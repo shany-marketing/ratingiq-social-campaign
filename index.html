@@ -591,8 +591,8 @@ function fmtDay(d){
   return DAYS[dt.getDay()];
 }
 function platformLabel(p){
-  if(p==='linkedin-company')return'LinkedIn — Company';
-  if(p==='linkedin-omri')return'LinkedIn — Omri';
+  if(p==='linkedin-company')return'Company';
+  if(p==='linkedin-omri')return'Omri';
   if(p==='facebook')return'Facebook';
   return p;
 }
@@ -1040,116 +1040,126 @@ function wrapText(ctx,text,x,y,maxW,lineH,align){
 
 // ── TEMPLATE 1: Announcement (split layout) ──
 function drawAnnouncement(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark){
-  const splitX=Math.round(w*0.4);
-  const pad=Math.round(w*0.045);
-  const leftBg=dark?bg:'#1C2A39';
-  const rightBg=dark?lighten(bg,18):'#F5F3EF';
+  const splitX=Math.round(w*0.38);
+  const lPad=Math.round(splitX*0.11);
+  const leftBg='#1C2A39';
+  const rightBg='#F5F3EF';
 
   ctx.fillStyle=leftBg; ctx.fillRect(0,0,splitX,h);
   ctx.fillStyle=rightBg; ctx.fillRect(splitX,0,w-splitX,h);
-  ctx.fillStyle=accent; ctx.fillRect(splitX-3,0,6,h);
+  ctx.fillStyle=accent; ctx.fillRect(splitX-2,0,4,h);
 
-  // Left: logo
-  const logoH=drawLogoSVG(ctx,pad,Math.round(h*0.08),splitX-pad*2,true)||Math.round(h*0.07);
+  // ── LEFT PANEL ──
+  const logoW=Math.round(splitX*0.78);
+  const logoTopY=Math.round(h*0.09);
+  const logoH=drawLogoSVG(ctx,lPad,logoTopY,logoW,true)||Math.round(h*0.06);
 
-  // Left: tag label
   if(tag){
-    ctx.font=`600 ${Math.round(h*0.026)}px Inter,sans-serif`;
+    ctx.font=`600 ${Math.round(h*0.022)}px Inter,sans-serif`;
     ctx.fillStyle=accent;
-    ctx.fillText(tag,pad,Math.round(h*0.08)+logoH+Math.round(h*0.06));
+    ctx.letterSpacing='1.5px';
+    ctx.fillText(tag,lPad,logoTopY+logoH+Math.round(h*0.055));
+    ctx.letterSpacing='0px';
   }
 
-  // Left: sub (tagline)
+  // Left: sub text sits in the middle-lower area
   if(sub){
-    ctx.font=`500 italic ${Math.round(h*0.034)}px Manrope,sans-serif`;
-    ctx.fillStyle='rgba(255,255,255,0.75)';
-    wrapText(ctx,sub,pad,h*0.72,splitX-pad*2,Math.round(h*0.048));
+    ctx.font=`400 italic ${Math.round(h*0.033)}px Manrope,sans-serif`;
+    ctx.fillStyle='rgba(255,255,255,0.65)';
+    wrapText(ctx,sub,lPad,Math.round(h*0.58),splitX-lPad*2,Math.round(h*0.05));
   }
 
-  // Left: bottom slogan
-  ctx.font=`600 ${Math.round(h*0.024)}px Manrope,sans-serif`;
+  // Left: URL anchor bottom
+  ctx.font=`600 ${Math.round(h*0.023)}px Inter,sans-serif`;
   ctx.fillStyle=accent;
-  ctx.fillText('rating-iq.com',pad,h*0.92);
+  ctx.fillText('rating-iq.com',lPad,Math.round(h*0.91));
 
-  // Right: headline
-  const rPad=Math.round(w*0.05);
+  // ── RIGHT PANEL ──
+  const rPad=Math.round((w-splitX)*0.09);
   const rX=splitX+rPad;
-  const rW=w-splitX-rPad*1.5;
-  const rightTC='#1C2A39';
+  const rW=w-splitX-rPad*1.8;
 
-  let cy=Math.round(h*0.14);
+  let cy=Math.round(h*0.12);
+
   if(headline){
-    const fs=Math.min(Math.round(h*0.07),80);
+    const fs=Math.min(Math.round(h*0.063),68);
     ctx.font=`800 ${fs}px Manrope,sans-serif`;
-    ctx.fillStyle=rightTC;
-    cy=wrapText(ctx,headline,rX,cy,rW,Math.round(fs*1.25));
-    ctx.fillStyle=accent; ctx.fillRect(rX,cy+4,70,4);
-    cy+=Math.round(h*0.06);
+    ctx.fillStyle='#1C2A39';
+    cy=wrapText(ctx,headline,rX,cy,rW,Math.round(fs*1.28));
+    cy+=Math.round(h*0.025);
+    // Gold accent line
+    ctx.fillStyle=accent; ctx.fillRect(rX,cy,64,3);
+    cy+=Math.round(h*0.045);
   }
 
   if(body){
-    ctx.font=`400 ${Math.round(h*0.031)}px Inter,sans-serif`;
-    ctx.fillStyle='rgba(28,42,57,0.75)';
+    const fs=Math.round(h*0.034);
+    ctx.font=`400 ${fs}px Inter,sans-serif`;
+    ctx.fillStyle='rgba(28,42,57,0.78)';
+    const paraGap=Math.round(h*0.035);
+    const lineH=Math.round(fs*1.55);
     body.split('\n').forEach(l=>{
-      if(l.trim())cy=wrapText(ctx,l,rX,cy,rW,Math.round(h*0.044));
-      else cy+=Math.round(h*0.02);
+      if(l.trim()){cy=wrapText(ctx,l,rX,cy,rW,lineH);}
+      else cy+=paraGap;
     });
-  }
-
-  if(showLogo){
-    const lW=Math.round((w-splitX)*0.45);
-    drawLogoSVG(ctx,rX,h-Math.round(h*0.1),lW,false);
   }
 }
 
 // ── TEMPLATE 2: Thought Leadership ──
 function drawTL(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark){
   ctx.fillStyle=bg; ctx.fillRect(0,0,w,h);
-  const pad=Math.round(w*0.075);
+  const pad=Math.round(w*0.08);
   const maxW=w-pad*2;
 
-  // Top: logo + accent bar
+  // Logo top-left, compact
   if(showLogo){
-    const lW=Math.round(w*0.2);
-    drawLogoSVG(ctx,pad,Math.round(h*0.07),lW,dark);
-  } else {
-    ctx.fillStyle=accent; ctx.fillRect(pad,Math.round(h*0.08),60,4);
+    drawLogoSVG(ctx,pad,Math.round(h*0.08),Math.round(w*0.17),dark);
   }
 
-  let cy=Math.round(h*0.22);
+  // Gold anchor bar
+  ctx.fillStyle=accent;
+  ctx.fillRect(pad,Math.round(h*0.215),52,4);
+
+  let cy=Math.round(h*0.27);
 
   if(tag){
-    ctx.font=`700 ${Math.round(h*0.024)}px Inter,sans-serif`;
+    ctx.font=`700 ${Math.round(h*0.022)}px Inter,sans-serif`;
     ctx.fillStyle=accent;
     ctx.fillText(tag,pad,cy);
-    cy+=Math.round(h*0.06);
+    cy+=Math.round(h*0.055);
   }
 
   if(headline){
-    const fs=Math.min(Math.round(h*0.072),72);
+    const fs=Math.min(Math.round(h*0.058),60);
     ctx.font=`800 ${fs}px Manrope,sans-serif`;
     ctx.fillStyle=tc;
-    cy=wrapText(ctx,headline,pad,cy,maxW,Math.round(fs*1.3));
-    cy+=Math.round(h*0.025);
-    ctx.fillStyle=accent; ctx.fillRect(pad,cy,60,3);
+    cy=wrapText(ctx,headline,pad,cy,maxW,Math.round(fs*1.35));
     cy+=Math.round(h*0.04);
   }
 
   if(sub){
-    ctx.font=`500 ${Math.round(h*0.035)}px Manrope,sans-serif`;
+    ctx.font=`500 ${Math.round(h*0.034)}px Manrope,sans-serif`;
     ctx.fillStyle=mc;
     cy=wrapText(ctx,sub,pad,cy,maxW,Math.round(h*0.05));
-    cy+=Math.round(h*0.02);
+    cy+=Math.round(h*0.032);
   }
 
   if(body){
-    ctx.font=`400 ${Math.round(h*0.029)}px Inter,sans-serif`;
+    const fs=Math.round(h*0.031);
+    ctx.font=`400 ${fs}px Inter,sans-serif`;
     ctx.fillStyle=tc;
-    body.split('\n').slice(0,5).forEach(l=>{
-      if(l.trim())cy=wrapText(ctx,l,pad,cy,maxW,Math.round(h*0.041));
-      else cy+=Math.round(h*0.018);
+    body.split('\n').slice(0,7).forEach(l=>{
+      if(l.trim()) cy=wrapText(ctx,l,pad,cy,maxW,Math.round(fs*1.6));
+      else cy+=Math.round(h*0.03);
     });
   }
+
+  // Bottom-right URL
+  ctx.font=`500 ${Math.round(h*0.022)}px Inter,sans-serif`;
+  ctx.fillStyle=accent;
+  ctx.textAlign='right';
+  ctx.fillText('rating-iq.com',w-pad,Math.round(h*0.93));
+  ctx.textAlign='left';
 }
 
 // ── TEMPLATE 3: Reveal (centered) ──
