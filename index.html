@@ -191,6 +191,7 @@ canvas#vb-canvas{border-radius:8px;box-shadow:0 4px 24px rgba(0,0,0,.18);max-wid
     <div class="section-header">
       <h2>Campaign Roadmap</h2>
       <button class="btn btn-primary" onclick="openNewPost()">+ New Post</button>
+      <button class="btn btn-ghost btn-sm" onclick="if(confirm('Reset all posts to defaults? This clears local edits.')){localStorage.removeItem('sc_posts');location.reload();}" title="Reset to default posts" style="margin-left:8px">↺ Reset Posts</button>
     </div>
     <div class="stats" id="stats-bar"></div>
     <div class="filters">
@@ -256,7 +257,8 @@ canvas#vb-canvas{border-radius:8px;box-shadow:0 4px 24px rgba(0,0,0,.18);max-wid
             <button class="vb-tpl-btn" onclick="setTemplate('starfield',this)">✦ Stars</button>
             <button class="vb-tpl-btn" onclick="setTemplate('night',this)">🌙 Night</button>
             <button class="vb-tpl-btn" onclick="setTemplate('hotel',this)">🏨 Hotel</button>
-            <button class="vb-tpl-btn" onclick="setTemplate('postcard',this)">✈ Postcard</button>
+            <button class="vb-tpl-btn" onclick="setTemplate('postcard',this)">✉ Stationery</button>
+            <button class="vb-tpl-btn" onclick="setTemplate('browser',this)">🖥 Browser</button>
             <button class="vb-tpl-btn" onclick="setTemplate('score',this)">⭐ Score</button>
             <button class="vb-tpl-btn" onclick="setTemplate('bold',this)">Bold</button>
           </div>
@@ -407,65 +409,75 @@ const DAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
 const DEFAULT_POSTS = [
+  // ─── APRIL ───
   {
     id:'p1', date:'2026-04-07', platform:'linkedin-company', type:'Rebrand Announcement',
-    copy:`We've rebranded. Upstar is now RatingIQ.
+    visual:'Upstar is now RatingIQ.',
+    copy:`Upstar is now RatingIQ.
 
-New name. New logo. New slogan: "From reviews to revenue."
+New name. New logo. New slogan — "From reviews to revenue."
 
-Same team. Same mission — help hotel chains move their Booking.com score in a direction that matters to their P&L.
+Same team. Same stubbornly specific belief: a hotel chain's Booking.com score is a revenue number, not a PR metric.
 
-RatingIQ is the rating-performance system we always wanted to build. Not a review management tool. Not a dashboard. An operational push system that maps exactly what to fix — and gets it to the right people.
+We built the product we always wanted to build. Not another review management tool. Not a dashboard. An operational push system that maps what's hurting your score, prioritizes the fixes, and gets the right information to the right people — without waiting for anyone to log in.
 
 The new website is live: rating-iq.com
 
-If you run a hotel chain and your rating isn't where it should be — that's the conversation we want to have.`,
+If you're a hotel chain CEO and your rating isn't where it should be — that's exactly the conversation we want.`,
     visualConcept:'Split layout. Left: deep navy with RatingIQ logo centered in white + gold. Right: warm sand with "Upstar → RatingIQ" in large Manrope bold. Gold divider line. Slogan bottom right.',
     status:'draft', corrections:''
   },
   {
     id:'p2', date:'2026-04-07', platform:'facebook', type:'Rebrand Announcement',
-    copy:`We've rebranded. Upstar is now RatingIQ.
+    visual:'Upstar → RatingIQ',
+    copy:`We've had a name change.
 
-New name. New logo. New slogan: "From reviews to revenue."
+Upstar is now RatingIQ.
 
-Same mission — help hotel chains turn their Booking.com score into a commercial advantage.
+Turns out "your rating is revenue" was always the whole point — so we named the product after it.
 
-See what we've built: rating-iq.com`,
-    visualConcept:'Same split layout as LinkedIn version. Adapted for Facebook dimensions (1200×628).',
+New name. New logo. Same mission.
+
+See the new look: rating-iq.com`,
+    visualConcept:'Bold announcement split: dark navy left side with logo, warm sand right side with the arrow mark "Upstar → RatingIQ". Clean, brand-forward.',
     status:'draft', corrections:''
   },
   {
     id:'p3', date:'2026-04-09', platform:'linkedin-omri', type:'Thought Leadership',
-    copy:`A 0.2 drop on Booking.com can cost a mid-size hotel chain $200K+ in annual RevPAR.
+    visual:'"0.2 on Booking.com.\nThat\'s revenue."',
+    copy:`I once sat across from a hotel chain CEO who told me his rating wasn't a priority.
 
-Nobody talks about this number.
+His RevPAR was down 11% that quarter.
 
-Hotels obsess over occupancy and ADR. Rating gets treated like a PR metric.
+He just hadn't connected the two yet.
 
-It's not.
+A 0.2 drop on Booking.com — barely noticeable on paper — can quietly erase $200K+ in annual revenue for a mid-size chain.
 
-A lower score:
-→ Drops your search rank
-→ Shrinks your click-through rate
-→ Hits your conversion
-→ Hits your RevPAR
+Here's the math nobody puts on a slide:
+→ Lower score = lower search rank
+→ Lower rank = fewer clicks
+→ Fewer clicks = lower conversion
+→ Lower conversion = lower RevPAR
 
-The chain CEOs who get this stop asking "how do I manage reviews" and start asking "what's the fastest path to a higher score."
+Everyone says "our rating dipped a bit."
 
-Those are two very different questions.
+That dip has a dollar amount. Most chains never find it.
 
-We built RatingIQ to answer the second one.`,
+We built RatingIQ to find it.`,
     visualConcept:'Warm sand background. Large pull quote: "0.2 on Booking.com. That\'s revenue." in Manrope bold navy. Small RatingIQ mark bottom right. Minimal, executive.',
     status:'draft', corrections:''
   },
   {
     id:'p4', date:'2026-04-11', platform:'linkedin-company', type:'Website Launch',
-    copy:`The new website is live.
+    visual:'Built for the person\nwho signs the P&L.',
+    copy:`The website is live.
 
 rating-iq.com
 
-Built for one audience: the CEO running a hotel chain who knows their rating is affecting revenue — and wants it fixed, not managed.
+We built it for one person: the CEO running a hotel chain who knows their Booking.com score is costing them money — and wants it fixed, not managed.
+
+Not for ops managers. Not for GMs.
+For the person who signs the P&L.
 
 Take a look.`,
     visualConcept:'Browser frame mockup showing rating-iq.com hero. Dark navy background. Gold URL bar highlight. Tagline visible inside mockup.',
@@ -473,77 +485,85 @@ Take a look.`,
   },
   {
     id:'p5', date:'2026-04-11', platform:'facebook', type:'Website Launch',
-    copy:`Our new website is live.
+    visual:'rating-iq.com is live.',
+    copy:`rating-iq.com is live.
 
-rating-iq.com — built for hotel chain CEOs who want their rating problem solved, not managed.
+Built for hotel chain CEOs who want their rating problem solved — not managed, not monitored, not dashboarded to death.
+
+Solved.
 
 Take a look.`,
-    visualConcept:'Same browser mockup, Facebook dimensions.',
+    visualConcept:'Browser mockup, Facebook dimensions. Clean navy header, URL bar, hero section visible.',
     status:'draft', corrections:''
   },
   {
     id:'p6', date:'2026-04-13', platform:'linkedin-omri', type:'Thought Leadership',
-    copy:`Most rating gains don't require a single renovation.
+    visual:'No renovation required.',
+    copy:`The most common thing I hear after a demo:
 
-They require someone to read what guests are actually saying — and then act on it.
+"Wait — this doesn't require a renovation?"
 
-The most common review clusters in hotel chains:
-→ Breakfast service timing
-→ Check-in wait times
-→ Room cleanliness consistency
-→ Staff responsiveness
+No. It doesn't.
 
-None of these require CapEx.
-All of them require operational focus.
+Most hotels losing ground on their Booking.com score aren't losing it because the building is bad. They're losing it because:
 
-The problem isn't the building.
-It's that nobody's mapped the fixes to the right people.
+Breakfast runs 20 minutes late on weekends.
+Check-in at 3 PM becomes a quiet disaster.
+Room 214 has a shower that's been "almost fixed" since February.
 
-That's the whole job.`,
-    visualConcept:'Clean card. Headline: "Zero CapEx. Higher rating." Navy text on sand. Bulleted list below in lighter Inter. RatingIQ mark small, bottom right.',
+These are operational problems. They have operational fixes. No CapEx required.
+
+The trick is knowing which ones are actually moving the score — and getting that information to the person who can act on it.
+
+That's the whole product.`,
+    visualConcept:'Clean card. Large headline: "No renovation required." Navy text on sand. Small body text below. RatingIQ mark bottom right.',
     status:'draft', corrections:''
   },
   {
     id:'p7', date:'2026-04-15', platform:'linkedin-company', type:'Brand Introduction',
-    copy:`RatingIQ is a rating-performance system for hotel chains.
+    visual:'Not a dashboard.\nA push system.',
+    copy:`RatingIQ is not a review management tool.
 
-Not review management. Not a reputation dashboard.
+Not a reputation dashboard. Not a "feedback analytics platform."
 
-An operational push system that:
-→ Maps exactly what's hurting your score
+(We've seen enough of those.)
+
+It's an operational push system for hotel chains:
+→ Maps what's actually hurting the score
 → Prioritizes the fixes
-→ Pushes the right actions to the right people
+→ Pushes the right actions to the right people — without waiting for anyone to log in
 
-For hotel chains where the Booking.com score isn't where it should be — and where fixing it matters to the P&L.
+Because nobody logs in.
 
 rating-iq.com`,
-    visualConcept:'Three-panel graphic, one bullet per panel. Navy background, gold accent text. Minimal and sharp.',
+    visualConcept:'Bold comparison. Two labels: "Reporting tool / dashboard" crossed out, vs "Push system" in gold. Sharp and direct.',
     status:'draft', corrections:''
   },
   {
     id:'p8', date:'2026-04-17', platform:'linkedin-omri', type:'Thought Leadership',
+    visual:'The fix isn\'t a better dashboard.\nIt\'s a push.',
     copy:`Every hotel bought a review management tool.
 
-Almost none of them are actually using it.
+A genuinely surprising number of them open it maybe twice a month.
 
-The problem with "log in and analyze" is that nobody logs in.
+I'm not judging. I get it. The GM is running a hotel. 47 things on fire at any given moment. Opening a dashboard to "explore patterns" is not on that list.
 
-GMs are running a hotel. They're not sitting at a dashboard looking for patterns.
+So the data sits. Reviews pile up. The same complaints come in every weekend. Nothing changes.
 
-The system has to push to them. Not pull them in.
+The fix isn't a better dashboard. It's a push.
 
-New complaint cluster? Tell the GM.
+New complaint cluster? Tell the GM — don't wait for them to find it.
 Same issue across 3 properties? Tell the CEO.
-Score about to drop? Alert someone who can act.
+Score trending down? Alert someone before it shows up on the display.
 
-That's the difference between a reporting tool and a performance system.
-
-It's also the only difference that matters.`,
+That's how review data actually gets used.
+You make it come to people. Not the other way around.`,
     visualConcept:'Two-column comparison. Left: "Reporting tool" gray, passive. Right: "Performance system" navy, active. Gold divider. Bold and sharp.',
     status:'draft', corrections:''
   },
   {
     id:'p9', date:'2026-04-19', platform:'linkedin-omri', type:'Thought Leadership',
+    visual:'Three rating problems.\nAll solvable.',
     copy:`Hotel chains have three kinds of rating problems.
 
 The first is visible. A score that's been sitting at 8.1 for 18 months while the city average climbs.
@@ -560,6 +580,7 @@ That's what RatingIQ is for.`,
   },
   {
     id:'p10', date:'2026-04-21', platform:'linkedin-company', type:'Slogan Reveal',
+    visual:'From reviews to revenue.',
     copy:`From reviews to revenue.
 
 That's the only journey that matters.
@@ -570,6 +591,257 @@ Move the number that moves your P&L.
 
 rating-iq.com`,
     visualConcept:'Full-bleed navy. "From reviews to revenue." centered in large Manrope 800. Gold underline on "revenue." RatingIQ logo top left. Minimal, brand-defining.',
+    status:'draft', corrections:''
+  },
+
+  // ─── MAY ───
+  {
+    id:'p11', date:'2026-05-01', platform:'linkedin-omri', type:'True Story',
+    visual:'Score up 0.3 in 60 days.\nNo renovation.',
+    copy:`True story.
+
+A chain CEO told me their rating had been stuck at 8.3 for two years.
+
+I pulled their review data before the call.
+
+Top complaint cluster across 4 properties: WiFi in meeting rooms.
+
+Same issue. 11 months in a row. 47 reviews. Never once escalated to someone with authority to fix it.
+
+Two weeks after the call, they sorted the infrastructure.
+
+Score: 8.6 within 60 days.
+
+No renovation. No new staff. No rebranding.
+
+Just: someone finally connected the complaint to the person who could act on it.
+
+That's RatingIQ.`,
+    visualConcept:'Quote card. Large: "Score up 0.3 in 60 days." Smaller: "No renovation." Navy background, gold accent. Minimal and punchy.',
+    status:'draft', corrections:''
+  },
+  {
+    id:'p12', date:'2026-05-03', platform:'linkedin-company', type:'Data & Metrics',
+    visual:'The average chain.\nFour unresolved problems.',
+    copy:`The average hotel chain has:
+
+→ 4 recurring complaint clusters unresolved for 90+ days
+→ 1 property dragging down the portfolio average by 0.4 points
+→ A Booking.com score that hasn't moved in over a year
+
+We didn't make these numbers up. We see them every time we look at a new portfolio.
+
+The good news: all three are fixable without touching the building.
+
+rating-iq.com`,
+    visualConcept:'Stats card. Three key numbers in large Manrope — "4 clusters / 0.4 drag / 14 months flat." Navy + gold. Clean data visual.',
+    status:'draft', corrections:''
+  },
+  {
+    id:'p13', date:'2026-05-05', platform:'linkedin-omri', type:'Thought Leadership',
+    visual:'Wrong question.\nWrong answer.',
+    copy:`The question hotel chains ask: "How do we manage our reviews?"
+
+The question they should be asking: "What's the fastest path to a higher score?"
+
+Those sound similar. They're completely different.
+
+"Manage reviews" = respond faster, template better, apologize more professionally.
+
+"Faster path to a higher score" = find what's actually hurting the rating, fix it operationally, move the number.
+
+One of these is a PR exercise.
+One shows up on the P&L.
+
+You already know which one matters.`,
+    visualConcept:'Two-question split. Left: wrong question crossed out. Right: right question in gold. Sharp, provocative.',
+    status:'draft', corrections:''
+  },
+  {
+    id:'p14', date:'2026-05-07', platform:'facebook', type:'Brand Post',
+    visual:'Rating is a revenue number.\nNot a PR metric.',
+    copy:`Your Booking.com score affects your rank.
+Your rank affects your clicks.
+Your clicks affect your revenue.
+
+And yet — most hotel chains still treat their rating like a customer service problem.
+
+RatingIQ treats it like the revenue problem it actually is.
+
+rating-iq.com`,
+    visualConcept:'Bold statement card. Dark navy. "Rating is a revenue number." in large white Manrope. Gold accent underline. Clean.',
+    status:'draft', corrections:''
+  },
+  {
+    id:'p15', date:'2026-05-10', platform:'linkedin-omri', type:'Timely Post',
+    visual:'Most reviewed weekend\nin hospitality.',
+    copy:`Mother's Day weekend is the most reviewed weekend in hospitality.
+
+Full houses. High expectations. Staff running at capacity.
+
+The complaints that land Monday morning after a holiday weekend are some of the most consistent, predictable patterns we see.
+
+Same issues across chains, year after year:
+Breakfast too slow. Room not ready. Spa overbooked with no waitlist system.
+
+None of these are surprises. All of them were predictable.
+
+Happy Mother's Day to everyone running a hotel this weekend — you've earned it.
+
+(And if the reviews land hard on Monday — you know where to find us.)`,
+    visualConcept:'Warm, elegant card. "The most reviewed weekend in hospitality." Gold + navy. Subtle, not too promotional.',
+    status:'draft', corrections:''
+  },
+  {
+    id:'p16', date:'2026-05-12', platform:'linkedin-company', type:'Product Post',
+    visual:'Not all complaints\nare equal.',
+    copy:`Not all complaints are equal.
+
+A one-off guest complaint about a specific staff member? Probably not moving your score.
+
+A recurring cluster about check-in wait times across 3 properties for 6 weeks? That's your score.
+
+RatingIQ shows you the difference — and pushes the fix to the people who can act on it.
+
+Because knowing isn't enough. Someone has to do something about it.
+
+rating-iq.com`,
+    visualConcept:'Two-tier card. Top: "one-off complaint" faded/gray. Bottom: "recurring cluster" highlighted in gold. Sharp contrast.',
+    status:'draft', corrections:''
+  },
+  {
+    id:'p17', date:'2026-05-14', platform:'linkedin-omri', type:'True Story',
+    visual:'"I was about to spend $400K\non the wrong thing."',
+    copy:`True story.
+
+Hotel chain. 6 properties. Booking.com scores from 7.9 to 8.7.
+
+The CEO assumed the 7.9 property needed a renovation.
+
+We pulled the data before he signed anything.
+
+Top complaint cluster at the 7.9 property: a single check-in desk handling peak arrival times solo.
+
+That's it. One operational gap. No structural issue. No design problem.
+
+They added a second desk for peak hours.
+
+Score: 8.4 within 90 days.
+
+The CEO's words at our next call: "I was about to spend $400K on the wrong thing."
+
+The most expensive mistake in this industry is solving the visible problem instead of the actual one.`,
+    visualConcept:'Pull quote card. Large: "$400K on the wrong thing." Navy background. Gold text. Powerful and memorable.',
+    status:'draft', corrections:''
+  },
+  {
+    id:'p18', date:'2026-05-17', platform:'linkedin-company', type:'Data & Metrics',
+    visual:'0.3–0.5 points.\n90 days. Zero CapEx.',
+    copy:`Hotels that address their top 3 complaint clusters within 30 days:
+
+→ See an average rating improvement of 0.3–0.5 points within 90 days
+→ Without capital expenditure
+→ Through operational prioritization alone
+
+These aren't projections from a marketing deck.
+These are outcomes from chains using RatingIQ.
+
+The math is straightforward once you know where to look.
+
+rating-iq.com`,
+    visualConcept:'Stats card. Three outcomes stacked: "0.3–0.5 pts / 90 days / Zero CapEx." Large, confident numbers in gold on navy.',
+    status:'draft', corrections:''
+  },
+  {
+    id:'p19', date:'2026-05-19', platform:'linkedin-omri', type:'Thought Leadership',
+    visual:'Different question.\nDifferent result.',
+    copy:`Hotel ratings on Booking.com are not a popularity contest.
+
+They're a feedback loop with financial consequences.
+
+A 0.1 point improvement in your score can shift your search rank enough to meaningfully move occupancy.
+
+Which means the conversation isn't: "How do we get more positive reviews?"
+
+It's: "What's actually driving our negative reviews — and how fast can we fix it?"
+
+Different question. Different answer. Different result.
+
+The first question leads to response templates.
+The second one leads to RatingIQ.`,
+    visualConcept:'Clean quote split. Left question faded. Right question bold in gold. Minimal and sharp.',
+    status:'draft', corrections:''
+  },
+  {
+    id:'p20', date:'2026-05-21', platform:'facebook', type:'Brand Post',
+    visual:'"We\'re on it."\n\nIs no longer enough.',
+    copy:`For the hotel chain CEOs who've heard this before:
+
+Your rating dips. You ask ops. Ops says "we're on it."
+
+Three months later — same score.
+
+RatingIQ is for the moment when "we're on it" stops being a strategy.
+
+rating-iq.com`,
+    visualConcept:'Quote card. "We\'re on it." crossed out. Below it: "We need a system." RatingIQ mark bottom. Dark, sharp.',
+    status:'draft', corrections:''
+  },
+  {
+    id:'p21', date:'2026-05-25', platform:'linkedin-omri', type:'Timely Post',
+    visual:'Sold out doesn\'t mean\nwell-reviewed.',
+    copy:`Memorial Day weekend.
+
+One of the highest-demand weekends in US hospitality.
+
+Also: one of the highest-complaint weekends.
+
+The gap between a sold-out property and a well-reviewed sold-out property isn't square footage or thread count.
+
+It's operational execution under pressure.
+
+The chains that come out of this weekend with better reviews than they went in — they had the fixes mapped before Friday.
+
+Good luck to everyone running a full house this weekend. You've earned the demand.
+
+(The rating, you still have to work for.)`,
+    visualConcept:'Minimal dark card. "Sold out ≠ well-reviewed." Gold divider. Understated and smart.',
+    status:'draft', corrections:''
+  },
+  {
+    id:'p22', date:'2026-05-27', platform:'linkedin-company', type:'Website Feature',
+    visual:'Built for one person.\nThe CEO who signs the P&L.',
+    copy:`We built the website around one question:
+
+"What would this look like if it wasn't designed for investors?"
+
+No feature list. No dashboard screenshots. No testimonial carousels.
+
+Just the problem, the approach, and the outcome — for the person who actually has to make a decision.
+
+If you haven't seen it yet:
+
+rating-iq.com`,
+    visualConcept:'Browser mockup template. Shows the website hero section inside a clean browser frame. Navy background, gold URL bar, tagline visible.',
+    status:'draft', corrections:''
+  },
+  {
+    id:'p23', date:'2026-05-29', platform:'linkedin-omri', type:'Thought Leadership',
+    visual:'"I\'ve been asking for this\nfor three years."',
+    copy:`The best thing I hear after a RatingIQ walkthrough:
+
+"I've been asking for this for three years."
+
+Not "impressive tech."
+Not "great UI."
+Not "nice to have."
+
+"Someone finally connected what guests are saying to what I actually need to fix."
+
+That's the product. That's always been the product.
+
+If you run a hotel chain and that line sounds familiar — we should talk.`,
+    visualConcept:'Pull quote card. Large quote in Manrope italic. Minimal navy background. Very human, very direct.',
     status:'draft', corrections:''
   }
 ];
@@ -982,6 +1254,7 @@ function renderCanvas(){
   else if(template==='postcard')   drawPostcard(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark);
   else if(template==='score')      drawScore(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark);
   else if(template==='bold')       drawBold(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark);
+  else if(template==='browser')    drawBrowser(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark);
 
   const platform=document.getElementById('vb-platform').value;
   if(platform!=='none') drawPlatformBadge(ctx,w,h,platform);
@@ -2016,6 +2289,122 @@ function drawBold(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark){
   }
 }
 
+// ── TEMPLATE 13: Browser Mockup ──
+// Shows a simulated browser frame with the website hero inside
+function drawBrowser(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark){
+  // Outer background
+  ctx.fillStyle='#1A2432'; ctx.fillRect(0,0,w,h);
+
+  // Subtle vignette
+  const vig=ctx.createRadialGradient(w/2,h/2,Math.min(w,h)*0.3,w/2,h/2,Math.min(w,h)*0.75);
+  vig.addColorStop(0,'transparent');
+  vig.addColorStop(1,'rgba(0,0,0,0.35)');
+  ctx.fillStyle=vig; ctx.fillRect(0,0,w,h);
+
+  // Browser window frame
+  const bx=Math.round(w*0.05), by=Math.round(h*0.06);
+  const bw=w-bx*2, bh=h-by*2;
+  const br=Math.round(Math.min(bw,bh)*0.025);
+
+  // Drop shadow
+  ctx.save();
+  ctx.shadowColor='rgba(0,0,0,0.5)';
+  ctx.shadowBlur=Math.round(Math.min(w,h)*0.04);
+  ctx.shadowOffsetY=Math.round(h*0.01);
+  ctx.fillStyle='#1C2A39';
+  roundRect(ctx,bx,by,bw,bh,br); ctx.fill();
+  ctx.restore();
+
+  // Browser chrome bar
+  const chromeH=Math.round(h*0.075);
+  ctx.fillStyle='#24333F';
+  ctx.fillRect(bx,by,bw,chromeH);
+
+  // Traffic lights
+  const dotR=Math.round(Math.min(w,h)*0.012);
+  const dotY=by+chromeH/2;
+  [[bx+dotR*2.5,'#FF5F56'],[bx+dotR*5.5,'#FFBD2E'],[bx+dotR*8.5,'#27C93F']].forEach(([dx,dc])=>{
+    ctx.beginPath(); ctx.arc(dx,dotY,dotR,0,Math.PI*2);
+    ctx.fillStyle=dc; ctx.fill();
+  });
+
+  // URL bar
+  const urlW=Math.round(bw*0.44);
+  const urlX=bx+(bw-urlW)/2;
+  const urlH=Math.round(chromeH*0.52);
+  const urlY=by+(chromeH-urlH)/2;
+  ctx.fillStyle='rgba(255,255,255,0.1)';
+  roundRect(ctx,urlX,urlY,urlW,urlH,urlH/2); ctx.fill();
+  ctx.font=`400 ${Math.round(urlH*0.58)}px Inter,sans-serif`;
+  ctx.fillStyle='rgba(255,255,255,0.55)';
+  ctx.textAlign='center';
+  ctx.fillText('rating-iq.com',bx+bw/2,urlY+urlH*0.69);
+  ctx.textAlign='left';
+
+  // Website content area (inside browser)
+  const cY=by+chromeH;
+  const cH=bh-chromeH;
+  const cx2=bx+bw/2;
+
+  // Hero background gradient
+  const heroG=ctx.createLinearGradient(bx,cY,bx,cY+cH);
+  heroG.addColorStop(0,'#1C2A39');
+  heroG.addColorStop(1,'#253547');
+  ctx.fillStyle=heroG; ctx.fillRect(bx,cY,bw,cH);
+
+  // Gold accent line below chrome
+  ctx.fillStyle=accent; ctx.fillRect(bx,cY,bw,2);
+
+  // Large brand star watermark in hero
+  drawStarBg(ctx,bx+bw*0.82,cY+cH*0.5,Math.min(bw,cH)*0.32,accent,0.07,true);
+
+  // Nav bar simulation
+  const navH=Math.round(cH*0.12);
+  ctx.fillStyle='rgba(0,0,0,0.15)'; ctx.fillRect(bx,cY,bw,navH);
+  if(showLogo){
+    const lW=Math.round(bw*0.16);
+    drawLogoSVG(ctx,bx+Math.round(bw*0.04),cY+(navH-lW/3.67)/2,lW,true);
+  }
+  // Nav items (simulated)
+  ['Product','Pricing','Contact'].forEach((item,i)=>{
+    ctx.font=`500 ${Math.round(navH*0.32)}px Inter,sans-serif`;
+    ctx.fillStyle='rgba(255,255,255,0.45)';
+    ctx.fillText(item,bx+bw*0.55+i*Math.round(bw*0.1),cY+navH*0.6);
+  });
+
+  // Hero headline
+  let hy=cY+navH+Math.round(cH*0.1);
+  if(tag){
+    ctx.font=`600 ${Math.round(cH*0.045)}px Inter,sans-serif`;
+    ctx.fillStyle=accent;
+    ctx.textAlign='center'; ctx.fillText(tag,cx2,hy); ctx.textAlign='left';
+    hy+=Math.round(cH*0.07);
+  }
+  if(headline){
+    const fs=Math.min(Math.round(cH*0.1),80);
+    ctx.font=`800 ${fs}px Manrope,sans-serif`;
+    ctx.fillStyle='#FFFFFF';
+    hy=wrapTextC(ctx,headline,cx2,hy,bw*0.72,Math.round(fs*1.2));
+    hy+=Math.round(cH*0.04);
+  }
+  if(sub){
+    ctx.font=`400 ${Math.round(cH*0.05)}px Inter,sans-serif`;
+    ctx.fillStyle='rgba(255,255,255,0.55)';
+    hy=wrapTextC(ctx,sub,cx2,hy,bw*0.55,Math.round(cH*0.068));
+    hy+=Math.round(cH*0.045);
+  }
+  // CTA button
+  const btnW=Math.round(bw*0.22), btnH=Math.round(cH*0.085);
+  const btnX=cx2-btnW/2;
+  ctx.fillStyle=accent;
+  roundRect(ctx,btnX,hy,btnW,btnH,Math.round(btnH*0.25)); ctx.fill();
+  ctx.font=`700 ${Math.round(btnH*0.42)}px Manrope,sans-serif`;
+  ctx.fillStyle='#1C2A39';
+  ctx.textAlign='center';
+  ctx.fillText(body||'Book a Demo',cx2,hy+btnH*0.65);
+  ctx.textAlign='left';
+}
+
 function lighten(hex,amt){
   const r=Math.min(255,parseInt(hex.slice(1,3),16)+amt);
   const g=Math.min(255,parseInt(hex.slice(3,5),16)+amt);
@@ -2063,11 +2452,11 @@ function copyToClipboard(){
 function openBuilderFor(id){
   const p=posts.find(x=>x.id===id);
   if(!p)return;
-  // pre-fill visual builder with post's first line as headline
-  const lines=p.copy.split('\n').filter(l=>l.trim());
-  document.getElementById('vb-headline').value=lines[0]||'';
-  document.getElementById('vb-sub').value=lines[1]||'';
-  document.getElementById('vb-body').value=lines.slice(2,6).join('\n');
+  // Visual gets only the short visual quote — not the full copy
+  const vLines=(p.visual||p.copy.split('\n').filter(l=>l.trim())[0]||'').split('\n');
+  document.getElementById('vb-headline').value=vLines[0]||'';
+  document.getElementById('vb-sub').value=vLines[1]||'';
+  document.getElementById('vb-body').value='';
   document.getElementById('vb-tag').value=p.type.toUpperCase();
   // switch to builder tab
   document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
