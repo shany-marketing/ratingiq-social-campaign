@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RatingIQ — Social Campaign</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#1C2A39;--slate:#516B84;--gold:#C9A86A;--charcoal:#2B2B2B;
+  --sand:#ECE8E2;--white:#fff;--bg:#f5f4f2;
+  --status-draft:#64748b;--status-ready:#3b82f6;--status-scheduled:#d97706;--status-published:#16a34a;
+  --li-co:#0077B5;--li-om:#7C3AED;--fb:#1877F2;
+}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--charcoal);min-height:100vh}
+h1,h2,h3,h4{font-family:'Manrope',sans-serif}
+
+/* ─── HEADER ─── */
+header{background:var(--navy);padding:0 28px;display:flex;align-items:center;height:58px;gap:20px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.25)}
+.logo{font-family:'Manrope',sans-serif;font-weight:800;font-size:17px;color:var(--white);letter-spacing:-.3px}
+.logo span{color:var(--gold)}
+.header-sub{font-size:12px;color:var(--slate);letter-spacing:.5px;text-transform:uppercase;font-weight:600;margin-left:4px;margin-top:1px}
+nav{display:flex;gap:4px;margin-left:auto}
+nav button{background:none;border:none;color:rgba(255,255,255,.55);font-family:'Inter',sans-serif;font-size:13px;font-weight:500;padding:6px 14px;border-radius:6px;cursor:pointer;transition:all .15s}
+nav button.active{background:rgba(255,255,255,.12);color:#fff}
+nav button:hover:not(.active){color:#fff;background:rgba(255,255,255,.07)}
+
+/* ─── MAIN ─── */
+main{padding:28px 32px;max-width:1400px;margin:0 auto}
+
+/* ─── STATS BAR ─── */
+.stats{display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap}
+.stat-card{background:var(--white);border:1px solid rgba(0,0,0,.08);border-radius:10px;padding:14px 20px;min-width:120px;flex:1}
+.stat-card .num{font-family:'Manrope',sans-serif;font-size:26px;font-weight:800;color:var(--navy)}
+.stat-card .lbl{font-size:11px;font-weight:600;color:var(--slate);text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
+.stat-card.draft .num{color:var(--status-draft)}
+.stat-card.ready .num{color:var(--status-ready)}
+.stat-card.scheduled .num{color:var(--status-scheduled)}
+.stat-card.published .num{color:var(--status-published)}
+
+/* ─── FILTERS ─── */
+.filters{display:flex;gap:10px;margin-bottom:18px;align-items:center;flex-wrap:wrap}
+.filters select,.filters input{font-family:'Inter',sans-serif;font-size:13px;border:1px solid rgba(0,0,0,.12);border-radius:7px;padding:7px 12px;background:#fff;color:var(--charcoal);outline:none;cursor:pointer}
+.filters select:focus,.filters input:focus{border-color:var(--slate)}
+.btn{font-family:'Inter',sans-serif;font-size:13px;font-weight:600;padding:8px 16px;border-radius:7px;border:none;cursor:pointer;transition:all .15s}
+.btn-primary{background:var(--navy);color:#fff}
+.btn-primary:hover{background:#253547}
+.btn-gold{background:var(--gold);color:var(--navy)}
+.btn-gold:hover{background:#b8924f}
+.btn-ghost{background:transparent;border:1px solid rgba(0,0,0,.14);color:var(--charcoal)}
+.btn-ghost:hover{background:rgba(0,0,0,.04)}
+.btn-sm{font-size:12px;padding:5px 11px}
+
+/* ─── TABLE ─── */
+.table-wrap{background:var(--white);border:1px solid rgba(0,0,0,.08);border-radius:12px;overflow:hidden}
+table{width:100%;border-collapse:collapse}
+thead th{background:#f9f8f6;padding:11px 16px;text-align:left;font-size:11px;font-weight:700;color:var(--slate);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid rgba(0,0,0,.08);white-space:nowrap}
+tbody tr{border-bottom:1px solid rgba(0,0,0,.05);transition:background .1s;cursor:pointer}
+tbody tr:last-child{border-bottom:none}
+tbody tr:hover{background:#faf9f7}
+tbody td{padding:13px 16px;font-size:13.5px;vertical-align:middle}
+.td-date{white-space:nowrap;font-weight:600;color:var(--charcoal);font-size:13px}
+.td-day{font-size:11px;color:var(--slate);font-weight:400;display:block;margin-top:1px}
+
+/* ─── PLATFORM BADGES ─── */
+.badge{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.1px;white-space:nowrap}
+.badge-linkedin-company{background:#e8f2f9;color:var(--li-co)}
+.badge-linkedin-omri{background:#f3eeff;color:var(--li-om)}
+.badge-facebook{background:#eaf1fd;color:var(--fb)}
+
+/* ─── TYPE TAG ─── */
+.type-tag{font-size:12px;font-weight:500;color:var(--slate);background:#f1f0ee;padding:3px 8px;border-radius:5px;display:inline-block}
+
+/* ─── COPY PREVIEW ─── */
+.copy-preview{font-size:13px;color:var(--charcoal);max-width:340px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.4}
+
+/* ─── STATUS ─── */
+.status-badge{display:inline-block;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.2px}
+.status-draft{background:#f1f5f9;color:var(--status-draft)}
+.status-ready{background:#eff6ff;color:var(--status-ready)}
+.status-scheduled{background:#fffbeb;color:var(--status-scheduled)}
+.status-published{background:#f0fdf4;color:var(--status-published)}
+
+.status-select{font-family:'Inter',sans-serif;font-size:12px;font-weight:600;border:none;border-radius:20px;padding:3px 8px;cursor:pointer;outline:none;-webkit-appearance:none;appearance:none}
+
+/* ─── CORRECTIONS ─── */
+.corrections-cell{max-width:180px}
+.corrections-cell input{width:100%;font-family:'Inter',sans-serif;font-size:12px;border:1px solid transparent;border-radius:5px;padding:4px 8px;background:transparent;color:var(--charcoal);transition:all .15s}
+.corrections-cell input:hover{border-color:rgba(0,0,0,.14);background:#f9f8f6}
+.corrections-cell input:focus{border-color:var(--slate);background:#fff;outline:none}
+
+/* ─── VISUAL INDICATOR ─── */
+.vis-dot{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;background:#f1f0ee;cursor:pointer;transition:all .15s}
+.vis-dot:hover{background:var(--gold);color:var(--navy)}
+
+/* ─── TABS ─── */
+.tab-content{display:none}
+.tab-content.active{display:block}
+
+/* ─── MODAL ─── */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;align-items:center;justify-content:center;padding:24px}
+.overlay.open{display:flex}
+.modal{background:#fff;border-radius:16px;width:100%;max-width:860px;max-height:90vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.modal-header{padding:22px 28px;border-bottom:1px solid rgba(0,0,0,.08);display:flex;align-items:center;gap:12px;flex-shrink:0}
+.modal-header h2{font-family:'Manrope',sans-serif;font-size:17px;font-weight:700;color:var(--navy);flex:1}
+.modal-body{padding:24px 28px;overflow-y:auto;flex:1;display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.modal-footer{padding:16px 28px;border-top:1px solid rgba(0,0,0,.08);display:flex;gap:10px;justify-content:flex-end;flex-shrink:0;background:#faf9f7}
+
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:11px;font-weight:700;color:var(--slate);text-transform:uppercase;letter-spacing:.5px}
+.field textarea,.field input,.field select{font-family:'Inter',sans-serif;font-size:13.5px;border:1px solid rgba(0,0,0,.12);border-radius:8px;padding:10px 13px;color:var(--charcoal);outline:none;transition:border-color .15s;resize:vertical;line-height:1.6}
+.field textarea:focus,.field input:focus,.field select:focus{border-color:var(--slate)}
+.field textarea.copy-area{min-height:240px;font-size:13px}
+.field textarea.small{min-height:80px}
+.field-full{grid-column:1/-1}
+.char-count{font-size:11px;color:var(--slate);text-align:right;margin-top:2px}
+
+/* ─── VISUAL BUILDER ─── */
+.vb-wrap{display:grid;grid-template-columns:220px 1fr;gap:0;height:calc(100% - 0px);min-height:500px}
+.vb-controls{background:#f9f8f6;border-right:1px solid rgba(0,0,0,.08);padding:20px;overflow-y:auto;display:flex;flex-direction:column;gap:16px}
+.vb-controls h3{font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.5px}
+.vb-canvas-area{padding:24px;display:flex;flex-direction:column;align-items:center;gap:16px;background:#e8e6e2;overflow:auto}
+canvas#vb-canvas{border-radius:8px;box-shadow:0 4px 24px rgba(0,0,0,.18);max-width:100%;cursor:default}
+.vb-dims{display:flex;gap:6px;flex-wrap:wrap}
+.vb-dim-btn{font-size:11px;font-weight:600;padding:4px 10px;border-radius:5px;border:1px solid rgba(0,0,0,.14);background:#fff;cursor:pointer;font-family:'Inter',sans-serif;color:var(--charcoal);transition:all .1s}
+.vb-dim-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.vb-tpl-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
+.vb-tpl-btn{font-size:11px;font-weight:600;padding:6px 4px;border-radius:6px;border:1px solid rgba(0,0,0,.12);background:#fff;cursor:pointer;font-family:'Inter',sans-serif;color:var(--charcoal);text-align:center;transition:all .1s}
+.vb-tpl-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.vb-field{display:flex;flex-direction:column;gap:5px}
+.vb-field label{font-size:10px;font-weight:700;color:var(--slate);text-transform:uppercase;letter-spacing:.4px}
+.vb-field input,.vb-field textarea,.vb-field select{font-family:'Inter',sans-serif;font-size:12px;border:1px solid rgba(0,0,0,.12);border-radius:6px;padding:7px 9px;color:var(--charcoal);outline:none;resize:vertical;transition:border-color .15s}
+.vb-field input:focus,.vb-field textarea:focus,.vb-field select:focus{border-color:var(--slate)}
+.vb-field textarea{min-height:60px}
+.color-swatches{display:flex;gap:5px;flex-wrap:wrap}
+.swatch{width:24px;height:24px;border-radius:5px;cursor:pointer;border:2px solid transparent;transition:all .1s}
+.swatch.active,.swatch:hover{border-color:var(--charcoal)}
+.export-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto;padding-top:12px;border-top:1px solid rgba(0,0,0,.08)}
+
+/* ─── TIMELINE VIEW ─── */
+.timeline{display:flex;flex-direction:column;gap:0}
+.tl-week{margin-bottom:28px}
+.tl-week-label{font-family:'Manrope',sans-serif;font-size:12px;font-weight:700;color:var(--slate);text-transform:uppercase;letter-spacing:.6px;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--sand)}
+.tl-row{display:flex;gap:0;align-items:stretch;margin-bottom:8px}
+.tl-date-col{width:90px;flex-shrink:0;padding:10px 12px 10px 0;display:flex;flex-direction:column;align-items:flex-end;justify-content:flex-start;border-right:2px solid var(--sand)}
+.tl-date-col .day{font-family:'Manrope',sans-serif;font-weight:700;font-size:22px;color:var(--navy);line-height:1}
+.tl-date-col .weekday{font-size:10px;font-weight:600;color:var(--slate);text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
+.tl-cards{display:flex;flex-direction:column;gap:8px;padding:0 0 0 16px;flex:1}
+.tl-card{background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:10px;padding:14px 16px;cursor:pointer;transition:all .15s;display:flex;gap:14px;align-items:flex-start}
+.tl-card:hover{box-shadow:0 2px 12px rgba(0,0,0,.1);transform:translateY(-1px)}
+.tl-card-left{display:flex;flex-direction:column;gap:6px;flex:1}
+.tl-card-title{font-family:'Manrope',sans-serif;font-size:13.5px;font-weight:700;color:var(--navy)}
+.tl-card-preview{font-size:12.5px;color:var(--slate);line-height:1.45;margin-top:2px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.tl-card-meta{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:4px}
+.tl-card-right{display:flex;flex-direction:column;gap:6px;align-items:flex-end;flex-shrink:0}
+.tl-dot{width:12px;height:12px;border-radius:50%;margin-top:4px;flex-shrink:0}
+
+/* ─── EMPTY ─── */
+.empty{text-align:center;padding:48px;color:var(--slate)}
+.empty p{font-size:14px}
+
+/* ─── SECTION HEADERS ─── */
+.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.section-header h2{font-family:'Manrope',sans-serif;font-size:20px;font-weight:800;color:var(--navy)}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(0,0,0,.15);border-radius:3px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Rating<span>IQ</span></div>
+  <div class="header-sub">Social Campaign</div>
+  <nav>
+    <button class="active" onclick="switchTab('roadmap',this)">Roadmap</button>
+    <button onclick="switchTab('timeline',this)">Timeline</button>
+    <button onclick="switchTab('builder',this)">Visual Builder</button>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ROADMAP TAB -->
+  <div id="tab-roadmap" class="tab-content active">
+    <div class="section-header">
+      <h2>Campaign Roadmap</h2>
+      <button class="btn btn-primary" onclick="openNewPost()">+ New Post</button>
+    </div>
+    <div class="stats" id="stats-bar"></div>
+    <div class="filters">
+      <select id="filter-platform" onchange="renderTable()">
+        <option value="">All Platforms</option>
+        <option value="linkedin-company">LinkedIn Company</option>
+        <option value="linkedin-omri">LinkedIn — Omri</option>
+        <option value="facebook">Facebook</option>
+      </select>
+      <select id="filter-status" onchange="renderTable()">
+        <option value="">All Statuses</option>
+        <option value="draft">Draft</option>
+        <option value="ready">Ready</option>
+        <option value="scheduled">Scheduled</option>
+        <option value="published">Published</option>
+      </select>
+      <input type="text" id="filter-search" placeholder="Search copy..." oninput="renderTable()" style="flex:1;max-width:260px">
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Platform</th>
+            <th>Type</th>
+            <th>Copy Preview</th>
+            <th>Visual</th>
+            <th>Status</th>
+            <th>Corrections</th>
+            <th style="width:40px"></th>
+          </tr>
+        </thead>
+        <tbody id="posts-table"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- TIMELINE TAB -->
+  <div id="tab-timeline" class="tab-content">
+    <div class="section-header">
+      <h2>Timeline View</h2>
+    </div>
+    <div id="timeline-view" class="timeline"></div>
+  </div>
+
+  <!-- BUILDER TAB -->
+  <div id="tab-builder" class="tab-content">
+    <div class="section-header" style="margin-bottom:0">
+      <h2>Visual Builder</h2>
+    </div>
+    <div class="vb-wrap" style="height:calc(100vh - 140px)">
+      <div class="vb-controls">
+
+        <div>
+          <h3 style="margin-bottom:10px">Template</h3>
+          <div class="vb-tpl-grid">
+            <button class="vb-tpl-btn active" onclick="setTemplate('announcement',this)">Announce</button>
+            <button class="vb-tpl-btn" onclick="setTemplate('thought-leadership',this)">TL Post</button>
+            <button class="vb-tpl-btn" onclick="setTemplate('reveal',this)">Reveal</button>
+            <button class="vb-tpl-btn" onclick="setTemplate('comparison',this)">Compare</button>
+            <button class="vb-tpl-btn" onclick="setTemplate('minimal',this)">Minimal</button>
+            <button class="vb-tpl-btn" onclick="setTemplate('quote',this)">Quote</button>
+          </div>
+        </div>
+
+        <div>
+          <h3 style="margin-bottom:8px">Dimensions</h3>
+          <div class="vb-dims">
+            <button class="vb-dim-btn active" onclick="setDims(1200,627,this)">LinkedIn</button>
+            <button class="vb-dim-btn" onclick="setDims(1080,1080,this)">Square</button>
+            <button class="vb-dim-btn" onclick="setDims(1200,628,this)">Facebook</button>
+            <button class="vb-dim-btn" onclick="setDims(1080,1920,this)">Story</button>
+          </div>
+        </div>
+
+        <div class="vb-field">
+          <label>Headline</label>
+          <input type="text" id="vb-headline" placeholder="Main headline..." oninput="renderCanvas()">
+        </div>
+        <div class="vb-field">
+          <label>Subheadline</label>
+          <input type="text" id="vb-sub" placeholder="Subheadline or tagline..." oninput="renderCanvas()">
+        </div>
+        <div class="vb-field">
+          <label>Body text</label>
+          <textarea id="vb-body" placeholder="Body copy..." oninput="renderCanvas()"></textarea>
+        </div>
+        <div class="vb-field">
+          <label>Tag / Label</label>
+          <input type="text" id="vb-tag" placeholder="e.g. NEW · REBRAND" oninput="renderCanvas()">
+        </div>
+
+        <div>
+          <h3 style="margin-bottom:8px">Background</h3>
+          <div class="color-swatches" id="bg-swatches"></div>
+        </div>
+        <div>
+          <h3 style="margin-bottom:8px">Accent</h3>
+          <div class="color-swatches" id="acc-swatches"></div>
+        </div>
+
+        <div class="vb-field">
+          <label>Show Logo</label>
+          <select id="vb-logo" onchange="renderCanvas()">
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+          </select>
+        </div>
+
+        <div class="export-row">
+          <button class="btn btn-primary btn-sm" onclick="exportPNG()">↓ PNG</button>
+          <button class="btn btn-ghost btn-sm" onclick="exportPDF()">↓ PDF</button>
+          <button class="btn btn-gold btn-sm" onclick="copyToClipboard()">Copy</button>
+        </div>
+      </div>
+      <div class="vb-canvas-area">
+        <div class="vb-dims" style="justify-content:center;margin-bottom:4px">
+          <span id="canvas-size-label" style="font-size:11px;font-weight:600;color:var(--slate);font-family:'Inter',sans-serif"></span>
+        </div>
+        <canvas id="vb-canvas"></canvas>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- POST EDITOR MODAL -->
+<div class="overlay" id="post-modal">
+  <div class="modal" style="max-width:900px">
+    <div class="modal-header">
+      <h2 id="modal-title">Edit Post</h2>
+      <div id="modal-badges" style="display:flex;gap:6px"></div>
+      <button class="btn btn-ghost btn-sm" style="margin-left:auto" onclick="closeModal('post-modal')">✕ Close</button>
+    </div>
+    <div class="modal-body">
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div class="field">
+          <label>Date</label>
+          <input type="date" id="edit-date">
+        </div>
+        <div class="field">
+          <label>Platform</label>
+          <select id="edit-platform" onchange="updateModalBadge()">
+            <option value="linkedin-company">LinkedIn — Company</option>
+            <option value="linkedin-omri">LinkedIn — Omri</option>
+            <option value="facebook">Facebook</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Post Type</label>
+          <input type="text" id="edit-type" placeholder="e.g. Thought Leadership">
+        </div>
+        <div class="field">
+          <label>Status</label>
+          <select id="edit-status">
+            <option value="draft">Draft</option>
+            <option value="ready">Ready</option>
+            <option value="scheduled">Scheduled</option>
+            <option value="published">Published</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Visual Concept</label>
+          <textarea id="edit-visual" class="small" placeholder="Describe the visual..."></textarea>
+        </div>
+        <div class="field">
+          <label>Corrections / Notes</label>
+          <textarea id="edit-corrections" class="small" placeholder="Any corrections or feedback..."></textarea>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div class="field" style="flex:1;display:flex;flex-direction:column">
+          <label>Post Copy</label>
+          <textarea id="edit-copy" class="copy-area" style="flex:1;min-height:320px" oninput="updateCharCount()"></textarea>
+          <div class="char-count" id="char-count">0 chars</div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="openBuilderFromPost()">Open in Visual Builder →</button>
+      <button class="btn btn-ghost" onclick="deleteCurrentPost()" style="color:#dc2626;border-color:#fecaca">Delete</button>
+      <button class="btn btn-primary" onclick="savePost()">Save Post</button>
+    </div>
+  </div>
+</div>
+
+<!-- CLOSE ON OVERLAY CLICK -->
+<script>
+document.querySelectorAll('.overlay').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open')}));
+</script>
+
+<script>
+// ─────────────────────────────────────────
+// DATA
+// ─────────────────────────────────────────
+
+const DAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+const DEFAULT_POSTS = [
+  {
+    id:'p1', date:'2026-04-07', platform:'linkedin-company', type:'Rebrand Announcement',
+    copy:`We've rebranded. Upstar is now RatingIQ.
+
+New name. New logo. New slogan: "From reviews to revenue."
+
+Same team. Same mission — help hotel chains move their Booking.com score in a direction that matters to their P&L.
+
+RatingIQ is the rating-performance system we always wanted to build. Not a review management tool. Not a dashboard. An operational push system that maps exactly what to fix — and gets it to the right people.
+
+The new website is live: rating-iq.com
+
+If you run a hotel chain and your rating isn't where it should be — that's the conversation we want to have.`,
+    visualConcept:'Split layout. Left: deep navy with RatingIQ logo centered in white + gold. Right: warm sand with "Upstar → RatingIQ" in large Manrope bold. Gold divider line. Slogan bottom right.',
+    status:'draft', corrections:''
+  },
+  {
+    id:'p2', date:'2026-04-07', platform:'facebook', type:'Rebrand Announcement',
+    copy:`We've rebranded. Upstar is now RatingIQ.
+
+New name. New logo. New slogan: "From reviews to revenue."
+
+Same mission — help hotel chains turn their Booking.com score into a commercial advantage.
+
+See what we've built: rating-iq.com`,
+    visualConcept:'Same split layout as LinkedIn version. Adapted for Facebook dimensions (1200×628).',
+    status:'draft', corrections:''
+  },
+  {
+    id:'p3', date:'2026-04-09', platform:'linkedin-omri', type:'Thought Leadership',
+    copy:`A 0.2 drop on Booking.com can cost a mid-size hotel chain $200K+ in annual RevPAR.
+
+Nobody talks about this number.
+
+Hotels obsess over occupancy and ADR. Rating gets treated like a PR metric.
+
+It's not.
+
+A lower score:
+→ Drops your search rank
+→ Shrinks your click-through rate
+→ Hits your conversion
+→ Hits your RevPAR
+
+The chain CEOs who get this stop asking "how do I manage reviews" and start asking "what's the fastest path to a higher score."
+
+Those are two very different questions.
+
+We built RatingIQ to answer the second one.`,
+    visualConcept:'Warm sand background. Large pull quote: "0.2 on Booking.com. That\'s revenue." in Manrope bold navy. Small RatingIQ mark bottom right. Minimal, executive.',
+    status:'draft', corrections:''
+  },
+  {
+    id:'p4', date:'2026-04-11', platform:'linkedin-company', type:'Website Launch',
+    copy:`The new website is live.
+
+rating-iq.com
+
+Built for one audience: the CEO running a hotel chain who knows their rating is affecting revenue — and wants it fixed, not managed.
+
+Take a look.`,
+    visualConcept:'Browser frame mockup showing rating-iq.com hero. Dark navy background. Gold URL bar highlight. Tagline visible inside mockup.',
+    status:'draft', corrections:''
+  },
+  {
+    id:'p5', date:'2026-04-11', platform:'facebook', type:'Website Launch',
+    copy:`Our new website is live.
+
+rating-iq.com — built for hotel chain CEOs who want their rating problem solved, not managed.
+
+Take a look.`,
+    visualConcept:'Same browser mockup, Facebook dimensions.',
+    status:'draft', corrections:''
+  },
+  {
+    id:'p6', date:'2026-04-13', platform:'linkedin-omri', type:'Thought Leadership',
+    copy:`Most rating gains don't require a single renovation.
+
+They require someone to read what guests are actually saying — and then act on it.
+
+The most common review clusters in hotel chains:
+→ Breakfast service timing
+→ Check-in wait times
+→ Room cleanliness consistency
+→ Staff responsiveness
+
+None of these require CapEx.
+All of them require operational focus.
+
+The problem isn't the building.
+It's that nobody's mapped the fixes to the right people.
+
+That's the whole job.`,
+    visualConcept:'Clean card. Headline: "Zero CapEx. Higher rating." Navy text on sand. Bulleted list below in lighter Inter. RatingIQ mark small, bottom right.',
+    status:'draft', corrections:''
+  },
+  {
+    id:'p7', date:'2026-04-15', platform:'linkedin-company', type:'Brand Introduction',
+    copy:`RatingIQ is a rating-performance system for hotel chains.
+
+Not review management. Not a reputation dashboard.
+
+An operational push system that:
+→ Maps exactly what's hurting your score
+→ Prioritizes the fixes
+→ Pushes the right actions to the right people
+
+For hotel chains where the Booking.com score isn't where it should be — and where fixing it matters to the P&L.
+
+rating-iq.com`,
+    visualConcept:'Three-panel graphic, one bullet per panel. Navy background, gold accent text. Minimal and sharp.',
+    status:'draft', corrections:''
+  },
+  {
+    id:'p8', date:'2026-04-17', platform:'linkedin-omri', type:'Thought Leadership',
+    copy:`Every hotel bought a review management tool.
+
+Almost none of them are actually using it.
+
+The problem with "log in and analyze" is that nobody logs in.
+
+GMs are running a hotel. They're not sitting at a dashboard looking for patterns.
+
+The system has to push to them. Not pull them in.
+
+New complaint cluster? Tell the GM.
+Same issue across 3 properties? Tell the CEO.
+Score about to drop? Alert someone who can act.
+
+That's the difference between a reporting tool and a performance system.
+
+It's also the only difference that matters.`,
+    visualConcept:'Two-column comparison. Left: "Reporting tool" gray, passive. Right: "Performance system" navy, active. Gold divider. Bold and sharp.',
+    status:'draft', corrections:''
+  },
+  {
+    id:'p9', date:'2026-04-19', platform:'linkedin-omri', type:'Thought Leadership',
+    copy:`Hotel chains have three kinds of rating problems.
+
+The first is visible. A score that's been sitting at 8.1 for 18 months while the city average climbs.
+
+The second is quiet. A trailing 90-day average that's lower than the displayed score — a drop signal most chains don't see until it hits.
+
+The third is operational. Recurring complaints that never get mapped to a fix because nobody owns the data-to-action step.
+
+All three are solvable. None of them require guesswork.
+
+That's what RatingIQ is for.`,
+    visualConcept:'Three stacked cards, each a "problem type." Clean, numbered. Navy + gold accents. Educational and sharp.',
+    status:'draft', corrections:''
+  },
+  {
+    id:'p10', date:'2026-04-21', platform:'linkedin-company', type:'Slogan Reveal',
+    copy:`From reviews to revenue.
+
+That's the only journey that matters.
+
+Not "manage your reputation." Not "monitor your feedback."
+
+Move the number that moves your P&L.
+
+rating-iq.com`,
+    visualConcept:'Full-bleed navy. "From reviews to revenue." centered in large Manrope 800. Gold underline on "revenue." RatingIQ logo top left. Minimal, brand-defining.',
+    status:'draft', corrections:''
+  }
+];
+
+function loadPosts(){
+  try{
+    const s=localStorage.getItem('sc_posts');
+    return s?JSON.parse(s):[...DEFAULT_POSTS.map(p=>({...p}))];
+  }catch{return [...DEFAULT_POSTS.map(p=>({...p}))]}
+}
+function savePosts(p){localStorage.setItem('sc_posts',JSON.stringify(p))}
+
+let posts=loadPosts();
+let editingId=null;
+
+// ─────────────────────────────────────────
+// HELPERS
+// ─────────────────────────────────────────
+
+function fmtDate(d){
+  const dt=new Date(d+'T12:00:00');
+  return `${MONTHS[dt.getMonth()]} ${dt.getDate()}`;
+}
+function fmtDay(d){
+  const dt=new Date(d+'T12:00:00');
+  return DAYS[dt.getDay()];
+}
+function platformLabel(p){
+  if(p==='linkedin-company')return'LinkedIn Co.';
+  if(p==='linkedin-omri')return'LinkedIn Omri';
+  if(p==='facebook')return'Facebook';
+  return p;
+}
+function platformIcon(p){
+  if(p==='linkedin-company'||p==='linkedin-omri')return'in';
+  if(p==='facebook')return'f';
+  return'';
+}
+function statusDot(s){
+  const c={draft:'#94a3b8',ready:'#3b82f6',scheduled:'#d97706',published:'#16a34a'};
+  return c[s]||'#ccc';
+}
+
+// ─────────────────────────────────────────
+// STATS
+// ─────────────────────────────────────────
+function renderStats(){
+  const bar=document.getElementById('stats-bar');
+  const counts={total:posts.length,draft:0,ready:0,scheduled:0,published:0};
+  posts.forEach(p=>{ if(counts[p.status]!==undefined)counts[p.status]++ });
+  bar.innerHTML=`
+    <div class="stat-card"><div class="num">${counts.total}</div><div class="lbl">Total Posts</div></div>
+    <div class="stat-card draft"><div class="num">${counts.draft}</div><div class="lbl">Draft</div></div>
+    <div class="stat-card ready"><div class="num">${counts.ready}</div><div class="lbl">Ready</div></div>
+    <div class="stat-card scheduled"><div class="num">${counts.scheduled}</div><div class="lbl">Scheduled</div></div>
+    <div class="stat-card published"><div class="num">${counts.published}</div><div class="lbl">Published</div></div>
+  `;
+}
+
+// ─────────────────────────────────────────
+// TABLE
+// ─────────────────────────────────────────
+function getFiltered(){
+  const plat=document.getElementById('filter-platform').value;
+  const stat=document.getElementById('filter-status').value;
+  const q=document.getElementById('filter-search').value.toLowerCase();
+  return posts.filter(p=>{
+    if(plat&&p.platform!==plat)return false;
+    if(stat&&p.status!==stat)return false;
+    if(q&&!p.copy.toLowerCase().includes(q)&&!p.type.toLowerCase().includes(q))return false;
+    return true;
+  }).sort((a,b)=>a.date.localeCompare(b.date));
+}
+
+function renderTable(){
+  const tbody=document.getElementById('posts-table');
+  const filtered=getFiltered();
+  if(!filtered.length){
+    tbody.innerHTML='<tr><td colspan="8" style="text-align:center;padding:32px;color:var(--slate)">No posts found</td></tr>';
+    return;
+  }
+  tbody.innerHTML=filtered.map(p=>`
+    <tr onclick="openEdit('${p.id}')">
+      <td class="td-date">${fmtDate(p.date)}<span class="td-day">${fmtDay(p.date)}</span></td>
+      <td><span class="badge badge-${p.platform}">${platformIcon(p.platform)} ${platformLabel(p.platform)}</span></td>
+      <td><span class="type-tag">${p.type}</span></td>
+      <td><div class="copy-preview">${p.copy.split('\n')[0]}</div></td>
+      <td>
+        <div class="vis-dot" title="${p.visualConcept}" onclick="event.stopPropagation();openBuilderFor('${p.id}')">🎨</div>
+      </td>
+      <td onclick="event.stopPropagation()">
+        <select class="status-select status-${p.status}" onchange="quickStatus('${p.id}',this.value);this.className='status-select status-'+this.value">
+          <option value="draft" ${p.status==='draft'?'selected':''}>Draft</option>
+          <option value="ready" ${p.status==='ready'?'selected':''}>Ready</option>
+          <option value="scheduled" ${p.status==='scheduled'?'selected':''}>Scheduled</option>
+          <option value="published" ${p.status==='published'?'selected':''}>Published</option>
+        </select>
+      </td>
+      <td class="corrections-cell" onclick="event.stopPropagation()">
+        <input type="text" value="${p.corrections||''}" placeholder="Add note..." onchange="quickCorrection('${p.id}',this.value)">
+      </td>
+      <td><span style="font-size:16px;color:var(--slate);padding:0 6px">›</span></td>
+    </tr>
+  `).join('');
+
+  // color status selects
+  tbody.querySelectorAll('.status-select').forEach(s=>{
+    s.style.background = {draft:'#f1f5f9',ready:'#eff6ff',scheduled:'#fffbeb',published:'#f0fdf4'}[s.value]||'';
+    s.style.color = {draft:'#64748b',ready:'#3b82f6',scheduled:'#d97706',published:'#16a34a'}[s.value]||'';
+    s.style.fontWeight='700';
+    s.style.borderRadius='20px';
+    s.style.padding='3px 8px';
+  });
+}
+
+function quickStatus(id,val){
+  const p=posts.find(x=>x.id===id);
+  if(p){p.status=val;savePosts(posts);renderStats();}
+}
+function quickCorrection(id,val){
+  const p=posts.find(x=>x.id===id);
+  if(p){p.corrections=val;savePosts(posts);}
+}
+
+// ─────────────────────────────────────────
+// TIMELINE
+// ─────────────────────────────────────────
+function renderTimeline(){
+  const cont=document.getElementById('timeline-view');
+  const sorted=[...posts].sort((a,b)=>a.date.localeCompare(b.date));
+
+  // group by week
+  const weeks={};
+  sorted.forEach(p=>{
+    const dt=new Date(p.date+'T12:00:00');
+    const mon=new Date(dt);
+    mon.setDate(dt.getDate()-dt.getDay()+1);
+    const wk=mon.toISOString().slice(0,10);
+    if(!weeks[wk])weeks[wk]=[];
+    weeks[wk].push(p);
+  });
+
+  // group by date within week
+  cont.innerHTML=Object.keys(weeks).sort().map(wk=>{
+    const wkPosts=weeks[wk];
+    const dates={};
+    wkPosts.forEach(p=>{
+      if(!dates[p.date])dates[p.date]=[];
+      dates[p.date].push(p);
+    });
+    const dt=new Date(wk+'T12:00:00');
+    const label=`Week of ${MONTHS[dt.getMonth()]} ${dt.getDate()}`;
+    return `
+      <div class="tl-week">
+        <div class="tl-week-label">${label}</div>
+        ${Object.keys(dates).sort().map(d=>`
+          <div class="tl-row">
+            <div class="tl-date-col">
+              <div class="day">${new Date(d+'T12:00:00').getDate()}</div>
+              <div class="weekday">${fmtDay(d)}</div>
+            </div>
+            <div class="tl-cards">
+              ${dates[d].map(p=>`
+                <div class="tl-card" onclick="openEdit('${p.id}')">
+                  <div style="margin-top:3px"><div class="tl-dot" style="background:${statusDot(p.status)}"></div></div>
+                  <div class="tl-card-left">
+                    <div class="tl-card-title">${p.type}</div>
+                    <div class="tl-card-preview">${p.copy.replace(/\n/g,' ')}</div>
+                    <div class="tl-card-meta">
+                      <span class="badge badge-${p.platform}">${platformLabel(p.platform)}</span>
+                      <span class="status-badge status-${p.status}">${p.status}</span>
+                    </div>
+                  </div>
+                  <div class="tl-card-right">
+                    <div class="vis-dot" title="Open Visual Builder" onclick="event.stopPropagation();openBuilderFor('${p.id}')">🎨</div>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  }).join('');
+}
+
+// ─────────────────────────────────────────
+// EDIT MODAL
+// ─────────────────────────────────────────
+function openEdit(id){
+  editingId=id;
+  const p=posts.find(x=>x.id===id);
+  document.getElementById('modal-title').textContent=p.type;
+  document.getElementById('edit-date').value=p.date;
+  document.getElementById('edit-platform').value=p.platform;
+  document.getElementById('edit-type').value=p.type;
+  document.getElementById('edit-status').value=p.status;
+  document.getElementById('edit-visual').value=p.visualConcept||'';
+  document.getElementById('edit-corrections').value=p.corrections||'';
+  document.getElementById('edit-copy').value=p.copy;
+  updateCharCount();
+  updateModalBadge();
+  document.getElementById('post-modal').classList.add('open');
+}
+
+function openNewPost(){
+  editingId=null;
+  const today=new Date().toISOString().slice(0,10);
+  document.getElementById('modal-title').textContent='New Post';
+  document.getElementById('edit-date').value=today;
+  document.getElementById('edit-platform').value='linkedin-company';
+  document.getElementById('edit-type').value='';
+  document.getElementById('edit-status').value='draft';
+  document.getElementById('edit-visual').value='';
+  document.getElementById('edit-corrections').value='';
+  document.getElementById('edit-copy').value='';
+  updateCharCount();
+  updateModalBadge();
+  document.getElementById('post-modal').classList.add('open');
+}
+
+function updateModalBadge(){
+  const p=document.getElementById('edit-platform').value;
+  document.getElementById('modal-badges').innerHTML=`<span class="badge badge-${p}">${platformLabel(p)}</span>`;
+}
+
+function updateCharCount(){
+  const v=document.getElementById('edit-copy').value;
+  document.getElementById('char-count').textContent=`${v.length} chars`;
+}
+
+function savePost(){
+  const date=document.getElementById('edit-date').value;
+  const platform=document.getElementById('edit-platform').value;
+  const type=document.getElementById('edit-type').value;
+  const status=document.getElementById('edit-status').value;
+  const visualConcept=document.getElementById('edit-visual').value;
+  const corrections=document.getElementById('edit-corrections').value;
+  const copy=document.getElementById('edit-copy').value;
+
+  if(editingId){
+    const p=posts.find(x=>x.id===editingId);
+    Object.assign(p,{date,platform,type,status,visualConcept,corrections,copy});
+  } else {
+    posts.push({id:'p'+Date.now(),date,platform,type,status,visualConcept,corrections,copy});
+  }
+  savePosts(posts);
+  render();
+  closeModal('post-modal');
+}
+
+function deleteCurrentPost(){
+  if(!editingId)return;
+  if(!confirm('Delete this post?'))return;
+  posts=posts.filter(p=>p.id!==editingId);
+  savePosts(posts);
+  render();
+  closeModal('post-modal');
+}
+
+function closeModal(id){document.getElementById(id).classList.remove('open')}
+
+// ─────────────────────────────────────────
+// TABS
+// ─────────────────────────────────────────
+function switchTab(name,btn){
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  btn.classList.add('active');
+  if(name==='timeline')renderTimeline();
+  if(name==='builder')renderCanvas();
+}
+
+// ─────────────────────────────────────────
+// VISUAL BUILDER
+// ─────────────────────────────────────────
+let vbState={
+  template:'announcement',
+  w:1200, h:627,
+  headline:'',sub:'',body:'',tag:'',
+  bg:'#1C2A39', accent:'#C9A86A',
+  showLogo:true
+};
+
+const BRAND_COLORS=['#1C2A39','#516B84','#C9A86A','#2B2B2B','#ECE8E2','#FFFFFF','#F0EDE8'];
+
+function initSwatches(){
+  const bgEl=document.getElementById('bg-swatches');
+  const accEl=document.getElementById('acc-swatches');
+  BRAND_COLORS.forEach(c=>{
+    const b=document.createElement('div');
+    b.className='swatch'+(vbState.bg===c?' active':'');
+    b.style.background=c;
+    b.style.border=c==='#FFFFFF'?'2px solid #ddd':'2px solid transparent';
+    b.title=c;
+    b.onclick=()=>{vbState.bg=c;document.querySelectorAll('#bg-swatches .swatch').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderCanvas();};
+    bgEl.appendChild(b);
+
+    const a=document.createElement('div');
+    a.className='swatch'+(vbState.accent===c?' active':'');
+    a.style.background=c;
+    a.style.border=c==='#FFFFFF'?'2px solid #ddd':'2px solid transparent';
+    a.title=c;
+    a.onclick=()=>{vbState.accent=c;document.querySelectorAll('#acc-swatches .swatch').forEach(x=>x.classList.remove('active'));a.classList.add('active');renderCanvas();};
+    accEl.appendChild(a);
+  });
+}
+
+function setTemplate(t,btn){
+  vbState.template=t;
+  document.querySelectorAll('.vb-tpl-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+
+  // preset defaults per template
+  const presets={
+    'announcement':{bg:'#1C2A39',accent:'#C9A86A'},
+    'thought-leadership':{bg:'#ECE8E2',accent:'#1C2A39'},
+    'reveal':{bg:'#1C2A39',accent:'#C9A86A'},
+    'comparison':{bg:'#FFFFFF',accent:'#1C2A39'},
+    'minimal':{bg:'#F0EDE8',accent:'#516B84'},
+    'quote':{bg:'#1C2A39',accent:'#C9A86A'},
+  };
+  if(presets[t]){
+    vbState.bg=presets[t].bg;
+    vbState.accent=presets[t].accent;
+    document.querySelectorAll('#bg-swatches .swatch').forEach(s=>s.classList.toggle('active',s.title===vbState.bg));
+    document.querySelectorAll('#acc-swatches .swatch').forEach(s=>s.classList.toggle('active',s.title===vbState.accent));
+  }
+  renderCanvas();
+}
+
+function setDims(w,h,btn){
+  vbState.w=w;vbState.h=h;
+  document.querySelectorAll('.vb-dim-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderCanvas();
+}
+
+const SCALE=0.5; // display at 50%
+
+function renderCanvas(){
+  const headline=document.getElementById('vb-headline').value||vbState.headline;
+  const sub=document.getElementById('vb-sub').value||vbState.sub;
+  const body=document.getElementById('vb-body').value||vbState.body;
+  const tag=document.getElementById('vb-tag').value||vbState.tag;
+  const showLogo=document.getElementById('vb-logo').value==='1';
+  const {template,w,h,bg,accent}=vbState;
+
+  const cv=document.getElementById('vb-canvas');
+  cv.width=w;cv.height=h;
+  cv.style.width=Math.round(w*SCALE)+'px';
+  cv.style.height=Math.round(h*SCALE)+'px';
+  document.getElementById('canvas-size-label').textContent=`${w} × ${h}px`;
+
+  const ctx=cv.getContext('2d');
+  ctx.clearRect(0,0,w,h);
+
+  const isDark=isDarkColor(bg);
+  const textColor=isDark?'#FFFFFF':'#1C2A39';
+  const mutedColor=isDark?'rgba(255,255,255,0.55)':'rgba(28,42,57,0.5)';
+
+  if(template==='announcement') drawAnnouncement(ctx,w,h,bg,accent,textColor,mutedColor,headline,sub,body,tag,showLogo);
+  else if(template==='thought-leadership') drawTL(ctx,w,h,bg,accent,textColor,mutedColor,headline,sub,body,tag,showLogo);
+  else if(template==='reveal') drawReveal(ctx,w,h,bg,accent,textColor,mutedColor,headline,sub,body,tag,showLogo);
+  else if(template==='comparison') drawComparison(ctx,w,h,bg,accent,textColor,mutedColor,headline,sub,body,tag,showLogo);
+  else if(template==='minimal') drawMinimal(ctx,w,h,bg,accent,textColor,mutedColor,headline,sub,body,tag,showLogo);
+  else if(template==='quote') drawQuote(ctx,w,h,bg,accent,textColor,mutedColor,headline,sub,body,tag,showLogo);
+}
+
+function isDarkColor(hex){
+  const r=parseInt(hex.slice(1,3),16);
+  const g=parseInt(hex.slice(3,5),16);
+  const b=parseInt(hex.slice(5,7),16);
+  return (0.299*r+0.587*g+0.114*b)<128;
+}
+
+function wrapText(ctx,text,x,y,maxW,lineH){
+  const words=text.split(' ');
+  let line='';
+  let cy=y;
+  words.forEach(w=>{
+    const test=line?line+' '+w:w;
+    if(ctx.measureText(test).width>maxW&&line){
+      ctx.fillText(line,x,cy);
+      line=w;cy+=lineH;
+    } else line=test;
+  });
+  if(line){ctx.fillText(line,x,cy);cy+=lineH;}
+  return cy;
+}
+
+function drawLogo(ctx,x,y,size,color){
+  ctx.font=`800 ${size}px 'Manrope', sans-serif`;
+  ctx.fillStyle=color;
+  ctx.fillText('Rating',x,y);
+  const w1=ctx.measureText('Rating').width;
+  // accent color for IQ
+  ctx.fillText('IQ',x+w1,y);
+}
+
+function drawAnnouncement(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo){
+  // Split: left dark, right lighter
+  const splitX=w*0.42;
+  ctx.fillStyle=bg;ctx.fillRect(0,0,w,h);
+
+  // right panel
+  const rightBg=isDarkColor(bg)?lighten(bg,20):'#F5F3EF';
+  ctx.fillStyle=rightBg;ctx.fillRect(splitX,0,w-splitX,h);
+
+  // accent divider
+  ctx.fillStyle=accent;ctx.fillRect(splitX-3,0,6,h);
+
+  // Left: logo area
+  const lTC=isDarkColor(bg)?'#fff':tc;
+  const logoSize=Math.round(h*0.055);
+  ctx.font=`800 ${logoSize}px Manrope,sans-serif`;
+  ctx.fillStyle=lTC;
+  const logoX=Math.round(w*0.06);
+  ctx.fillText('Rating',logoX,h*0.12+logoSize*0.4);
+  const rw=ctx.measureText('Rating').width;
+  ctx.fillStyle=accent;
+  ctx.fillText('IQ',logoX+rw,h*0.12+logoSize*0.4);
+
+  if(tag){
+    ctx.fillStyle=accent;
+    ctx.font=`600 ${Math.round(h*0.022)}px Inter,sans-serif`;
+    ctx.fillText(tag,logoX,h*0.25);
+  }
+
+  // Left tagline
+  if(sub){
+    ctx.font=`500 ${Math.round(h*0.035)}px Manrope,sans-serif`;
+    ctx.fillStyle=lTC;
+    const maxW=splitX-logoX*2;
+    wrapText(ctx,sub,logoX,h*0.55,maxW,Math.round(h*0.05));
+  }
+
+  // accent tagline bottom left
+  ctx.font=`600 italic ${Math.round(h*0.028)}px Manrope,sans-serif`;
+  ctx.fillStyle=accent;
+  ctx.fillText('"From reviews to revenue"',logoX,h*0.88);
+
+  // Right panel
+  const rPad=Math.round(w*0.06);
+  const rX=splitX+rPad;
+  const rW=w-splitX-rPad*1.2;
+  const rightTC=isDarkColor(rightBg)?'#fff':'#1C2A39';
+
+  if(headline){
+    ctx.font=`800 ${Math.round(h*0.075)}px Manrope,sans-serif`;
+    ctx.fillStyle=rightTC;
+    const lines=headline.split('\n');
+    let cy=h*0.2;
+    lines.forEach(l=>{
+      cy=wrapText(ctx,l,rX,cy,rW,Math.round(h*0.1));
+    });
+    // underline
+    ctx.fillStyle=accent;ctx.fillRect(rX,cy,Math.min(ctx.measureText(headline.split('\n')[0]).width,120),4);
+  }
+
+  if(body){
+    ctx.font=`400 ${Math.round(h*0.032)}px Inter,sans-serif`;
+    ctx.fillStyle=rightTC;
+    const bodyLines=body.split('\n');
+    let cy=h*0.5;
+    bodyLines.forEach(l=>{
+      if(l.trim()){cy=wrapText(ctx,l,rX,cy,rW,Math.round(h*0.045));}
+      else cy+=Math.round(h*0.025);
+    });
+  }
+}
+
+function drawTL(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo){
+  ctx.fillStyle=bg;ctx.fillRect(0,0,w,h);
+
+  const pad=Math.round(w*0.07);
+  const isDark=isDarkColor(bg);
+
+  // top accent bar
+  ctx.fillStyle=accent;ctx.fillRect(pad,Math.round(h*0.08),60,4);
+
+  if(tag){
+    ctx.font=`700 ${Math.round(h*0.025)}px Inter,sans-serif`;
+    ctx.fillStyle=accent;
+    ctx.fillText(tag,pad,h*0.18);
+  }
+
+  if(headline){
+    ctx.font=`800 ${Math.round(h*0.085)}px Manrope,sans-serif`;
+    ctx.fillStyle=tc;
+    const lines=headline.split('\n');
+    let cy=h*(tag?0.26:0.22);
+    lines.forEach(l=>{
+      cy=wrapText(ctx,l,pad,cy,w-pad*2,Math.round(h*0.11));
+    });
+  }
+
+  if(sub){
+    ctx.font=`500 ${Math.round(h*0.038)}px Manrope,sans-serif`;
+    ctx.fillStyle=mc;
+    wrapText(ctx,sub,pad,h*0.5,w-pad*2,Math.round(h*0.055));
+  }
+
+  if(body){
+    const bodyPad=pad;
+    ctx.font=`400 ${Math.round(h*0.03)}px Inter,sans-serif`;
+    ctx.fillStyle=tc;
+    const bodyLines=body.split('\n');
+    let cy=h*0.62;
+    bodyLines.slice(0,4).forEach(l=>{
+      if(l.trim()){cy=wrapText(ctx,l,bodyPad,cy,w-bodyPad*2,Math.round(h*0.042));}
+      else cy+=Math.round(h*0.022);
+    });
+  }
+
+  if(showLogo){
+    const ls=Math.round(h*0.035);
+    ctx.font=`800 ${ls}px Manrope,sans-serif`;
+    const logoW=ctx.measureText('RatingIQ').width+10;
+    const lx=w-pad-logoW;
+    ctx.fillStyle=isDark?'rgba(255,255,255,0.3)':accent;
+    ctx.fillText('Rating',lx,h*0.93);
+    const rw=ctx.measureText('Rating').width;
+    ctx.fillStyle=accent;
+    ctx.fillText('IQ',lx+rw,h*0.93);
+  }
+}
+
+function drawReveal(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo){
+  ctx.fillStyle=bg;ctx.fillRect(0,0,w,h);
+
+  // large centered brand element
+  const cx=w/2,cy=h/2;
+
+  // accent circle (subtle)
+  ctx.beginPath();
+  ctx.arc(cx,cy-h*0.05,Math.min(w,h)*0.28,0,Math.PI*2);
+  ctx.fillStyle=accent+'18';
+  ctx.fill();
+
+  if(showLogo){
+    const ls=Math.round(h*0.12);
+    ctx.font=`800 ${ls}px Manrope,sans-serif`;
+    const logoFull='RatingIQ';
+    const tw=ctx.measureText(logoFull).width;
+    const lx=cx-tw/2;
+    ctx.fillStyle=isDarkColor(bg)?'#fff':tc;
+    ctx.fillText('Rating',lx,cy-h*0.04);
+    const rw=ctx.measureText('Rating').width;
+    ctx.fillStyle=accent;
+    ctx.fillText('IQ',lx+rw,cy-h*0.04);
+  }
+
+  if(headline){
+    ctx.font=`600 ${Math.round(h*0.045)}px Manrope,sans-serif`;
+    ctx.fillStyle=isDarkColor(bg)?'rgba(255,255,255,0.8)':mc;
+    ctx.textAlign='center';
+    wrapText(ctx,headline,cx,cy+h*0.12,w*0.7,Math.round(h*0.065));
+    ctx.textAlign='left';
+  }
+
+  if(sub){
+    ctx.font=`500 italic ${Math.round(h*0.033)}px Manrope,sans-serif`;
+    ctx.fillStyle=accent;
+    ctx.textAlign='center';
+    ctx.fillText(sub,cx,cy+h*0.25);
+    ctx.textAlign='left';
+  }
+
+  // bottom tag
+  if(tag){
+    ctx.fillStyle=accent;
+    ctx.font=`700 ${Math.round(h*0.02)}px Inter,sans-serif`;
+    ctx.textAlign='center';
+    ctx.fillText(tag,cx,h*0.92);
+    ctx.textAlign='left';
+  }
+}
+
+function drawComparison(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo){
+  ctx.fillStyle=bg;ctx.fillRect(0,0,w,h);
+  const midX=w/2;
+  const pad=Math.round(w*0.06);
+
+  // Left panel (gray)
+  ctx.fillStyle='#F0EDE8';
+  ctx.fillRect(0,0,midX-3,h);
+  // Right panel (navy)
+  ctx.fillStyle='#1C2A39';
+  ctx.fillRect(midX+3,0,midX-3,h);
+  // Divider
+  ctx.fillStyle=accent;ctx.fillRect(midX-3,0,6,h);
+
+  // Left header
+  ctx.font=`700 ${Math.round(h*0.04)}px Manrope,sans-serif`;
+  ctx.fillStyle='#516B84';
+  ctx.fillText('Before',pad,h*0.15);
+
+  // Right header
+  ctx.font=`700 ${Math.round(h*0.04)}px Manrope,sans-serif`;
+  ctx.fillStyle=accent;
+  ctx.fillText('RatingIQ',midX+pad,h*0.15);
+
+  if(headline){
+    const parts=headline.split('|');
+    if(parts[0]){
+      ctx.font=`600 ${Math.round(h*0.055)}px Manrope,sans-serif`;
+      ctx.fillStyle='#2B2B2B';
+      wrapText(ctx,parts[0].trim(),pad,h*0.3,midX-pad*2,Math.round(h*0.07));
+    }
+    if(parts[1]){
+      ctx.font=`700 ${Math.round(h*0.055)}px Manrope,sans-serif`;
+      ctx.fillStyle='#fff';
+      wrapText(ctx,parts[1].trim(),midX+pad,h*0.3,midX-pad*2,Math.round(h*0.07));
+    }
+  }
+
+  if(body){
+    const parts=body.split('||');
+    if(parts[0]){
+      ctx.font=`400 ${Math.round(h*0.028)}px Inter,sans-serif`;
+      ctx.fillStyle='#516B84';
+      const leftLines=parts[0].trim().split('\n');
+      let cy=h*0.48;
+      leftLines.forEach(l=>{if(l.trim()){cy=wrapText(ctx,l,pad,cy,midX-pad*2,Math.round(h*0.04));}else cy+=Math.round(h*0.02);});
+    }
+    if(parts[1]){
+      ctx.font=`400 ${Math.round(h*0.028)}px Inter,sans-serif`;
+      ctx.fillStyle='rgba(255,255,255,0.8)';
+      const rightLines=parts[1].trim().split('\n');
+      let cy=h*0.48;
+      rightLines.forEach(l=>{if(l.trim()){cy=wrapText(ctx,l,midX+pad,cy,midX-pad*2,Math.round(h*0.04));}else cy+=Math.round(h*0.02);});
+    }
+  }
+
+  if(showLogo){
+    ctx.font=`700 ${Math.round(h*0.028)}px Manrope,sans-serif`;
+    ctx.fillStyle='rgba(255,255,255,0.4)';
+    ctx.fillText('Rating',midX+pad,h*0.93);
+    const rw=ctx.measureText('Rating').width;
+    ctx.fillStyle=accent;
+    ctx.fillText('IQ',midX+pad+rw,h*0.93);
+  }
+}
+
+function drawMinimal(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo){
+  ctx.fillStyle=bg;ctx.fillRect(0,0,w,h);
+  const pad=Math.round(w*0.08);
+  const isDark=isDarkColor(bg);
+
+  if(tag){
+    ctx.font=`600 ${Math.round(h*0.022)}px Inter,sans-serif`;
+    ctx.fillStyle=accent;
+    ctx.fillText(tag,pad,h*0.15);
+  }
+
+  if(headline){
+    ctx.font=`800 ${Math.round(h*0.09)}px Manrope,sans-serif`;
+    ctx.fillStyle=tc;
+    let cy=h*(tag?0.28:0.25);
+    headline.split('\n').forEach(l=>{cy=wrapText(ctx,l,pad,cy,w-pad*2,Math.round(h*0.12));});
+  }
+
+  // thin line
+  ctx.fillStyle=accent;ctx.fillRect(pad,h*0.55,80,3);
+
+  if(sub){
+    ctx.font=`500 ${Math.round(h*0.035)}px Manrope,sans-serif`;
+    ctx.fillStyle=mc;
+    wrapText(ctx,sub,pad,h*0.64,w-pad*2,Math.round(h*0.05));
+  }
+
+  if(showLogo){
+    const ls=Math.round(h*0.03);
+    ctx.font=`800 ${ls}px Manrope,sans-serif`;
+    const lx=w-pad-ctx.measureText('RatingIQ').width;
+    ctx.fillStyle=isDark?'rgba(255,255,255,0.25)':mc;
+    ctx.fillText('Rating',lx,h*0.93);
+    const rw=ctx.measureText('Rating').width;
+    ctx.fillStyle=accent;
+    ctx.fillText('IQ',lx+rw,h*0.93);
+  }
+}
+
+function drawQuote(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo){
+  ctx.fillStyle=bg;ctx.fillRect(0,0,w,h);
+  const pad=Math.round(w*0.08);
+  const isDark=isDarkColor(bg);
+
+  // large quote mark
+  ctx.font=`900 ${Math.round(h*0.35)}px Georgia,serif`;
+  ctx.fillStyle=accent+'30';
+  ctx.fillText('"',pad-Math.round(w*0.01),h*0.55);
+
+  if(headline){
+    ctx.font=`700 italic ${Math.round(h*0.07)}px Manrope,sans-serif`;
+    ctx.fillStyle=tc;
+    let cy=h*0.28;
+    headline.split('\n').forEach(l=>{cy=wrapText(ctx,l,pad,cy,w-pad*2,Math.round(h*0.1));});
+  }
+
+  // accent line
+  ctx.fillStyle=accent;ctx.fillRect(pad,h*0.66,50,3);
+
+  if(sub){
+    ctx.font=`600 ${Math.round(h*0.03)}px Inter,sans-serif`;
+    ctx.fillStyle=isDark?'rgba(255,255,255,0.65)':mc;
+    ctx.fillText(sub,pad+8,h*0.76);
+  }
+
+  if(tag){
+    ctx.font=`600 ${Math.round(h*0.022)}px Inter,sans-serif`;
+    ctx.fillStyle=accent;
+    ctx.fillText(tag,pad,h*0.14);
+  }
+
+  if(showLogo){
+    const ls=Math.round(h*0.03);
+    ctx.font=`800 ${ls}px Manrope,sans-serif`;
+    const lx=w-pad-ctx.measureText('RatingIQ').width;
+    ctx.fillStyle=isDark?'rgba(255,255,255,0.3)':mc;
+    ctx.fillText('Rating',lx,h*0.93);
+    const rw=ctx.measureText('Rating').width;
+    ctx.fillStyle=accent;
+    ctx.fillText('IQ',lx+rw,h*0.93);
+  }
+}
+
+function lighten(hex,amt){
+  const r=Math.min(255,parseInt(hex.slice(1,3),16)+amt);
+  const g=Math.min(255,parseInt(hex.slice(3,5),16)+amt);
+  const b=Math.min(255,parseInt(hex.slice(5,7),16)+amt);
+  return`#${r.toString(16).padStart(2,'0')}${g.toString(16).padStart(2,'0')}${b.toString(16).padStart(2,'0')}`;
+}
+
+// ─────────────────────────────────────────
+// EXPORT
+// ─────────────────────────────────────────
+function exportPNG(){
+  const cv=document.getElementById('vb-canvas');
+  const link=document.createElement('a');
+  const hl=document.getElementById('vb-headline').value||'ratingiq-post';
+  link.download=`ratingiq-${hl.slice(0,20).replace(/\s+/g,'-').toLowerCase()||'post'}.png`;
+  link.href=cv.toDataURL('image/png');
+  link.click();
+}
+
+function exportPDF(){
+  const cv=document.getElementById('vb-canvas');
+  const img=cv.toDataURL('image/png');
+  const w=cv.width,h=cv.height;
+  const win=window.open('','_blank');
+  win.document.write(`<!DOCTYPE html><html><head><style>*{margin:0;padding:0}body{background:#333;display:flex;justify-content:center;align-items:center;min-height:100vh}img{max-width:100%;box-shadow:0 4px 24px rgba(0,0,0,.4)}</style></head><body><img src="${img}"><script>window.print()<\/script></body></html>`);
+  win.document.close();
+}
+
+function copyToClipboard(){
+  const cv=document.getElementById('vb-canvas');
+  cv.toBlob(blob=>{
+    try{
+      navigator.clipboard.write([new ClipboardItem({'image/png':blob})]).then(()=>{
+        const btn=document.querySelector('.btn-gold');
+        btn.textContent='Copied!';
+        setTimeout(()=>btn.textContent='Copy',1800);
+      });
+    }catch{alert('Copy not supported in this browser. Use PNG export instead.');}
+  });
+}
+
+// ─────────────────────────────────────────
+// BUILDER FROM POST
+// ─────────────────────────────────────────
+function openBuilderFor(id){
+  const p=posts.find(x=>x.id===id);
+  if(!p)return;
+  // pre-fill visual builder with post's first line as headline
+  const lines=p.copy.split('\n').filter(l=>l.trim());
+  document.getElementById('vb-headline').value=lines[0]||'';
+  document.getElementById('vb-sub').value=lines[1]||'';
+  document.getElementById('vb-body').value=lines.slice(2,6).join('\n');
+  document.getElementById('vb-tag').value=p.type.toUpperCase();
+  // switch to builder tab
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-builder').classList.add('active');
+  document.querySelectorAll('nav button')[2].classList.add('active');
+  renderCanvas();
+}
+
+function openBuilderFromPost(){
+  const id=editingId;
+  closeModal('post-modal');
+  if(id)openBuilderFor(id);
+}
+
+// ─────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────
+function render(){
+  renderStats();
+  renderTable();
+}
+
+function init(){
+  initSwatches();
+  render();
+  // set default builder content
+  document.getElementById('vb-headline').value='Upstar is now RatingIQ.';
+  document.getElementById('vb-sub').value='From reviews to revenue.';
+  document.getElementById('vb-tag').value='REBRAND · APRIL 2026';
+  renderCanvas();
+}
+
+window.addEventListener('load',()=>{
+  // wait for fonts
+  document.fonts.ready.then(init);
+});
+</script>
+</body>
+</html>
