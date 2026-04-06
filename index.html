@@ -254,13 +254,18 @@ canvas#vb-canvas{border-radius:8px;box-shadow:0 4px 24px rgba(0,0,0,.18);max-wid
             <button class="vb-tpl-btn" onclick="setTemplate('comparison',this)">Compare</button>
             <button class="vb-tpl-btn" onclick="setTemplate('minimal',this)">Minimal</button>
             <button class="vb-tpl-btn" onclick="setTemplate('quote',this)">Quote</button>
-            <button class="vb-tpl-btn" onclick="setTemplate('starfield',this)">✦ Stars</button>
+            <button class="vb-tpl-btn" onclick="setTemplate('starfield',this)">★ Stars</button>
             <button class="vb-tpl-btn" onclick="setTemplate('night',this)">🌙 Night</button>
             <button class="vb-tpl-btn" onclick="setTemplate('hotel',this)">🏨 Hotel</button>
-            <button class="vb-tpl-btn" onclick="setTemplate('postcard',this)">✉ Stationery</button>
-            <button class="vb-tpl-btn" onclick="setTemplate('browser',this)">🖥 Browser</button>
-            <button class="vb-tpl-btn" onclick="setTemplate('score',this)">⭐ Score</button>
+            <button class="vb-tpl-btn" onclick="setTemplate('hotel2',this)">🏨 Arch</button>
+            <button class="vb-tpl-btn" onclick="setTemplate('hotel3',this)">🌅 Suite</button>
+            <button class="vb-tpl-btn" onclick="setTemplate('postcard',this)">✉ Paper</button>
+            <button class="vb-tpl-btn" onclick="setTemplate('score-booking',this)">🔵 Booking</button>
+            <button class="vb-tpl-btn" onclick="setTemplate('score-google',this)">★ Google</button>
+            <button class="vb-tpl-btn" onclick="setTemplate('score-tripadv',this)">🟢 TripAdv</button>
+            <button class="vb-tpl-btn" onclick="setTemplate('score-expedia',this)">✈ Expedia</button>
             <button class="vb-tpl-btn" onclick="setTemplate('bold',this)">Bold</button>
+            <button class="vb-tpl-btn" onclick="setTemplate('browser',this)">🖥 Browser</button>
           </div>
         </div>
 
@@ -1252,7 +1257,12 @@ function renderCanvas(){
   else if(template==='night')      drawNight(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark);
   else if(template==='hotel')      drawHotel(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark);
   else if(template==='postcard')   drawPostcard(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark);
-  else if(template==='score')      drawScore(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark);
+  else if(template==='score-booking') drawScoreBooking(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark);
+  else if(template==='score-google')  drawScoreGoogle(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark);
+  else if(template==='score-tripadv') drawScoreTripAdv(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark);
+  else if(template==='score-expedia') drawScoreExpedia(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark);
+  else if(template==='hotel2')     drawHotel2(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark);
+  else if(template==='hotel3')     drawHotel3(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark);
   else if(template==='bold')       drawBold(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark);
   else if(template==='browser')    drawBrowser(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark);
 
@@ -1788,74 +1798,66 @@ function drawWindowGrid(ctx,x,y,gw,gh,cols,rows,winColor,alpha){
 
 // ── TEMPLATE 7: Starfield ──
 function drawStarfield(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark){
-  // Deep navy background
-  ctx.fillStyle=bg; ctx.fillRect(0,0,w,h);
+  // Deep navy — matches the branding deck slide aesthetic
+  ctx.fillStyle='#1C2A39'; ctx.fillRect(0,0,w,h);
 
-  // Subtle warm radial glow (upper-left, where content is)
-  const grd=ctx.createRadialGradient(w*0.35,h*0.4,0,w*0.35,h*0.4,Math.min(w,h)*0.6);
-  grd.addColorStop(0,accent+'18');
-  grd.addColorStop(1,'transparent');
-  ctx.fillStyle=grd; ctx.fillRect(0,0,w,h);
+  // LARGE brand star — dominant graphic on right, partially cropped
+  // This is the deck look: one big star as a visual anchor, not scattered decoration
+  const sX=w*0.76, sY=h*0.52, sZ=Math.min(w,h)*0.58;
+  drawStarBg(ctx,sX,sY,sZ,accent,0.05,false);          // soft fill
+  drawStarBg(ctx,sX,sY,sZ,accent,0.13,true);           // outer outline
+  drawStarBg(ctx,sX,sY,sZ*0.6,'#FFFFFF',0.04,true);    // inner outline for depth
 
-  // Large brand star watermark — right side, outline only (deck style)
-  drawStarBg(ctx,w*0.82,h*0.5,Math.min(w,h)*0.38,accent,0.09,true);
-  drawStarBg(ctx,w*0.82,h*0.5,Math.min(w,h)*0.22,accent,0.06,false);
+  // Small brand star top-left — references logo mark
+  drawStar5(ctx,Math.round(w*0.065),Math.round(h*0.085),Math.min(w,h)*0.022,accent,0.95);
 
-  // Intentional accent stars — small, precise, not scattered noise
-  const stars=[
-    {x:.08,y:.12,s:.028,op:.9},{x:.91,y:.08,s:.020,op:.75},
-    {x:.06,y:.82,s:.016,op:.65},{x:.72,y:.88,s:.018,op:.6},
-    {x:.52,y:.06,s:.011,op:.5},{x:.88,y:.68,s:.013,op:.55},
-  ];
-  stars.forEach(s=>drawStar5(ctx,w*s.x,h*s.y,Math.min(w,h)*s.s,accent,s.op));
+  // Thin gold horizontal rule (left zone)
+  ctx.save();
+  ctx.globalAlpha=0.45;
+  ctx.fillStyle=accent;
+  ctx.fillRect(Math.round(w*0.065),Math.round(h*0.5),Math.round(w*0.52),1);
+  ctx.restore();
 
-  // Tiny background star-dots (subtle, seeded)
-  const rng=mulberry32(77);
-  for(let i=0;i<18;i++){
-    const sx=rng()*w, sy=rng()*h*0.95;
-    const sr=rng()*2+1, op=rng()*0.4+0.1;
-    drawStar5(ctx,sx,sy,sr*2.5,'#FFFFFF',op);
-  }
-
-  // Content: centered
-  const cx=w/2, pad=Math.round(w*0.1);
-  const maxW=w*0.78;
-  const logoH=showLogo?Math.round(w*0.18/3.67)+Math.round(h*0.07):0;
-  const bottomSafe=h-logoH;
-  let cy=h*(tag?0.32:0.36);
+  // Left-aligned text (like deck slides — text zone is left 60%)
+  const pad=Math.round(w*0.07);
+  const maxW=w*0.59;
+  const logoH=showLogo?Math.round(w*0.16/3.67)+Math.round(h*0.06):0;
+  let cy=Math.round(h*0.17);
 
   if(tag){
-    ctx.font=`700 ${Math.round(h*0.023)}px Inter,sans-serif`;
+    ctx.font=`600 ${Math.round(h*0.021)}px Inter,sans-serif`;
     ctx.fillStyle=accent;
-    ctx.textAlign='center'; ctx.fillText(tag,cx,h*0.27); ctx.textAlign='left';
-    cy=h*0.36;
+    ctx.fillText(tag,pad,cy);
+    cy+=Math.round(h*0.05);
   }
 
   if(headline){
-    const fs=Math.min(Math.round(h*0.066),68);
+    const fs=Math.min(Math.round(h*0.073),76);
     ctx.font=`800 ${fs}px Manrope,sans-serif`;
     ctx.fillStyle='#FFFFFF';
-    cy=wrapTextC(ctx,headline,cx,cy,maxW,Math.round(fs*1.25));
-    cy+=Math.round(h*0.03);
+    cy=wrapText(ctx,headline,pad,cy,maxW,Math.round(fs*1.18));
+    cy+=Math.round(h*0.038);
   }
 
-  if(sub && cy<bottomSafe-Math.round(h*0.12)){
-    ctx.font=`500 italic ${Math.round(h*0.032)}px Manrope,sans-serif`;
+  if(sub){
+    ctx.font=`400 italic ${Math.round(h*0.031)}px Manrope,sans-serif`;
     ctx.fillStyle=accent;
-    cy=wrapTextC(ctx,sub,cx,cy,maxW,Math.round(h*0.048));
-    cy+=Math.round(h*0.022);
+    cy=wrapText(ctx,sub,pad,cy,maxW,Math.round(h*0.047));
+    cy+=Math.round(h*0.025);
   }
 
-  if(body && cy<bottomSafe-Math.round(h*0.1)){
+  if(body && cy<h-logoH-Math.round(h*0.1)){
     ctx.font=`400 ${Math.round(h*0.026)}px Inter,sans-serif`;
-    ctx.fillStyle='rgba(255,255,255,0.55)';
-    wrapTextC(ctx,body.split('\n')[0],cx,cy,maxW,Math.round(h*0.04));
+    ctx.fillStyle='rgba(255,255,255,0.5)';
+    body.split('\n').slice(0,2).forEach(l=>{
+      if(l.trim()) cy=wrapText(ctx,l,pad,cy,maxW,Math.round(h*0.04));
+    });
   }
 
   if(showLogo){
-    const lW=Math.round(w*0.18);
+    const lW=Math.round(w*0.16);
     const lH=lW/3.67;
-    drawLogoSVG(ctx,cx-lW/2,h-lH-Math.round(h*0.05),lW,true);
+    drawLogoSVG(ctx,pad,h-lH-Math.round(h*0.05),lW,true);
   }
 }
 
@@ -2009,224 +2011,488 @@ function drawHotel(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark){
     });
   }
 
-  // Right side: large brand star watermark (outline only, like deck aesthetic)
-  drawStarBg(ctx,w*0.84,h*0.52,Math.min(w,h)*0.28,accent,0.1,true);
 }
 
-// ── TEMPLATE 10: Hotel Letterhead ──
-function drawPostcard(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark){
-  // Cream/sand background
-  ctx.fillStyle='#F8F5F0'; ctx.fillRect(0,0,w,h);
+// ── TEMPLATE 9b: Hotel Arch (Grand Entrance) ──
+function drawHotel2(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark){
+  ctx.fillStyle='#1C2A39'; ctx.fillRect(0,0,w,h);
 
-  // Outer thin border
-  ctx.strokeStyle='rgba(201,168,106,0.35)';
-  ctx.lineWidth=1;
-  const m=Math.round(Math.min(w,h)*0.025);
-  ctx.strokeRect(m,m,w-m*2,h-m*2);
+  // Grand arch — right side, architectural hotel entrance motif
+  const aX=w*0.50, aY=Math.round(h*0.06);
+  const aW=w*0.52, aH=h*0.88;
+  const aR=aW/2; // semicircle radius at top
 
-  // Full-width gold header band
-  const headerH=Math.round(h*0.175);
-  ctx.fillStyle='#1C2A39';
-  ctx.fillRect(0,0,w,headerH);
+  // Warm ambient glow inside arch
+  const glow=ctx.createRadialGradient(aX+aW/2,aY+aH*0.65,0,aX+aW/2,aY+aH*0.6,aH*0.55);
+  glow.addColorStop(0,accent+'28');
+  glow.addColorStop(0.5,'rgba(201,168,106,0.06)');
+  glow.addColorStop(1,'transparent');
+  ctx.fillStyle=glow; ctx.fillRect(0,0,w,h);
 
-  // Gold accent line at bottom of header
-  ctx.fillStyle=accent;
-  ctx.fillRect(0,headerH-3,w,3);
+  // Outer arch — gold, medium opacity
+  ctx.save();
+  ctx.strokeStyle=accent;
+  ctx.lineWidth=Math.round(Math.min(w,h)*0.014);
+  ctx.globalAlpha=0.5;
+  ctx.beginPath();
+  ctx.moveTo(aX,aY+aH);
+  ctx.lineTo(aX,aY+aR);
+  ctx.quadraticCurveTo(aX,aY,aX+aR,aY);
+  ctx.quadraticCurveTo(aX+aW,aY,aX+aW,aY+aR);
+  ctx.lineTo(aX+aW,aY+aH);
+  ctx.stroke();
+  ctx.restore();
 
-  // Logo centered in header
+  // Inner arch — thinner, less opacity
+  const io=Math.round(Math.min(w,h)*0.028);
+  const iX=aX+io, iY=aY+io*0.6, iW=aW-io*2, iR=iW/2;
+  ctx.save();
+  ctx.strokeStyle=accent;
+  ctx.lineWidth=Math.round(Math.min(w,h)*0.005);
+  ctx.globalAlpha=0.25;
+  ctx.beginPath();
+  ctx.moveTo(iX,aY+aH);
+  ctx.lineTo(iX,iY+iR);
+  ctx.quadraticCurveTo(iX,iY,iX+iR,iY);
+  ctx.quadraticCurveTo(iX+iW,iY,iX+iW,iY+iR);
+  ctx.lineTo(iX+iW,aY+aH);
+  ctx.stroke();
+  ctx.restore();
+
+  // Window grid inside arch area (very subtle)
+  drawWindowGrid(ctx,aX+io,aY+aR,aW-io*2,aH-aR,5,4,'#C9A86A',0.06);
+
+  // Left side text
+  const pad=Math.round(w*0.06);
+  const maxW=w*0.44;
+  let cy=Math.round(h*0.13);
+
   if(showLogo){
-    const lW=Math.round(w*0.26);
-    const lH=lW/3.67;
-    drawLogoSVG(ctx,w/2-lW/2,headerH/2-lH/2,lW,true);
+    drawLogoSVG(ctx,pad,cy,Math.round(w*0.17),true);
+    cy+=Math.round(h*0.15);
   }
 
-  // Small star accent in header corners
-  drawStar5(ctx,Math.round(w*0.07),Math.round(headerH*0.5),Math.min(w,h)*0.018,accent,0.7);
-  drawStar5(ctx,Math.round(w*0.93),Math.round(headerH*0.5),Math.min(w,h)*0.018,accent,0.7);
-
-  // Content area padding
-  const pad=Math.round(w*0.1);
-  const maxW=w-pad*2;
-  let cy=headerH+Math.round(h*0.07);
-
-  // Tag line (property name / category)
   if(tag){
     ctx.font=`600 ${Math.round(h*0.021)}px Inter,sans-serif`;
     ctx.fillStyle=accent;
-    ctx.textAlign='center'; ctx.fillText(tag.toUpperCase(),w/2,cy); ctx.textAlign='left';
+    ctx.fillText(tag,pad,cy);
     cy+=Math.round(h*0.05);
-    // Thin gold divider below tag
-    ctx.fillStyle=accent+'55';
-    ctx.fillRect(w/2-Math.round(w*0.1),cy,Math.round(w*0.2),1);
+  }
+
+  if(headline){
+    const fs=Math.min(Math.round(h*0.065),68);
+    ctx.font=`800 ${fs}px Manrope,sans-serif`;
+    ctx.fillStyle='#FFFFFF';
+    cy=wrapText(ctx,headline,pad,cy,maxW,Math.round(fs*1.2));
+    cy+=Math.round(h*0.025);
+    ctx.fillStyle=accent; ctx.fillRect(pad,cy,50,2);
     cy+=Math.round(h*0.04);
   }
 
-  // Headline — large, centered, navy
-  if(headline){
-    const fs=Math.min(Math.round(h*0.06),62);
-    ctx.font=`800 ${fs}px Manrope,sans-serif`;
-    ctx.fillStyle='#1C2A39';
-    cy=wrapTextC(ctx,headline,w/2,cy,maxW,Math.round(fs*1.25));
-    cy+=Math.round(h*0.025);
-  }
-
-  // Subheadline — italic, gold-tinted
   if(sub){
-    ctx.font=`400 italic ${Math.round(h*0.032)}px Manrope,sans-serif`;
-    ctx.fillStyle='rgba(28,42,57,0.65)';
-    cy=wrapTextC(ctx,sub,w/2,cy,maxW*0.85,Math.round(h*0.048));
+    ctx.font=`400 italic ${Math.round(h*0.031)}px Manrope,sans-serif`;
+    ctx.fillStyle='rgba(255,255,255,0.62)';
+    cy=wrapText(ctx,sub,pad,cy,maxW,Math.round(h*0.047));
     cy+=Math.round(h*0.022);
   }
 
-  // Body text — left-aligned, justified feel
   if(body){
-    const fs=Math.round(h*0.028);
+    const fs=Math.round(h*0.027);
     ctx.font=`400 ${fs}px Inter,sans-serif`;
-    ctx.fillStyle='rgba(28,42,57,0.72)';
-    body.split('\n').slice(0,4).forEach(l=>{
-      if(l.trim()) cy=wrapTextC(ctx,l,w/2,cy,maxW,Math.round(fs*1.55));
-      else cy+=Math.round(h*0.022);
+    ctx.fillStyle='rgba(255,255,255,0.45)';
+    body.split('\n').slice(0,3).forEach(l=>{
+      if(l.trim()) cy=wrapText(ctx,l,pad,cy,maxW,Math.round(fs*1.5));
+    });
+  }
+}
+
+// ── TEMPLATE 9c: Hotel Suite (Room View) ──
+function drawHotel3(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark){
+  // Warm cream — hotel room letterhead / postcard feel
+  ctx.fillStyle='#F4EFE6'; ctx.fillRect(0,0,w,h);
+
+  // Window on right — suggests looking out from a hotel room
+  const wX=w*0.54, wY=Math.round(h*0.09);
+  const wW=w*0.38, wH=h*0.74;
+  const fw=Math.round(Math.min(wW,wH)*0.04);
+
+  // Sky / city view gradient
+  const sky=ctx.createLinearGradient(wX,wY,wX,wY+wH);
+  sky.addColorStop(0,'#0E1F2E');
+  sky.addColorStop(0.45,'#1C3A5A');
+  sky.addColorStop(0.78,'#516B84');
+  sky.addColorStop(1,accent+'BB');
+  ctx.save();
+  ctx.beginPath(); roundRect(ctx,wX,wY,wW,wH,fw*1.5); ctx.clip();
+  ctx.fillStyle=sky; ctx.fillRect(wX,wY,wW,wH);
+
+  // City lights
+  const rng=mulberry32(99);
+  for(let i=0;i<55;i++){
+    const lx=wX+rng()*wW, ly=wY+wH*0.52+rng()*wH*0.42;
+    ctx.beginPath(); ctx.arc(lx,ly,rng()*1.8+0.4,0,Math.PI*2);
+    ctx.fillStyle=`rgba(255,240,190,${(rng()*0.55+0.15).toFixed(2)})`;
+    ctx.fill();
+  }
+  ctx.restore();
+
+  // Window frame
+  ctx.strokeStyle='#1C2A39';
+  ctx.lineWidth=fw;
+  ctx.beginPath(); roundRect(ctx,wX,wY,wW,wH,fw*1.5); ctx.stroke();
+
+  // Vertical center bar
+  ctx.lineWidth=Math.round(fw*0.55);
+  ctx.beginPath(); ctx.moveTo(wX+wW/2,wY+fw/2); ctx.lineTo(wX+wW/2,wY+wH-fw/2); ctx.stroke();
+  // Horizontal bar
+  ctx.beginPath(); ctx.moveTo(wX+fw/2,wY+wH*0.44); ctx.lineTo(wX+wW-fw/2,wY+wH*0.44); ctx.stroke();
+
+  // Gold trim
+  ctx.save();
+  ctx.strokeStyle=accent;
+  ctx.lineWidth=Math.round(fw*0.28);
+  ctx.globalAlpha=0.55;
+  ctx.beginPath(); roundRect(ctx,wX+fw,wY+fw,wW-fw*2,wH-fw*2,fw); ctx.stroke();
+  ctx.restore();
+
+  // Curtain lines left of window
+  ctx.save();
+  ctx.strokeStyle='rgba(201,168,106,0.18)';
+  ctx.lineWidth=Math.round(w*0.01);
+  for(let i=0;i<3;i++){
+    const cx2=wX-Math.round(w*0.018)-i*Math.round(w*0.014);
+    ctx.beginPath(); ctx.moveTo(cx2,wY-Math.round(h*0.015)); ctx.lineTo(cx2,wY+wH+Math.round(h*0.015)); ctx.stroke();
+  }
+  ctx.restore();
+
+  // Left side text
+  const pad=Math.round(w*0.07);
+  const maxW=w*0.44;
+  let cy=Math.round(h*0.13);
+
+  if(showLogo){
+    drawLogoSVG(ctx,pad,cy,Math.round(w*0.16),false);
+    cy+=Math.round(h*0.14);
+  }
+
+  if(tag){
+    ctx.font=`600 ${Math.round(h*0.021)}px Inter,sans-serif`;
+    ctx.fillStyle=accent;
+    ctx.fillText(tag,pad,cy);
+    cy+=Math.round(h*0.05);
+  }
+
+  if(headline){
+    const fs=Math.min(Math.round(h*0.065),68);
+    ctx.font=`800 ${fs}px Manrope,sans-serif`;
+    ctx.fillStyle='#1C2A39';
+    cy=wrapText(ctx,headline,pad,cy,maxW,Math.round(fs*1.2));
+    cy+=Math.round(h*0.025);
+    ctx.fillStyle=accent; ctx.fillRect(pad,cy,50,2);
+    cy+=Math.round(h*0.04);
+  }
+
+  if(sub){
+    ctx.font=`400 italic ${Math.round(h*0.031)}px Manrope,sans-serif`;
+    ctx.fillStyle='rgba(28,42,57,0.65)';
+    cy=wrapText(ctx,sub,pad,cy,maxW,Math.round(h*0.047));
+    cy+=Math.round(h*0.022);
+  }
+
+  if(body){
+    const fs=Math.round(h*0.027);
+    ctx.font=`400 ${fs}px Inter,sans-serif`;
+    ctx.fillStyle='rgba(28,42,57,0.6)';
+    body.split('\n').slice(0,3).forEach(l=>{
+      if(l.trim()) cy=wrapText(ctx,l,pad,cy,maxW,Math.round(fs*1.5));
+    });
+  }
+}
+
+// ── TEMPLATE 10: Hotel Paper ──
+function drawPostcard(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark){
+  // Ivory paper — true hotel stationery
+  ctx.fillStyle='#FAF7F2'; ctx.fillRect(0,0,w,h);
+
+  // Outer margin line (hairline)
+  const m=Math.round(Math.min(w,h)*0.034);
+  ctx.strokeStyle=accent+'3A';
+  ctx.lineWidth=1;
+  ctx.strokeRect(m,m,w-m*2,h-m*2);
+
+  // Corner ornament cross marks
+  const cs=Math.round(m*0.55);
+  [[m,m],[w-m,m],[m,h-m],[w-m,h-m]].forEach(([cx2,cy2])=>{
+    ctx.fillStyle=accent+'55';
+    ctx.fillRect(cx2-cs,cy2-1,cs*2,2);
+    ctx.fillRect(cx2-1,cy2-cs,2,cs*2);
+  });
+
+  // Logo — top center, small
+  const logoAreaTop=m+Math.round(h*0.048);
+  const lW=Math.round(w*0.14);
+  if(showLogo){
+    const lH=lW/3.67;
+    drawLogoSVG(ctx,w/2-lW/2,logoAreaTop,lW,false);
+  }
+  const lineY=logoAreaTop+(showLogo?Math.round(lW/3.67):0)+Math.round(h*0.028);
+  ctx.fillStyle=accent+'55';
+  ctx.fillRect(w/2-Math.round(w*0.13),lineY,Math.round(w*0.26),1);
+
+  // Content
+  const pad=Math.round(w*0.1);
+  const maxW=w-pad*2;
+  let cy=lineY+Math.round(h*0.052);
+
+  if(tag){
+    ctx.font=`500 ${Math.round(h*0.018)}px Inter,sans-serif`;
+    ctx.fillStyle='rgba(28,42,57,0.42)';
+    ctx.textAlign='center'; ctx.fillText(tag.toUpperCase(),w/2,cy); ctx.textAlign='left';
+    cy+=Math.round(h*0.048);
+  }
+
+  if(headline){
+    const fs=Math.min(Math.round(h*0.057),58);
+    ctx.font=`800 ${fs}px Manrope,sans-serif`;
+    ctx.fillStyle='#1C2A39';
+    cy=wrapTextC(ctx,headline,w/2,cy,maxW*0.86,Math.round(fs*1.22));
+    cy+=Math.round(h*0.02);
+  }
+
+  // Gold accent line
+  ctx.fillStyle=accent+'77';
+  ctx.fillRect(w/2-24,cy,48,2);
+  cy+=Math.round(h*0.04);
+
+  if(sub){
+    ctx.font=`400 italic ${Math.round(h*0.029)}px Manrope,sans-serif`;
+    ctx.fillStyle='rgba(28,42,57,0.58)';
+    cy=wrapTextC(ctx,sub,w/2,cy,maxW*0.76,Math.round(h*0.044));
+    cy+=Math.round(h*0.02);
+  }
+
+  if(body){
+    ctx.font=`400 ${Math.round(h*0.026)}px Inter,sans-serif`;
+    ctx.fillStyle='rgba(28,42,57,0.62)';
+    body.split('\n').slice(0,3).forEach(l=>{
+      if(l.trim()) cy=wrapTextC(ctx,l,w/2,cy,maxW,Math.round(h*0.04));
+      else cy+=Math.round(h*0.018);
     });
   }
 
-  // Full-width gold footer band
-  const footerH=Math.round(h*0.095);
-  const footerY=h-footerH;
-  ctx.fillStyle=accent;
-  ctx.fillRect(0,footerY,w,3);
-  ctx.fillStyle='rgba(28,42,57,0.06)';
-  ctx.fillRect(0,footerY+3,w,footerH-3);
-
-  // Footer text
-  ctx.font=`500 ${Math.round(h*0.019)}px Inter,sans-serif`;
-  ctx.fillStyle='rgba(28,42,57,0.45)';
+  // Website URL at bottom — very small, no band
+  ctx.font=`400 ${Math.round(h*0.016)}px Inter,sans-serif`;
+  ctx.fillStyle='rgba(28,42,57,0.3)';
   ctx.textAlign='center';
-  ctx.fillText('rating-iq.com',w/2,footerY+Math.round(footerH*0.62));
+  ctx.fillText('rating-iq.com',w/2,h-m-Math.round(h*0.022));
   ctx.textAlign='left';
 }
 
-// ── TEMPLATE 11: Score (4-Platform Grid) ──
-// tag = property name, headline = Booking.com score (e.g. "8.9")
-// sub = Google rating (e.g. "4.6"), body = "TA:4.2|EXP:8.8"
-function drawScore(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark){
-  ctx.fillStyle='#F0EEE9'; ctx.fillRect(0,0,w,h);
+// ── TEMPLATE 11a: Score — Booking.com style ──
+// headline = score value (e.g. "8.9"), tag = property name, sub = label/context
+function drawScoreBooking(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark){
+  // Booking.com-inspired: deep blue authority, 1–10 numeric score
+  const grad=ctx.createLinearGradient(0,0,w,h);
+  grad.addColorStop(0,'#0A1A3A');
+  grad.addColorStop(1,'#003580');
+  ctx.fillStyle=grad; ctx.fillRect(0,0,w,h);
 
-  // Header band — navy
-  const hdrH=Math.round(h*0.16);
-  ctx.fillStyle='#1C2A39'; ctx.fillRect(0,0,w,hdrH);
-  ctx.fillStyle=accent; ctx.fillRect(0,hdrH-2,w,2);
+  // Subtle ring decorations (implied platform, not literal)
+  const cx=w/2, cy2=h/2;
+  ctx.save();
+  ctx.globalAlpha=0.06;
+  ctx.strokeStyle='#FFFFFF';
+  ctx.lineWidth=1;
+  [0.46,0.36,0.26].forEach(r=>{ctx.beginPath();ctx.arc(cx,cy2,Math.min(w,h)*r,0,Math.PI*2);ctx.stroke();});
+  ctx.restore();
 
-  // Logo in header
-  if(showLogo){
-    const lW=Math.round(w*0.22);
-    drawLogoSVG(ctx,w/2-lW/2,hdrH/2-Math.round(lW/3.67)/2,lW,true);
-  }
+  if(showLogo){const lW=Math.round(w*0.17);drawLogoSVG(ctx,cx-lW/2,Math.round(h*0.07),lW,true);}
 
-  // Property name below header
-  const propY=hdrH+Math.round(h*0.055);
   if(tag){
-    ctx.font=`600 ${Math.round(h*0.022)}px Inter,sans-serif`;
-    ctx.fillStyle='rgba(28,42,57,0.55)';
-    ctx.textAlign='center'; ctx.fillText(tag,w/2,propY); ctx.textAlign='left';
+    ctx.font=`500 ${Math.round(h*0.022)}px Inter,sans-serif`;
+    ctx.fillStyle='rgba(255,255,255,0.45)';
+    ctx.textAlign='center'; ctx.fillText(tag,cx,Math.round(h*0.26)); ctx.textAlign='left';
   }
 
-  // Parse scores
-  const bkScore=parseFloat(headline)||0;
-  const ggScore=parseFloat(sub)||0;
-  let taScore=0, exScore=0;
-  if(body){
-    const m1=body.match(/TA[:\s]*([\d.]+)/i); if(m1) taScore=parseFloat(m1[1]);
-    const m2=body.match(/EXP[:\s]*([\d.]+)/i); if(m2) exScore=parseFloat(m2[1]);
-  }
-
-  // 2×2 grid layout
-  const gPad=Math.round(w*0.04);
-  const gTop=hdrH+Math.round(h*0.1);
-  const gW=(w-gPad*3)/2;
-  const gH=(h-gTop-gPad*3)/2;
-  const cells=[
-    {x:gPad,    y:gTop,        score:bkScore, max:10, label:'Booking.com', bg:'#003580', fg:'#FFFFFF', mode:'num',  acol:'#FFFFFF'},
-    {x:gPad*2+gW,y:gTop,       score:ggScore, max:5,  label:'Google',      bg:'#FFFFFF', fg:'#3C4043', mode:'stars',acol:'#FBBC04'},
-    {x:gPad,    y:gTop+gH+gPad,score:taScore, max:5,  label:'Tripadvisor', bg:'#00AA6C', fg:'#FFFFFF', mode:'circles',acol:'#FFFFFF'},
-    {x:gPad*2+gW,y:gTop+gH+gPad,score:exScore,max:10, label:'Expedia',    bg:'#1B1B80', fg:'#FFFFFF', mode:'num',  acol:'#FFBB00'},
-  ];
-
-  cells.forEach(cell=>{
-    const {x,y,score,max,label,bg:cbg,fg,mode,acol}=cell;
-    // Card background
-    ctx.fillStyle=cbg;
-    roundRect(ctx,x,y,gW,gH,Math.round(Math.min(gW,gH)*0.06));
-    ctx.fill();
-
-    // Score value
-    const cx=x+gW/2, cy2=y+gH/2;
-    if(mode==='num'){
-      const fs=Math.min(Math.round(gH*0.38),80);
-      ctx.font=`800 ${fs}px Manrope,sans-serif`;
-      ctx.fillStyle=acol;
-      ctx.textAlign='center';
-      ctx.fillText(score>0?score.toFixed(1):'—',cx,cy2+Math.round(fs*0.35));
-      ctx.textAlign='left';
-      // Out-of label
-      ctx.font=`500 ${Math.round(gH*0.12)}px Inter,sans-serif`;
-      ctx.fillStyle=fg+'99';
-      ctx.textAlign='center';
-      ctx.fillText('/'+max,cx,cy2+Math.round(gH*0.32));
-      ctx.textAlign='left';
-    } else if(mode==='stars'){
-      // 5 stars row
-      const sSize=Math.round(Math.min(gW,gH)*0.11);
-      const filled=Math.round(score);
-      ctx.save();
-      const totalStarW=sSize*2*5+sSize*0.5*4;
-      let sx=cx-totalStarW/2;
-      for(let i=0;i<5;i++){
-        ctx.fillStyle=i<filled?acol:'rgba(251,188,4,0.2)';
-        ctx.beginPath();
-        for(let p=0;p<10;p++){
-          const r=p%2===0?sSize:sSize*0.4;
-          const a=(p*Math.PI/5)-Math.PI/2;
-          const px2=sx+sSize+r*Math.cos(a), py2=cy2+r*Math.sin(a);
-          p===0?ctx.moveTo(px2,py2):ctx.lineTo(px2,py2);
-        }
-        ctx.closePath(); ctx.fill();
-        sx+=sSize*2+sSize*0.5;
-      }
-      ctx.restore();
-      // Numeric below stars
-      ctx.font=`700 ${Math.round(gH*0.18)}px Manrope,sans-serif`;
-      ctx.fillStyle=fg;
-      ctx.textAlign='center';
-      ctx.fillText(score>0?score.toFixed(1):'—',cx,cy2-Math.round(gH*0.14));
-      ctx.textAlign='left';
-    } else if(mode==='circles'){
-      // TripAdvisor 5-bubble circles
-      const bR=Math.round(Math.min(gW,gH)*0.07);
-      const filled=Math.round(score);
-      const totalBW=(bR*2)*5+(bR*0.5)*4;
-      let bx=cx-totalBW/2+bR;
-      for(let i=0;i<5;i++){
-        ctx.beginPath();
-        ctx.arc(bx,cy2,bR,0,Math.PI*2);
-        ctx.fillStyle=i<filled?'#FFFFFF':'rgba(255,255,255,0.25)';
-        ctx.fill();
-        bx+=bR*2+bR*0.5;
-      }
-      // Numeric above bubbles
-      ctx.font=`700 ${Math.round(gH*0.18)}px Manrope,sans-serif`;
-      ctx.fillStyle=fg;
-      ctx.textAlign='center';
-      ctx.fillText(score>0?score.toFixed(1):'—',cx,cy2-Math.round(gH*0.18));
-      ctx.textAlign='left';
-    }
-
-    // Platform label at bottom of card
-    ctx.font=`600 ${Math.round(gH*0.105)}px Inter,sans-serif`;
-    ctx.fillStyle=mode==='stars'?'#5F6368':fg+'CC';
+  if(headline){
+    const fs=Math.min(Math.round(h*0.27),230);
+    ctx.font=`800 ${fs}px Manrope,sans-serif`;
+    ctx.fillStyle='#FFFFFF';
     ctx.textAlign='center';
-    ctx.fillText(label,cx,y+gH-Math.round(gH*0.1));
+    ctx.fillText(headline,cx,Math.round(h*0.62));
     ctx.textAlign='left';
-  });
+    ctx.font=`500 ${Math.round(h*0.038)}px Inter,sans-serif`;
+    ctx.fillStyle='rgba(255,255,255,0.4)';
+    ctx.textAlign='center'; ctx.fillText('out of 10',cx,Math.round(h*0.69)); ctx.textAlign='left';
+  }
+
+  if(sub){
+    ctx.font=`500 ${Math.round(h*0.027)}px Inter,sans-serif`;
+    ctx.fillStyle=accent;
+    ctx.textAlign='center'; ctx.fillText(sub,cx,Math.round(h*0.80)); ctx.textAlign='left';
+  }
+
+  ctx.font=`500 ${Math.round(h*0.021)}px Inter,sans-serif`;
+  ctx.fillStyle='rgba(255,255,255,0.3)';
+  ctx.textAlign='center'; ctx.fillText('Booking.com score',cx,Math.round(h*0.90)); ctx.textAlign='left';
+}
+
+// ── TEMPLATE 11b: Score — Google style ──
+// headline = score out of 5 (e.g. "4.6"), tag = property name
+function drawScoreGoogle(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark){
+  // Google-inspired: clean light background, 5-star method
+  ctx.fillStyle='#F8F5F0'; ctx.fillRect(0,0,w,h);
+  const cx=w/2;
+
+  if(showLogo){const lW=Math.round(w*0.17);drawLogoSVG(ctx,cx-lW/2,Math.round(h*0.07),lW,false);}
+
+  if(tag){
+    ctx.font=`500 ${Math.round(h*0.022)}px Inter,sans-serif`;
+    ctx.fillStyle='rgba(28,42,57,0.45)';
+    ctx.textAlign='center'; ctx.fillText(tag,cx,Math.round(h*0.26)); ctx.textAlign='left';
+  }
+
+  // Rating number — above the stars
+  if(headline){
+    ctx.font=`800 ${Math.round(h*0.1)}px Manrope,sans-serif`;
+    ctx.fillStyle='#1C2A39';
+    ctx.textAlign='center'; ctx.fillText(headline,cx,Math.round(h*0.38)); ctx.textAlign='left';
+  }
+
+  // 5 large stars — main visual
+  const sc=headline?parseFloat(headline):0;
+  const sf=Math.round(sc);
+  const ssz=Math.round(Math.min(w,h)*0.088);
+  const sgap=ssz*0.38;
+  const tsw=5*ssz*2+4*sgap;
+  let sx2=cx-tsw/2+ssz;
+  const sY2=Math.round(h*0.54);
+  for(let i=0;i<5;i++){
+    ctx.fillStyle=i<sf?accent:'rgba(201,168,106,0.18)';
+    ctx.beginPath();
+    for(let p=0;p<10;p++){
+      const r=p%2===0?ssz:ssz*0.4;
+      const a=(p*Math.PI/5)-Math.PI/2;
+      const px=sx2+r*Math.cos(a),py=sY2+r*Math.sin(a);
+      p===0?ctx.moveTo(px,py):ctx.lineTo(px,py);
+    }
+    ctx.closePath(); ctx.fill();
+    sx2+=ssz*2+sgap;
+  }
+
+  if(sub){
+    ctx.font=`500 ${Math.round(h*0.027)}px Inter,sans-serif`;
+    ctx.fillStyle='rgba(28,42,57,0.55)';
+    ctx.textAlign='center'; ctx.fillText(sub,cx,Math.round(h*0.72)); ctx.textAlign='left';
+  }
+
+  ctx.font=`500 ${Math.round(h*0.021)}px Inter,sans-serif`;
+  ctx.fillStyle='rgba(28,42,57,0.32)';
+  ctx.textAlign='center'; ctx.fillText('Google rating',cx,Math.round(h*0.84)); ctx.textAlign='left';
+}
+
+// ── TEMPLATE 11c: Score — Tripadvisor style ──
+// headline = score out of 5 (e.g. "4.2"), tag = property name
+function drawScoreTripAdv(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark){
+  // Tripadvisor-inspired: deep green, 5-bubble circle method
+  const grad=ctx.createLinearGradient(0,0,0,h);
+  grad.addColorStop(0,'#0C3028');
+  grad.addColorStop(1,'#1C2A39');
+  ctx.fillStyle=grad; ctx.fillRect(0,0,w,h);
+
+  // Background ring decoration (bubbles/circles implied)
+  const cx=w/2, cy2=h/2;
+  ctx.save();
+  ctx.globalAlpha=0.05;
+  ctx.strokeStyle='#00AA6C';
+  ctx.lineWidth=1;
+  [0.5,0.4,0.3,0.2].forEach(r=>{ctx.beginPath();ctx.arc(cx,cy2,Math.min(w,h)*r,0,Math.PI*2);ctx.stroke();});
+  ctx.restore();
+
+  if(showLogo){const lW=Math.round(w*0.17);drawLogoSVG(ctx,cx-lW/2,Math.round(h*0.07),lW,true);}
+
+  if(tag){
+    ctx.font=`500 ${Math.round(h*0.022)}px Inter,sans-serif`;
+    ctx.fillStyle='rgba(255,255,255,0.4)';
+    ctx.textAlign='center'; ctx.fillText(tag,cx,Math.round(h*0.26)); ctx.textAlign='left';
+  }
+
+  if(headline){
+    ctx.font=`800 ${Math.round(h*0.1)}px Manrope,sans-serif`;
+    ctx.fillStyle='#FFFFFF';
+    ctx.textAlign='center'; ctx.fillText(headline,cx,Math.round(h*0.38)); ctx.textAlign='left';
+  }
+
+  // 5 bubble circles — Tripadvisor's rating method
+  const bc=headline?parseFloat(headline):0;
+  const bf=Math.round(bc);
+  const bR=Math.round(Math.min(w,h)*0.072);
+  const bGap=Math.round(bR*0.42);
+  const tbw=5*bR*2+4*bGap;
+  let bx2=cx-tbw/2+bR;
+  const bY2=Math.round(h*0.55);
+  for(let i=0;i<5;i++){
+    ctx.beginPath(); ctx.arc(bx2,bY2,bR,0,Math.PI*2);
+    ctx.fillStyle=i<bf?'#00AA6C':'rgba(0,170,108,0.18)';
+    ctx.fill();
+    if(i<bf){
+      ctx.strokeStyle='rgba(255,255,255,0.22)'; ctx.lineWidth=1; ctx.stroke();
+    }
+    bx2+=bR*2+bGap;
+  }
+
+  if(sub){
+    ctx.font=`500 ${Math.round(h*0.027)}px Inter,sans-serif`;
+    ctx.fillStyle='rgba(255,255,255,0.5)';
+    ctx.textAlign='center'; ctx.fillText(sub,cx,Math.round(h*0.74)); ctx.textAlign='left';
+  }
+
+  ctx.font=`500 ${Math.round(h*0.021)}px Inter,sans-serif`;
+  ctx.fillStyle='rgba(255,255,255,0.28)';
+  ctx.textAlign='center'; ctx.fillText('Tripadvisor rating',cx,Math.round(h*0.84)); ctx.textAlign='left';
+}
+
+// ── TEMPLATE 11d: Score — Expedia style ──
+// headline = score out of 10 (e.g. "8.8"), tag = property name
+function drawScoreExpedia(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark){
+  // Expedia-inspired: bold navy + yellow, 1–10, dynamic energy
+  ctx.fillStyle='#191E5C'; ctx.fillRect(0,0,w,h);
+
+  // Yellow diagonal accent sweep
+  const sweep=ctx.createLinearGradient(0,h,w,0);
+  sweep.addColorStop(0,'rgba(255,187,0,0.14)');
+  sweep.addColorStop(0.4,'rgba(255,187,0,0.0)');
+  ctx.fillStyle=sweep; ctx.fillRect(0,0,w,h);
+
+  const cx=w/2;
+
+  if(showLogo){const lW=Math.round(w*0.17);drawLogoSVG(ctx,cx-lW/2,Math.round(h*0.07),lW,true);}
+
+  if(tag){
+    ctx.font=`500 ${Math.round(h*0.022)}px Inter,sans-serif`;
+    ctx.fillStyle='rgba(255,255,255,0.42)';
+    ctx.textAlign='center'; ctx.fillText(tag,cx,Math.round(h*0.26)); ctx.textAlign='left';
+  }
+
+  if(headline){
+    const fs=Math.min(Math.round(h*0.28),240);
+    ctx.font=`800 ${fs}px Manrope,sans-serif`;
+    ctx.fillStyle='#FFBB00';
+    ctx.textAlign='center'; ctx.fillText(headline,cx,Math.round(h*0.62)); ctx.textAlign='left';
+    ctx.font=`500 ${Math.round(h*0.038)}px Inter,sans-serif`;
+    ctx.fillStyle='rgba(255,255,255,0.38)';
+    ctx.textAlign='center'; ctx.fillText('/ 10',cx,Math.round(h*0.69)); ctx.textAlign='left';
+  }
+
+  if(sub){
+    ctx.font=`500 ${Math.round(h*0.027)}px Inter,sans-serif`;
+    ctx.fillStyle='rgba(255,187,0,0.65)';
+    ctx.textAlign='center'; ctx.fillText(sub,cx,Math.round(h*0.80)); ctx.textAlign='left';
+  }
+
+  ctx.font=`500 ${Math.round(h*0.021)}px Inter,sans-serif`;
+  ctx.fillStyle='rgba(255,255,255,0.28)';
+  ctx.textAlign='center'; ctx.fillText('Expedia score',cx,Math.round(h*0.90)); ctx.textAlign='left';
 }
 
 // ── TEMPLATE 12: Bold Statement ──
