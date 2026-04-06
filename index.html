@@ -292,6 +292,15 @@ canvas#vb-canvas{border-radius:8px;box-shadow:0 4px 24px rgba(0,0,0,.18);max-wid
         </div>
 
         <div class="vb-field">
+          <label>Platform</label>
+          <select id="vb-platform" onchange="renderCanvas()">
+            <option value="none">None</option>
+            <option value="linkedin">LinkedIn</option>
+            <option value="facebook">Facebook</option>
+          </select>
+        </div>
+
+        <div class="vb-field">
           <label>Show Logo</label>
           <select id="vb-logo" onchange="renderCanvas()">
             <option value="1">Yes</option>
@@ -921,6 +930,57 @@ function renderCanvas(){
   else if(template==='comparison') drawComparison(ctx,w,h,bg,accent,textColor,mutedColor,headline,sub,body,tag,showLogo);
   else if(template==='minimal') drawMinimal(ctx,w,h,bg,accent,textColor,mutedColor,headline,sub,body,tag,showLogo);
   else if(template==='quote') drawQuote(ctx,w,h,bg,accent,textColor,mutedColor,headline,sub,body,tag,showLogo);
+
+  const platform=document.getElementById('vb-platform').value;
+  if(platform!=='none') drawPlatformBadge(ctx,w,h,platform);
+}
+
+function drawPlatformBadge(ctx,w,h,platform){
+  const size=Math.round(Math.min(w,h)*0.065);
+  const pad=Math.round(Math.min(w,h)*0.04);
+  const x=w-pad-size;
+  const y=pad;
+  const r=Math.round(size*0.22);
+
+  if(platform==='linkedin'){
+    // Rounded rect background
+    ctx.fillStyle='#0077B5';
+    roundRect(ctx,x,y,size,size,r);
+    ctx.fill();
+    // "in" text
+    ctx.fillStyle='#fff';
+    ctx.font=`800 ${Math.round(size*0.62)}px Georgia,serif`;
+    ctx.textAlign='center';
+    ctx.textBaseline='middle';
+    ctx.fillText('in',x+size/2,y+size/2+Math.round(size*0.03));
+    ctx.textAlign='left';
+    ctx.textBaseline='alphabetic';
+  } else if(platform==='facebook'){
+    ctx.fillStyle='#1877F2';
+    roundRect(ctx,x,y,size,size,r);
+    ctx.fill();
+    ctx.fillStyle='#fff';
+    ctx.font=`800 ${Math.round(size*0.68)}px Georgia,serif`;
+    ctx.textAlign='center';
+    ctx.textBaseline='middle';
+    ctx.fillText('f',x+size/2+Math.round(size*0.04),y+size/2+Math.round(size*0.03));
+    ctx.textAlign='left';
+    ctx.textBaseline='alphabetic';
+  }
+}
+
+function roundRect(ctx,x,y,w,h,r){
+  ctx.beginPath();
+  ctx.moveTo(x+r,y);
+  ctx.lineTo(x+w-r,y);
+  ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+  ctx.lineTo(x+w,y+h-r);
+  ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+  ctx.lineTo(x+r,y+h);
+  ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+  ctx.lineTo(x,y+r);
+  ctx.quadraticCurveTo(x,y,x+r,y);
+  ctx.closePath();
 }
 
 function isDarkColor(hex){
