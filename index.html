@@ -591,10 +591,8 @@ function fmtDay(d){
   return DAYS[dt.getDay()];
 }
 function platformLabel(p){
-  if(p==='linkedin-company')return'Company';
-  if(p==='linkedin-omri')return'Omri';
-  if(p==='facebook')return'Facebook';
-  return p;
+  if(p==='linkedin-omri')return' Omri';
+  return'';
 }
 
 const ICONS={
