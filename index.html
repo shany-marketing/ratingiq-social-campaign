@@ -274,19 +274,19 @@ canvas#vb-canvas{border-radius:8px;box-shadow:0 4px 24px rgba(0,0,0,.18);max-wid
 
         <div class="vb-field">
           <label>Headline</label>
-          <input type="text" id="vb-headline" placeholder="Main headline..." oninput="renderCanvas()">
+          <input type="text" id="vb-headline" placeholder="Main headline..." oninput="renderCanvas()" onkeyup="renderCanvas()">
         </div>
         <div class="vb-field">
           <label>Subheadline</label>
-          <input type="text" id="vb-sub" placeholder="Subheadline or tagline..." oninput="renderCanvas()">
+          <input type="text" id="vb-sub" placeholder="Subheadline or tagline..." oninput="renderCanvas()" onkeyup="renderCanvas()">
         </div>
         <div class="vb-field">
           <label>Body text</label>
-          <textarea id="vb-body" placeholder="Body copy..." oninput="renderCanvas()"></textarea>
+          <textarea id="vb-body" placeholder="Body copy..." oninput="renderCanvas()" onkeyup="renderCanvas()"></textarea>
         </div>
         <div class="vb-field">
           <label>Tag / Label</label>
-          <input type="text" id="vb-tag" placeholder="e.g. NEW · REBRAND" oninput="renderCanvas()">
+          <input type="text" id="vb-tag" placeholder="e.g. NEW · REBRAND" oninput="renderCanvas()" onkeyup="renderCanvas()">
         </div>
 
         <div>
@@ -316,6 +316,7 @@ canvas#vb-canvas{border-radius:8px;box-shadow:0 4px 24px rgba(0,0,0,.18);max-wid
         </div>
 
         <div class="export-row">
+          <button class="btn btn-ghost btn-sm" onclick="renderCanvas()" title="Force refresh canvas">↺</button>
           <button class="btn btn-primary btn-sm" onclick="exportPNG()">↓ PNG</button>
           <button class="btn btn-ghost btn-sm" onclick="exportPDF()">↓ PDF</button>
           <button class="btn btn-gold btn-sm" onclick="copyToClipboard()">Copy</button>
@@ -942,6 +943,7 @@ function drawLogoSVG(ctx,x,y,maxW,isDarkBg){
 }
 
 function renderCanvas(){
+  try{
   const headline=document.getElementById('vb-headline').value;
   const sub=document.getElementById('vb-sub').value;
   const body=document.getElementById('vb-body').value;
@@ -957,6 +959,12 @@ function renderCanvas(){
 
   const ctx=cv.getContext('2d');
   ctx.clearRect(0,0,w,h);
+  // Reset state fully on each render
+  ctx.globalAlpha=1;
+  ctx.textAlign='left';
+  ctx.textBaseline='alphabetic';
+  ctx.setLineDash([]);
+  ctx.lineWidth=1;
 
   const dark=isDarkColor(bg);
   const tc=dark?'#FFFFFF':'#1C2A39';
@@ -977,6 +985,7 @@ function renderCanvas(){
 
   const platform=document.getElementById('vb-platform').value;
   if(platform!=='none') drawPlatformBadge(ctx,w,h,platform);
+  }catch(e){console.error('Canvas render error:',e);}
 }
 
 function drawPlatformBadge(ctx,w,h,platform){
