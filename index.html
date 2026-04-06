@@ -65,10 +65,11 @@ tbody td{padding:13px 16px;font-size:13.5px;vertical-align:middle}
 .td-day{font-size:11px;color:var(--slate);font-weight:400;display:block;margin-top:1px}
 
 /* ─── PLATFORM BADGES ─── */
-.badge{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.1px;white-space:nowrap}
+.badge{display:inline-flex;align-items:center;gap:6px;padding:4px 10px 4px 6px;border-radius:6px;font-size:11px;font-weight:600;letter-spacing:.1px;white-space:nowrap}
+.badge svg{flex-shrink:0;display:block}
 .badge-linkedin-company{background:#e8f2f9;color:var(--li-co)}
-.badge-linkedin-omri{background:#f3eeff;color:var(--li-om)}
-.badge-facebook{background:#eaf1fd;color:var(--fb)}
+.badge-linkedin-omri{background:#ede8f7;color:var(--li-om)}
+.badge-facebook{background:#e7effe;color:var(--fb)}
 
 /* ─── TYPE TAG ─── */
 .type-tag{font-size:12px;font-weight:500;color:var(--slate);background:#f1f0ee;padding:3px 8px;border-radius:5px;display:inline-block}
@@ -590,14 +591,26 @@ function fmtDay(d){
   return DAYS[dt.getDay()];
 }
 function platformLabel(p){
-  if(p==='linkedin-company')return'LinkedIn Co.';
-  if(p==='linkedin-omri')return'LinkedIn Omri';
+  if(p==='linkedin-company')return'LinkedIn — Company';
+  if(p==='linkedin-omri')return'LinkedIn — Omri';
   if(p==='facebook')return'Facebook';
   return p;
 }
+
+const ICONS={
+  linkedin:`<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="24" height="24" rx="4" fill="#0077B5"/>
+    <path d="M7.5 9.5H5V19H7.5V9.5ZM6.25 8.5C7.08 8.5 7.75 7.83 7.75 7C7.75 6.17 7.08 5.5 6.25 5.5C5.42 5.5 4.75 6.17 4.75 7C4.75 7.83 5.42 8.5 6.25 8.5ZM19 19H16.5V14.25C16.5 12.6 15.7 12 14.75 12C13.75 12 13 12.75 13 14.25V19H10.5V9.5H13V10.75C13.4 9.95 14.35 9.25 15.75 9.25C17.85 9.25 19 10.6 19 13.25V19Z" fill="white"/>
+  </svg>`,
+  facebook:`<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="24" height="24" rx="4" fill="#1877F2"/>
+    <path d="M16 8H13.5C13.22 8 13 8.22 13 8.5V11H16L15.5 14H13V21H10V14H8V11H10V8.5C10 6.57 11.57 5 13.5 5H16V8Z" fill="white"/>
+  </svg>`
+};
+
 function platformIcon(p){
-  if(p==='linkedin-company'||p==='linkedin-omri')return'in';
-  if(p==='facebook')return'f';
+  if(p==='linkedin-company'||p==='linkedin-omri')return ICONS.linkedin;
+  if(p==='facebook')return ICONS.facebook;
   return'';
 }
 function statusDot(s){
@@ -646,7 +659,7 @@ function renderTable(){
   tbody.innerHTML=filtered.map(p=>`
     <tr onclick="openEdit('${p.id}')">
       <td class="td-date">${fmtDate(p.date)}<span class="td-day">${fmtDay(p.date)}</span></td>
-      <td><span class="badge badge-${p.platform}">${platformIcon(p.platform)} ${platformLabel(p.platform)}</span></td>
+      <td><span class="badge badge-${p.platform}">${platformIcon(p.platform)}${platformLabel(p.platform)}</span></td>
       <td><span class="type-tag">${p.type}</span></td>
       <td><div class="copy-preview">${p.copy.split('\n')[0]}</div></td>
       <td>
@@ -731,7 +744,7 @@ function renderTimeline(){
                     <div class="tl-card-title">${p.type}</div>
                     <div class="tl-card-preview">${p.copy.replace(/\n/g,' ')}</div>
                     <div class="tl-card-meta">
-                      <span class="badge badge-${p.platform}">${platformLabel(p.platform)}</span>
+                      <span class="badge badge-${p.platform}">${platformIcon(p.platform)}${platformLabel(p.platform)}</span>
                       <span class="status-badge status-${p.status}">${p.status}</span>
                     </div>
                   </div>
@@ -785,7 +798,7 @@ function openNewPost(){
 
 function updateModalBadge(){
   const p=document.getElementById('edit-platform').value;
-  document.getElementById('modal-badges').innerHTML=`<span class="badge badge-${p}">${platformLabel(p)}</span>`;
+  document.getElementById('modal-badges').innerHTML=`<span class="badge badge-${p}">${platformIcon(p)}${platformLabel(p)}</span>`;
 }
 
 function updateCharCount(){
