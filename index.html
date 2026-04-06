@@ -253,6 +253,12 @@ canvas#vb-canvas{border-radius:8px;box-shadow:0 4px 24px rgba(0,0,0,.18);max-wid
             <button class="vb-tpl-btn" onclick="setTemplate('comparison',this)">Compare</button>
             <button class="vb-tpl-btn" onclick="setTemplate('minimal',this)">Minimal</button>
             <button class="vb-tpl-btn" onclick="setTemplate('quote',this)">Quote</button>
+            <button class="vb-tpl-btn" onclick="setTemplate('starfield',this)">✦ Stars</button>
+            <button class="vb-tpl-btn" onclick="setTemplate('night',this)">🌙 Night</button>
+            <button class="vb-tpl-btn" onclick="setTemplate('hotel',this)">🏨 Hotel</button>
+            <button class="vb-tpl-btn" onclick="setTemplate('postcard',this)">✈ Postcard</button>
+            <button class="vb-tpl-btn" onclick="setTemplate('score',this)">⭐ Score</button>
+            <button class="vb-tpl-btn" onclick="setTemplate('bold',this)">Bold</button>
           </div>
         </div>
 
@@ -895,6 +901,12 @@ function setTemplate(t,btn){
     'comparison':{bg:'#FFFFFF',accent:'#1C2A39'},
     'minimal':{bg:'#F0EDE8',accent:'#516B84'},
     'quote':{bg:'#1C2A39',accent:'#C9A86A'},
+    'starfield':{bg:'#1C2A39',accent:'#C9A86A'},
+    'night':{bg:'#0A1520',accent:'#C9A86A'},
+    'hotel':{bg:'#ECE8E2',accent:'#1C2A39'},
+    'postcard':{bg:'#F5EFE0',accent:'#C9A86A'},
+    'score':{bg:'#1C2A39',accent:'#C9A86A'},
+    'bold':{bg:'#1C2A39',accent:'#C9A86A'},
   };
   if(presets[t]){
     vbState.bg=presets[t].bg;
@@ -956,6 +968,12 @@ function renderCanvas(){
   else if(template==='comparison') drawComparison(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark);
   else if(template==='minimal')    drawMinimal(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark);
   else if(template==='quote')      drawQuote(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark);
+  else if(template==='starfield')  drawStarfield(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark);
+  else if(template==='night')      drawNight(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark);
+  else if(template==='hotel')      drawHotel(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark);
+  else if(template==='postcard')   drawPostcard(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark);
+  else if(template==='score')      drawScore(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark);
+  else if(template==='bold')       drawBold(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark);
 
   const platform=document.getElementById('vb-platform').value;
   if(platform!=='none') drawPlatformBadge(ctx,w,h,platform);
@@ -1375,6 +1393,514 @@ function drawQuote(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark){
       if(l.trim())cy=wrapText(ctx,l,pad,cy,maxW,Math.round(h*0.04));
       else cy+=Math.round(h*0.015);
     });
+  }
+}
+
+// ─────────────────────────────────────────
+// SHARED HELPERS
+// ─────────────────────────────────────────
+
+// 4-pointed sparkle star (matches the RatingIQ logo star)
+function drawSparkle(ctx,cx,cy,size,color,opacity){
+  ctx.save();
+  ctx.globalAlpha=opacity||1;
+  ctx.fillStyle=color;
+  ctx.beginPath();
+  for(let i=0;i<8;i++){
+    const r=i%2===0?size:size*0.18;
+    const a=(i*Math.PI/4)-Math.PI/2;
+    i===0?ctx.moveTo(cx+r*Math.cos(a),cy+r*Math.sin(a)):ctx.lineTo(cx+r*Math.cos(a),cy+r*Math.sin(a));
+  }
+  ctx.closePath();
+  ctx.fill();
+  ctx.restore();
+}
+
+// Center-aligned wrapping text, returns final y
+function wrapTextC(ctx,text,cx,y,maxW,lineH){
+  if(!text)return y;
+  const words=text.split(' ');
+  let line='',cy=y;
+  const flush=l=>{ctx.save();ctx.textAlign='center';ctx.fillText(l,cx,cy);ctx.restore();cy+=lineH;};
+  words.forEach(w=>{
+    const t=line?line+' '+w:w;
+    if(ctx.measureText(t).width>maxW&&line){flush(line);line=w;}else line=t;
+  });
+  if(line)flush(line);
+  return cy;
+}
+
+// Draw a row of 5 stars (filled/empty) at given position
+function drawStars(ctx,cx,y,size,filled,color,emptyColor){
+  const gap=size*1.5;
+  const total=5;
+  for(let i=0;i<total;i++){
+    const sx=cx-(total/2-i-0.5)*gap;
+    ctx.fillStyle=i<filled?color:emptyColor;
+    ctx.beginPath();
+    for(let p=0;p<10;p++){
+      const r=p%2===0?size:size*0.4;
+      const a=(p*Math.PI/5)-Math.PI/2;
+      p===0?ctx.moveTo(sx+r*Math.cos(a),y+r*Math.sin(a)):ctx.lineTo(sx+r*Math.cos(a),y+r*Math.sin(a));
+    }
+    ctx.closePath();
+    ctx.fill();
+  }
+}
+
+// Hotel window grid (cols × rows of small lit windows)
+function drawWindowGrid(ctx,x,y,gw,gh,cols,rows,winColor,alpha){
+  const cW=gw/cols, cH=gh/rows;
+  const wW=cW*0.52, wH=cH*0.6;
+  ctx.save();
+  ctx.globalAlpha=alpha||0.12;
+  ctx.fillStyle=winColor;
+  for(let r=0;r<rows;r++){
+    for(let c=0;c<cols;c++){
+      const wx=x+c*cW+(cW-wW)/2;
+      const wy=y+r*cH+(cH-wH)/2;
+      roundRect(ctx,wx,wy,wW,wH,Math.round(wW*0.12));
+      ctx.fill();
+    }
+  }
+  ctx.restore();
+}
+
+// ── TEMPLATE 7: Starfield ──
+function drawStarfield(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark){
+  // Deep navy background
+  ctx.fillStyle=bg; ctx.fillRect(0,0,w,h);
+
+  // Soft radial glow center
+  const grd=ctx.createRadialGradient(w/2,h/2,0,w/2,h/2,Math.min(w,h)*0.55);
+  grd.addColorStop(0,accent+'14');
+  grd.addColorStop(1,'transparent');
+  ctx.fillStyle=grd; ctx.fillRect(0,0,w,h);
+
+  // Scattered sparkles — mix of sizes and opacities
+  const sparks=[
+    {x:.07,y:.10,s:.038,op:.95},{x:.88,y:.07,s:.028,op:.8},
+    {x:.93,y:.78,s:.032,op:.85},{x:.05,y:.85,s:.022,op:.7},
+    {x:.50,y:.04,s:.016,op:.6},{x:.72,y:.92,s:.024,op:.75},
+    {x:.18,y:.52,s:.012,op:.4},{x:.82,y:.42,s:.014,op:.45},
+    {x:.35,y:.88,s:.010,op:.5},{x:.60,y:.12,s:.009,op:.4},
+    {x:.25,y:.18,s:.007,op:.35},{x:.78,y:.20,s:.008,op:.38},
+    {x:.42,y:.78,s:.006,op:.32},{x:.15,y:.70,s:.007,op:.3},
+  ];
+  sparks.forEach(s=>drawSparkle(ctx,w*s.x,h*s.y,Math.min(w,h)*s.s,accent,s.op));
+
+  // Content: centered
+  const cx=w/2, pad=Math.round(w*0.1);
+  const maxW=w-pad*2;
+  let cy=h*(tag?0.34:0.38);
+
+  if(tag){
+    ctx.font=`700 ${Math.round(h*0.024)}px Inter,sans-serif`;
+    ctx.fillStyle=accent;
+    ctx.textAlign='center'; ctx.fillText(tag,cx,h*0.28); ctx.textAlign='left';
+    cy=h*0.38;
+  }
+
+  if(headline){
+    const fs=Math.min(Math.round(h*0.07),72);
+    ctx.font=`800 ${fs}px Manrope,sans-serif`;
+    ctx.fillStyle='#FFFFFF';
+    cy=wrapTextC(ctx,headline,cx,cy,maxW,Math.round(fs*1.3));
+    cy+=Math.round(h*0.03);
+  }
+
+  if(sub){
+    ctx.font=`500 italic ${Math.round(h*0.034)}px Manrope,sans-serif`;
+    ctx.fillStyle=accent;
+    cy=wrapTextC(ctx,sub,cx,cy,maxW,Math.round(h*0.05));
+    cy+=Math.round(h*0.025);
+  }
+
+  if(body){
+    ctx.font=`400 ${Math.round(h*0.028)}px Inter,sans-serif`;
+    ctx.fillStyle='rgba(255,255,255,0.6)';
+    cy=wrapTextC(ctx,body.split('\n')[0],cx,cy,maxW,Math.round(h*0.042));
+  }
+
+  if(showLogo){
+    const lW=Math.round(w*0.18);
+    const lH=lW/3.67;
+    drawLogoSVG(ctx,cx-lW/2,h-lH-Math.round(h*0.06),lW,true);
+  }
+}
+
+// ── TEMPLATE 8: Night Sky ──
+function drawNight(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark){
+  // Very dark gradient
+  const grad=ctx.createLinearGradient(0,0,0,h);
+  grad.addColorStop(0,'#0A1520');
+  grad.addColorStop(1,'#1C2A39');
+  ctx.fillStyle=grad; ctx.fillRect(0,0,w,h);
+
+  // Tiny scattered dots (stars)
+  const dots=[];
+  const rng=mulberry32(42);
+  for(let i=0;i<120;i++) dots.push({x:rng(),y:rng(),r:rng()*1.5+0.5,op:rng()*0.6+0.2});
+  dots.forEach(d=>{
+    ctx.beginPath();
+    ctx.arc(d.x*w,d.y*h,d.r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(255,255,255,${d.op.toFixed(2)})`;
+    ctx.fill();
+  });
+
+  // A few larger sparkles, anchored positions
+  drawSparkle(ctx,w*0.9,h*0.1,Math.min(w,h)*0.028,accent,0.9);
+  drawSparkle(ctx,w*0.08,h*0.15,Math.min(w,h)*0.018,accent,0.7);
+  drawSparkle(ctx,w*0.85,h*0.82,Math.min(w,h)*0.022,accent,0.75);
+
+  // Horizontal gold line
+  const lineY=Math.round(h*0.22);
+  const gLine=ctx.createLinearGradient(w*0.08,0,w*0.92,0);
+  gLine.addColorStop(0,'transparent');
+  gLine.addColorStop(0.2,accent);
+  gLine.addColorStop(0.8,accent);
+  gLine.addColorStop(1,'transparent');
+  ctx.fillStyle=gLine; ctx.fillRect(Math.round(w*0.08),lineY,Math.round(w*0.84),1);
+
+  const pad=Math.round(w*0.09);
+  const cx=w/2, maxW=w-pad*2;
+  let cy=Math.round(h*0.3);
+
+  if(tag){
+    ctx.font=`600 ${Math.round(h*0.022)}px Inter,sans-serif`;
+    ctx.fillStyle=accent;
+    ctx.textAlign='center'; ctx.fillText(tag,cx,cy); ctx.textAlign='left';
+    cy+=Math.round(h*0.055);
+  }
+
+  if(headline){
+    const fs=Math.min(Math.round(h*0.075),76);
+    ctx.font=`800 ${fs}px Manrope,sans-serif`;
+    ctx.fillStyle='#FFFFFF';
+    cy=wrapTextC(ctx,headline,cx,cy,maxW,Math.round(fs*1.3));
+    cy+=Math.round(h*0.03);
+  }
+
+  if(sub){
+    ctx.font=`400 italic ${Math.round(h*0.036)}px Manrope,sans-serif`;
+    ctx.fillStyle=accent;
+    cy=wrapTextC(ctx,sub,cx,cy,maxW,Math.round(h*0.052));
+  }
+
+  // Bottom line
+  const gLine2=ctx.createLinearGradient(w*0.08,0,w*0.92,0);
+  gLine2.addColorStop(0,'transparent');
+  gLine2.addColorStop(0.2,accent+'88');
+  gLine2.addColorStop(0.8,accent+'88');
+  gLine2.addColorStop(1,'transparent');
+  ctx.fillStyle=gLine2; ctx.fillRect(Math.round(w*0.08),Math.round(h*0.82),Math.round(w*0.84),1);
+
+  if(showLogo){
+    const lW=Math.round(w*0.18);
+    const lH=lW/3.67;
+    drawLogoSVG(ctx,cx-lW/2,h-lH-Math.round(h*0.05),lW,true);
+  }
+}
+
+// Seeded PRNG for consistent random star placement
+function mulberry32(a){
+  return function(){
+    a|=0;a=a+0x6D2B79F5|0;
+    let t=Math.imul(a^a>>>15,1|a);
+    t=t+Math.imul(t^t>>>7,61|t)^t;
+    return((t^t>>>14)>>>0)/4294967296;
+  };
+}
+
+// ── TEMPLATE 9: Hotel ──
+function drawHotel(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark){
+  ctx.fillStyle=bg; ctx.fillRect(0,0,w,h);
+
+  // Hotel facade: grid of windows covering full canvas
+  drawWindowGrid(ctx,0,0,w,h,12,6,dark?'#C9A86A':'#1C2A39',dark?0.12:0.1);
+
+  // Overlay gradient (stronger at left where text lives)
+  const ov=ctx.createLinearGradient(0,0,w,0);
+  ov.addColorStop(0,bg+(dark?'EE':'DD'));
+  ov.addColorStop(0.55,bg+'CC');
+  ov.addColorStop(1,bg+'44');
+  ctx.fillStyle=ov; ctx.fillRect(0,0,w,h);
+
+  const pad=Math.round(w*0.07);
+  const maxW=w*0.58;
+  let cy=Math.round(h*0.12);
+
+  if(showLogo){
+    drawLogoSVG(ctx,pad,cy,Math.round(w*0.18),dark);
+    cy+=Math.round(h*0.14);
+  }
+
+  if(tag){
+    ctx.font=`700 ${Math.round(h*0.022)}px Inter,sans-serif`;
+    ctx.fillStyle=accent;
+    ctx.fillText(tag,pad,cy);
+    cy+=Math.round(h*0.055);
+  }
+
+  if(headline){
+    const fs=Math.min(Math.round(h*0.065),68);
+    ctx.font=`800 ${fs}px Manrope,sans-serif`;
+    ctx.fillStyle=tc;
+    cy=wrapText(ctx,headline,pad,cy,maxW,Math.round(fs*1.3));
+    cy+=Math.round(h*0.03);
+    ctx.fillStyle=accent; ctx.fillRect(pad,cy,60,3);
+    cy+=Math.round(h*0.04);
+  }
+
+  if(sub){
+    ctx.font=`500 ${Math.round(h*0.034)}px Manrope,sans-serif`;
+    ctx.fillStyle=mc;
+    cy=wrapText(ctx,sub,pad,cy,maxW,Math.round(h*0.05));
+    cy+=Math.round(h*0.025);
+  }
+
+  if(body){
+    const fs=Math.round(h*0.03);
+    ctx.font=`400 ${fs}px Inter,sans-serif`;
+    ctx.fillStyle=tc;
+    body.split('\n').slice(0,4).forEach(l=>{
+      if(l.trim())cy=wrapText(ctx,l,pad,cy,maxW,Math.round(fs*1.55));
+      else cy+=Math.round(h*0.025);
+    });
+  }
+
+  // Right side: single large sparkle decoration
+  drawSparkle(ctx,w*0.82,h*0.45,Math.min(w,h)*0.06,accent,0.25);
+  drawSparkle(ctx,w*0.82,h*0.45,Math.min(w,h)*0.02,accent,0.7);
+}
+
+// ── TEMPLATE 10: Postcard ──
+function drawPostcard(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark){
+  ctx.fillStyle=bg; ctx.fillRect(0,0,w,h);
+
+  // Warm texture-like inner border
+  const brd=Math.round(Math.min(w,h)*0.04);
+  ctx.strokeStyle=accent+'55';
+  ctx.lineWidth=1;
+  ctx.setLineDash([6,4]);
+  ctx.strokeRect(brd,brd,w-brd*2,h-brd*2);
+  ctx.setLineDash([]);
+
+  // Solid inner border line
+  ctx.strokeStyle=accent+'44';
+  ctx.lineWidth=2;
+  ctx.strokeRect(brd+6,brd+6,w-brd*2-12,h-brd*2-12);
+
+  // Postage stamp top-right
+  const stW=Math.round(w*0.14), stH=Math.round(h*0.3);
+  const stX=w-brd-stW-Math.round(w*0.03);
+  const stY=brd+Math.round(h*0.04);
+  ctx.fillStyle='#fff';
+  ctx.fillRect(stX,stY,stW,stH);
+  ctx.strokeStyle=accent+'66';
+  ctx.lineWidth=1;
+  ctx.strokeRect(stX,stY,stW,stH);
+  // Stamp perforations
+  const perfSize=4, perfGap=8;
+  ctx.fillStyle=bg;
+  [[stX,stY,stW,0],[stX,stY+stH,stW,0],[stX,stY,0,stH],[stX+stW,stY,0,stH]].forEach(([sx,sy,lw,lh])=>{
+    const len=lw||lh, horiz=lw>0;
+    for(let i=0;i<=len;i+=perfGap){
+      ctx.beginPath();
+      ctx.arc(horiz?sx+i:sx, horiz?sy:sy+i, perfSize/2, 0, Math.PI*2);
+      ctx.fill();
+    }
+  });
+  // Stamp content
+  drawSparkle(ctx,stX+stW/2,stY+stH*0.38,Math.min(stW,stH)*0.22,accent,0.9);
+  ctx.font=`700 ${Math.round(stH*0.15)}px Manrope,sans-serif`;
+  ctx.fillStyle='#1C2A39';
+  ctx.textAlign='center';
+  ctx.fillText('RATING',stX+stW/2,stY+stH*0.68);
+  ctx.fillStyle=accent;
+  ctx.fillText('IQ',stX+stW/2,stY+stH*0.86);
+  ctx.textAlign='left';
+
+  // Left column: content
+  const pad=brd+Math.round(w*0.05);
+  const maxW=w*0.64;
+  let cy=brd+Math.round(h*0.1);
+
+  if(tag){
+    ctx.font=`600 ${Math.round(h*0.022)}px Inter,sans-serif`;
+    ctx.fillStyle=accent;
+    ctx.fillText(tag,pad,cy);
+    cy+=Math.round(h*0.06);
+  }
+
+  if(headline){
+    const fs=Math.min(Math.round(h*0.062),64);
+    ctx.font=`800 ${fs}px Manrope,sans-serif`;
+    ctx.fillStyle='#1C2A39';
+    cy=wrapText(ctx,headline,pad,cy,maxW,Math.round(fs*1.3));
+    cy+=Math.round(h*0.02);
+  }
+
+  // Handwritten-style accent line
+  ctx.fillStyle=accent; ctx.fillRect(pad,cy,48,2); cy+=Math.round(h*0.04);
+
+  if(sub){
+    ctx.font=`400 italic ${Math.round(h*0.033)}px Manrope,sans-serif`;
+    ctx.fillStyle='rgba(28,42,57,0.65)';
+    cy=wrapText(ctx,sub,pad,cy,maxW,Math.round(h*0.05));
+    cy+=Math.round(h*0.025);
+  }
+
+  if(body){
+    ctx.font=`400 ${Math.round(h*0.029)}px Inter,sans-serif`;
+    ctx.fillStyle='rgba(28,42,57,0.7)';
+    body.split('\n').slice(0,3).forEach(l=>{
+      if(l.trim())cy=wrapText(ctx,l,pad,cy,maxW,Math.round(h*0.044));
+      else cy+=Math.round(h*0.02);
+    });
+  }
+
+  // Bottom: postmark circle (right side)
+  const pmX=stX+stW/2, pmY=stY+stH+Math.round(h*0.12);
+  ctx.strokeStyle=accent+'88'; ctx.lineWidth=1.5;
+  ctx.beginPath(); ctx.arc(pmX,pmY,Math.round(Math.min(w,h)*0.06),0,Math.PI*2); ctx.stroke();
+  ctx.font=`600 ${Math.round(h*0.018)}px Inter,sans-serif`;
+  ctx.fillStyle=accent+'99';
+  ctx.textAlign='center';
+  ctx.fillText('APR 2026',pmX,pmY+Math.round(h*0.01));
+  ctx.textAlign='left';
+
+  if(showLogo){
+    const lW=Math.round(maxW*0.38);
+    drawLogoSVG(ctx,pad,h-brd-Math.round(lW/3.67)-Math.round(h*0.04),lW,false);
+  }
+}
+
+// ── TEMPLATE 11: Score ──
+function drawScore(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark){
+  ctx.fillStyle=bg; ctx.fillRect(0,0,w,h);
+
+  // Subtle glow behind score
+  const grd=ctx.createRadialGradient(w/2,h*0.42,0,w/2,h*0.42,Math.min(w,h)*0.4);
+  grd.addColorStop(0,accent+'22');
+  grd.addColorStop(1,'transparent');
+  ctx.fillStyle=grd; ctx.fillRect(0,0,w,h);
+
+  // Sparkles in corners
+  drawSparkle(ctx,w*0.06,h*0.08,Math.min(w,h)*0.025,accent,0.7);
+  drawSparkle(ctx,w*0.94,h*0.08,Math.min(w,h)*0.018,accent,0.5);
+  drawSparkle(ctx,w*0.06,h*0.92,Math.min(w,h)*0.015,accent,0.45);
+  drawSparkle(ctx,w*0.94,h*0.92,Math.min(w,h)*0.022,accent,0.6);
+
+  const cx=w/2;
+  const pad=Math.round(w*0.08);
+
+  // Logo top center
+  if(showLogo){
+    const lW=Math.round(w*0.2);
+    drawLogoSVG(ctx,cx-lW/2,Math.round(h*0.07),lW,dark);
+  }
+
+  // Tag
+  if(tag){
+    ctx.font=`600 ${Math.round(h*0.022)}px Inter,sans-serif`;
+    ctx.fillStyle=mc;
+    ctx.textAlign='center'; ctx.fillText(tag,cx,Math.round(h*0.24)); ctx.textAlign='left';
+  }
+
+  // Big score number (headline used as the number, e.g. "8.9")
+  if(headline){
+    const fs=Math.min(Math.round(h*0.22),200);
+    ctx.font=`800 ${fs}px Manrope,sans-serif`;
+    ctx.fillStyle=accent;
+    ctx.textAlign='center';
+    ctx.fillText(headline,cx,Math.round(h*0.58));
+    ctx.textAlign='left';
+  }
+
+  // Stars row
+  const starY=Math.round(h*0.65);
+  const starSize=Math.round(Math.min(w,h)*0.028);
+  const filledStars=headline?Math.round(parseFloat(headline)/2):4;
+  drawStars(ctx,cx,starY,starSize,isNaN(filledStars)?4:Math.min(filledStars,5),accent,'rgba(201,168,106,0.2)');
+
+  // Sub label below stars
+  if(sub){
+    ctx.font=`500 ${Math.round(h*0.032)}px Manrope,sans-serif`;
+    ctx.fillStyle=mc;
+    ctx.textAlign='center';
+    ctx.fillText(sub,cx,Math.round(h*0.76));
+    ctx.textAlign='left';
+  }
+
+  // Body small bottom
+  if(body){
+    ctx.font=`400 ${Math.round(h*0.026)}px Inter,sans-serif`;
+    ctx.fillStyle=mc;
+    ctx.textAlign='center';
+    ctx.fillText(body.split('\n')[0].slice(0,60),cx,Math.round(h*0.87));
+    ctx.textAlign='left';
+  }
+}
+
+// ── TEMPLATE 12: Bold Statement ──
+function drawBold(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark){
+  ctx.fillStyle=bg; ctx.fillRect(0,0,w,h);
+
+  // Accent corner fills
+  const cSize=Math.round(Math.min(w,h)*0.18);
+  ctx.fillStyle=accent+'18';
+  ctx.fillRect(0,0,cSize,Math.round(cSize*0.3));
+  ctx.fillRect(0,0,Math.round(cSize*0.3),cSize);
+  ctx.fillRect(w-cSize,h-Math.round(cSize*0.3),cSize,Math.round(cSize*0.3));
+  ctx.fillRect(w-Math.round(cSize*0.3),h-cSize,Math.round(cSize*0.3),cSize);
+
+  // Small sparkles in the corner accents
+  drawSparkle(ctx,Math.round(w*0.04),Math.round(h*0.06),Math.min(w,h)*0.022,accent,0.8);
+  drawSparkle(ctx,Math.round(w*0.96),Math.round(h*0.94),Math.min(w,h)*0.018,accent,0.7);
+
+  const cx=w/2, cy=h/2;
+  const pad=Math.round(w*0.09);
+  const maxW=w-pad*2;
+
+  // Centered headline — very large
+  if(headline){
+    const fs=Math.min(Math.round(h*0.1),100);
+    ctx.font=`800 ${fs}px Manrope,sans-serif`;
+    ctx.fillStyle=tc;
+    const lineH=Math.round(fs*1.2);
+    const lines=headline.split('\n');
+    const totalH=lines.length*lineH;
+    let startY=cy-totalH/2+Math.round(fs*0.75);
+    if(sub) startY-=Math.round(h*0.08);
+    lines.forEach(l=>{
+      startY=wrapTextC(ctx,l,cx,startY,maxW,lineH);
+    });
+
+    // Accent underline on last word
+    ctx.fillStyle=accent;
+    ctx.fillRect(cx-40,startY-Math.round(h*0.01),80,4);
+    startY+=Math.round(h*0.04);
+
+    if(sub){
+      ctx.font=`400 italic ${Math.round(h*0.04)}px Manrope,sans-serif`;
+      ctx.fillStyle=mc;
+      wrapTextC(ctx,sub,cx,startY,maxW,Math.round(h*0.057));
+    }
+  }
+
+  // Logo bottom-center
+  if(showLogo){
+    const lW=Math.round(w*0.16);
+    const lH=lW/3.67;
+    drawLogoSVG(ctx,cx-lW/2,h-lH-Math.round(h*0.05),lW,dark);
+  }
+
+  // Tag top-center
+  if(tag){
+    ctx.font=`600 ${Math.round(h*0.02)}px Inter,sans-serif`;
+    ctx.fillStyle=accent;
+    ctx.textAlign='center'; ctx.fillText(tag,cx,Math.round(h*0.1)); ctx.textAlign='left';
   }
 }
 
