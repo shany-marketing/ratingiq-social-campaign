@@ -175,6 +175,18 @@ canvas#vb-canvas{border-radius:8px;box-shadow:0 4px 24px rgba(0,0,0,.18);max-wid
 ::-webkit-scrollbar{width:6px;height:6px}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:rgba(0,0,0,.15);border-radius:3px}
+
+/* ─── UPLOAD ZONE ─── */
+.vb-dropzone{border:2px dashed rgba(0,0,0,.2);border-radius:10px;padding:28px 16px;text-align:center;cursor:pointer;transition:all .2s;background:#fff}
+.vb-dropzone:hover,.vb-dropzone.dragging{border-color:var(--gold);background:#fdfbf7}
+.vb-drop-icon{font-size:30px;margin-bottom:8px;color:var(--slate)}
+.vb-drop-text{font-family:'Manrope',sans-serif;font-weight:700;font-size:13px;color:var(--navy);margin-bottom:4px}
+.vb-drop-hint{font-size:11px;color:var(--slate)}
+.vis-thumb{width:40px;height:40px;border-radius:5px;object-fit:cover;cursor:pointer;border:1px solid rgba(0,0,0,.1);display:block;transition:opacity .15s}
+.vis-thumb:hover{opacity:.8}
+.modal-img-wrap{border:2px dashed rgba(0,0,0,.13);border-radius:8px;padding:16px;text-align:center;cursor:pointer;transition:all .2s;background:#faf9f7}
+.modal-img-wrap:hover{border-color:var(--gold);background:#fdfbf7}
+.modal-img-wrap.has-img{border-style:solid;border-color:rgba(0,0,0,.1);cursor:default;padding:0;overflow:hidden}
 </style>
 </head>
 <body>
@@ -250,103 +262,82 @@ canvas#vb-canvas{border-radius:8px;box-shadow:0 4px 24px rgba(0,0,0,.18);max-wid
 
   <!-- BUILDER TAB -->
   <div id="tab-builder" class="tab-content">
-    <div class="section-header" style="margin-bottom:0">
-      <h2>Visual Builder</h2>
+    <div class="section-header" style="margin-bottom:16px">
+      <h2>Visual Upload</h2>
+      <span style="font-size:13px;color:var(--slate)">Attach Canva visuals to each post</span>
     </div>
-    <div class="vb-wrap" style="height:calc(100vh - 140px)">
+    <div class="vb-wrap" style="height:calc(100vh - 155px)">
+
+      <!-- Left panel: controls -->
       <div class="vb-controls">
 
-        <div>
-          <h3 style="margin-bottom:10px">Template</h3>
-          <div class="vb-tpl-grid">
-            <button class="vb-tpl-btn active" onclick="setTemplate('announcement',this)">Announce</button>
-            <button class="vb-tpl-btn" onclick="setTemplate('thought-leadership',this)">TL Post</button>
-            <button class="vb-tpl-btn" onclick="setTemplate('reveal',this)">Reveal</button>
-            <button class="vb-tpl-btn" onclick="setTemplate('comparison',this)">Compare</button>
-            <button class="vb-tpl-btn" onclick="setTemplate('minimal',this)">Minimal</button>
-            <button class="vb-tpl-btn" onclick="setTemplate('quote',this)">Quote</button>
-            <button class="vb-tpl-btn" onclick="setTemplate('starfield',this)">★ Stars</button>
-            <button class="vb-tpl-btn" onclick="setTemplate('night',this)">🌙 Night</button>
-            <button class="vb-tpl-btn" onclick="setTemplate('hotel',this)">🏨 Hotel</button>
-            <button class="vb-tpl-btn" onclick="setTemplate('hotel2',this)">🏨 Arch</button>
-            <button class="vb-tpl-btn" onclick="setTemplate('hotel3',this)">🌅 Suite</button>
-            <button class="vb-tpl-btn" onclick="setTemplate('postcard',this)">✉ Paper</button>
-            <button class="vb-tpl-btn" onclick="setTemplate('score-booking',this)">🔵 Booking</button>
-            <button class="vb-tpl-btn" onclick="setTemplate('score-google',this)">★ Google</button>
-            <button class="vb-tpl-btn" onclick="setTemplate('score-tripadv',this)">🟢 TripAdv</button>
-            <button class="vb-tpl-btn" onclick="setTemplate('score-expedia',this)">✈ Expedia</button>
-            <button class="vb-tpl-btn" onclick="setTemplate('bold',this)">Bold</button>
-            <button class="vb-tpl-btn" onclick="setTemplate('browser',this)">🖥 Browser</button>
+        <div class="vb-field">
+          <label>Post</label>
+          <select id="vb-post-select" onchange="vbSelectPost(this.value)" style="font-size:12px"></select>
+        </div>
+
+        <div id="vb-upload-zone" style="display:none">
+          <h3 style="margin-bottom:10px">Upload Visual</h3>
+          <div class="vb-dropzone" id="vb-dropzone"
+            onclick="document.getElementById('vb-file-input').click()"
+            ondragover="event.preventDefault();this.classList.add('dragging')"
+            ondragleave="this.classList.remove('dragging')"
+            ondrop="this.classList.remove('dragging');vbHandleDrop(event)">
+            <div class="vb-drop-icon">↑</div>
+            <div class="vb-drop-text">Drop image here</div>
+            <div class="vb-drop-hint">or click to browse · PNG / JPG</div>
+          </div>
+          <input type="file" id="vb-file-input" accept="image/*" style="display:none" onchange="vbHandleFile(this.files[0]);this.value=''">
+
+          <div id="vb-current-thumb-wrap" style="display:none;margin-top:14px">
+            <label style="font-size:10px;font-weight:700;color:var(--slate);text-transform:uppercase;letter-spacing:.4px;display:block;margin-bottom:7px">Attached Visual</label>
+            <img id="vb-current-thumb" style="width:100%;border-radius:7px;border:1px solid rgba(0,0,0,.1);display:block;margin-bottom:8px">
+            <div style="display:flex;gap:6px">
+              <button class="btn btn-ghost btn-sm" style="flex:1" onclick="vbRemoveImage()">Remove</button>
+              <button class="btn btn-primary btn-sm" style="flex:1" onclick="vbDownloadImage()">↓ Save</button>
+            </div>
           </div>
         </div>
 
-        <div>
-          <h3 style="margin-bottom:8px">Dimensions</h3>
-          <div class="vb-dims">
-            <button class="vb-dim-btn active" onclick="setDims(1200,627,this)">LinkedIn</button>
-            <button class="vb-dim-btn" onclick="setDims(1080,1080,this)">Square</button>
-            <button class="vb-dim-btn" onclick="setDims(1200,628,this)">Facebook</button>
-            <button class="vb-dim-btn" onclick="setDims(1080,1920,this)">Story</button>
-          </div>
+        <div id="vb-no-post" style="font-size:12px;color:var(--slate);text-align:center;padding:16px 0">
+          Select a post above to attach or view its visual.
         </div>
 
-        <div class="vb-field">
-          <label>Headline</label>
-          <input type="text" id="vb-headline" placeholder="Main headline..." oninput="renderCanvas()" onkeyup="renderCanvas()">
-        </div>
-        <div class="vb-field">
-          <label>Subheadline</label>
-          <input type="text" id="vb-sub" placeholder="Subheadline or tagline..." oninput="renderCanvas()" onkeyup="renderCanvas()">
-        </div>
-        <div class="vb-field">
-          <label>Body text</label>
-          <textarea id="vb-body" placeholder="Body copy..." oninput="renderCanvas()" onkeyup="renderCanvas()"></textarea>
-        </div>
-        <div class="vb-field">
-          <label>Tag / Label</label>
-          <input type="text" id="vb-tag" placeholder="e.g. NEW · REBRAND" oninput="renderCanvas()" onkeyup="renderCanvas()">
-        </div>
-
-        <div>
-          <h3 style="margin-bottom:8px">Background</h3>
-          <div class="color-swatches" id="bg-swatches"></div>
-        </div>
-        <div>
-          <h3 style="margin-bottom:8px">Accent</h3>
-          <div class="color-swatches" id="acc-swatches"></div>
-        </div>
-
-        <div class="vb-field">
-          <label>Platform</label>
-          <select id="vb-platform" onchange="renderCanvas()">
-            <option value="none">None</option>
-            <option value="linkedin">LinkedIn</option>
-            <option value="facebook">Facebook</option>
-          </select>
-        </div>
-
-        <div class="vb-field">
-          <label>Show Logo</label>
-          <select id="vb-logo" onchange="renderCanvas()">
-            <option value="1">Yes</option>
-            <option value="0">No</option>
-          </select>
-        </div>
-
-        <div class="export-row">
-          <button class="btn btn-ghost btn-sm" onclick="renderCanvas()" title="Force refresh canvas">↺</button>
-          <button class="btn btn-primary btn-sm" onclick="exportPNG()">↓ PNG</button>
-          <button class="btn btn-ghost btn-sm" onclick="exportPDF()">↓ PDF</button>
-          <button class="btn btn-gold btn-sm" onclick="copyToClipboard()">Copy</button>
-        </div>
       </div>
-      <div class="vb-canvas-area">
-        <div class="vb-dims" style="justify-content:center;margin-bottom:4px">
-          <span id="canvas-size-label" style="font-size:11px;font-weight:600;color:var(--slate);font-family:'Inter',sans-serif"></span>
+
+      <!-- Right panel: preview -->
+      <div class="vb-canvas-area" style="flex-direction:column;align-items:center;justify-content:center;padding:32px">
+
+        <!-- Empty state -->
+        <div id="vb-preview-empty" style="text-align:center;color:var(--slate)">
+          <div style="font-size:52px;margin-bottom:14px">🎨</div>
+          <div style="font-family:'Manrope',sans-serif;font-weight:700;font-size:16px;color:var(--navy);margin-bottom:6px">No post selected</div>
+          <div style="font-size:13px">Pick a post from the left panel to upload or view its Canva visual</div>
         </div>
-        <canvas id="vb-canvas"></canvas>
+
+        <!-- Post content -->
+        <div id="vb-preview-content" style="display:none;width:100%;max-width:700px">
+
+          <!-- Image preview or placeholder -->
+          <div id="vb-img-placeholder" style="background:#fff;border:2px dashed #d0ccc6;border-radius:10px;padding:48px;text-align:center;margin-bottom:18px;color:var(--slate)">
+            <div style="font-size:36px;margin-bottom:10px">📤</div>
+            <div style="font-family:'Manrope',sans-serif;font-weight:700;font-size:15px;color:var(--navy);margin-bottom:4px">No visual uploaded yet</div>
+            <div style="font-size:13px">Upload a PNG or JPG from Canva using the left panel</div>
+          </div>
+          <img id="vb-preview-img" style="display:none;width:100%;border-radius:10px;box-shadow:0 4px 24px rgba(0,0,0,.18);margin-bottom:18px">
+
+          <!-- Post info card -->
+          <div style="background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:10px;padding:16px 20px">
+            <div id="vb-post-meta" style="display:flex;gap:8px;align-items:center;margin-bottom:10px;flex-wrap:wrap"></div>
+            <div style="font-size:11px;font-weight:700;color:var(--slate);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Copy</div>
+            <div id="vb-post-copy" style="font-size:13px;color:var(--charcoal);line-height:1.6;white-space:pre-line;max-height:180px;overflow-y:auto"></div>
+          </div>
+        </div>
+
       </div>
     </div>
+    <!-- hidden canvas kept for any legacy JS refs -->
+    <canvas id="vb-canvas" style="display:none"></canvas>
   </div>
 
 </main>
@@ -389,6 +380,22 @@ canvas#vb-canvas{border-radius:8px;box-shadow:0 4px 24px rgba(0,0,0,.18);max-wid
         <div class="field">
           <label>Visual Concept</label>
           <textarea id="edit-visual" class="small" placeholder="Describe the visual..."></textarea>
+        </div>
+        <div class="field">
+          <label>Canva Visual</label>
+          <div id="modal-img-zone" class="modal-img-wrap" onclick="document.getElementById('modal-file-input').click()">
+            <div id="modal-img-placeholder" style="padding:14px 0;color:var(--slate)">
+              <div style="font-size:22px;margin-bottom:6px">📤</div>
+              <div style="font-size:12px;font-weight:600;color:var(--navy);margin-bottom:2px">Upload Canva visual</div>
+              <div style="font-size:11px">Click or drag a PNG / JPG here</div>
+            </div>
+            <img id="modal-img-preview" style="display:none;width:100%;border-radius:6px;display:none">
+          </div>
+          <input type="file" id="modal-file-input" accept="image/*" style="display:none" onchange="modalHandleFile(this.files[0]);this.value=''">
+          <div id="modal-img-actions" style="display:none;gap:6px;margin-top:6px">
+            <button type="button" class="btn btn-ghost btn-sm" style="flex:1" onclick="modalRemoveImage()">Remove</button>
+            <button type="button" class="btn btn-ghost btn-sm" style="flex:1" onclick="document.getElementById('modal-file-input').click()">Replace</button>
+          </div>
         </div>
         <div class="field">
           <label>Corrections / Notes</label>
@@ -959,8 +966,10 @@ function renderTable(){
       <td><span class="badge badge-${p.platform}">${platformIcon(p.platform)}${platformLabel(p.platform)}</span></td>
       <td><span class="type-tag">${p.type}</span></td>
       <td><div class="copy-preview">${p.copy.split('\n')[0]}</div></td>
-      <td>
-        <div class="vis-dot" title="${p.visualConcept}" onclick="event.stopPropagation();openBuilderFor('${p.id}')">🎨</div>
+      <td onclick="event.stopPropagation();openBuilderFor('${p.id}')">
+        ${getThumb(p.id)
+          ? `<img class="vis-thumb" src="${getThumb(p.id)}" title="Click to manage visual" alt="visual">`
+          : `<div class="vis-dot" title="Upload visual in builder">📤</div>`}
       </td>
       <td onclick="event.stopPropagation()">
         <select class="status-select status-${p.status}" onchange="quickStatus('${p.id}',this.value);this.className='status-select status-'+this.value">
@@ -1052,8 +1061,10 @@ function renderTimeline(){
                       <span class="status-badge status-${p.status}">${p.status}</span>
                     </div>
                   </div>
-                  <div class="tl-card-right">
-                    <div class="vis-dot" title="Open Visual Builder" onclick="event.stopPropagation();openBuilderFor('${p.id}')">🎨</div>
+                  <div class="tl-card-right" onclick="event.stopPropagation();openBuilderFor('${p.id}')">
+                    ${getThumb(p.id)
+                      ? `<img class="vis-thumb" src="${getThumb(p.id)}" title="Manage visual" alt="visual">`
+                      : `<div class="vis-dot" title="Upload visual">📤</div>`}
                   </div>
                 </div>
               `).join('')}
@@ -1079,6 +1090,9 @@ function openEdit(id){
   document.getElementById('edit-visual').value=p.visualConcept||'';
   document.getElementById('edit-corrections').value=p.corrections||'';
   document.getElementById('edit-copy').value=p.copy;
+  // load image if exists
+  const img=uploadedImages[id]||null;
+  modalSetImage(img);
   updateCharCount();
   updateModalBadge();
   document.getElementById('post-modal').classList.add('open');
@@ -1095,6 +1109,7 @@ function openNewPost(){
   document.getElementById('edit-visual').value='';
   document.getElementById('edit-corrections').value='';
   document.getElementById('edit-copy').value='';
+  modalSetImage(null);
   updateCharCount();
   updateModalBadge();
   document.getElementById('post-modal').classList.add('open');
@@ -1119,13 +1134,20 @@ function savePost(){
   const corrections=document.getElementById('edit-corrections').value;
   const copy=document.getElementById('edit-copy').value;
 
+  let savedId=editingId;
   if(editingId){
     const p=posts.find(x=>x.id===editingId);
     Object.assign(p,{date,platform,type,status,visualConcept,corrections,copy});
   } else {
-    posts.push({id:'p'+Date.now(),date,platform,type,status,visualConcept,corrections,copy});
+    const newId='p'+Date.now();
+    savedId=newId;
+    posts.push({id:newId,date,platform,type,status,visualConcept,corrections,copy});
   }
+  // Persist image from modal
+  if(savedId&&modalImageData) saveImage(savedId,modalImageData);
+  else if(savedId&&!modalImageData) removeImage(savedId);
   savePosts(posts);
+  vbPopulateSelect();
   render();
   closeModal('post-modal');
 }
@@ -1150,7 +1172,6 @@ function switchTab(name,btn){
   document.getElementById('tab-'+name).classList.add('active');
   btn.classList.add('active');
   if(name==='timeline')renderTimeline();
-  if(name==='builder')renderCanvas();
 }
 
 // ─────────────────────────────────────────
@@ -1161,7 +1182,8 @@ let vbState={
   w:1200, h:627,
   headline:'',sub:'',body:'',tag:'',
   bg:'#1C2A39', accent:'#C9A86A',
-  showLogo:true
+  showLogo:true,
+  bgPhoto:null
 };
 
 const BRAND_COLORS=['#1C2A39','#516B84','#C9A86A','#2B2B2B','#ECE8E2','#FFFFFF','#F0EDE8'];
@@ -1207,12 +1229,26 @@ function setTemplate(t,btn){
     'postcard':{bg:'#F5EFE0',accent:'#C9A86A'},
     'score':{bg:'#1C2A39',accent:'#C9A86A'},
     'bold':{bg:'#1C2A39',accent:'#C9A86A'},
+    'photo-hotel':{bg:'#1C2A39',accent:'#C9A86A'},
   };
   if(presets[t]){
     vbState.bg=presets[t].bg;
     vbState.accent=presets[t].accent;
     document.querySelectorAll('#bg-swatches .swatch').forEach(s=>s.classList.toggle('active',s.title===vbState.bg));
     document.querySelectorAll('#acc-swatches .swatch').forEach(s=>s.classList.toggle('active',s.title===vbState.accent));
+  }
+  const isPhoto=t==='photo-hotel';
+  document.getElementById('photo-upload-field').style.display=isPhoto?'':'none';
+  document.getElementById('photo-overlay-field').style.display=isPhoto?'':'none';
+  if(isPhoto){
+    initPhotoLibrary();
+    // Auto-load first photo if none selected yet
+    if(!vbState.bgPhoto) loadPhotoByIndex(1);
+    // Highlight first thumb
+    setTimeout(()=>{
+      const first=document.querySelector('#photo-library button');
+      if(first)first.style.borderColor='#C9A86A';
+    },50);
   }
   renderCanvas();
 }
@@ -1242,6 +1278,7 @@ function drawLogoSVG(ctx,x,y,maxW,isDarkBg){
 }
 
 function renderCanvas(){
+  if(!document.getElementById('vb-headline'))return;
   try{
   const headline=document.getElementById('vb-headline').value;
   const sub=document.getElementById('vb-sub').value;
@@ -1260,10 +1297,15 @@ function renderCanvas(){
   ctx.clearRect(0,0,w,h);
   // Reset state fully on each render
   ctx.globalAlpha=1;
+  ctx.globalCompositeOperation='source-over';
   ctx.textAlign='left';
   ctx.textBaseline='alphabetic';
   ctx.setLineDash([]);
   ctx.lineWidth=1;
+  ctx.shadowColor='transparent';
+  ctx.shadowBlur=0;
+  ctx.shadowOffsetX=0;
+  ctx.shadowOffsetY=0;
 
   const dark=isDarkColor(bg);
   const tc=dark?'#FFFFFF':'#1C2A39';
@@ -1287,6 +1329,7 @@ function renderCanvas(){
   else if(template==='hotel3')     drawHotel3(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark);
   else if(template==='bold')       drawBold(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark);
   else if(template==='browser')    drawBrowser(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark);
+  else if(template==='photo-hotel'){const ov=parseInt(document.getElementById('vb-overlay')?document.getElementById('vb-overlay').value:60)/100;drawPhotoHotel(ctx,w,h,accent,headline,sub,body,tag,showLogo,vbState.bgPhoto,ov);}
 
   const platform=document.getElementById('vb-platform').value;
   if(platform!=='none') drawPlatformBadge(ctx,w,h,platform);
@@ -2693,6 +2736,173 @@ function drawBrowser(ctx,w,h,bg,accent,tc,mc,headline,sub,body,tag,showLogo,dark
   ctx.textAlign='left';
 }
 
+// ── Photo library init ──
+const PHOTO_COUNT=9;
+const photoCache={};  // index → Image object
+
+function initPhotoLibrary(){
+  const grid=document.getElementById('photo-library');
+  if(!grid)return;
+  grid.innerHTML='';
+  for(let i=1;i<=PHOTO_COUNT;i++){
+    const btn=document.createElement('button');
+    btn.style.cssText='padding:0;border:2px solid transparent;border-radius:5px;overflow:hidden;cursor:pointer;background:none;aspect-ratio:1;';
+    btn.title='Photo '+i;
+    btn.dataset.idx=i;
+
+    const imgEl=document.createElement('img');
+    imgEl.src=`photos/hotel-${i}.jpeg`;
+    imgEl.style.cssText='width:100%;height:60px;object-fit:cover;display:block;';
+    imgEl.onerror=()=>{btn.style.display='none';};
+    btn.appendChild(imgEl);
+
+    btn.onclick=()=>{
+      document.querySelectorAll('#photo-library button').forEach(b=>b.style.borderColor='transparent');
+      btn.style.borderColor='#C9A86A';
+      loadPhotoByIndex(i);
+    };
+    grid.appendChild(btn);
+  }
+}
+
+function loadPhotoByIndex(idx){
+  if(photoCache[idx]){
+    vbState.bgPhoto=photoCache[idx];
+    renderCanvas();
+    return;
+  }
+  const img=new Image();
+  img.onload=()=>{photoCache[idx]=img;vbState.bgPhoto=img;renderCanvas();};
+  img.src=`photos/hotel-${idx}.jpeg`;
+}
+
+function loadBgPhoto(event){
+  const file=event.target.files[0];
+  if(!file)return;
+  // deselect library thumbnails
+  document.querySelectorAll('#photo-library button').forEach(b=>b.style.borderColor='transparent');
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const img=new Image();
+    img.onload=()=>{vbState.bgPhoto=img;renderCanvas();};
+    img.src=e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+// ── TEMPLATE: Photo Hotel ──
+function drawPhotoHotel(ctx,w,h,accent,headline,sub,body,tag,showLogo,bgPhoto,overlayAlpha){
+  const oa=Math.min(0.88,Math.max(0.1,overlayAlpha||0.6));
+  const S=Math.min(w,h);
+
+  // 1. Photo background (cover-fit) or dark fallback
+  if(bgPhoto&&bgPhoto.naturalWidth){
+    const sc=Math.max(w/bgPhoto.naturalWidth,h/bgPhoto.naturalHeight);
+    ctx.drawImage(bgPhoto,(w-bgPhoto.naturalWidth*sc)/2,(h-bgPhoto.naturalHeight*sc)/2,bgPhoto.naturalWidth*sc,bgPhoto.naturalHeight*sc);
+  } else {
+    ctx.fillStyle='#111820';
+    ctx.fillRect(0,0,w,h);
+  }
+
+  // 2. Flat dark overlay
+  ctx.globalAlpha=1;
+  ctx.fillStyle=`rgba(0,0,0,${oa})`;
+  ctx.fillRect(0,0,w,h);
+
+  // 3. Vignette
+  const vig=ctx.createRadialGradient(w/2,h*0.48,S*0.15,w/2,h*0.48,S*0.82);
+  vig.addColorStop(0,'rgba(0,0,0,0)');
+  vig.addColorStop(1,'rgba(0,0,0,0.48)');
+  ctx.fillStyle=vig;
+  ctx.fillRect(0,0,w,h);
+
+  // 4. Inner border frame
+  const inset=Math.round(S*0.036);
+  ctx.strokeStyle='rgba(255,255,255,0.25)';
+  ctx.lineWidth=Math.max(1,Math.round(S*0.0018));
+  ctx.strokeRect(inset,inset,w-inset*2,h-inset*2);
+
+  // 5. Auto-fit headline text
+  const pad=Math.round(w*0.09);
+  const maxW=w-pad*2;
+  const maxH=h*0.62;
+  const text=(headline||'YOUR HEADLINE HERE').toUpperCase();
+
+  function wrap(fs,txt){
+    ctx.font=`800 ${fs}px Manrope,sans-serif`;
+    const words=txt.split(' ');
+    const out=[];let line='';
+    for(const wd of words){
+      const t=line?line+' '+wd:wd;
+      if(ctx.measureText(t).width>maxW&&line){out.push(line);line=wd;}else line=t;
+    }
+    if(line)out.push(line);
+    return out;
+  }
+
+  // Binary-search best font size
+  let lo=20,hi=Math.round(S*0.2);
+  while(lo<hi-1){
+    const mid=(lo+hi)>>1;
+    const ls=wrap(mid,text);
+    (ls.length*mid*1.2<=maxH)?lo=mid:hi=mid;
+  }
+  const fs=lo;
+  const lines=wrap(fs,text);
+  const lh=Math.round(fs*1.2);
+  const totalH=lines.length*lh;
+
+  // Draw text centered vertically — use textBaseline=top for clean positioning
+  ctx.save();
+  ctx.font=`800 ${fs}px Manrope,sans-serif`;
+  ctx.fillStyle='rgba(255,255,255,0.94)';
+  ctx.textAlign='center';
+  ctx.textBaseline='top';
+  ctx.shadowColor='rgba(0,0,0,0)'; // explicitly no shadow
+  let ty=Math.round((h-totalH)/2);
+  for(const l of lines){ctx.fillText(l,w/2,ty);ty+=lh;}
+  ctx.restore();
+
+  // 6. Sub-text below quote
+  if(sub){
+    const sfs=Math.round(S*0.024);
+    ctx.save();
+    ctx.font=`400 italic ${sfs}px Manrope,sans-serif`;
+    ctx.fillStyle=accent+'BB';
+    ctx.textAlign='center';
+    ctx.textBaseline='top';
+    ctx.fillText(sub,w/2,Math.round((h+totalH)/2)+Math.round(h*0.028));
+    ctx.restore();
+  }
+
+  // 7. Tag top-left
+  if(tag){
+    const tfs=Math.round(S*0.018);
+    ctx.save();
+    ctx.font=`600 ${tfs}px Inter,sans-serif`;
+    ctx.fillStyle=accent;
+    ctx.textAlign='left';
+    ctx.textBaseline='top';
+    ctx.fillText(tag.toUpperCase(),inset+Math.round(w*0.028),inset+Math.round(h*0.028));
+    ctx.restore();
+  }
+
+  // 8. URL branding bottom-center
+  const ufs=Math.round(S*0.02);
+  ctx.save();
+  ctx.font=`400 ${ufs}px Inter,sans-serif`;
+  ctx.fillStyle='rgba(255,255,255,0.42)';
+  ctx.textAlign='center';
+  ctx.textBaseline='bottom';
+  ctx.fillText('rating-iq.com',w/2,h-inset-Math.round(h*0.018));
+  ctx.restore();
+
+  // 9. Logo top-left inside frame
+  if(showLogo){
+    drawLogoSVG(ctx,inset+Math.round(w*0.028),inset+Math.round(h*0.028),Math.round(w*0.14),true);
+  }
+}
+
 function lighten(hex,amt){
   const r=Math.min(255,parseInt(hex.slice(1,3),16)+amt);
   const g=Math.min(255,parseInt(hex.slice(3,5),16)+amt);
@@ -2700,64 +2910,228 @@ function lighten(hex,amt){
   return`#${r.toString(16).padStart(2,'0')}${g.toString(16).padStart(2,'0')}${b.toString(16).padStart(2,'0')}`;
 }
 
-// ─────────────────────────────────────────
-// EXPORT
-// ─────────────────────────────────────────
-function exportPNG(){
-  const cv=document.getElementById('vb-canvas');
-  const link=document.createElement('a');
-  const hl=document.getElementById('vb-headline').value||'ratingiq-post';
-  link.download=`ratingiq-${hl.slice(0,20).replace(/\s+/g,'-').toLowerCase()||'post'}.png`;
-  link.href=cv.toDataURL('image/png');
-  link.click();
-}
-
-function exportPDF(){
-  const cv=document.getElementById('vb-canvas');
-  const img=cv.toDataURL('image/png');
-  const w=cv.width,h=cv.height;
-  const win=window.open('','_blank');
-  win.document.write(`<!DOCTYPE html><html><head><style>*{margin:0;padding:0}body{background:#333;display:flex;justify-content:center;align-items:center;min-height:100vh}img{max-width:100%;box-shadow:0 4px 24px rgba(0,0,0,.4)}</style></head><body><img src="${img}"><script>window.print()<\/script></body></html>`);
-  win.document.close();
-}
-
-function copyToClipboard(){
-  const cv=document.getElementById('vb-canvas');
-  cv.toBlob(blob=>{
-    try{
-      navigator.clipboard.write([new ClipboardItem({'image/png':blob})]).then(()=>{
-        const btn=document.querySelector('.btn-gold');
-        btn.textContent='Copied!';
-        setTimeout(()=>btn.textContent='Copy',1800);
-      });
-    }catch{alert('Copy not supported in this browser. Use PNG export instead.');}
-  });
-}
-
-// ─────────────────────────────────────────
-// BUILDER FROM POST
-// ─────────────────────────────────────────
-function openBuilderFor(id){
-  const p=posts.find(x=>x.id===id);
-  if(!p)return;
-  // Visual gets only the short visual quote — not the full copy
-  const vLines=(p.visual||p.copy.split('\n').filter(l=>l.trim())[0]||'').split('\n');
-  document.getElementById('vb-headline').value=vLines[0]||'';
-  document.getElementById('vb-sub').value=vLines[1]||'';
-  document.getElementById('vb-body').value='';
-  document.getElementById('vb-tag').value=p.type.toUpperCase();
-  // switch to builder tab
-  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
-  document.getElementById('tab-builder').classList.add('active');
-  document.querySelectorAll('nav button')[2].classList.add('active');
-  renderCanvas();
-}
-
 function openBuilderFromPost(){
   const id=editingId;
   closeModal('post-modal');
   if(id)openBuilderFor(id);
+}
+
+// ─────────────────────────────────────────
+// IMAGE STORAGE
+// ─────────────────────────────────────────
+const uploadedImages={}; // postId -> full dataUrl (in-memory)
+
+function saveImage(postId,dataUrl){
+  uploadedImages[postId]=dataUrl;
+  // Persist compressed thumb (~150px) for table display
+  resizeImage(dataUrl,150,0.7).then(t=>{
+    try{localStorage.setItem('sc_thumb_'+postId,t);}catch(e){}
+  });
+  // Try to persist full image
+  try{localStorage.setItem('sc_img_'+postId,dataUrl);}catch(e){
+    console.warn('Image too large for localStorage — keeping in memory only');
+  }
+}
+
+function removeImage(postId){
+  delete uploadedImages[postId];
+  try{localStorage.removeItem('sc_img_'+postId);}catch(e){}
+  try{localStorage.removeItem('sc_thumb_'+postId);}catch(e){}
+}
+
+function getThumb(postId){
+  return localStorage.getItem('sc_thumb_'+postId)||null;
+}
+
+function loadImages(){
+  for(const key of Object.keys(localStorage)){
+    if(key.startsWith('sc_img_')){
+      const id=key.replace('sc_img_','');
+      uploadedImages[id]=localStorage.getItem(key);
+    }
+  }
+}
+
+function resizeImage(dataUrl,maxW,quality){
+  return new Promise(resolve=>{
+    const img=new Image();
+    img.onload=()=>{
+      const scale=Math.min(1,maxW/img.width);
+      const c=document.createElement('canvas');
+      c.width=Math.round(img.width*scale);
+      c.height=Math.round(img.height*scale);
+      c.getContext('2d').drawImage(img,0,0,c.width,c.height);
+      resolve(c.toDataURL('image/jpeg',quality));
+    };
+    img.src=dataUrl;
+  });
+}
+
+// ─────────────────────────────────────────
+// MODAL IMAGE HANDLING
+// ─────────────────────────────────────────
+let modalImageData=null; // current image being edited in modal
+
+function modalSetImage(dataUrl){
+  modalImageData=dataUrl||null;
+  const zone=document.getElementById('modal-img-zone');
+  const placeholder=document.getElementById('modal-img-placeholder');
+  const preview=document.getElementById('modal-img-preview');
+  const actions=document.getElementById('modal-img-actions');
+  if(dataUrl){
+    zone.classList.add('has-img');
+    zone.onclick=null;
+    placeholder.style.display='none';
+    preview.style.display='block';
+    preview.src=dataUrl;
+    actions.style.display='flex';
+  } else {
+    zone.classList.remove('has-img');
+    zone.onclick=()=>document.getElementById('modal-file-input').click();
+    placeholder.style.display='';
+    preview.style.display='none';
+    preview.src='';
+    actions.style.display='none';
+  }
+}
+
+function modalHandleFile(file){
+  if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>modalSetImage(e.target.result);
+  reader.readAsDataURL(file);
+}
+
+function modalRemoveImage(){
+  modalSetImage(null);
+}
+
+
+// ─────────────────────────────────────────
+// BUILDER UPLOAD FUNCTIONS
+// ─────────────────────────────────────────
+let vbCurrentPostId=null;
+
+function openBuilderFor(id){
+  // Switch to builder tab
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-builder').classList.add('active');
+  document.querySelector('nav button[onclick*="builder"]').classList.add('active');
+  // Select the post
+  const sel=document.getElementById('vb-post-select');
+  sel.value=id;
+  vbSelectPost(id);
+}
+
+function vbPopulateSelect(){
+  const sel=document.getElementById('vb-post-select');
+  const sorted=[...posts].sort((a,b)=>a.date.localeCompare(b.date));
+  sel.innerHTML='<option value="">— Select a post —</option>'+
+    sorted.map(p=>`<option value="${p.id}">${fmtDate(p.date)} · ${p.type.slice(0,32)}${p.type.length>32?'…':''}</option>`).join('');
+}
+
+function vbSelectPost(id){
+  vbCurrentPostId=id||null;
+  const zone=document.getElementById('vb-upload-zone');
+  const noPost=document.getElementById('vb-no-post');
+  const empty=document.getElementById('vb-preview-empty');
+  const content=document.getElementById('vb-preview-content');
+
+  if(!id){
+    zone.style.display='none';
+    noPost.style.display='';
+    empty.style.display='';
+    content.style.display='none';
+    return;
+  }
+  zone.style.display='';
+  noPost.style.display='none';
+  empty.style.display='none';
+  content.style.display='';
+
+  // Update thumb in left panel
+  vbRefreshThumb();
+
+  // Update right panel
+  const p=posts.find(x=>x.id===id);
+  if(!p)return;
+  document.getElementById('vb-post-meta').innerHTML=
+    `<span class="badge badge-${p.platform}">${platformIcon(p.platform)}${platformLabel(p.platform)}</span>`+
+    `<span class="type-tag">${p.type}</span>`+
+    `<span class="status-badge status-${p.status}">${p.status}</span>`+
+    `<span style="font-size:12px;color:var(--slate);margin-left:auto">${fmtDate(p.date)}</span>`;
+  document.getElementById('vb-post-copy').textContent=p.copy;
+
+  const img=uploadedImages[id]||null;
+  const previewImg=document.getElementById('vb-preview-img');
+  const placeholder=document.getElementById('vb-img-placeholder');
+  if(img){
+    previewImg.src=img;
+    previewImg.style.display='block';
+    placeholder.style.display='none';
+  } else {
+    previewImg.style.display='none';
+    previewImg.src='';
+    placeholder.style.display='';
+  }
+}
+
+function vbRefreshThumb(){
+  const id=vbCurrentPostId;
+  const img=uploadedImages[id]||null;
+  const thumbWrap=document.getElementById('vb-current-thumb-wrap');
+  const thumb=document.getElementById('vb-current-thumb');
+  if(img){
+    thumbWrap.style.display='';
+    thumb.src=img;
+  } else {
+    thumbWrap.style.display='none';
+    thumb.src='';
+  }
+}
+
+function vbHandleDrop(e){
+  e.preventDefault();
+  const file=e.dataTransfer.files[0];
+  if(file&&file.type.startsWith('image/'))vbReadFile(file);
+}
+
+function vbHandleFile(file){
+  if(file&&file.type.startsWith('image/'))vbReadFile(file);
+}
+
+function vbReadFile(file){
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const id=vbCurrentPostId;
+    if(!id)return;
+    saveImage(id,e.target.result);
+    vbSelectPost(id); // refresh preview
+    vbRefreshThumb();
+    renderTable();
+  };
+  reader.readAsDataURL(file);
+}
+
+function vbRemoveImage(){
+  const id=vbCurrentPostId;
+  if(!id)return;
+  if(!confirm('Remove visual for this post?'))return;
+  removeImage(id);
+  vbSelectPost(id);
+  renderTable();
+}
+
+function vbDownloadImage(){
+  const id=vbCurrentPostId;
+  const img=uploadedImages[id];
+  if(!img)return;
+  const a=document.createElement('a');
+  const p=posts.find(x=>x.id===id);
+  a.download=(p?p.type.replace(/[^a-z0-9]/gi,'_'):'visual')+'_'+id+'.jpg';
+  a.href=img;
+  a.click();
 }
 
 // ─────────────────────────────────────────
@@ -2769,27 +3143,13 @@ function render(){
 }
 
 function init(){
-  initSwatches();
+  loadImages();
   render();
-  // set default builder content
-  document.getElementById('vb-headline').value='Upstar is now RatingIQ.';
-  document.getElementById('vb-sub').value='From reviews to revenue.';
-  document.getElementById('vb-tag').value='REBRAND · APRIL 2026';
-  renderCanvas();
+  vbPopulateSelect();
 }
 
 window.addEventListener('load',()=>{
-  document.fonts.ready.then(()=>{
-    init();
-    // Re-render canvas once SVG logos are loaded
-    let loaded=0;
-    const onLogoLoad=()=>{ if(++loaded===2) renderCanvas(); };
-    logoImgs.light.addEventListener('load',onLogoLoad);
-    logoImgs.dark.addEventListener('load',onLogoLoad);
-    // If already loaded (cached), fire immediately
-    if(logoImgs.light.complete) onLogoLoad();
-    if(logoImgs.dark.complete) onLogoLoad();
-  });
+  document.fonts.ready.then(()=>{ init(); });
 });
 </script>
 </body>
