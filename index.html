@@ -883,6 +883,15 @@ function loadPosts(){
         localStorage.setItem('sc_posts',JSON.stringify(shifted));
         return shifted;
       }
+      // Migration: update p2 Facebook copy — new page, no Upstar reference
+      const p2=loaded.find(p=>p.id==='p2');
+      if(p2&&p2.copy&&p2.copy.includes('Upstar is now RatingIQ')){
+        p2.type='Brand Introduction';
+        p2.visual='RatingIQ is here.';
+        p2.copy=`RatingIQ is now on Facebook.\n\nWe work with hotel chains to turn guest reviews into a revenue strategy — not just a score to monitor.\n\nFollow along for data, insights, and the stories behind the ratings.\n\nrating-iq.com`;
+        p2.visualConcept='Clean brand introduction: deep navy background, RatingIQ logo centered in white and gold. Slogan "From reviews to revenue" bottom. No reference to previous branding.';
+        localStorage.setItem('sc_posts',JSON.stringify(loaded));
+      }
       return loaded;
     }
     return [...DEFAULT_POSTS.map(p=>({...p}))];
