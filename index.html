@@ -879,6 +879,11 @@ If you run a hotel chain and that line sounds familiar — we should talk.`,
   }
 ];
 
+// Bump this number any time you update post copy/visual in DEFAULT_POSTS.
+// On load, if the stored version doesn't match, copy/visual fields refresh
+// from defaults while keeping status, corrections, omriApproved, and date.
+const DATA_VERSION = 2;
+
 function loadPosts(){
   try{
     const s=localStorage.getItem('sc_posts');
@@ -904,8 +909,24 @@ function loadPosts(){
         p2.visualConcept='Clean brand introduction: deep navy background, RatingIQ logo centered in white and gold. Slogan "From reviews to revenue" bottom. No reference to previous branding.';
         localStorage.setItem('sc_posts',JSON.stringify(loaded));
       }
+      // Version-based content refresh: update copy/visual from defaults, keep user edits
+      const storedVersion=parseInt(localStorage.getItem('sc_data_version')||'0',10);
+      if(storedVersion<DATA_VERSION){
+        loaded.forEach(lp=>{
+          const dp=DEFAULT_POSTS.find(d=>d.id===lp.id);
+          if(dp){
+            lp.copy=dp.copy;
+            lp.visual=dp.visual;
+            lp.visualConcept=dp.visualConcept;
+            lp.type=dp.type;
+          }
+        });
+        localStorage.setItem('sc_posts',JSON.stringify(loaded));
+        localStorage.setItem('sc_data_version',String(DATA_VERSION));
+      }
       return loaded;
     }
+    localStorage.setItem('sc_data_version',String(DATA_VERSION));
     return [...DEFAULT_POSTS.map(p=>({...p}))];
   }catch{return [...DEFAULT_POSTS.map(p=>({...p}))]}
 }
