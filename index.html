@@ -65,7 +65,9 @@ tbody tr{border-bottom:1px solid rgba(0,0,0,.05);transition:background .1s;curso
 tbody tr:last-child{border-bottom:none}
 tbody tr:hover{background:#faf9f7}
 tbody td{padding:13px 16px;font-size:13.5px;vertical-align:middle}
-.td-date{white-space:nowrap;font-weight:600;color:var(--charcoal);font-size:13px}
+.td-date{white-space:nowrap;font-weight:600;color:var(--charcoal);font-size:13px;cursor:pointer;position:relative}
+.td-date:hover .date-label{text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px}
+.td-date input[type=date]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
 .td-day{font-size:11px;color:var(--slate);font-weight:400;display:block;margin-top:1px}
 
 /* ─── PLATFORM BADGES ─── */
@@ -1136,7 +1138,11 @@ function renderTable(){
   }
   tbody.innerHTML=filtered.map(p=>`
     <tr onclick="openEdit('${p.id}')">
-      <td class="td-date">${fmtDate(p.date)}<span class="td-day">${fmtDay(p.date)}</span></td>
+      <td class="td-date" onclick="event.stopPropagation()" title="Click to change date">
+        <span class="date-label">${fmtDate(p.date)}</span>
+        <span class="td-day">${fmtDay(p.date)}</span>
+        <input type="date" value="${p.date}" onchange="quickDate('${p.id}',this.value)">
+      </td>
       <td><span class="badge badge-${p.platform}">${platformIcon(p.platform)}${platformLabel(p.platform)}</span></td>
       <td><span class="type-tag">${p.type}</span></td>
       <td><div class="copy-preview">${p.copy.split('\n')[0]}</div></td>
@@ -1173,6 +1179,18 @@ function renderTable(){
   });
 }
 
+function quickDate(id,val){
+  if(!val) return;
+  const p=posts.find(x=>x.id===id);
+  if(p){
+    p.date=val;
+    savePosts(posts);
+    posts.sort((a,b)=>a.date.localeCompare(b.date)||(parseInt(a.id.slice(1))-parseInt(b.id.slice(1))));
+    renderTable();
+    renderTimeline();
+    renderStats();
+  }
+}
 function quickStatus(id,val){
   const p=posts.find(x=>x.id===id);
   if(p){p.status=val;savePosts(posts);renderStats();}
