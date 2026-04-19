@@ -876,13 +876,126 @@ That's the product. That's always been the product.
 If you run a hotel chain and that line sounds familiar — we should talk.`,
     visualConcept:'Pull quote card. Large quote in Manrope italic. Minimal navy background. Very human, very direct.',
     status:'draft', corrections:'', omriApproved:false
+  },
+  {
+    id:'p24', date:'2026-06-02', platform:'linkedin-company', type:'Data & Metrics',
+    visual:'1% rating increase.\n+1.42% RevPAR.\n+0.54% occupancy.',
+    copy:`A 1% increase in your rating.
+
+That doesn't sound like much.
+
+Cornell University ran the numbers. It translates to 1.42% more RevPAR and 0.54% more occupancy.
+
+Across a chain of 10 properties, that's not a rounding error. That's a line item on the P&L.
+
+Your rating isn't a reputation score. It's a revenue dial.
+
+RatingIQ shows you exactly which direction it's moving — and why.
+
+rating-iq.com`,
+    visualConcept:'Stat card. Navy background. "1%" in large gold display type. Three outcome lines below in white Manrope. Cornell citation in small gold text at bottom.',
+    status:'draft', corrections:'', omriApproved:false
+  },
+  {
+    id:'p25', date:'2026-06-04', platform:'linkedin-omri', type:'Data & Metrics',
+    visual:'+2.68% online revenue\nper room.\nOne rating point.',
+    copy:`1% increase in your rating.
+
+TOBB University found that's worth 2.68% more in online revenue per room.
+
+OTAs don't just show you to more guests when your rating goes up. They show you to guests who are ready to book.
+
+The algorithm knows.
+
+rating-iq.com`,
+    visualConcept:'Minimal stat card. Gold "+2.68%" large. White subtext. Navy background. TOBB University citation small.',
+    status:'draft', corrections:'', omriApproved:false
+  },
+  {
+    id:'p26', date:'2026-06-07', platform:'linkedin-company', type:'Data & Metrics',
+    visual:'+1 star on Booking.\n+11.2% on your rate.',
+    copy:`Raise your Booking.com rating by one star.
+
+According to TripAdvisor research, you can now charge 11.2% more per room — and still get booked.
+
+Most hotels spend years and significant budget trying to justify a rate increase. The ones with the highest ratings don't have to justify anything.
+
+Your rating is your pricing power.
+
+rating-iq.com`,
+    visualConcept:'Split stat card. Left: gold star icon + "+1 star". Right: "+11.2% rate" in large white Manrope. Navy background. TripAdvisor citation.',
+    status:'draft', corrections:'', omriApproved:false
+  },
+  {
+    id:'p27', date:'2026-06-09', platform:'linkedin-omri', type:'Thought Leadership',
+    visual:'72% of guests choose\nrating over brand.',
+    copy:`72% of guests say a hotel's rating matters more to them than the brand name.
+
+That's from Expedia. And if you sit with it for a second — it makes sense.
+
+The brand tells them what to expect. The rating tells them what actually happened.
+
+You could be a Marriott property with a 7.8 and lose bookings to an independent running a 9.1.
+
+Your rating is your brand now. The logo is just the introduction.
+
+rating-iq.com`,
+    visualConcept:'Bold stat display. "72%" in large gold. Subtext: "choose rating over brand name" in white. Navy background. Expedia source small.',
+    status:'draft', corrections:'', omriApproved:false
+  },
+  {
+    id:'p28', date:'2026-06-11', platform:'linkedin-company', type:'Data & Metrics',
+    visual:'One rating point.\n+7.5% occupancy.',
+    copy:`One rating point.
+
+Contemporary Hospitality Management found that a single point increase in your hotel's rating is linked to a 7.5% increase in occupancy.
+
+One point. Across your whole chain. Every property.
+
+The question isn't whether it's worth fixing. The question is what's holding it back.
+
+rating-iq.com`,
+    visualConcept:'Stat card. "+7.5%" in large gold. "occupancy per rating point" in white. Navy background. Source cited small.',
+    status:'draft', corrections:'', omriApproved:false
+  },
+  {
+    id:'p29', date:'2026-06-14', platform:'linkedin-omri', type:'Data & Metrics',
+    visual:'Respond to reviews.\n2.2x more OTA revenue.',
+    copy:`Hotels that respond to 40-45% of their reviews see 2.2x more OTA revenue than those that don't respond at all.
+
+That's Cornell University and TripAdvisor saying the same thing in different words.
+
+Review responses aren't customer service. They're a revenue strategy.
+
+97% of guests who read reviews also read the responses. They're not just reading what went wrong. They're reading how you handle it.
+
+rating-iq.com`,
+    visualConcept:'Split stat card. "2.2x" in large gold. "more OTA revenue" below. Supporting stat "97% read responses" in smaller white text. Navy background.',
+    status:'draft', corrections:'', omriApproved:false
+  },
+  {
+    id:'p30', date:'2026-06-16', platform:'linkedin-company', type:'Thought Leadership',
+    visual:'Silence is what keeps\nthe bad reviews coming.',
+    copy:`Hotels that start responding to negative reviews receive fewer of them.
+
+That's from a peer-reviewed study by Proserpio and Zervas.
+
+Most people assume unhappy guests are just looking to vent. Some are. But a lot of them are looking to be heard.
+
+When you respond — publicly, consistently, in the right language — you change the signal you send to every guest who comes after.
+
+Silence is what keeps the bad reviews coming.
+
+rating-iq.com`,
+    visualConcept:'Pull quote card. "Silence is what keeps the bad reviews coming." in large Manrope italic, gold on navy. Source cited small.',
+    status:'draft', corrections:'', omriApproved:false
   }
 ];
 
 // Bump this number any time you update post copy/visual in DEFAULT_POSTS.
 // On load, if the stored version doesn't match, copy/visual fields refresh
 // from defaults while keeping status, corrections, omriApproved, and date.
-const DATA_VERSION = 2;
+const DATA_VERSION = 3;
 
 function loadPosts(){
   try{
@@ -921,9 +1034,15 @@ function loadPosts(){
             lp.type=dp.type;
           }
         });
-        localStorage.setItem('sc_posts',JSON.stringify(loaded));
         localStorage.setItem('sc_data_version',String(DATA_VERSION));
       }
+      // Merge any new posts from DEFAULT_POSTS not yet in localStorage
+      const loadedIds=new Set(loaded.map(p=>p.id));
+      DEFAULT_POSTS.forEach(dp=>{
+        if(!loadedIds.has(dp.id)) loaded.push({...dp});
+      });
+      loaded.sort((a,b)=>a.date.localeCompare(b.date)||(parseInt(a.id.slice(1))-parseInt(b.id.slice(1))));
+      localStorage.setItem('sc_posts',JSON.stringify(loaded));
       return loaded;
     }
     localStorage.setItem('sc_data_version',String(DATA_VERSION));
