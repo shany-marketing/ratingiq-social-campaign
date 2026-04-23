@@ -1508,7 +1508,7 @@ I read this study when we were building the product and it has stayed with me. R
 // from defaults while keeping status, corrections, shanyApproved, and date.
 
 
-const DATA_VERSION = 9;
+const DATA_VERSION = 10;
 
 function loadPosts(){
   try{
@@ -1541,11 +1541,7 @@ function loadPosts(){
             lp.visual=dp.visual;
             lp.visualConcept=dp.visualConcept;
             lp.type=dp.type;
-            if(lp.status!=='published'){
-              lp.date=dp.date;
-              lp.platform=dp.platform;
-              lp.status=dp.status;
-            }
+            // Never overwrite user-controlled fields: status, date, platform, shanyApproved, corrections
           }
         });
         localStorage.setItem('sc_data_version',String(DATA_VERSION));
