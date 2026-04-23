@@ -1759,9 +1759,15 @@ function quickDate(id,val){
     renderStats();
   }
 }
+function syncToScheduler(payload){
+  fetch('http://localhost:3002/sync',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}).catch(()=>{});
+}
 function quickStatus(id,val){
   const p=posts.find(x=>x.id===id);
-  if(p){p.status=val;savePosts(posts);renderStats();}
+  if(p){
+    p.status=val;savePosts(posts);renderStats();
+    syncToScheduler({id, status: val});
+  }
 }
 function quickCorrection(id,val){
   const p=posts.find(x=>x.id===id);
@@ -1769,7 +1775,11 @@ function quickCorrection(id,val){
 }
 function quickShanyApprove(id,val){
   const p=posts.find(x=>x.id===id);
-  if(p){p.shanyApproved=val;savePosts(posts);renderStats();renderTable();}
+  if(p){
+    p.shanyApproved=val;savePosts(posts);renderStats();renderTable();
+    if(val && p.status==='ready') syncToScheduler({id, approved: true});
+    if(!val) syncToScheduler({id, approved: false});
+  }
 }
 
 // ─────────────────────────────────────────

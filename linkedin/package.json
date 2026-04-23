@@ -1,0 +1,15 @@
+{
+  "name": "ratingiq-linkedin",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "auth": "node auth.js",
+    "post": "node post.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "open": "^9.1.0"
+  }
+}
