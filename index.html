@@ -97,10 +97,10 @@ tbody td{padding:13px 16px;font-size:13.5px;vertical-align:middle}
 .corrections-cell input{width:100%;font-family:'Inter',sans-serif;font-size:12px;border:1px solid transparent;border-radius:5px;padding:4px 8px;background:transparent;color:var(--charcoal);transition:all .15s}
 .corrections-cell input:hover{border-color:rgba(0,0,0,.14);background:#f9f8f6}
 .corrections-cell input:focus{border-color:var(--slate);background:#fff;outline:none}
-.omri-cell{width:56px;text-align:center}
-.omri-tick{width:28px;height:28px;border-radius:50%;border:2px solid #d0ccc6;background:transparent;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;margin:0 auto;transition:all .2s;color:transparent}
-.omri-tick:hover{border-color:#4a8f6b;background:rgba(74,143,107,.07)}
-.omri-tick.approved{background:#4a8f6b;border-color:#4a8f6b;color:#fff}
+.shany-cell{width:56px;text-align:center}
+.shany-tick{width:28px;height:28px;border-radius:50%;border:2px solid #d0ccc6;background:transparent;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;margin:0 auto;transition:all .2s;color:transparent}
+.shany-tick:hover{border-color:#4a8f6b;background:rgba(74,143,107,.07)}
+.shany-tick.approved{background:#4a8f6b;border-color:#4a8f6b;color:#fff}
 
 /* ─── VISUAL INDICATOR ─── */
 .vis-dot{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;background:#f1f0ee;cursor:pointer;transition:all .15s}
@@ -221,7 +221,6 @@ canvas#vb-canvas{border-radius:8px;box-shadow:0 4px 24px rgba(0,0,0,.18);max-wid
         <option value="">All Platforms</option>
         <option value="linkedin-company">LinkedIn Company</option>
         <option value="linkedin-omri">LinkedIn — Omri</option>
-        <option value="facebook">Facebook</option>
       </select>
       <select id="filter-status" onchange="renderTable()">
         <option value="">All Statuses</option>
@@ -230,9 +229,9 @@ canvas#vb-canvas{border-radius:8px;box-shadow:0 4px 24px rgba(0,0,0,.18);max-wid
         <option value="scheduled">Scheduled</option>
         <option value="published">Published</option>
       </select>
-      <select id="filter-omri" onchange="renderTable()">
+      <select id="filter-shany" onchange="renderTable()">
         <option value="">All Approval</option>
-        <option value="approved">Omri Approved</option>
+        <option value="approved">Shany Approved</option>
         <option value="pending">Pending Approval</option>
       </select>
       <input type="text" id="filter-search" placeholder="Search copy..." oninput="renderTable()" style="flex:1;max-width:260px">
@@ -247,7 +246,7 @@ canvas#vb-canvas{border-radius:8px;box-shadow:0 4px 24px rgba(0,0,0,.18);max-wid
             <th>Copy Preview</th>
             <th>Visual</th>
             <th>Status</th>
-            <th class="omri-cell">Omri ✓</th>
+            <th class="shany-cell">Shany ✓</th>
             <th>Corrections</th>
             <th style="width:40px"></th>
           </tr>
@@ -366,7 +365,6 @@ canvas#vb-canvas{border-radius:8px;box-shadow:0 4px 24px rgba(0,0,0,.18);max-wid
           <select id="edit-platform" onchange="updateModalBadge()">
             <option value="linkedin-company">LinkedIn — Company</option>
             <option value="linkedin-omri">LinkedIn — Omri</option>
-            <option value="facebook">Facebook</option>
           </select>
         </div>
         <div class="field">
@@ -453,20 +451,7 @@ The new website is live: rating-iq.com
 
 If you're a hotel chain CEO and your rating isn't where it should be — that's exactly the conversation we want.`,
     visualConcept:'Split layout. Left: deep navy with RatingIQ logo centered in white + gold. Right: warm sand with "Upstar → RatingIQ" in large Manrope bold. Gold divider line. Slogan bottom right.',
-    status:'draft', corrections:'', omriApproved:false
-  },
-  {
-    id:'p2', date:'2026-04-09', platform:'facebook', type:'Brand Introduction',
-    visual:'RatingIQ is here.',
-    copy:`RatingIQ is now on Facebook.
-
-We work with hotel chains to turn guest reviews into a revenue strategy — not just a score to monitor.
-
-Follow along for data, insights, and the stories behind the ratings.
-
-rating-iq.com`,
-    visualConcept:'Clean brand introduction: deep navy background, RatingIQ logo centered in white and gold. Slogan "From reviews to revenue" bottom. No reference to previous branding.',
-    status:'draft', corrections:'', omriApproved:false
+    status:'draft', corrections:'', shanyApproved:false
   },
   {
     id:'p3', date:'2026-04-11', platform:'linkedin-omri', type:'Thought Leadership',
@@ -491,7 +476,7 @@ That dip has a dollar amount. Most chains never find it.
 
 We built RatingIQ to find it.`,
     visualConcept:'Warm sand background. Large pull quote: "0.2 on Booking.com. That\'s revenue." in Manrope bold navy. Small RatingIQ mark bottom right. Minimal, executive.',
-    status:'draft', corrections:'', omriApproved:false
+    status:'draft', corrections:'', shanyApproved:false
   },
   {
     id:'p4', date:'2026-04-13', platform:'linkedin-company', type:'Website Launch',
@@ -516,20 +501,7 @@ Go see what that looks like.
 
 rating-iq.com`,
     visualConcept:'Browser frame mockup showing rating-iq.com hero. Dark navy background. Gold URL bar highlight. Tagline visible inside mockup.',
-    status:'draft', corrections:'', omriApproved:false
-  },
-  {
-    id:'p5', date:'2026-04-13', platform:'facebook', type:'Website Launch',
-    visual:'rating-iq.com is live.',
-    copy:`rating-iq.com is live.
-
-Built for hotel chain CEOs who want their rating problem solved — not managed, not monitored, not dashboarded to death.
-
-Solved.
-
-Take a look.`,
-    visualConcept:'Browser mockup, Facebook dimensions. Clean navy header, URL bar, hero section visible.',
-    status:'draft', corrections:'', omriApproved:false
+    status:'draft', corrections:'', shanyApproved:false
   },
   {
     id:'p6', date:'2026-04-15', platform:'linkedin-omri', type:'Thought Leadership',
@@ -552,7 +524,7 @@ The trick is knowing which ones are actually moving the score — and getting th
 
 That's the whole product.`,
     visualConcept:'Clean card. Large headline: "No renovation required." Navy text on sand. Small body text below. RatingIQ mark bottom right.',
-    status:'draft', corrections:'', omriApproved:false
+    status:'draft', corrections:'', shanyApproved:false
   },
   {
     id:'p7', date:'2026-04-17', platform:'linkedin-company', type:'Brand Introduction',
@@ -572,7 +544,7 @@ Because nobody logs in.
 
 rating-iq.com`,
     visualConcept:'Bold comparison. Two labels: "Reporting tool / dashboard" crossed out, vs "Push system" in gold. Sharp and direct.',
-    status:'draft', corrections:'', omriApproved:false
+    status:'draft', corrections:'', shanyApproved:false
   },
   {
     id:'p8', date:'2026-04-19', platform:'linkedin-omri', type:'Thought Leadership',
@@ -594,7 +566,7 @@ Score trending down? Alert someone before it shows up on the display.
 That's how review data actually gets used.
 You make it come to people. Not the other way around.`,
     visualConcept:'Two-column comparison. Left: "Reporting tool" gray, passive. Right: "Performance system" navy, active. Gold divider. Bold and sharp.',
-    status:'draft', corrections:'', omriApproved:false
+    status:'draft', corrections:'', shanyApproved:false
   },
   {
     id:'p9', date:'2026-04-21', platform:'linkedin-omri', type:'Thought Leadership',
@@ -611,7 +583,7 @@ All three are solvable. None of them require guesswork.
 
 That's what RatingIQ is for.`,
     visualConcept:'Three stacked cards, each a "problem type." Clean, numbered. Navy + gold accents. Educational and sharp.',
-    status:'draft', corrections:'', omriApproved:false
+    status:'draft', corrections:'', shanyApproved:false
   },
   {
     id:'p10', date:'2026-04-23', platform:'linkedin-company', type:'Slogan Reveal',
@@ -626,7 +598,7 @@ Move the number that moves your P&L.
 
 rating-iq.com`,
     visualConcept:'Full-bleed navy. "From reviews to revenue." centered in large Manrope 800. Gold underline on "revenue." RatingIQ logo top left. Minimal, brand-defining.',
-    status:'draft', corrections:'', omriApproved:false
+    status:'draft', corrections:'', shanyApproved:false
   },
 
   // ─── MAY ───
@@ -653,7 +625,7 @@ Just: someone finally connected the complaint to the person who could act on it.
 
 That's RatingIQ.`,
     visualConcept:'Quote card. Large: "Score up 0.3 in 60 days." Smaller: "No renovation." Navy background, gold accent. Minimal and punchy.',
-    status:'draft', corrections:'', omriApproved:false
+    status:'draft', corrections:'', shanyApproved:false
   },
   {
     id:'p12', date:'2026-05-05', platform:'linkedin-company', type:'Data & Metrics',
@@ -670,7 +642,7 @@ The good news: all three are fixable without touching the building.
 
 rating-iq.com`,
     visualConcept:'Stats card. Three key numbers in large Manrope — "4 clusters / 0.4 drag / 14 months flat." Navy + gold. Clean data visual.',
-    status:'draft', corrections:'', omriApproved:false
+    status:'draft', corrections:'', shanyApproved:false
   },
   {
     id:'p13', date:'2026-05-07', platform:'linkedin-omri', type:'Thought Leadership',
@@ -690,22 +662,7 @@ One shows up on the P&L.
 
 You already know which one matters.`,
     visualConcept:'Two-question split. Left: wrong question crossed out. Right: right question in gold. Sharp, provocative.',
-    status:'draft', corrections:'', omriApproved:false
-  },
-  {
-    id:'p14', date:'2026-05-09', platform:'facebook', type:'Brand Post',
-    visual:'Rating is a revenue number.\nNot a PR metric.',
-    copy:`Your Booking.com score affects your rank.
-Your rank affects your clicks.
-Your clicks affect your revenue.
-
-And yet — most hotel chains still treat their rating like a customer service problem.
-
-RatingIQ treats it like the revenue problem it actually is.
-
-rating-iq.com`,
-    visualConcept:'Bold statement card. Dark navy. "Rating is a revenue number." in large white Manrope. Gold accent underline. Clean.',
-    status:'draft', corrections:'', omriApproved:false
+    status:'draft', corrections:'', shanyApproved:false
   },
   {
     id:'p15', date:'2026-05-12', platform:'linkedin-omri', type:'Timely Post',
@@ -725,7 +682,7 @@ Happy Mother's Day to everyone running a hotel this weekend — you've earned it
 
 (And if the reviews land hard on Monday — you know where to find us.)`,
     visualConcept:'Warm, elegant card. "The most reviewed weekend in hospitality." Gold + navy. Subtle, not too promotional.',
-    status:'draft', corrections:'', omriApproved:false
+    status:'draft', corrections:'', shanyApproved:false
   },
   {
     id:'p16', date:'2026-05-14', platform:'linkedin-company', type:'Product Post',
@@ -742,7 +699,7 @@ Because knowing isn't enough. Someone has to do something about it.
 
 rating-iq.com`,
     visualConcept:'Two-tier card. Top: "one-off complaint" faded/gray. Bottom: "recurring cluster" highlighted in gold. Sharp contrast.',
-    status:'draft', corrections:'', omriApproved:false
+    status:'draft', corrections:'', shanyApproved:false
   },
   {
     id:'p17', date:'2026-05-16', platform:'linkedin-omri', type:'True Story',
@@ -767,7 +724,7 @@ The CEO's words at our next call: "I was about to spend $400K on the wrong thing
 
 The most expensive mistake in this industry is solving the visible problem instead of the actual one.`,
     visualConcept:'Pull quote card. Large: "$400K on the wrong thing." Navy background. Gold text. Powerful and memorable.',
-    status:'draft', corrections:'', omriApproved:false
+    status:'draft', corrections:'', shanyApproved:false
   },
   {
     id:'p18', date:'2026-05-19', platform:'linkedin-company', type:'Data & Metrics',
@@ -785,7 +742,7 @@ The math is straightforward once you know where to look.
 
 rating-iq.com`,
     visualConcept:'Stats card. Three outcomes stacked: "0.3–0.5 pts / 90 days / Zero CapEx." Large, confident numbers in gold on navy.',
-    status:'draft', corrections:'', omriApproved:false
+    status:'draft', corrections:'', shanyApproved:false
   },
   {
     id:'p19', date:'2026-05-21', platform:'linkedin-omri', type:'Thought Leadership',
@@ -805,22 +762,7 @@ Different question. Different answer. Different result.
 The first question leads to response templates.
 The second one leads to RatingIQ.`,
     visualConcept:'Clean quote split. Left question faded. Right question bold in gold. Minimal and sharp.',
-    status:'draft', corrections:'', omriApproved:false
-  },
-  {
-    id:'p20', date:'2026-05-23', platform:'facebook', type:'Brand Post',
-    visual:'"We\'re on it."\n\nIs no longer enough.',
-    copy:`For the hotel chain CEOs who've heard this before:
-
-Your rating dips. You ask ops. Ops says "we're on it."
-
-Three months later — same score.
-
-RatingIQ is for the moment when "we're on it" stops being a strategy.
-
-rating-iq.com`,
-    visualConcept:'Quote card. "We\'re on it." crossed out. Below it: "We need a system." RatingIQ mark bottom. Dark, sharp.',
-    status:'draft', corrections:'', omriApproved:false
+    status:'draft', corrections:'', shanyApproved:false
   },
   {
     id:'p21', date:'2026-05-27', platform:'linkedin-omri', type:'Timely Post',
@@ -841,7 +783,7 @@ Good luck to everyone running a full house this weekend. You've earned the deman
 
 (The rating, you still have to work for.)`,
     visualConcept:'Minimal dark card. "Sold out ≠ well-reviewed." Gold divider. Understated and smart.',
-    status:'draft', corrections:'', omriApproved:false
+    status:'draft', corrections:'', shanyApproved:false
   },
   {
     id:'p22', date:'2026-05-29', platform:'linkedin-company', type:'Website Feature',
@@ -858,7 +800,7 @@ If you haven't seen it yet:
 
 rating-iq.com`,
     visualConcept:'Browser mockup template. Shows the website hero section inside a clean browser frame. Navy background, gold URL bar, tagline visible.',
-    status:'draft', corrections:'', omriApproved:false
+    status:'draft', corrections:'', shanyApproved:false
   },
   {
     id:'p23', date:'2026-05-31', platform:'linkedin-omri', type:'Thought Leadership',
@@ -877,7 +819,7 @@ That's the product. That's always been the product.
 
 If you run a hotel chain and that line sounds familiar — we should talk.`,
     visualConcept:'Pull quote card. Large quote in Manrope italic. Minimal navy background. Very human, very direct.',
-    status:'draft', corrections:'', omriApproved:false
+    status:'draft', corrections:'', shanyApproved:false
   },
   {
     id:'p24', date:'2026-06-02', platform:'linkedin-company', type:'Data & Metrics',
@@ -896,7 +838,7 @@ RatingIQ shows you exactly which direction it's moving — and why.
 
 rating-iq.com`,
     visualConcept:'Stat card. Navy background. "1%" in large gold display type. Three outcome lines below in white Manrope. Cornell citation in small gold text at bottom.',
-    status:'draft', corrections:'', omriApproved:false
+    status:'draft', corrections:'', shanyApproved:false
   },
   {
     id:'p25', date:'2026-06-04', platform:'linkedin-omri', type:'Data & Metrics',
@@ -911,7 +853,7 @@ The algorithm knows.
 
 rating-iq.com`,
     visualConcept:'Minimal stat card. Gold "+2.68%" large. White subtext. Navy background. TOBB University citation small.',
-    status:'draft', corrections:'', omriApproved:false
+    status:'draft', corrections:'', shanyApproved:false
   },
   {
     id:'p26', date:'2026-06-07', platform:'linkedin-company', type:'Data & Metrics',
@@ -926,7 +868,7 @@ Your rating is your pricing power.
 
 rating-iq.com`,
     visualConcept:'Split stat card. Left: gold star icon + "+1 star". Right: "+11.2% rate" in large white Manrope. Navy background. TripAdvisor citation.',
-    status:'draft', corrections:'', omriApproved:false
+    status:'draft', corrections:'', shanyApproved:false
   },
   {
     id:'p27', date:'2026-06-09', platform:'linkedin-omri', type:'Thought Leadership',
@@ -943,7 +885,7 @@ Your rating is your brand now. The logo is just the introduction.
 
 rating-iq.com`,
     visualConcept:'Bold stat display. "72%" in large gold. Subtext: "choose rating over brand name" in white. Navy background. Expedia source small.',
-    status:'draft', corrections:'', omriApproved:false
+    status:'draft', corrections:'', shanyApproved:false
   },
   {
     id:'p28', date:'2026-06-11', platform:'linkedin-company', type:'Data & Metrics',
@@ -958,7 +900,7 @@ The question isn't whether it's worth fixing. The question is what's holding it 
 
 rating-iq.com`,
     visualConcept:'Stat card. "+7.5%" in large gold. "occupancy per rating point" in white. Navy background. Source cited small.',
-    status:'draft', corrections:'', omriApproved:false
+    status:'draft', corrections:'', shanyApproved:false
   },
   {
     id:'p29', date:'2026-06-14', platform:'linkedin-omri', type:'Data & Metrics',
@@ -973,7 +915,7 @@ Review responses aren't customer service. They're a revenue strategy.
 
 rating-iq.com`,
     visualConcept:'Split stat card. "2.2x" in large gold. "more OTA revenue" below. Supporting stat "97% read responses" in smaller white text. Navy background.',
-    status:'draft', corrections:'', omriApproved:false
+    status:'draft', corrections:'', shanyApproved:false
   },
   {
     id:'p30', date:'2026-06-16', platform:'linkedin-company', type:'Thought Leadership',
@@ -990,7 +932,7 @@ Silence is what keeps the bad reviews coming.
 
 rating-iq.com`,
     visualConcept:'Pull quote card. "Silence is what keeps the bad reviews coming." in large Manrope italic, gold on navy. Source cited small.',
-    status:'draft', corrections:'', omriApproved:false
+    status:'draft', corrections:'', shanyApproved:false
   },
   {
     id:'p31', date:'2026-04-28', platform:'linkedin-omri', type:'Thought Leadership',
@@ -1016,14 +958,16 @@ The 7 is telling you exactly what to fix to turn a one-time visitor into a repea
 
 Most of the time, the fix doesn't cost anything.`,
     visualConcept:'Large gold "7" with "/10" in white. Tagline: "Your most useful review." Rating bar 1-10 with 7 lit in gold. RatingIQ logo prominent top-left.',
-    status:'scheduled', corrections:'', omriApproved:false
+    status:'scheduled', corrections:'', shanyApproved:false
   }
 ];
 
 // Bump this number any time you update post copy/visual in DEFAULT_POSTS.
 // On load, if the stored version doesn't match, copy/visual fields refresh
-// from defaults while keeping status, corrections, omriApproved, and date.
-const DATA_VERSION = 4;
+// from defaults while keeping status, corrections, shanyApproved, and date.
+
+
+const DATA_VERSION = 5;
 
 function loadPosts(){
   try{
@@ -1041,18 +985,14 @@ function loadPosts(){
         localStorage.setItem('sc_posts',JSON.stringify(shifted));
         return shifted;
       }
-      // Migration: update p2 Facebook copy — new page, no Upstar reference
-      const p2=loaded.find(p=>p.id==='p2');
-      if(p2&&p2.copy&&p2.copy.includes('Upstar is now RatingIQ')){
-        p2.type='Brand Introduction';
-        p2.visual='RatingIQ is here.';
-        p2.copy=`RatingIQ is now on Facebook.\n\nWe work with hotel chains to turn guest reviews into a revenue strategy — not just a score to monitor.\n\nFollow along for data, insights, and the stories behind the ratings.\n\nrating-iq.com`;
-        p2.visualConcept='Clean brand introduction: deep navy background, RatingIQ logo centered in white and gold. Slogan "From reviews to revenue" bottom. No reference to previous branding.';
-        localStorage.setItem('sc_posts',JSON.stringify(loaded));
-      }
       // Version-based content refresh: update copy/visual from defaults, keep user edits
       const storedVersion=parseInt(localStorage.getItem('sc_data_version')||'0',10);
       if(storedVersion<DATA_VERSION){
+        // v5: remove Facebook posts
+        const facebookIds=new Set(['p2','p5','p14','p20']);
+        for(let i=loaded.length-1;i>=0;i--){
+          if(facebookIds.has(loaded[i].id)||loaded[i].platform==='facebook') loaded.splice(i,1);
+        }
         loaded.forEach(lp=>{
           const dp=DEFAULT_POSTS.find(d=>d.id===lp.id);
           if(dp){
@@ -1126,14 +1066,15 @@ function statusDot(s){
 function renderStats(){
   const bar=document.getElementById('stats-bar');
   const counts={total:posts.length,draft:0,ready:0,scheduled:0,published:0,approved:0};
-  posts.forEach(p=>{ if(counts[p.status]!==undefined)counts[p.status]++; if(p.omriApproved)counts.approved++; });
+  posts.forEach(p=>{ if(counts[p.status]!==undefined)counts[p.status]++; if(p.shanyApproved)counts.approved++; });
+
   bar.innerHTML=`
     <div class="stat-card"><div class="num">${counts.total}</div><div class="lbl">Total Posts</div></div>
     <div class="stat-card draft"><div class="num">${counts.draft}</div><div class="lbl">Draft</div></div>
     <div class="stat-card ready"><div class="num">${counts.ready}</div><div class="lbl">Ready</div></div>
     <div class="stat-card scheduled"><div class="num">${counts.scheduled}</div><div class="lbl">Scheduled</div></div>
     <div class="stat-card published"><div class="num">${counts.published}</div><div class="lbl">Published</div></div>
-    <div class="stat-card approved"><div class="num">${counts.approved}</div><div class="lbl">Omri Approved</div></div>
+    <div class="stat-card approved"><div class="num">${counts.approved}</div><div class="lbl">Shany Approved</div></div>
   `;
 }
 
@@ -1143,13 +1084,13 @@ function renderStats(){
 function getFiltered(){
   const plat=document.getElementById('filter-platform').value;
   const stat=document.getElementById('filter-status').value;
-  const omri=document.getElementById('filter-omri').value;
+  const omri=document.getElementById('filter-shany').value;
   const q=document.getElementById('filter-search').value.toLowerCase();
   return posts.filter(p=>{
     if(plat&&p.platform!==plat)return false;
     if(stat&&p.status!==stat)return false;
-    if(omri==='approved'&&!p.omriApproved)return false;
-    if(omri==='pending'&&p.omriApproved)return false;
+    if(omri==='approved'&&!p.shanyApproved)return false;
+    if(omri==='pending'&&p.shanyApproved)return false;
     if(q&&!p.copy.toLowerCase().includes(q)&&!p.type.toLowerCase().includes(q))return false;
     return true;
   }).sort((a,b)=>a.date.localeCompare(b.date));
@@ -1185,8 +1126,8 @@ function renderTable(){
           <option value="published" ${p.status==='published'?'selected':''}>Published</option>
         </select>
       </td>
-      <td class="omri-cell" onclick="event.stopPropagation()">
-        <button class="omri-tick${p.omriApproved?' approved':''}" onclick="quickOmriApprove('${p.id}',${!p.omriApproved})" title="${p.omriApproved?'Approved by Omri':'Pending Omri approval'}">✓</button>
+      <td class="shany-cell" onclick="event.stopPropagation()">
+        <button class="shany-tick${p.shanyApproved?' approved':''}" onclick="quickShanyApprove('${p.id}',${!p.shanyApproved})" title="${p.shanyApproved?'Approved by Shany':'Pending Shany approval'}">✓</button>
       </td>
       <td class="corrections-cell" onclick="event.stopPropagation()">
         <input type="text" value="${p.corrections||''}" placeholder="Add note..." onchange="quickCorrection('${p.id}',this.value)">
@@ -1225,9 +1166,9 @@ function quickCorrection(id,val){
   const p=posts.find(x=>x.id===id);
   if(p){p.corrections=val;savePosts(posts);}
 }
-function quickOmriApprove(id,val){
+function quickShanyApprove(id,val){
   const p=posts.find(x=>x.id===id);
-  if(p){p.omriApproved=val;savePosts(posts);renderStats();renderTable();}
+  if(p){p.shanyApproved=val;savePosts(posts);renderStats();renderTable();}
 }
 
 // ─────────────────────────────────────────
