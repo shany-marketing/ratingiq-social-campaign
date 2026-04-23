@@ -1094,7 +1094,7 @@ I hear this a lot. Omri hears it more. This post is why we built what we built.`
 // from defaults while keeping status, corrections, shanyApproved, and date.
 
 
-const DATA_VERSION = 6;
+const DATA_VERSION = 7;
 
 function loadPosts(){
   try{
@@ -1128,8 +1128,8 @@ function loadPosts(){
             lp.visualConcept=dp.visualConcept;
             lp.type=dp.type;
             lp.date=dp.date;
-            lp.status=dp.status;
             lp.platform=dp.platform;
+            if(lp.status!=='published') lp.status=dp.status;
           }
         });
         localStorage.setItem('sc_data_version',String(DATA_VERSION));
