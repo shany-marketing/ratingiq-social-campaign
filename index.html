@@ -1766,7 +1766,10 @@ function quickStatus(id,val){
   const p=posts.find(x=>x.id===id);
   if(p){
     p.status=val;savePosts(posts);renderStats();
-    syncToScheduler({id, status: val});
+    const payload={id, status: val};
+    if(val==='ready' && p.shanyApproved) payload.approved=true;
+    if(val!=='ready' && val!=='scheduled') payload.approved=false;
+    syncToScheduler(payload);
   }
 }
 function quickCorrection(id,val){
