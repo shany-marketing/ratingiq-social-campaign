@@ -105,7 +105,7 @@
   },
   {
     "id": "p11",
-    "date": "2026-05-08",
+    "date": "2026-05-15",
     "profile": "omri",
     "copy": "True story.\n\nA chain CEO told me their rating had been stuck at 8.3 for two years.\n\nI pulled their review data before the call.\n\nTop complaint cluster across 4 properties: WiFi in meeting rooms.\n\nSame issue. 11 months in a row. 47 reviews. Never once escalated to someone with authority to fix it.\n\nTwo weeks after the call, they sorted the infrastructure.\n\nScore: 8.6 within 60 days.\n\nNo renovation. No new staff. No rebranding.\n\nJust: someone finally connected the complaint to the person who could act on it.\n\nThat's RatingIQ.",
     "status": "scheduled",
@@ -113,7 +113,7 @@
   },
   {
     "id": "p34",
-    "date": "2026-05-08",
+    "date": "2026-05-15",
     "profile": "company",
     "copy": "Score up 0.3 in 60 days. No renovation. One connected complaint.\n\nThis is exactly what RatingIQ is built for.",
     "status": "scheduled",
@@ -129,7 +129,7 @@
   },
   {
     "id": "p41",
-    "date": "2026-05-08",
+    "date": "2026-05-15",
     "profile": "shany",
     "copy": "The WiFi story. Every time I share this, someone says \"we have the exact same problem.\"\n\nThat's the point. These aren't unusual problems. They're just unconnected ones.",
     "status": "scheduled",
@@ -145,7 +145,7 @@
   },
   {
     "id": "p15",
-    "date": "2026-05-15",
+    "date": "2026-05-08",
     "profile": "omri",
     "copy": "Mother's Day weekend is the most reviewed weekend in hospitality.\n\nFull houses. High expectations. Staff running at capacity.\n\nThe complaints that land Monday morning after a holiday weekend are some of the most consistent, predictable patterns we see.\n\nSame issues across chains, year after year:\nBreakfast too slow. Room not ready. Spa overbooked with no waitlist system.\n\nNone of these are surprises. All of them were predictable.\n\nHappy Mother's Day to everyone running a hotel this weekend. You've earned it.\n\n(And if the reviews land hard on Monday, you know where to find us.)",
     "status": "scheduled",
@@ -185,7 +185,7 @@
   },
   {
     "id": "p18",
-    "date": "2026-05-22",
+    "date": "2026-05-27",
     "profile": "company",
     "copy": "Hotels that address their top 3 complaint clusters within 30 days:\n\n\u2192 See an average rating improvement of 0.3-0.5 points within 90 days\n\u2192 Without capital expenditure\n\u2192 Through operational prioritization alone\n\nThese aren't projections from a marketing deck.\nThese are outcomes from chains using RatingIQ.\n\nThe math is straightforward once you know where to look.\n\nrating-iq.com",
     "status": "scheduled",
@@ -201,7 +201,7 @@
   },
   {
     "id": "p21",
-    "date": "2026-05-27",
+    "date": "2026-05-22",
     "profile": "omri",
     "copy": "Memorial Day weekend.\n\nOne of the highest-demand weekends in US hospitality.\n\nAlso: one of the highest-complaint weekends.\n\nThe gap between a sold-out property and a well-reviewed sold-out property isn't square footage or thread count.\n\nIt's operational execution under pressure.\n\nThe chains that come out of this weekend with better reviews than they went in. They had the fixes mapped before Friday.\n\nGood luck to everyone running a full house this weekend. You've earned the demand.\n\n(The rating, you still have to work for.)",
     "status": "scheduled",
@@ -345,7 +345,7 @@
   },
   {
     "id": "p48",
-    "date": "2026-05-15",
+    "date": "2026-05-08",
     "profile": "company",
     "copy": "Happy Mother's Day from the whole RatingIQ team.\n\nTo every hotel running full houses this weekend.",
     "status": "scheduled",
@@ -361,7 +361,7 @@
   },
   {
     "id": "p50",
-    "date": "2026-05-27",
+    "date": "2026-05-22",
     "profile": "company",
     "copy": "Happy Memorial Day from the RatingIQ team.\n\nTo every hotel running full capacity this weekend.",
     "status": "scheduled",
@@ -409,7 +409,7 @@
   },
   {
     "id": "p56",
-    "date": "2026-05-15",
+    "date": "2026-05-08",
     "profile": "shany",
     "copy": "Mother's Day in hospitality is no joke.\n\nThis post says it better than anything I've written. Happy Mother's Day to every hotel team running full houses.",
     "status": "scheduled",
@@ -425,7 +425,7 @@
   },
   {
     "id": "p58",
-    "date": "2026-05-27",
+    "date": "2026-05-22",
     "profile": "shany",
     "copy": "Sold out doesn't mean well-reviewed.\n\nI've been in this industry long enough to know that gap is always operational. This one is worth reading.",
     "status": "scheduled",
@@ -505,7 +505,7 @@
   },
   {
     "id": "p68",
-    "date": "2026-05-22",
+    "date": "2026-05-27",
     "profile": "omri",
     "copy": "0.3 to 0.5 points. 90 days. Zero CapEx.\n\nThese are outcomes from chains using RatingIQ. Not projections.",
     "status": "scheduled",
@@ -601,7 +601,7 @@
   },
   {
     "id": "p80",
-    "date": "2026-05-22",
+    "date": "2026-05-27",
     "profile": "shany",
     "copy": "0.3 to 0.5 points in 90 days. Zero CapEx.\n\nI share this every time someone asks me for proof it works.",
     "status": "scheduled",
