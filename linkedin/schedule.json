@@ -1,83 +1,650 @@
 [
-  { "id": "p1",  "date": "2026-04-09", "profile": "company", "copy": "Upstar is now RatingIQ.\n\nNew name. New logo. New slogan: \"From reviews to revenue.\"\n\nSame team. Same stubbornly specific belief: a hotel chain's Booking.com score is a revenue number, not a PR metric.\n\nWe built the product we always wanted to build. Not another review management tool. Not a dashboard. An operational push system that maps what's hurting your score, prioritizes the fixes, and gets the right information to the right people. No waiting for anyone to log in.\n\nThe new website is live: rating-iq.com\n\nIf you're a hotel chain CEO and your rating isn't where it should be. That's exactly the conversation we want.", "status": "scheduled", "approved": false },
-  { "id": "p3",  "date": "2026-04-11", "profile": "omri",    "copy": "I once sat across from a hotel chain CEO who told me his rating wasn't a priority.\n\nHis RevPAR was down 11% that quarter.\n\nHe just hadn't connected the two yet.\n\nA 0.2 drop on Booking.com. Barely noticeable on paper. But it quietly erases $200K+ in annual revenue for a mid-size chain.\n\nHere's the math nobody puts on a slide:\n→ Lower score = lower search rank\n→ Lower rank = fewer clicks\n→ Fewer clicks = lower conversion\n→ Lower conversion = lower RevPAR\n\nEveryone says \"our rating dipped a bit.\"\n\nThat dip has a dollar amount. Most chains never find it.\n\nWe built RatingIQ to find it.", "status": "scheduled", "approved": false },
-  { "id": "p32", "date": "2026-04-12", "profile": "company", "copy": "A 0.2 drop has a dollar amount. Most chains never find it.\n\nWe built RatingIQ to find it.", "status": "scheduled", "approved": false },
-  { "id": "p4",  "date": "2026-04-13", "profile": "company", "copy": "Something we've been building for a while is finally live.\n\nrating-iq.com\n\nWe rebuilt everything - the product story, the way we explain what we do, and why it matters if you're running a hotel chain with a rating problem.\n\nHere's what the site shows:\n\nExactly which factors are moving your rating - across every property, not just the loudest one.\n\nYour full chain picture, broken down by platform, by segment, month by month. No more guessing where you actually stand.\n\nEvery guest review answered automatically, in the right language - so your GMs stay focused on running the hotel.\n\nWe built a rating-performance system. Not review management. Not another dashboard to log into.\n\nGo see what that looks like.\n\nrating-iq.com", "status": "scheduled", "approved": false },
-  { "id": "p39", "date": "2026-04-14", "profile": "shany",   "copy": "Omri puts the math behind something I explain in every demo.\n\n0.2 on Booking.com isn't a small dip. It's a number on the P&L.\n\nThis post is the short version of every conversation we have.", "status": "scheduled", "approved": false },
-  { "id": "p6",  "date": "2026-04-15", "profile": "omri",    "copy": "The most common thing I hear after a demo:\n\n\"Wait. This doesn't require a renovation?\"\n\nNo. It doesn't.\n\nMost hotels losing ground on their Booking.com score aren't losing it because the building is bad. They're losing it because:\n\nBreakfast runs 20 minutes late on weekends.\nCheck-in at 3 PM becomes a quiet disaster.\nRoom 214 has a shower that's been \"almost fixed\" since February.\n\nThese are operational problems. They have operational fixes. No CapEx required.\n\nThe trick is knowing which ones are actually moving the score. And getting that information to the person who can act on it.\n\nThat's the whole product.", "status": "scheduled", "approved": false },
-  { "id": "p7",  "date": "2026-04-17", "profile": "company", "copy": "RatingIQ is not a review management tool.\n\nNot a reputation dashboard. Not a \"feedback analytics platform.\"\n\n(We've seen enough of those.)\n\nIt's an operational push system for hotel chains:\n→ Maps what's actually hurting the score\n→ Prioritizes the fixes\n→ Pushes the right actions to the right people. No login required.\n\nBecause nobody logs in.\n\nrating-iq.com", "status": "scheduled", "approved": false },
-  { "id": "p8",  "date": "2026-04-19", "profile": "omri",    "copy": "Every hotel bought a review management tool.\n\nA genuinely surprising number of them open it maybe twice a month.\n\nI'm not judging. I get it. The GM is running a hotel. 47 things on fire at any given moment. Opening a dashboard to \"explore patterns\" is not on that list.\n\nSo the data sits. Reviews pile up. The same complaints come in every weekend. Nothing changes.\n\nThe fix isn't a better dashboard. It's a push.\n\nNew complaint cluster? Tell the GM. Don't wait for them to find it.\nSame issue across 3 properties? Tell the CEO.\nScore trending down? Alert someone before it shows up on the display.\n\nThat's how review data actually gets used.\nYou make it come to people. Not the other way around.", "status": "scheduled", "approved": false },
-  { "id": "p9",  "date": "2026-04-21", "profile": "omri",    "copy": "Hotel chains have three kinds of rating problems.\n\nThe first is visible. A score that's been sitting at 8.1 for 18 months while the city average climbs.\n\nThe second is quiet. A trailing 90-day average that's lower than the displayed score. A drop signal most chains never see coming.\n\nThe third is operational. Recurring complaints that never get mapped to a fix because nobody owns the data-to-action step.\n\nAll three are solvable. None of them require guesswork.\n\nThat's what RatingIQ is for.", "status": "scheduled", "approved": false },
-  { "id": "p10", "date": "2026-04-23", "profile": "company", "copy": "From reviews to revenue.\n\nThat's the only journey that matters.\n\nNot \"manage your reputation.\" Not \"monitor your feedback.\"\n\nMove the number that moves your P&L.\n\nrating-iq.com", "status": "scheduled", "approved": false },
-  { "id": "p31", "date": "2026-04-28", "profile": "omri",    "copy": "The guest who gives you a 7 is more useful than the one who gives you a 10.\n\nHotels have this backwards.\n\nA 10 tells you they loved it. Nothing to learn, nothing to fix.\nA 3 tells you they're furious. You're in damage control. That relationship is probably over.\n\nA 7? That guest almost had a great stay.\n\nThey noticed something specific. They cared enough to write it down. And they're not angry enough to walk away permanently.\n\nThat is a blueprint.\n\nHotels spend most of their energy on the 3s.\nThey celebrate the 10s.\nThey scroll past the 7s.\n\nThe 7 is telling you exactly what to fix to turn a one-time visitor into a repeat guest.\n\nMost of the time, the fix doesn't cost anything.", "status": "scheduled", "approved": false },
-  { "id": "p33", "date": "2026-04-29", "profile": "company", "copy": "The 7 is a blueprint. Most hotels scroll past it.\n\nWe built a system to make sure you don't.\n\nrating-iq.com", "status": "scheduled", "approved": false },
-  { "id": "p40", "date": "2026-05-01", "profile": "shany",   "copy": "The 7 is the one worth reading.\n\nOmri explains why most hotels are focused on the wrong end of the scale. I've been saying this for months and never found a way to put it this clearly.", "status": "scheduled", "approved": false },
-  { "id": "p11", "date": "2026-05-03", "profile": "omri",    "copy": "True story.\n\nA chain CEO told me their rating had been stuck at 8.3 for two years.\n\nI pulled their review data before the call.\n\nTop complaint cluster across 4 properties: WiFi in meeting rooms.\n\nSame issue. 11 months in a row. 47 reviews. Never once escalated to someone with authority to fix it.\n\nTwo weeks after the call, they sorted the infrastructure.\n\nScore: 8.6 within 60 days.\n\nNo renovation. No new staff. No rebranding.\n\nJust: someone finally connected the complaint to the person who could act on it.\n\nThat's RatingIQ.", "status": "scheduled", "approved": false },
-  { "id": "p34", "date": "2026-05-04", "profile": "company", "copy": "Score up 0.3 in 60 days. No renovation. One connected complaint.\n\nThis is exactly what RatingIQ is built for.", "status": "scheduled", "approved": false },
-  { "id": "p12", "date": "2026-05-05", "profile": "company", "copy": "The average hotel chain has:\n\n→ 4 recurring complaint clusters unresolved for 90+ days\n→ 1 property dragging down the portfolio average by 0.4 points\n→ A Booking.com score that hasn't moved in over a year\n\nWe didn't make these numbers up. We see them every time we look at a new portfolio.\n\nThe good news: all three are fixable without touching the building.\n\nrating-iq.com", "status": "scheduled", "approved": false },
-  { "id": "p41", "date": "2026-05-06", "profile": "shany",   "copy": "The WiFi story. Every time I share this, someone says \"we have the exact same problem.\"\n\nThat's the point. These aren't unusual problems. They're just unconnected ones.", "status": "scheduled", "approved": false },
-  { "id": "p13", "date": "2026-05-07", "profile": "omri",    "copy": "The question hotel chains ask: \"How do we manage our reviews?\"\n\nThe question they should be asking: \"What's the fastest path to a higher score?\"\n\nThose sound similar. They're completely different.\n\n\"Manage reviews\" = respond faster, template better, apologize more professionally.\n\n\"Faster path to a higher score\" = find what's actually hurting the rating, fix it operationally, move the number.\n\nOne of these is a PR exercise.\nOne shows up on the P&L.\n\nYou already know which one matters.", "status": "scheduled", "approved": false },
-  { "id": "p15", "date": "2026-05-12", "profile": "omri",    "copy": "Mother's Day weekend is the most reviewed weekend in hospitality.\n\nFull houses. High expectations. Staff running at capacity.\n\nThe complaints that land Monday morning after a holiday weekend are some of the most consistent, predictable patterns we see.\n\nSame issues across chains, year after year:\nBreakfast too slow. Room not ready. Spa overbooked with no waitlist system.\n\nNone of these are surprises. All of them were predictable.\n\nHappy Mother's Day to everyone running a hotel this weekend. You've earned it.\n\n(And if the reviews land hard on Monday, you know where to find us.)", "status": "scheduled", "approved": false },
-  { "id": "p16", "date": "2026-05-14", "profile": "company", "copy": "Not all complaints are equal.\n\nA one-off guest complaint about a specific staff member? Probably not moving your score.\n\nA recurring cluster about check-in wait times across 3 properties for 6 weeks? That's your score.\n\nRatingIQ shows you the difference. And pushes the fix to the people who can act on it.\n\nBecause knowing isn't enough. Someone has to do something about it.\n\nrating-iq.com", "status": "scheduled", "approved": false },
-  { "id": "p17", "date": "2026-05-16", "profile": "omri",    "copy": "True story.\n\nHotel chain. 6 properties. Booking.com scores from 7.9 to 8.7.\n\nThe CEO assumed the 7.9 property needed a renovation.\n\nWe pulled the data before he signed anything.\n\nTop complaint cluster at the 7.9 property: a single check-in desk handling peak arrival times solo.\n\nThat's it. One operational gap. No structural issue. No design problem.\n\nThey added a second desk for peak hours.\n\nScore: 8.4 within 90 days.\n\nThe CEO's words at our next call: \"I was about to spend $400K on the wrong thing.\"\n\nThe most expensive mistake in this industry is solving the visible problem instead of the actual one.", "status": "scheduled", "approved": false },
-  { "id": "p35", "date": "2026-05-17", "profile": "company", "copy": "The most expensive mistake in hospitality: solving the visible problem instead of the actual one.\n\nOur founder. Our mission.", "status": "scheduled", "approved": false },
-  { "id": "p42", "date": "2026-05-18", "profile": "shany",   "copy": "The $400K story is real. I was in that call.\n\nThe CEO was ready to sign a renovation. The data said something completely different.\n\nThis is why we pull the data before you make a decision.", "status": "scheduled", "approved": false },
-  { "id": "p18", "date": "2026-05-19", "profile": "company", "copy": "Hotels that address their top 3 complaint clusters within 30 days:\n\n→ See an average rating improvement of 0.3-0.5 points within 90 days\n→ Without capital expenditure\n→ Through operational prioritization alone\n\nThese aren't projections from a marketing deck.\nThese are outcomes from chains using RatingIQ.\n\nThe math is straightforward once you know where to look.\n\nrating-iq.com", "status": "scheduled", "approved": false },
-  { "id": "p19", "date": "2026-05-21", "profile": "omri",    "copy": "Hotel ratings on Booking.com are not a popularity contest.\n\nThey're a feedback loop with financial consequences.\n\nA 0.1 point improvement in your score can shift your search rank enough to meaningfully move occupancy.\n\nWhich means the conversation isn't: \"How do we get more positive reviews?\"\n\nIt's: \"What's actually driving our negative reviews. How fast can we fix it?\"\n\nDifferent question. Different answer. Different result.\n\nThe first question leads to response templates.\nThe second one leads to RatingIQ.", "status": "scheduled", "approved": false },
-  { "id": "p21", "date": "2026-05-27", "profile": "omri",    "copy": "Memorial Day weekend.\n\nOne of the highest-demand weekends in US hospitality.\n\nAlso: one of the highest-complaint weekends.\n\nThe gap between a sold-out property and a well-reviewed sold-out property isn't square footage or thread count.\n\nIt's operational execution under pressure.\n\nThe chains that come out of this weekend with better reviews than they went in. They had the fixes mapped before Friday.\n\nGood luck to everyone running a full house this weekend. You've earned the demand.\n\n(The rating, you still have to work for.)", "status": "scheduled", "approved": false },
-  { "id": "p22", "date": "2026-05-29", "profile": "company", "copy": "We built the website around one question:\n\n\"What would this look like if it wasn't designed for investors?\"\n\nNo feature list. No dashboard screenshots. No testimonial carousels.\n\nJust the problem, the approach, and the outcome. For the person who actually has to make a decision.\n\nIf you haven't seen it yet:\n\nrating-iq.com", "status": "scheduled", "approved": false },
-  { "id": "p23", "date": "2026-05-31", "profile": "omri",    "copy": "The best thing I hear after a RatingIQ walkthrough:\n\n\"I've been asking for this for three years.\"\n\nNot \"impressive tech.\"\nNot \"great UI.\"\nNot \"nice to have.\"\n\n\"Someone finally connected what guests are saying to what I actually need to fix.\"\n\nThat's the product. That's always been the product.\n\nIf you run a hotel chain and that line sounds familiar, we should talk.", "status": "scheduled", "approved": false },
-  { "id": "p36", "date": "2026-06-01", "profile": "company", "copy": "Someone finally connected what guests are saying to what you actually need to fix.\n\nThat's the whole product. That's always been the product.\n\nrating-iq.com", "status": "scheduled", "approved": false },
-  { "id": "p24", "date": "2026-06-02", "profile": "company", "copy": "A 1% increase in your rating.\n\nThat doesn't sound like much.\n\nCornell University ran the numbers. It translates to 1.42% more RevPAR and 0.54% more occupancy.\n\nAcross a chain of 10 properties, that's not a rounding error. That's a line item on the P&L.\n\nYour rating isn't a reputation score. It's a revenue dial.\n\nRatingIQ shows you exactly which direction it's moving. And why.\n\nrating-iq.com", "status": "scheduled", "approved": false },
-  { "id": "p43", "date": "2026-06-03", "profile": "shany",   "copy": "\"I've been asking for this for three years.\"\n\nI hear this a lot. Omri hears it more. This post is why we built what we built.", "status": "scheduled", "approved": false },
-  { "id": "p25", "date": "2026-06-04", "profile": "omri",    "copy": "1% increase in your rating.\n\nTOBB University found that's worth 2.68% more in online revenue per room.\n\nOTAs don't just show you to more guests when your rating goes up. They show you to guests who are ready to book.\n\nThe algorithm knows.\n\nrating-iq.com", "status": "scheduled", "approved": false },
-  { "id": "p26", "date": "2026-06-07", "profile": "company", "copy": "Raise your Booking.com rating by one star.\n\nAccording to TripAdvisor research, you can now charge 11.2% more per room. And still get booked.\n\nMost hotels spend years and significant budget trying to justify a rate increase. The ones with the highest ratings don't have to justify anything.\n\nYour rating is your pricing power.\n\nrating-iq.com", "status": "scheduled", "approved": false },
-  { "id": "p27", "date": "2026-06-09", "profile": "omri",    "copy": "72% of guests say a hotel's rating matters more to them than the brand name.\n\nThat's from Expedia. And if you sit with it for a second, it makes sense.\n\nThe brand tells them what to expect. The rating tells them what actually happened.\n\nYou could be a Marriott property with a 7.8 and lose bookings to an independent running a 9.1.\n\nYour rating is your brand now. The logo is just the introduction.\n\nrating-iq.com", "status": "scheduled", "approved": false },
-  { "id": "p37", "date": "2026-06-10", "profile": "company", "copy": "72% of guests choose rating over brand name.\n\nYour rating is your brand now. RatingIQ is how you protect it.\n\nrating-iq.com", "status": "scheduled", "approved": false },
-  { "id": "p28", "date": "2026-06-11", "profile": "company", "copy": "One rating point.\n\nContemporary Hospitality Management found that a single point increase in your hotel's rating is linked to a 7.5% increase in occupancy.\n\nOne point. Across your whole chain. Every property.\n\nThe question isn't whether it's worth fixing. The question is what's holding it back.\n\nrating-iq.com", "status": "scheduled", "approved": false },
-  { "id": "p29", "date": "2026-06-14", "profile": "omri",    "copy": "Hotels that respond to 40-45% of their reviews see 2.2x more OTA revenue than those that don't respond at all.\n\nThat's Cornell University and TripAdvisor saying the same thing in different words.\n\nReview responses aren't customer service. They're a revenue strategy.\n\n97% of guests who read reviews also read the responses. They're not just reading what went wrong. They're reading how you handle it.\n\nrating-iq.com", "status": "scheduled", "approved": false },
-  { "id": "p38", "date": "2026-06-15", "profile": "company", "copy": "Review responses aren't customer service. They're a revenue strategy.\n\nEvery unanswered review is a missed signal. And a missed booking.\n\nrating-iq.com", "status": "scheduled", "approved": false },
-  { "id": "p30", "date": "2026-06-16", "profile": "company", "copy": "Hotels that start responding to negative reviews receive fewer of them.\n\nThat's from a peer-reviewed study by Proserpio and Zervas.\n\nMost people assume unhappy guests are just looking to vent. Some are. But a lot of them are looking to be heard.\n\nWhen you respond. Publicly, consistently, in the right language. You change the signal you send to every guest who comes after.\n\nSilence is what keeps the bad reviews coming.\n\nrating-iq.com", "status": "scheduled", "approved": false },
-  { "id": "p44", "date": "2026-04-16", "profile": "company", "copy": "No renovation required. Just the right data, to the right person, at the right time.\n\nThat's the whole product.\n\nrating-iq.com", "status": "scheduled", "approved": false },
-  { "id": "p45", "date": "2026-04-20", "profile": "company", "copy": "Nobody logs in. That's not a criticism — it's an industry truth.\n\nWe built RatingIQ around it.\n\nrating-iq.com", "status": "scheduled", "approved": false },
-  { "id": "p46", "date": "2026-04-22", "profile": "company", "copy": "Three rating problems. All solvable. None requiring guesswork.\n\nSee exactly what's hurting yours at rating-iq.com", "status": "scheduled", "approved": false },
-  { "id": "p47", "date": "2026-05-08", "profile": "company", "copy": "Different question. Different answer.\n\nThe right one shows up on your P&L.\n\nrating-iq.com", "status": "scheduled", "approved": false },
-  { "id": "p48", "date": "2026-05-13", "profile": "company", "copy": "Happy Mother's Day from the whole RatingIQ team.\n\nTo every hotel running full houses this weekend.", "status": "scheduled", "approved": false },
-  { "id": "p49", "date": "2026-05-22", "profile": "company", "copy": "A 0.1 point improvement can shift your search rank enough to move occupancy.\n\nThe conversation starts at rating-iq.com", "status": "scheduled", "approved": false },
-  { "id": "p50", "date": "2026-05-28", "profile": "company", "copy": "Happy Memorial Day from the RatingIQ team.\n\nTo every hotel running full capacity this weekend.", "status": "scheduled", "approved": false },
-  { "id": "p51", "date": "2026-06-05", "profile": "company", "copy": "2.68% more in online revenue per rating point.\n\nThe math works for a reason.\n\nrating-iq.com", "status": "scheduled", "approved": false },
-  { "id": "p52", "date": "2026-04-17", "profile": "shany", "copy": "Every time Omri explains this, someone in the room exhales.\n\nNo renovation required. The problem is operational. That means the fix is too.", "status": "scheduled", "approved": false },
-  { "id": "p53", "date": "2026-04-21", "profile": "shany", "copy": "Nobody opens the dashboard. I've been in enough hotel ops conversations to know this is true.\n\nOmri explains exactly why that matters.", "status": "scheduled", "approved": false },
-  { "id": "p54", "date": "2026-04-25", "profile": "shany", "copy": "Three problems. All solvable.\n\nI've watched Omri explain this in rooms with hotel CEOs and seen the penny drop every time.", "status": "scheduled", "approved": false },
-  { "id": "p55", "date": "2026-05-09", "profile": "shany", "copy": "The wrong question gets you response templates.\n\nThe right one gets you a number on your P&L. This is the distinction we built a company around.", "status": "scheduled", "approved": false },
-  { "id": "p56", "date": "2026-05-14", "profile": "shany", "copy": "Mother's Day in hospitality is no joke.\n\nThis post says it better than anything I've written. Happy Mother's Day to every hotel team running full houses.", "status": "scheduled", "approved": false },
-  { "id": "p57", "date": "2026-05-23", "profile": "shany", "copy": "Not a popularity contest. A feedback loop with financial consequences.\n\nOmri puts in one sentence what takes me a slide deck to explain.", "status": "scheduled", "approved": false },
-  { "id": "p58", "date": "2026-05-29", "profile": "shany", "copy": "Sold out doesn't mean well-reviewed.\n\nI've been in this industry long enough to know that gap is always operational. This one is worth reading.", "status": "scheduled", "approved": false },
-  { "id": "p59", "date": "2026-06-06", "profile": "shany", "copy": "2.68% more in online revenue per rating point. I use this number in almost every conversation.\n\nOmri explains the why.", "status": "scheduled", "approved": false },
-  { "id": "p60", "date": "2026-06-11", "profile": "shany", "copy": "72% choose rating over brand name. I've seen this stat stop people mid-sentence in demos.\n\nThe logo is just the introduction. Omri nails it here.", "status": "scheduled", "approved": false },
-  { "id": "p61", "date": "2026-06-16", "profile": "shany", "copy": "Review responses as a revenue strategy. Not customer service.\n\nThat reframe changes everything. Worth reading.", "status": "scheduled", "approved": false },
-  { "id": "p62", "date": "2026-04-10", "profile": "omri", "copy": "We built what we always wanted to build.\n\nNot another review management tool. Something that actually moves the number.\n\nrating-iq.com", "status": "scheduled", "approved": false },
-  { "id": "p63", "date": "2026-04-14", "profile": "omri", "copy": "It's live. Everything we've been building — the product, the story, the case for why this matters.\n\nrating-iq.com", "status": "scheduled", "approved": false },
-  { "id": "p64", "date": "2026-04-18", "profile": "omri", "copy": "This is the short version of what I explain in every first call.\n\nNobody logs in. We built around that truth.\n\nrating-iq.com", "status": "scheduled", "approved": false },
-  { "id": "p65", "date": "2026-04-24", "profile": "omri", "copy": "From reviews to revenue. That's the journey.\n\nThat's the only one that matters.", "status": "scheduled", "approved": false },
-  { "id": "p66", "date": "2026-05-06", "profile": "omri", "copy": "4 clusters. 0.4 point drag. 14 months flat.\n\nWe see these numbers every time we look at a new portfolio. None of them are permanent.\n\nrating-iq.com", "status": "scheduled", "approved": false },
-  { "id": "p67", "date": "2026-05-15", "profile": "omri", "copy": "A recurring cluster across 3 properties for 6 weeks is not a complaint.\n\nThat's your score.\n\nrating-iq.com", "status": "scheduled", "approved": false },
-  { "id": "p68", "date": "2026-05-20", "profile": "omri", "copy": "0.3 to 0.5 points. 90 days. Zero CapEx.\n\nThese are outcomes from chains using RatingIQ. Not projections.", "status": "scheduled", "approved": false },
-  { "id": "p69", "date": "2026-05-30", "profile": "omri", "copy": "We built the website for one person.\n\nThe one who has to make the decision.\n\nrating-iq.com", "status": "scheduled", "approved": false },
-  { "id": "p70", "date": "2026-06-03", "profile": "omri", "copy": "1% rating increase. 1.42% more RevPAR. Cornell ran the numbers.\n\nThe dial is real.\n\nrating-iq.com", "status": "scheduled", "approved": false },
-  { "id": "p71", "date": "2026-06-08", "profile": "omri", "copy": "One star on Booking.com. 11.2% more on your rate. Still booked.\n\nThe highest-rated properties don't justify their prices. They just charge them.\n\nrating-iq.com", "status": "scheduled", "approved": false },
-  { "id": "p72", "date": "2026-06-12", "profile": "omri", "copy": "One rating point. 7.5% more occupancy. Across your whole chain.\n\nThe question is what's holding it back.\n\nrating-iq.com", "status": "scheduled", "approved": false },
-  { "id": "p73", "date": "2026-06-17", "profile": "omri", "copy": "Silence is what keeps the bad reviews coming.\n\nWe make sure you're never silent. No review goes unanswered.\n\nrating-iq.com", "status": "scheduled", "approved": false },
-  { "id": "p74", "date": "2026-04-11", "profile": "shany", "copy": "We changed the name. We didn't change what we believe.\n\nA hotel chain's rating is a revenue number. Everything we build starts from there.", "status": "scheduled", "approved": false },
-  { "id": "p75", "date": "2026-04-15", "profile": "shany", "copy": "I spent months working on this website. Not on how it looks — on what it says.\n\nFor the person who actually has to make the call. Take a look.\n\nrating-iq.com", "status": "scheduled", "approved": false },
-  { "id": "p76", "date": "2026-04-19", "profile": "shany", "copy": "We are not a dashboard. We are not a reporting tool.\n\nWe are the thing that makes review data actually get used.", "status": "scheduled", "approved": false },
-  { "id": "p77", "date": "2026-04-25", "profile": "shany", "copy": "From reviews to revenue. I've been living this line for months.\n\nIt's the clearest thing we've ever said about what we do.", "status": "scheduled", "approved": false },
-  { "id": "p78", "date": "2026-05-07", "profile": "shany", "copy": "We see these numbers every time we look at a new portfolio.\n\n4 clusters. One dragging property. A score that hasn't moved in a year. All fixable. That's what keeps me going.", "status": "scheduled", "approved": false },
-  { "id": "p79", "date": "2026-05-16", "profile": "shany", "copy": "A one-off complaint is noise. A recurring cluster is your score.\n\nThis one took us a while to explain clearly. We finally got it right.", "status": "scheduled", "approved": false },
-  { "id": "p80", "date": "2026-05-21", "profile": "shany", "copy": "0.3 to 0.5 points in 90 days. Zero CapEx.\n\nI share this every time someone asks me for proof it works.", "status": "scheduled", "approved": false },
-  { "id": "p81", "date": "2026-05-31", "profile": "shany", "copy": "I built this website for one person. The CEO who signs the P&L and doesn't have time for a product tour.\n\nIf that's you — rating-iq.com", "status": "scheduled", "approved": false },
-  { "id": "p82", "date": "2026-06-04", "profile": "shany", "copy": "Cornell says 1% rating increase = 1.42% RevPAR.\n\nI've been using this number in every conversation since we found it. The math is the pitch.", "status": "scheduled", "approved": false },
-  { "id": "p83", "date": "2026-06-09", "profile": "shany", "copy": "Raise your rating by one star. Charge 11.2% more. Still get booked.\n\nTripAdvisor's number, not ours. The case writes itself.", "status": "scheduled", "approved": false },
-  { "id": "p84", "date": "2026-06-13", "profile": "shany", "copy": "One rating point. 7.5% more occupancy.\n\nI use this number to open conversations. It closes them too.", "status": "scheduled", "approved": false },
-  { "id": "p85", "date": "2026-06-18", "profile": "shany", "copy": "Silence is what keeps the bad reviews coming.\n\nI read this study when we were building the product and it has stayed with me. Responding is a revenue strategy.", "status": "scheduled", "approved": false }
+  {
+    "id": "p1",
+    "date": "2026-04-09",
+    "profile": "company",
+    "copy": "Upstar is now RatingIQ.\n\nNew name. New logo. New slogan: \"From reviews to revenue.\"\n\nSame team. Same stubbornly specific belief: a hotel chain's Booking.com score is a revenue number, not a PR metric.\n\nWe built the product we always wanted to build. Not another review management tool. Not a dashboard. An operational push system that maps what's hurting your score, prioritizes the fixes, and gets the right information to the right people. No waiting for anyone to log in.\n\nThe new website is live: rating-iq.com\n\nIf you're a hotel chain CEO and your rating isn't where it should be. That's exactly the conversation we want.",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p3",
+    "date": "2026-04-11",
+    "profile": "omri",
+    "copy": "I once sat across from a hotel chain CEO who told me his rating wasn't a priority.\n\nHis RevPAR was down 11% that quarter.\n\nHe just hadn't connected the two yet.\n\nA 0.2 drop on Booking.com. Barely noticeable on paper. But it quietly erases $200K+ in annual revenue for a mid-size chain.\n\nHere's the math nobody puts on a slide:\n\u2192 Lower score = lower search rank\n\u2192 Lower rank = fewer clicks\n\u2192 Fewer clicks = lower conversion\n\u2192 Lower conversion = lower RevPAR\n\nEveryone says \"our rating dipped a bit.\"\n\nThat dip has a dollar amount. Most chains never find it.\n\nWe built RatingIQ to find it.",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p32",
+    "date": "2026-04-11",
+    "profile": "company",
+    "copy": "A 0.2 drop has a dollar amount. Most chains never find it.\n\nWe built RatingIQ to find it.",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p4",
+    "date": "2026-04-13",
+    "profile": "company",
+    "copy": "Something we've been building for a while is finally live.\n\nrating-iq.com\n\nWe rebuilt everything - the product story, the way we explain what we do, and why it matters if you're running a hotel chain with a rating problem.\n\nHere's what the site shows:\n\nExactly which factors are moving your rating - across every property, not just the loudest one.\n\nYour full chain picture, broken down by platform, by segment, month by month. No more guessing where you actually stand.\n\nEvery guest review answered automatically, in the right language - so your GMs stay focused on running the hotel.\n\nWe built a rating-performance system. Not review management. Not another dashboard to log into.\n\nGo see what that looks like.\n\nrating-iq.com",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p39",
+    "date": "2026-04-11",
+    "profile": "shany",
+    "copy": "Omri puts the math behind something I explain in every demo.\n\n0.2 on Booking.com isn't a small dip. It's a number on the P&L.\n\nThis post is the short version of every conversation we have.",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p6",
+    "date": "2026-04-15",
+    "profile": "omri",
+    "copy": "The most common thing I hear after a demo:\n\n\"Wait. This doesn't require a renovation?\"\n\nNo. It doesn't.\n\nMost hotels losing ground on their Booking.com score aren't losing it because the building is bad. They're losing it because:\n\nBreakfast runs 20 minutes late on weekends.\nCheck-in at 3 PM becomes a quiet disaster.\nRoom 214 has a shower that's been \"almost fixed\" since February.\n\nThese are operational problems. They have operational fixes. No CapEx required.\n\nThe trick is knowing which ones are actually moving the score. And getting that information to the person who can act on it.\n\nThat's the whole product.",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p7",
+    "date": "2026-04-17",
+    "profile": "company",
+    "copy": "RatingIQ is not a review management tool.\n\nNot a reputation dashboard. Not a \"feedback analytics platform.\"\n\n(We've seen enough of those.)\n\nIt's an operational push system for hotel chains:\n\u2192 Maps what's actually hurting the score\n\u2192 Prioritizes the fixes\n\u2192 Pushes the right actions to the right people. No login required.\n\nBecause nobody logs in.\n\nrating-iq.com",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p8",
+    "date": "2026-04-19",
+    "profile": "omri",
+    "copy": "Every hotel bought a review management tool.\n\nA genuinely surprising number of them open it maybe twice a month.\n\nI'm not judging. I get it. The GM is running a hotel. 47 things on fire at any given moment. Opening a dashboard to \"explore patterns\" is not on that list.\n\nSo the data sits. Reviews pile up. The same complaints come in every weekend. Nothing changes.\n\nThe fix isn't a better dashboard. It's a push.\n\nNew complaint cluster? Tell the GM. Don't wait for them to find it.\nSame issue across 3 properties? Tell the CEO.\nScore trending down? Alert someone before it shows up on the display.\n\nThat's how review data actually gets used.\nYou make it come to people. Not the other way around.",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p9",
+    "date": "2026-04-21",
+    "profile": "omri",
+    "copy": "Hotel chains have three kinds of rating problems.\n\nThe first is visible. A score that's been sitting at 8.1 for 18 months while the city average climbs.\n\nThe second is quiet. A trailing 90-day average that's lower than the displayed score. A drop signal most chains never see coming.\n\nThe third is operational. Recurring complaints that never get mapped to a fix because nobody owns the data-to-action step.\n\nAll three are solvable. None of them require guesswork.\n\nThat's what RatingIQ is for.",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p10",
+    "date": "2026-04-23",
+    "profile": "company",
+    "copy": "From reviews to revenue.\n\nThat's the only journey that matters.\n\nNot \"manage your reputation.\" Not \"monitor your feedback.\"\n\nMove the number that moves your P&L.\n\nrating-iq.com",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p31",
+    "date": "2026-04-28",
+    "profile": "omri",
+    "copy": "The guest who gives you a 7 is more useful than the one who gives you a 10.\n\nHotels have this backwards.\n\nA 10 tells you they loved it. Nothing to learn, nothing to fix.\nA 3 tells you they're furious. You're in damage control. That relationship is probably over.\n\nA 7? That guest almost had a great stay.\n\nThey noticed something specific. They cared enough to write it down. And they're not angry enough to walk away permanently.\n\nThat is a blueprint.\n\nHotels spend most of their energy on the 3s.\nThey celebrate the 10s.\nThey scroll past the 7s.\n\nThe 7 is telling you exactly what to fix to turn a one-time visitor into a repeat guest.\n\nMost of the time, the fix doesn't cost anything.",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p33",
+    "date": "2026-04-28",
+    "profile": "company",
+    "copy": "The 7 is a blueprint. Most hotels scroll past it.\n\nWe built a system to make sure you don't.\n\nrating-iq.com",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p40",
+    "date": "2026-04-28",
+    "profile": "shany",
+    "copy": "The 7 is the one worth reading.\n\nOmri explains why most hotels are focused on the wrong end of the scale. I've been saying this for months and never found a way to put it this clearly.",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p11",
+    "date": "2026-05-03",
+    "profile": "omri",
+    "copy": "True story.\n\nA chain CEO told me their rating had been stuck at 8.3 for two years.\n\nI pulled their review data before the call.\n\nTop complaint cluster across 4 properties: WiFi in meeting rooms.\n\nSame issue. 11 months in a row. 47 reviews. Never once escalated to someone with authority to fix it.\n\nTwo weeks after the call, they sorted the infrastructure.\n\nScore: 8.6 within 60 days.\n\nNo renovation. No new staff. No rebranding.\n\nJust: someone finally connected the complaint to the person who could act on it.\n\nThat's RatingIQ.",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p34",
+    "date": "2026-05-03",
+    "profile": "company",
+    "copy": "Score up 0.3 in 60 days. No renovation. One connected complaint.\n\nThis is exactly what RatingIQ is built for.",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p12",
+    "date": "2026-05-05",
+    "profile": "company",
+    "copy": "The average hotel chain has:\n\n\u2192 4 recurring complaint clusters unresolved for 90+ days\n\u2192 1 property dragging down the portfolio average by 0.4 points\n\u2192 A Booking.com score that hasn't moved in over a year\n\nWe didn't make these numbers up. We see them every time we look at a new portfolio.\n\nThe good news: all three are fixable without touching the building.\n\nrating-iq.com",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p41",
+    "date": "2026-05-03",
+    "profile": "shany",
+    "copy": "The WiFi story. Every time I share this, someone says \"we have the exact same problem.\"\n\nThat's the point. These aren't unusual problems. They're just unconnected ones.",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p13",
+    "date": "2026-05-07",
+    "profile": "omri",
+    "copy": "The question hotel chains ask: \"How do we manage our reviews?\"\n\nThe question they should be asking: \"What's the fastest path to a higher score?\"\n\nThose sound similar. They're completely different.\n\n\"Manage reviews\" = respond faster, template better, apologize more professionally.\n\n\"Faster path to a higher score\" = find what's actually hurting the rating, fix it operationally, move the number.\n\nOne of these is a PR exercise.\nOne shows up on the P&L.\n\nYou already know which one matters.",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p15",
+    "date": "2026-05-12",
+    "profile": "omri",
+    "copy": "Mother's Day weekend is the most reviewed weekend in hospitality.\n\nFull houses. High expectations. Staff running at capacity.\n\nThe complaints that land Monday morning after a holiday weekend are some of the most consistent, predictable patterns we see.\n\nSame issues across chains, year after year:\nBreakfast too slow. Room not ready. Spa overbooked with no waitlist system.\n\nNone of these are surprises. All of them were predictable.\n\nHappy Mother's Day to everyone running a hotel this weekend. You've earned it.\n\n(And if the reviews land hard on Monday, you know where to find us.)",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p16",
+    "date": "2026-05-14",
+    "profile": "company",
+    "copy": "Not all complaints are equal.\n\nA one-off guest complaint about a specific staff member? Probably not moving your score.\n\nA recurring cluster about check-in wait times across 3 properties for 6 weeks? That's your score.\n\nRatingIQ shows you the difference. And pushes the fix to the people who can act on it.\n\nBecause knowing isn't enough. Someone has to do something about it.\n\nrating-iq.com",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p17",
+    "date": "2026-05-16",
+    "profile": "omri",
+    "copy": "True story.\n\nHotel chain. 6 properties. Booking.com scores from 7.9 to 8.7.\n\nThe CEO assumed the 7.9 property needed a renovation.\n\nWe pulled the data before he signed anything.\n\nTop complaint cluster at the 7.9 property: a single check-in desk handling peak arrival times solo.\n\nThat's it. One operational gap. No structural issue. No design problem.\n\nThey added a second desk for peak hours.\n\nScore: 8.4 within 90 days.\n\nThe CEO's words at our next call: \"I was about to spend $400K on the wrong thing.\"\n\nThe most expensive mistake in this industry is solving the visible problem instead of the actual one.",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p35",
+    "date": "2026-05-16",
+    "profile": "company",
+    "copy": "The most expensive mistake in hospitality: solving the visible problem instead of the actual one.\n\nOur founder. Our mission.",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p42",
+    "date": "2026-05-16",
+    "profile": "shany",
+    "copy": "The $400K story is real. I was in that call.\n\nThe CEO was ready to sign a renovation. The data said something completely different.\n\nThis is why we pull the data before you make a decision.",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p18",
+    "date": "2026-05-19",
+    "profile": "company",
+    "copy": "Hotels that address their top 3 complaint clusters within 30 days:\n\n\u2192 See an average rating improvement of 0.3-0.5 points within 90 days\n\u2192 Without capital expenditure\n\u2192 Through operational prioritization alone\n\nThese aren't projections from a marketing deck.\nThese are outcomes from chains using RatingIQ.\n\nThe math is straightforward once you know where to look.\n\nrating-iq.com",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p19",
+    "date": "2026-05-21",
+    "profile": "omri",
+    "copy": "Hotel ratings on Booking.com are not a popularity contest.\n\nThey're a feedback loop with financial consequences.\n\nA 0.1 point improvement in your score can shift your search rank enough to meaningfully move occupancy.\n\nWhich means the conversation isn't: \"How do we get more positive reviews?\"\n\nIt's: \"What's actually driving our negative reviews. How fast can we fix it?\"\n\nDifferent question. Different answer. Different result.\n\nThe first question leads to response templates.\nThe second one leads to RatingIQ.",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p21",
+    "date": "2026-05-27",
+    "profile": "omri",
+    "copy": "Memorial Day weekend.\n\nOne of the highest-demand weekends in US hospitality.\n\nAlso: one of the highest-complaint weekends.\n\nThe gap between a sold-out property and a well-reviewed sold-out property isn't square footage or thread count.\n\nIt's operational execution under pressure.\n\nThe chains that come out of this weekend with better reviews than they went in. They had the fixes mapped before Friday.\n\nGood luck to everyone running a full house this weekend. You've earned the demand.\n\n(The rating, you still have to work for.)",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p22",
+    "date": "2026-05-29",
+    "profile": "company",
+    "copy": "We built the website around one question:\n\n\"What would this look like if it wasn't designed for investors?\"\n\nNo feature list. No dashboard screenshots. No testimonial carousels.\n\nJust the problem, the approach, and the outcome. For the person who actually has to make a decision.\n\nIf you haven't seen it yet:\n\nrating-iq.com",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p23",
+    "date": "2026-05-31",
+    "profile": "omri",
+    "copy": "The best thing I hear after a RatingIQ walkthrough:\n\n\"I've been asking for this for three years.\"\n\nNot \"impressive tech.\"\nNot \"great UI.\"\nNot \"nice to have.\"\n\n\"Someone finally connected what guests are saying to what I actually need to fix.\"\n\nThat's the product. That's always been the product.\n\nIf you run a hotel chain and that line sounds familiar, we should talk.",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p36",
+    "date": "2026-05-31",
+    "profile": "company",
+    "copy": "Someone finally connected what guests are saying to what you actually need to fix.\n\nThat's the whole product. That's always been the product.\n\nrating-iq.com",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p24",
+    "date": "2026-06-02",
+    "profile": "company",
+    "copy": "A 1% increase in your rating.\n\nThat doesn't sound like much.\n\nCornell University ran the numbers. It translates to 1.42% more RevPAR and 0.54% more occupancy.\n\nAcross a chain of 10 properties, that's not a rounding error. That's a line item on the P&L.\n\nYour rating isn't a reputation score. It's a revenue dial.\n\nRatingIQ shows you exactly which direction it's moving. And why.\n\nrating-iq.com",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p43",
+    "date": "2026-05-31",
+    "profile": "shany",
+    "copy": "\"I've been asking for this for three years.\"\n\nI hear this a lot. Omri hears it more. This post is why we built what we built.",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p25",
+    "date": "2026-06-04",
+    "profile": "omri",
+    "copy": "1% increase in your rating.\n\nTOBB University found that's worth 2.68% more in online revenue per room.\n\nOTAs don't just show you to more guests when your rating goes up. They show you to guests who are ready to book.\n\nThe algorithm knows.\n\nrating-iq.com",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p26",
+    "date": "2026-06-07",
+    "profile": "company",
+    "copy": "Raise your Booking.com rating by one star.\n\nAccording to TripAdvisor research, you can now charge 11.2% more per room. And still get booked.\n\nMost hotels spend years and significant budget trying to justify a rate increase. The ones with the highest ratings don't have to justify anything.\n\nYour rating is your pricing power.\n\nrating-iq.com",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p27",
+    "date": "2026-06-09",
+    "profile": "omri",
+    "copy": "72% of guests say a hotel's rating matters more to them than the brand name.\n\nThat's from Expedia. And if you sit with it for a second, it makes sense.\n\nThe brand tells them what to expect. The rating tells them what actually happened.\n\nYou could be a Marriott property with a 7.8 and lose bookings to an independent running a 9.1.\n\nYour rating is your brand now. The logo is just the introduction.\n\nrating-iq.com",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p37",
+    "date": "2026-06-09",
+    "profile": "company",
+    "copy": "72% of guests choose rating over brand name.\n\nYour rating is your brand now. RatingIQ is how you protect it.\n\nrating-iq.com",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p28",
+    "date": "2026-06-11",
+    "profile": "company",
+    "copy": "One rating point.\n\nContemporary Hospitality Management found that a single point increase in your hotel's rating is linked to a 7.5% increase in occupancy.\n\nOne point. Across your whole chain. Every property.\n\nThe question isn't whether it's worth fixing. The question is what's holding it back.\n\nrating-iq.com",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p29",
+    "date": "2026-06-14",
+    "profile": "omri",
+    "copy": "Hotels that respond to 40-45% of their reviews see 2.2x more OTA revenue than those that don't respond at all.\n\nThat's Cornell University and TripAdvisor saying the same thing in different words.\n\nReview responses aren't customer service. They're a revenue strategy.\n\n97% of guests who read reviews also read the responses. They're not just reading what went wrong. They're reading how you handle it.\n\nrating-iq.com",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p38",
+    "date": "2026-06-14",
+    "profile": "company",
+    "copy": "Review responses aren't customer service. They're a revenue strategy.\n\nEvery unanswered review is a missed signal. And a missed booking.\n\nrating-iq.com",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p30",
+    "date": "2026-06-16",
+    "profile": "company",
+    "copy": "Hotels that start responding to negative reviews receive fewer of them.\n\nThat's from a peer-reviewed study by Proserpio and Zervas.\n\nMost people assume unhappy guests are just looking to vent. Some are. But a lot of them are looking to be heard.\n\nWhen you respond. Publicly, consistently, in the right language. You change the signal you send to every guest who comes after.\n\nSilence is what keeps the bad reviews coming.\n\nrating-iq.com",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p44",
+    "date": "2026-04-15",
+    "profile": "company",
+    "copy": "No renovation required. Just the right data, to the right person, at the right time.\n\nThat's the whole product.\n\nrating-iq.com",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p45",
+    "date": "2026-04-19",
+    "profile": "company",
+    "copy": "Nobody logs in. That's not a criticism \u2014 it's an industry truth.\n\nWe built RatingIQ around it.\n\nrating-iq.com",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p46",
+    "date": "2026-04-21",
+    "profile": "company",
+    "copy": "Three rating problems. All solvable. None requiring guesswork.\n\nSee exactly what's hurting yours at rating-iq.com",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p47",
+    "date": "2026-05-07",
+    "profile": "company",
+    "copy": "Different question. Different answer.\n\nThe right one shows up on your P&L.\n\nrating-iq.com",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p48",
+    "date": "2026-05-12",
+    "profile": "company",
+    "copy": "Happy Mother's Day from the whole RatingIQ team.\n\nTo every hotel running full houses this weekend.",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p49",
+    "date": "2026-05-21",
+    "profile": "company",
+    "copy": "A 0.1 point improvement can shift your search rank enough to move occupancy.\n\nThe conversation starts at rating-iq.com",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p50",
+    "date": "2026-05-27",
+    "profile": "company",
+    "copy": "Happy Memorial Day from the RatingIQ team.\n\nTo every hotel running full capacity this weekend.",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p51",
+    "date": "2026-06-04",
+    "profile": "company",
+    "copy": "2.68% more in online revenue per rating point.\n\nThe math works for a reason.\n\nrating-iq.com",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p52",
+    "date": "2026-04-15",
+    "profile": "shany",
+    "copy": "Every time Omri explains this, someone in the room exhales.\n\nNo renovation required. The problem is operational. That means the fix is too.",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p53",
+    "date": "2026-04-19",
+    "profile": "shany",
+    "copy": "Nobody opens the dashboard. I've been in enough hotel ops conversations to know this is true.\n\nOmri explains exactly why that matters.",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p54",
+    "date": "2026-04-21",
+    "profile": "shany",
+    "copy": "Three problems. All solvable.\n\nI've watched Omri explain this in rooms with hotel CEOs and seen the penny drop every time.",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p55",
+    "date": "2026-05-07",
+    "profile": "shany",
+    "copy": "The wrong question gets you response templates.\n\nThe right one gets you a number on your P&L. This is the distinction we built a company around.",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p56",
+    "date": "2026-05-12",
+    "profile": "shany",
+    "copy": "Mother's Day in hospitality is no joke.\n\nThis post says it better than anything I've written. Happy Mother's Day to every hotel team running full houses.",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p57",
+    "date": "2026-05-21",
+    "profile": "shany",
+    "copy": "Not a popularity contest. A feedback loop with financial consequences.\n\nOmri puts in one sentence what takes me a slide deck to explain.",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p58",
+    "date": "2026-05-27",
+    "profile": "shany",
+    "copy": "Sold out doesn't mean well-reviewed.\n\nI've been in this industry long enough to know that gap is always operational. This one is worth reading.",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p59",
+    "date": "2026-06-04",
+    "profile": "shany",
+    "copy": "2.68% more in online revenue per rating point. I use this number in almost every conversation.\n\nOmri explains the why.",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p60",
+    "date": "2026-06-09",
+    "profile": "shany",
+    "copy": "72% choose rating over brand name. I've seen this stat stop people mid-sentence in demos.\n\nThe logo is just the introduction. Omri nails it here.",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p61",
+    "date": "2026-06-14",
+    "profile": "shany",
+    "copy": "Review responses as a revenue strategy. Not customer service.\n\nThat reframe changes everything. Worth reading.",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p62",
+    "date": "2026-04-09",
+    "profile": "omri",
+    "copy": "We built what we always wanted to build.\n\nNot another review management tool. Something that actually moves the number.\n\nrating-iq.com",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p63",
+    "date": "2026-04-13",
+    "profile": "omri",
+    "copy": "It's live. Everything we've been building \u2014 the product, the story, the case for why this matters.\n\nrating-iq.com",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p64",
+    "date": "2026-04-17",
+    "profile": "omri",
+    "copy": "This is the short version of what I explain in every first call.\n\nNobody logs in. We built around that truth.\n\nrating-iq.com",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p65",
+    "date": "2026-04-23",
+    "profile": "omri",
+    "copy": "From reviews to revenue. That's the journey.\n\nThat's the only one that matters.",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p66",
+    "date": "2026-05-05",
+    "profile": "omri",
+    "copy": "4 clusters. 0.4 point drag. 14 months flat.\n\nWe see these numbers every time we look at a new portfolio. None of them are permanent.\n\nrating-iq.com",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p67",
+    "date": "2026-05-14",
+    "profile": "omri",
+    "copy": "A recurring cluster across 3 properties for 6 weeks is not a complaint.\n\nThat's your score.\n\nrating-iq.com",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p68",
+    "date": "2026-05-19",
+    "profile": "omri",
+    "copy": "0.3 to 0.5 points. 90 days. Zero CapEx.\n\nThese are outcomes from chains using RatingIQ. Not projections.",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p69",
+    "date": "2026-05-29",
+    "profile": "omri",
+    "copy": "We built the website for one person.\n\nThe one who has to make the decision.\n\nrating-iq.com",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p70",
+    "date": "2026-06-02",
+    "profile": "omri",
+    "copy": "1% rating increase. 1.42% more RevPAR. Cornell ran the numbers.\n\nThe dial is real.\n\nrating-iq.com",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p71",
+    "date": "2026-06-07",
+    "profile": "omri",
+    "copy": "One star on Booking.com. 11.2% more on your rate. Still booked.\n\nThe highest-rated properties don't justify their prices. They just charge them.\n\nrating-iq.com",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p72",
+    "date": "2026-06-11",
+    "profile": "omri",
+    "copy": "One rating point. 7.5% more occupancy. Across your whole chain.\n\nThe question is what's holding it back.\n\nrating-iq.com",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p73",
+    "date": "2026-06-16",
+    "profile": "omri",
+    "copy": "Silence is what keeps the bad reviews coming.\n\nWe make sure you're never silent. No review goes unanswered.\n\nrating-iq.com",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p74",
+    "date": "2026-04-09",
+    "profile": "shany",
+    "copy": "We changed the name. We didn't change what we believe.\n\nA hotel chain's rating is a revenue number. Everything we build starts from there.",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p75",
+    "date": "2026-04-13",
+    "profile": "shany",
+    "copy": "I spent months working on this website. Not on how it looks \u2014 on what it says.\n\nFor the person who actually has to make the call. Take a look.\n\nrating-iq.com",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p76",
+    "date": "2026-04-17",
+    "profile": "shany",
+    "copy": "We are not a dashboard. We are not a reporting tool.\n\nWe are the thing that makes review data actually get used.",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p77",
+    "date": "2026-04-23",
+    "profile": "shany",
+    "copy": "From reviews to revenue. I've been living this line for months.\n\nIt's the clearest thing we've ever said about what we do.",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p78",
+    "date": "2026-05-05",
+    "profile": "shany",
+    "copy": "We see these numbers every time we look at a new portfolio.\n\n4 clusters. One dragging property. A score that hasn't moved in a year. All fixable. That's what keeps me going.",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p79",
+    "date": "2026-05-14",
+    "profile": "shany",
+    "copy": "A one-off complaint is noise. A recurring cluster is your score.\n\nThis one took us a while to explain clearly. We finally got it right.",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p80",
+    "date": "2026-05-19",
+    "profile": "shany",
+    "copy": "0.3 to 0.5 points in 90 days. Zero CapEx.\n\nI share this every time someone asks me for proof it works.",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p81",
+    "date": "2026-05-29",
+    "profile": "shany",
+    "copy": "I built this website for one person. The CEO who signs the P&L and doesn't have time for a product tour.\n\nIf that's you \u2014 rating-iq.com",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p82",
+    "date": "2026-06-02",
+    "profile": "shany",
+    "copy": "Cornell says 1% rating increase = 1.42% RevPAR.\n\nI've been using this number in every conversation since we found it. The math is the pitch.",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p83",
+    "date": "2026-06-07",
+    "profile": "shany",
+    "copy": "Raise your rating by one star. Charge 11.2% more. Still get booked.\n\nTripAdvisor's number, not ours. The case writes itself.",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p84",
+    "date": "2026-06-11",
+    "profile": "shany",
+    "copy": "One rating point. 7.5% more occupancy.\n\nI use this number to open conversations. It closes them too.",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p85",
+    "date": "2026-06-16",
+    "profile": "shany",
+    "copy": "Silence is what keeps the bad reviews coming.\n\nI read this study when we were building the product and it has stayed with me. Responding is a revenue strategy.",
+    "status": "scheduled",
+    "approved": false
+  }
 ]
