@@ -71,8 +71,13 @@ tbody td{padding:13px 16px;font-size:13.5px;vertical-align:middle}
 .td-day{font-size:11px;color:var(--slate);font-weight:400;display:block;margin-top:1px}
 tbody tr.sub-row{background:#f8f8f8}
 tbody tr.sub-row:hover{background:#f2f2f0}
+tbody tr.sub-row>td{padding:6px 12px;font-size:11.5px;color:#6b7280}
 tbody tr.sub-row>td:first-child{padding-left:38px;position:relative}
-tbody tr.sub-row>td:first-child::before{content:'↳';position:absolute;left:17px;top:50%;transform:translateY(-50%);color:#94a3b8;font-size:13px;font-weight:700}
+tbody tr.sub-row>td:first-child::before{content:'↳';position:absolute;left:17px;top:50%;transform:translateY(-50%);color:#94a3b8;font-size:11px;font-weight:700}
+tbody tr.sub-row .badge{font-size:10px;padding:2px 7px 2px 5px}
+tbody tr.sub-row .type-tag{font-size:10px}
+tbody tr.sub-row .copy-preview{font-size:11.5px;opacity:.75}
+tbody tr.sub-row .status-select{font-size:10px;padding:2px 6px}
 
 /* ─── PLATFORM BADGES ─── */
 .badge{display:inline-flex;align-items:center;gap:6px;padding:4px 10px 4px 6px;border-radius:6px;font-size:11px;font-weight:600;letter-spacing:.1px;white-space:nowrap}
