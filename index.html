@@ -75,6 +75,7 @@ tbody td{padding:13px 16px;font-size:13.5px;vertical-align:middle}
 .badge svg{flex-shrink:0;display:block}
 .badge-linkedin-company{background:#e8f2f9;color:var(--li-co)}
 .badge-linkedin-omri{background:#ede8f7;color:var(--li-om)}
+.badge-linkedin-shany{background:#fce7f3;color:#be185d}
 .badge-facebook{background:#e7effe;color:var(--fb)}
 
 /* ─── TYPE TAG ─── */
@@ -221,6 +222,7 @@ canvas#vb-canvas{border-radius:8px;box-shadow:0 4px 24px rgba(0,0,0,.18);max-wid
         <option value="">All Platforms</option>
         <option value="linkedin-company">LinkedIn Company</option>
         <option value="linkedin-omri">LinkedIn — Omri</option>
+        <option value="linkedin-shany">LinkedIn — Shany</option>
       </select>
       <select id="filter-status" onchange="renderTable()">
         <option value="">All Statuses</option>
@@ -365,6 +367,7 @@ canvas#vb-canvas{border-radius:8px;box-shadow:0 4px 24px rgba(0,0,0,.18);max-wid
           <select id="edit-platform" onchange="updateModalBadge()">
             <option value="linkedin-company">LinkedIn — Company</option>
             <option value="linkedin-omri">LinkedIn — Omri</option>
+            <option value="linkedin-shany">LinkedIn — Shany</option>
           </select>
         </div>
         <div class="field">
@@ -959,6 +962,130 @@ The 7 is telling you exactly what to fix to turn a one-time visitor into a repea
 Most of the time, the fix doesn't cost anything.`,
     visualConcept:'Large gold "7" with "/10" in white. Tagline: "Your most useful review." Rating bar 1-10 with 7 lit in gold. RatingIQ logo prominent top-left.',
     status:'scheduled', corrections:'', shanyApproved:false
+  },
+
+  // ─── REPOSTS: COMPANY OVER OMRI ───
+  {
+    id:'p32', date:'2026-04-12', platform:'linkedin-company', type:'Company Repost',
+    visual:'Pending — Claude Design',
+    copy:`A 0.2 drop has a dollar amount. Most chains never find it.
+
+We built RatingIQ to find it.`,
+    visualConcept:'Minimal navy card. Pull stat: "0.2 = $200K+" in gold. RatingIQ logo prominent.',
+    status:'scheduled', corrections:'', shanyApproved:false
+  },
+  {
+    id:'p33', date:'2026-04-29', platform:'linkedin-company', type:'Company Repost',
+    visual:'Pending — Claude Design',
+    copy:`The 7 is a blueprint. Most hotels scroll past it.
+
+We built a system to make sure you don't.
+
+rating-iq.com`,
+    visualConcept:'Gold "7" on navy. Short tagline below in white. RatingIQ logo top-left.',
+    status:'scheduled', corrections:'', shanyApproved:false
+  },
+  {
+    id:'p34', date:'2026-05-04', platform:'linkedin-company', type:'Company Repost',
+    visual:'Pending — Claude Design',
+    copy:`Score up 0.3 in 60 days. No renovation. One connected complaint.
+
+This is exactly what RatingIQ is built for.`,
+    visualConcept:'Stat card: "+0.3 / 60 days" in gold on navy. Clean and sharp.',
+    status:'scheduled', corrections:'', shanyApproved:false
+  },
+  {
+    id:'p35', date:'2026-05-17', platform:'linkedin-company', type:'Company Repost',
+    visual:'Pending — Claude Design',
+    copy:`The most expensive mistake in hospitality: solving the visible problem instead of the actual one.
+
+Our founder. Our mission.`,
+    visualConcept:'Bold navy card. Pull quote: "$400K on the wrong thing." Gold text. RatingIQ logo.',
+    status:'scheduled', corrections:'', shanyApproved:false
+  },
+  {
+    id:'p36', date:'2026-06-01', platform:'linkedin-company', type:'Company Repost',
+    visual:'Pending — Claude Design',
+    copy:`Someone finally connected what guests are saying to what you actually need to fix.
+
+That's the whole product. That's always been the product.
+
+rating-iq.com`,
+    visualConcept:'Pull quote card on navy. "I\'ve been asking for this for three years." in Manrope italic gold.',
+    status:'scheduled', corrections:'', shanyApproved:false
+  },
+  {
+    id:'p37', date:'2026-06-10', platform:'linkedin-company', type:'Company Repost',
+    visual:'Pending — Claude Design',
+    copy:`72% of guests choose rating over brand name.
+
+Your rating is your brand now. RatingIQ is how you protect it.
+
+rating-iq.com`,
+    visualConcept:'"72%" large gold on navy. Short copy below in white Manrope. Logo prominent.',
+    status:'scheduled', corrections:'', shanyApproved:false
+  },
+  {
+    id:'p38', date:'2026-06-15', platform:'linkedin-company', type:'Company Repost',
+    visual:'Pending — Claude Design',
+    copy:`Review responses aren't customer service. They're a revenue strategy.
+
+Every unanswered review is a missed signal. And a missed booking.
+
+rating-iq.com`,
+    visualConcept:'"2.2x" stat in gold on navy. Subline: "more OTA revenue. From responding to reviews." Clean.',
+    status:'scheduled', corrections:'', shanyApproved:false
+  },
+
+  // ─── REPOSTS: SHANY'S PROFILE ───
+  {
+    id:'p39', date:'2026-04-14', platform:'linkedin-shany', type:'Repost — Shany',
+    visual:'Pending — Claude Design',
+    copy:`Omri puts the math behind something I explain in every demo.
+
+0.2 on Booking.com isn't a small dip. It's a number on the P&L.
+
+This post is the short version of every conversation we have.`,
+    visualConcept:'Warm sand background. Short personal note in navy Manrope. RatingIQ logo subtle bottom.',
+    status:'scheduled', corrections:'', shanyApproved:false
+  },
+  {
+    id:'p40', date:'2026-05-01', platform:'linkedin-shany', type:'Repost — Shany',
+    visual:'Pending — Claude Design',
+    copy:`The 7 is the one worth reading.
+
+Omri explains why most hotels are focused on the wrong end of the scale. I've been saying this for months and never found a way to put it this clearly.`,
+    visualConcept:'Warm personal feel. Gold "7" on cream. Handwritten-style feel. RatingIQ logo small.',
+    status:'scheduled', corrections:'', shanyApproved:false
+  },
+  {
+    id:'p41', date:'2026-05-06', platform:'linkedin-shany', type:'Repost — Shany',
+    visual:'Pending — Claude Design',
+    copy:`The WiFi story. Every time I share this, someone says "we have the exact same problem."
+
+That's the point. These aren't unusual problems. They're just unconnected ones.`,
+    visualConcept:'Clean warm card. Short quote in navy on cream. Personal and grounded.',
+    status:'scheduled', corrections:'', shanyApproved:false
+  },
+  {
+    id:'p42', date:'2026-05-18', platform:'linkedin-shany', type:'Repost — Shany',
+    visual:'Pending — Claude Design',
+    copy:`The $400K story is real. I was in that call.
+
+The CEO was ready to sign a renovation. The data said something completely different.
+
+This is why we pull the data before you make a decision.`,
+    visualConcept:'Personal card. Pull quote: "$400K on the wrong thing." Warm, not corporate. RatingIQ logo.',
+    status:'scheduled', corrections:'', shanyApproved:false
+  },
+  {
+    id:'p43', date:'2026-06-03', platform:'linkedin-shany', type:'Repost — Shany',
+    visual:'Pending — Claude Design',
+    copy:`"I've been asking for this for three years."
+
+I hear this a lot. Omri hears it more. This post is why we built what we built.`,
+    visualConcept:'Warm cream card. Short quote in navy italic. Minimal and human. RatingIQ logo bottom.',
+    status:'scheduled', corrections:'', shanyApproved:false
   }
 ];
 
@@ -967,7 +1094,7 @@ Most of the time, the fix doesn't cost anything.`,
 // from defaults while keeping status, corrections, shanyApproved, and date.
 
 
-const DATA_VERSION = 5;
+const DATA_VERSION = 6;
 
 function loadPosts(){
   try{
@@ -1000,6 +1127,9 @@ function loadPosts(){
             lp.visual=dp.visual;
             lp.visualConcept=dp.visualConcept;
             lp.type=dp.type;
+            lp.date=dp.date;
+            lp.status=dp.status;
+            lp.platform=dp.platform;
           }
         });
         localStorage.setItem('sc_data_version',String(DATA_VERSION));
@@ -1036,6 +1166,7 @@ function fmtDay(d){
 }
 function platformLabel(p){
   if(p==='linkedin-omri')return' Omri';
+  if(p==='linkedin-shany')return' Shany';
   return'';
 }
 
@@ -1051,7 +1182,7 @@ const ICONS={
 };
 
 function platformIcon(p){
-  if(p==='linkedin-company'||p==='linkedin-omri')return ICONS.linkedin;
+  if(p==='linkedin-company'||p==='linkedin-omri'||p==='linkedin-shany')return ICONS.linkedin;
   if(p==='facebook')return ICONS.facebook;
   return'';
 }
