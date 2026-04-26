@@ -1767,8 +1767,8 @@ function quickStatus(id,val){
   if(p){
     p.status=val;savePosts(posts);renderStats();
     const payload={id, status: val};
-    const isOmri = p.profile==='omri';
-    if(val==='ready' && (p.shanyApproved || isOmri)) payload.approved=true;
+    const isPersonal = p.profile==='omri' || p.profile==='shany';
+    if(val==='ready' && (p.shanyApproved || isPersonal)) payload.approved=true;
     if(val!=='ready' && val!=='scheduled') payload.approved=false;
     syncToScheduler(payload);
   }

@@ -36,7 +36,7 @@
     "date": "2026-04-11",
     "profile": "shany",
     "copy": "Omri puts the math behind something I explain in every demo.\n\n0.2 on Booking.com isn't a small dip. It's a number on the P&L.\n\nThis post is the short version of every conversation we have.",
-    "status": "scheduled",
+    "status": "published",
     "approved": false
   },
   {
@@ -101,7 +101,7 @@
     "profile": "shany",
     "copy": "The 7 is the one worth reading.\n\nOmri explains why most hotels are focused on the wrong end of the scale. I've been saying this for months and never found a way to put it this clearly.",
     "status": "scheduled",
-    "approved": false
+    "approved": true
   },
   {
     "id": "p11",
@@ -133,7 +133,7 @@
     "profile": "shany",
     "copy": "The WiFi story. Every time I share this, someone says \"we have the exact same problem.\"\n\nThat's the point. These aren't unusual problems. They're just unconnected ones.",
     "status": "scheduled",
-    "approved": false
+    "approved": true
   },
   {
     "id": "p13",
@@ -181,7 +181,7 @@
     "profile": "shany",
     "copy": "The $400K story is real. I was in that call.\n\nThe CEO was ready to sign a renovation. The data said something completely different.\n\nThis is why we pull the data before you make a decision.",
     "status": "scheduled",
-    "approved": false
+    "approved": true
   },
   {
     "id": "p18",
@@ -245,7 +245,7 @@
     "profile": "shany",
     "copy": "\"I've been asking for this for three years.\"\n\nI hear this a lot. Omri hears it more. This post is why we built what we built.",
     "status": "scheduled",
-    "approved": false
+    "approved": true
   },
   {
     "id": "p25",
@@ -380,7 +380,7 @@
     "date": "2026-04-15",
     "profile": "shany",
     "copy": "Every time Omri explains this, someone in the room exhales.\n\nNo renovation required. The problem is operational. That means the fix is too.",
-    "status": "scheduled",
+    "status": "published",
     "approved": false
   },
   {
@@ -389,7 +389,7 @@
     "profile": "shany",
     "copy": "Nobody opens the dashboard. I've been in enough hotel ops conversations to know this is true.\n\nOmri explains exactly why that matters.",
     "status": "scheduled",
-    "approved": false
+    "approved": true
   },
   {
     "id": "p54",
@@ -397,7 +397,7 @@
     "profile": "shany",
     "copy": "Three problems. All solvable.\n\nI've watched Omri explain this in rooms with hotel CEOs and seen the penny drop every time.",
     "status": "scheduled",
-    "approved": false
+    "approved": true
   },
   {
     "id": "p55",
@@ -405,7 +405,7 @@
     "profile": "shany",
     "copy": "The wrong question gets you response templates.\n\nThe right one gets you a number on your P&L. This is the distinction we built a company around.",
     "status": "scheduled",
-    "approved": false
+    "approved": true
   },
   {
     "id": "p56",
@@ -413,7 +413,7 @@
     "profile": "shany",
     "copy": "Mother's Day in hospitality is no joke.\n\nThis post says it better than anything I've written. Happy Mother's Day to every hotel team running full houses.",
     "status": "scheduled",
-    "approved": false
+    "approved": true
   },
   {
     "id": "p57",
@@ -421,7 +421,7 @@
     "profile": "shany",
     "copy": "Not a popularity contest. A feedback loop with financial consequences.\n\nOmri puts in one sentence what takes me a slide deck to explain.",
     "status": "scheduled",
-    "approved": false
+    "approved": true
   },
   {
     "id": "p58",
@@ -429,7 +429,7 @@
     "profile": "shany",
     "copy": "Sold out doesn't mean well-reviewed.\n\nI've been in this industry long enough to know that gap is always operational. This one is worth reading.",
     "status": "scheduled",
-    "approved": false
+    "approved": true
   },
   {
     "id": "p59",
@@ -437,7 +437,7 @@
     "profile": "shany",
     "copy": "2.68% more in online revenue per rating point. I use this number in almost every conversation.\n\nOmri explains the why.",
     "status": "scheduled",
-    "approved": false
+    "approved": true
   },
   {
     "id": "p60",
@@ -445,7 +445,7 @@
     "profile": "shany",
     "copy": "72% choose rating over brand name. I've seen this stat stop people mid-sentence in demos.\n\nThe logo is just the introduction. Omri nails it here.",
     "status": "scheduled",
-    "approved": false
+    "approved": true
   },
   {
     "id": "p61",
@@ -453,7 +453,7 @@
     "profile": "shany",
     "copy": "Review responses as a revenue strategy. Not customer service.\n\nThat reframe changes everything. Worth reading.",
     "status": "scheduled",
-    "approved": false
+    "approved": true
   },
   {
     "id": "p62",
@@ -556,7 +556,7 @@
     "date": "2026-04-09",
     "profile": "shany",
     "copy": "We changed the name. We didn't change what we believe.\n\nA hotel chain's rating is a revenue number. Everything we build starts from there.",
-    "status": "scheduled",
+    "status": "published",
     "approved": false
   },
   {
@@ -564,7 +564,7 @@
     "date": "2026-04-13",
     "profile": "shany",
     "copy": "I spent months working on this website. Not on how it looks — on what it says.\n\nFor the person who actually has to make the call. Take a look.\n\nrating-iq.com",
-    "status": "scheduled",
+    "status": "published",
     "approved": false
   },
   {
@@ -573,7 +573,7 @@
     "profile": "shany",
     "copy": "We are not a dashboard. We are not a reporting tool.\n\nWe are the thing that makes review data actually get used.",
     "status": "scheduled",
-    "approved": false
+    "approved": true
   },
   {
     "id": "p77",
@@ -581,7 +581,7 @@
     "profile": "shany",
     "copy": "From reviews to revenue. I've been living this line for months.\n\nIt's the clearest thing we've ever said about what we do.",
     "status": "scheduled",
-    "approved": false
+    "approved": true
   },
   {
     "id": "p78",
@@ -589,7 +589,7 @@
     "profile": "shany",
     "copy": "We see these numbers every time we look at a new portfolio.\n\n4 clusters. One dragging property. A score that hasn't moved in a year. All fixable. That's what keeps me going.",
     "status": "scheduled",
-    "approved": false
+    "approved": true
   },
   {
     "id": "p79",
@@ -597,7 +597,7 @@
     "profile": "shany",
     "copy": "A one-off complaint is noise. A recurring cluster is your score.\n\nThis one took us a while to explain clearly. We finally got it right.",
     "status": "scheduled",
-    "approved": false
+    "approved": true
   },
   {
     "id": "p80",
@@ -605,7 +605,7 @@
     "profile": "shany",
     "copy": "0.3 to 0.5 points in 90 days. Zero CapEx.\n\nI share this every time someone asks me for proof it works.",
     "status": "scheduled",
-    "approved": false
+    "approved": true
   },
   {
     "id": "p81",
@@ -613,7 +613,7 @@
     "profile": "shany",
     "copy": "I built this website for one person. The CEO who signs the P&L and doesn't have time for a product tour.\n\nIf that's you — rating-iq.com",
     "status": "scheduled",
-    "approved": false
+    "approved": true
   },
   {
     "id": "p82",
@@ -621,7 +621,7 @@
     "profile": "shany",
     "copy": "Cornell says 1% rating increase = 1.42% RevPAR.\n\nI've been using this number in every conversation since we found it. The math is the pitch.",
     "status": "scheduled",
-    "approved": false
+    "approved": true
   },
   {
     "id": "p83",
@@ -629,7 +629,7 @@
     "profile": "shany",
     "copy": "Raise your rating by one star. Charge 11.2% more. Still get booked.\n\nTripAdvisor's number, not ours. The case writes itself.",
     "status": "scheduled",
-    "approved": false
+    "approved": true
   },
   {
     "id": "p84",
@@ -637,7 +637,7 @@
     "profile": "shany",
     "copy": "One rating point. 7.5% more occupancy.\n\nI use this number to open conversations. It closes them too.",
     "status": "scheduled",
-    "approved": false
+    "approved": true
   },
   {
     "id": "p85",
@@ -645,6 +645,6 @@
     "profile": "shany",
     "copy": "Silence is what keeps the bad reviews coming.\n\nI read this study when we were building the product and it has stayed with me. Responding is a revenue strategy.",
     "status": "scheduled",
-    "approved": false
+    "approved": true
   }
 ]
