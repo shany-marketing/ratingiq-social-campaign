@@ -1765,10 +1765,12 @@ function syncToScheduler(payload){
 function quickStatus(id,val){
   const p=posts.find(x=>x.id===id);
   if(p){
-    p.status=val;savePosts(posts);renderStats();
-    const payload={id, status: val};
     const isPersonal = p.profile==='omri' || p.profile==='shany';
-    if(val==='ready' && (p.shanyApproved || isPersonal)) payload.approved=true;
+    // Personal profiles: "Ready" auto-promotes to "Scheduled"
+    if(val==='ready' && isPersonal) val='scheduled';
+    p.status=val;savePosts(posts);renderStats();renderTable();
+    const payload={id, status: val};
+    if(val==='scheduled' && (p.shanyApproved || isPersonal)) payload.approved=true;
     if(val!=='ready' && val!=='scheduled') payload.approved=false;
     syncToScheduler(payload);
   }
