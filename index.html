@@ -1587,6 +1587,15 @@ function loadPosts(){
         });
         localStorage.setItem('sc_data_version',String(DATA_VERSION));
       }
+      // Migration: promote personal-profile "ready" posts to "scheduled"
+      let promoted=false;
+      loaded.forEach(p=>{
+        if((p.profile==='omri'||p.profile==='shany')&&p.status==='ready'){
+          p.status='scheduled';p.approved=true;promoted=true;
+        }
+      });
+      if(promoted) localStorage.setItem('sc_posts',JSON.stringify(loaded));
+
       // Merge any new posts from DEFAULT_POSTS not yet in localStorage
       const loadedIds=new Set(loaded.map(p=>p.id));
       DEFAULT_POSTS.forEach(dp=>{
