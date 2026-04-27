@@ -11,7 +11,7 @@
     "id": "p3",
     "date": "2026-04-11",
     "profile": "omri",
-    "copy": "I once sat across from a hotel chain CEO who told me his rating wasn't a priority.\n\nHis RevPAR was down 11% that quarter.\n\nHe just hadn't connected the two yet.\n\nA 0.2 drop on Booking.com. Barely noticeable on paper. But it quietly erases $200K+ in annual revenue for a mid-size chain.\n\nHere's the math nobody puts on a slide:\n→ Lower score = lower search rank\n→ Lower rank = fewer clicks\n→ Fewer clicks = lower conversion\n→ Lower conversion = lower RevPAR\n\nEveryone says \"our rating dipped a bit.\"\n\nThat dip has a dollar amount. Most chains never find it.\n\nWe built RatingIQ to find it.",
+    "copy": "I once sat across from a hotel chain CEO who told me his rating wasn't a priority.\n\nHis RevPAR was down 11% that quarter.\n\nHe just hadn't connected the two yet.\n\nA 0.2 drop on Booking.com. Barely noticeable on paper. But it quietly erases $200K+ in annual revenue for a mid-size chain.\n\nHere's the math nobody puts on a slide:\n\u2192 Lower score = lower search rank\n\u2192 Lower rank = fewer clicks\n\u2192 Fewer clicks = lower conversion\n\u2192 Lower conversion = lower RevPAR\n\nEveryone says \"our rating dipped a bit.\"\n\nThat dip has a dollar amount. Most chains never find it.\n\nWe built RatingIQ to find it.",
     "status": "published",
     "approved": false
   },
@@ -51,9 +51,10 @@
     "id": "p7",
     "date": "2026-04-28",
     "profile": "company",
-    "copy": "RatingIQ is not a review management tool.\n\nNot a reputation dashboard. Not a \"feedback analytics platform.\"\n\n(We've seen enough of those.)\n\nIt's an operational push system for hotel chains:\n→ Maps what's actually hurting the score\n→ Prioritizes the fixes\n→ Pushes the right actions to the right people. No login required.\n\nBecause nobody logs in.\n\nrating-iq.com",
-    "status": "scheduled",
-    "approved": false
+    "copy": "RatingIQ is not a review management tool.\n\nNot a reputation dashboard. Not a \"feedback analytics platform.\"\n\n(We've seen enough of those.)\n\nIt's an operational push system for hotel chains:\n\u2192 Maps what's actually hurting the score\n\u2192 Prioritizes the fixes\n\u2192 Pushes the right actions to the right people. No login required.\n\nBecause nobody logs in.\n\nrating-iq.com",
+    "status": "published",
+    "approved": false,
+    "linkedInUrl": "https://www.linkedin.com/feed/update/urn:li:activity:7454415065123971073/?actorCompanyId=91043663"
   },
   {
     "id": "p8",
@@ -77,7 +78,7 @@
     "profile": "company",
     "copy": "From reviews to revenue.\n\nThat's the only journey that matters.\n\nNot \"manage your reputation.\" Not \"monitor your feedback.\"\n\nMove the number that moves your P&L.\n\nrating-iq.com",
     "status": "scheduled",
-    "approved": false
+    "approved": true
   },
   {
     "id": "p31",
@@ -123,7 +124,7 @@
     "id": "p12",
     "date": "2026-05-11",
     "profile": "company",
-    "copy": "The average hotel chain has:\n\n→ 4 recurring complaint clusters unresolved for 90+ days\n→ 1 property dragging down the portfolio average by 0.4 points\n→ A Booking.com score that hasn't moved in over a year\n\nWe didn't make these numbers up. We see them every time we look at a new portfolio.\n\nThe good news: all three are fixable without touching the building.\n\nrating-iq.com",
+    "copy": "The average hotel chain has:\n\n\u2192 4 recurring complaint clusters unresolved for 90+ days\n\u2192 1 property dragging down the portfolio average by 0.4 points\n\u2192 A Booking.com score that hasn't moved in over a year\n\nWe didn't make these numbers up. We see them every time we look at a new portfolio.\n\nThe good news: all three are fixable without touching the building.\n\nrating-iq.com",
     "status": "scheduled",
     "approved": false
   },
@@ -157,7 +158,7 @@
     "profile": "company",
     "copy": "Not all complaints are equal.\n\nA one-off guest complaint about a specific staff member? Probably not moving your score.\n\nA recurring cluster about check-in wait times across 3 properties for 6 weeks? That's your score.\n\nRatingIQ shows you the difference. And pushes the fix to the people who can act on it.\n\nBecause knowing isn't enough. Someone has to do something about it.\n\nrating-iq.com",
     "status": "scheduled",
-    "approved": false
+    "approved": true
   },
   {
     "id": "p17",
@@ -187,7 +188,7 @@
     "id": "p18",
     "date": "2026-05-27",
     "profile": "company",
-    "copy": "Hotels that address their top 3 complaint clusters within 30 days:\n\n→ See an average rating improvement of 0.3-0.5 points within 90 days\n→ Without capital expenditure\n→ Through operational prioritization alone\n\nThese aren't projections from a marketing deck.\nThese are outcomes from chains using RatingIQ.\n\nThe math is straightforward once you know where to look.\n\nrating-iq.com",
+    "copy": "Hotels that address their top 3 complaint clusters within 30 days:\n\n\u2192 See an average rating improvement of 0.3-0.5 points within 90 days\n\u2192 Without capital expenditure\n\u2192 Through operational prioritization alone\n\nThese aren't projections from a marketing deck.\nThese are outcomes from chains using RatingIQ.\n\nThe math is straightforward once you know where to look.\n\nrating-iq.com",
     "status": "scheduled",
     "approved": false
   },
@@ -323,7 +324,7 @@
     "id": "p45",
     "date": "2026-04-28",
     "profile": "company",
-    "copy": "Nobody logs in. That's not a criticism — it's an industry truth.\n\nWe built RatingIQ around it.\n\nrating-iq.com",
+    "copy": "Nobody logs in. That's not a criticism \u2014 it's an industry truth.\n\nWe built RatingIQ around it.\n\nrating-iq.com",
     "status": "scheduled",
     "approved": false
   },
@@ -467,17 +468,18 @@
     "id": "p63",
     "date": "2026-04-13",
     "profile": "omri",
-    "copy": "It's live. Everything we've been building — the product, the story, the case for why this matters.\n\nrating-iq.com",
+    "copy": "It's live. Everything we've been building \u2014 the product, the story, the case for why this matters.\n\nrating-iq.com",
     "status": "published",
     "approved": false
   },
   {
     "id": "p64",
-    "date": "2026-04-28",
+    "date": "2026-04-27",
     "profile": "omri",
     "copy": "This is the short version of what I explain in every first call.\n\nNobody logs in. We built around that truth.\n\nrating-iq.com",
-    "status": "scheduled",
-    "approved": true
+    "status": "published",
+    "approved": false,
+    "reshareOf": "p7"
   },
   {
     "id": "p65",
@@ -563,17 +565,18 @@
     "id": "p75",
     "date": "2026-04-13",
     "profile": "shany",
-    "copy": "I spent months working on this website. Not on how it looks — on what it says.\n\nFor the person who actually has to make the call. Take a look.\n\nrating-iq.com",
+    "copy": "I spent months working on this website. Not on how it looks \u2014 on what it says.\n\nFor the person who actually has to make the call. Take a look.\n\nrating-iq.com",
     "status": "published",
     "approved": false
   },
   {
     "id": "p76",
-    "date": "2026-04-28",
+    "date": "2026-04-27",
     "profile": "shany",
     "copy": "We are not a dashboard. We are not a reporting tool.\n\nWe are the thing that makes review data actually get used.",
-    "status": "scheduled",
-    "approved": true
+    "status": "published",
+    "approved": false,
+    "reshareOf": "p7"
   },
   {
     "id": "p77",
@@ -611,7 +614,7 @@
     "id": "p81",
     "date": "2026-05-29",
     "profile": "shany",
-    "copy": "I built this website for one person. The CEO who signs the P&L and doesn't have time for a product tour.\n\nIf that's you — rating-iq.com",
+    "copy": "I built this website for one person. The CEO who signs the P&L and doesn't have time for a product tour.\n\nIf that's you \u2014 rating-iq.com",
     "status": "scheduled",
     "approved": true
   },
