@@ -20,9 +20,13 @@
 }
 .ai-badge{display:inline-flex;align-items:center;gap:3px;background:linear-gradient(135deg,#ede9fe,#ddd6fe);color:#5b21b6;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;letter-spacing:.3px;margin-left:5px;vertical-align:middle}
 .ai-badge::before{content:'✦';font-size:9px}
+.review-badge{display:inline-flex;align-items:center;gap:3px;background:#fef3c7;color:#92400e;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;letter-spacing:.3px;margin-left:5px;vertical-align:middle}
+.review-badge::before{content:'◎';font-size:9px}
 .visual-prompt-tip{max-width:320px;font-size:11.5px;color:var(--slate);font-style:italic;padding:6px 0 0}
 tr.ai-row{background:#faf7ff}
 tr.ai-row:hover{background:#f3eeff}
+tr.review-row{background:#fffbeb}
+tr.review-row:hover{background:#fef9e3}
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--charcoal);min-height:100vh}
 h1,h2,h3,h4{font-family:'Manrope',sans-serif}
 
@@ -91,6 +95,7 @@ tbody tr.sub-row .status-select{font-size:10px;padding:2px 6px}
 .badge-linkedin-company{background:#e8f2f9;color:var(--li-co)}
 .badge-linkedin-omri{background:#ede8f7;color:var(--li-om)}
 .badge-linkedin-shany{background:#fce7f3;color:#be185d}
+.badge-linkedin-group{background:#e6f4f0;color:#0f766e}
 .badge-facebook{background:#e7effe;color:var(--fb)}
 
 /* ─── TYPE TAG ─── */
@@ -238,6 +243,7 @@ canvas#vb-canvas{border-radius:8px;box-shadow:0 4px 24px rgba(0,0,0,.18);max-wid
         <option value="linkedin-company">LinkedIn Company</option>
         <option value="linkedin-omri">LinkedIn — Omri</option>
         <option value="linkedin-shany">LinkedIn — Shany</option>
+        <option value="linkedin-group">LinkedIn — Groups</option>
       </select>
       <select id="filter-status" onchange="renderTable()">
         <option value="">All Statuses</option>
@@ -306,9 +312,13 @@ canvas#vb-canvas{border-radius:8px;box-shadow:0 4px 24px rgba(0,0,0,.18);max-wid
             ondrop="this.classList.remove('dragging');vbHandleDrop(event)">
             <div class="vb-drop-icon">↑</div>
             <div class="vb-drop-text">Drop image here</div>
-            <div class="vb-drop-hint">or click to browse · PNG / JPG</div>
+            <div class="vb-drop-hint">or click to browse · PNG / JPG / MP4 / MOV</div>
           </div>
-          <input type="file" id="vb-file-input" accept="image/*" style="display:none" onchange="vbHandleFile(this.files[0]);this.value=''">
+          <input type="file" id="vb-file-input" style="display:none" onchange="vbHandleFile(this.files[0]);this.value=''">
+          <div style="margin-top:8px;display:flex;gap:6px;align-items:center">
+            <input type="text" id="vb-path-input" placeholder="Or paste file path here…" style="flex:1;font-size:11px;padding:5px 8px;border:1px solid #ddd;border-radius:6px;color:var(--navy)">
+            <button type="button" class="btn btn-ghost btn-sm" onclick="vbLoadFromPath()">Load</button>
+          </div>
 
           <div id="vb-current-thumb-wrap" style="display:none;margin-top:14px">
             <label style="font-size:10px;font-weight:700;color:var(--slate);text-transform:uppercase;letter-spacing:.4px;display:block;margin-bottom:7px">Attached Visual</label>
@@ -404,18 +414,26 @@ canvas#vb-canvas{border-radius:8px;box-shadow:0 4px 24px rgba(0,0,0,.18);max-wid
         </div>
         <div class="field">
           <label>Canva Visual</label>
-          <div id="modal-img-zone" class="modal-img-wrap" onclick="document.getElementById('modal-file-input').click()">
+          <div id="modal-img-zone" class="modal-img-wrap" onclick="document.getElementById('modal-file-input').click()"
+            ondragover="event.preventDefault();this.style.borderColor='var(--gold)'"
+            ondragleave="this.style.borderColor=''"
+            ondrop="event.preventDefault();this.style.borderColor='';modalHandleFile(event.dataTransfer.files[0])">
             <div id="modal-img-placeholder" style="padding:14px 0;color:var(--slate)">
               <div style="font-size:22px;margin-bottom:6px">📤</div>
               <div style="font-size:12px;font-weight:600;color:var(--navy);margin-bottom:2px">Upload Canva visual</div>
-              <div style="font-size:11px">Click or drag a PNG / JPG here</div>
+              <div style="font-size:11px">Click to browse or drag any file here</div>
             </div>
-            <img id="modal-img-preview" style="display:none;width:100%;border-radius:6px;display:none">
+            <img id="modal-img-preview" style="display:none;width:100%;border-radius:6px">
+            <video id="modal-video-preview" style="display:none;width:100%;border-radius:6px" controls playsinline></video>
           </div>
-          <input type="file" id="modal-file-input" accept="image/*" style="display:none" onchange="modalHandleFile(this.files[0]);this.value=''">
+          <input type="file" id="modal-file-input" style="display:none" onchange="modalHandleFile(this.files[0]);this.value=''">
           <div id="modal-img-actions" style="display:none;gap:6px;margin-top:6px">
             <button type="button" class="btn btn-ghost btn-sm" style="flex:1" onclick="modalRemoveImage()">Remove</button>
             <button type="button" class="btn btn-ghost btn-sm" style="flex:1" onclick="document.getElementById('modal-file-input').click()">Replace</button>
+          </div>
+          <div style="margin-top:8px;display:flex;gap:6px;align-items:center">
+            <input type="text" id="modal-path-input" placeholder="Or paste file path here…" style="flex:1;font-size:11px;padding:5px 8px;border:1px solid #ddd;border-radius:6px;color:var(--navy)">
+            <button type="button" class="btn btn-ghost btn-sm" onclick="loadFromPath()">Load</button>
           </div>
         </div>
         <div class="field">
@@ -605,7 +623,7 @@ All three are solvable. None of them require guesswork.
 
 That's what RatingIQ is for.`,
     visualConcept:'Three stacked cards, each a "problem type." Clean, numbered. Navy + gold accents. Educational and sharp.',
-    status:'draft', corrections:'', shanyApproved:false
+    status:'published', corrections:'', shanyApproved:false
   },
   {
     id:'p10', date:'2026-05-04', platform:'linkedin-company', type:'Slogan Reveal',
@@ -810,15 +828,13 @@ Good luck to everyone running a full house this weekend. You've earned the deman
   {
     id:'p22', date:'2026-05-29', platform:'linkedin-company', type:'Website Feature',
     visual:'Built for one person.\nThe CEO who signs the P&L.',
-    copy:`We built the website around one question:
+    copy:`Most hotel tech websites open with a product tour.
 
-"What would this look like if it wasn't designed for investors?"
+rating-iq.com opens with the problem.
 
-No feature list. No dashboard screenshots. No testimonial carousels.
+The rating pressure. The revenue consequence. The operational fix — without renovation, without capital expenditure.
 
-Just the problem, the approach, and the outcome — for the person who actually has to make a decision.
-
-If you haven't seen it yet:
+If you're running a hotel chain and your Booking.com score hasn't moved in 12 months, that page was written for you.
 
 rating-iq.com`,
     visualConcept:'Browser mockup template. Shows the website hero section inside a clean browser frame. Navy background, gold URL bar, tagline visible.',
@@ -980,7 +996,7 @@ The 7 is telling you exactly what to fix to turn a one-time visitor into a repea
 
 Most of the time, the fix doesn't cost anything.`,
     visualConcept:'Large gold "7" with "/10" in white. Tagline: "Your most useful review." Rating bar 1-10 with 7 lit in gold. RatingIQ logo prominent top-left.',
-    status:'scheduled', corrections:'', shanyApproved:false
+    status:'published', corrections:'', shanyApproved:false
   },
 
   // ─── REPOSTS: COMPANY OVER OMRI ───
@@ -1075,7 +1091,7 @@ This post is the short version of every conversation we have.`,
 
 Omri explains why most hotels are focused on the wrong end of the scale. I've been saying this for months and never found a way to put it this clearly.`,
     visualConcept:'Warm personal feel. Gold "7" on cream. Handwritten-style feel. RatingIQ logo small.',
-    status:'scheduled', corrections:'', shanyApproved:false
+    status:'published', corrections:'', shanyApproved:false
   },
   {
     id:'p41', date:'2026-05-15', platform:'linkedin-shany', type:'Repost — Shany',
@@ -1171,9 +1187,13 @@ The conversation starts at rating-iq.com`,
   {
     id:'p50', date:'2026-05-22', platform:'linkedin-company', type:'Company Repost',
     visual:'Pending — Claude Design',
-    copy:`Happy Memorial Day from the RatingIQ team.
+    copy:`This weekend, every hotel in the US is full.
 
-To every hotel running full capacity this weekend.`,
+The reviews that land Monday morning will follow you for months.
+
+To every team running at capacity — you've got this.
+
+rating-iq.com`,
     visualConcept:'Minimal navy card. Warm holiday line in white Manrope. Gold RatingIQ logo.',
     status:'scheduled', corrections:'', shanyApproved:false
   },
@@ -1206,7 +1226,7 @@ No renovation required. The problem is operational. That means the fix is too.`,
 
 Omri explains exactly why that matters.`,
     visualConcept:'Personal warm card. Short copy in navy. Cream background.',
-    status:'scheduled', corrections:'', shanyApproved:false
+    status:'published', corrections:'', shanyApproved:false
   },
   {
     id:'p54', date:'2026-04-30', platform:'linkedin-shany', type:'Repost — Shany',
@@ -1215,7 +1235,7 @@ Omri explains exactly why that matters.`,
 
 I've watched Omri explain this in rooms with hotel CEOs and seen the penny drop every time.`,
     visualConcept:'Clean warm card. Personal voice. Minimal cream background.',
-    status:'scheduled', corrections:'', shanyApproved:false
+    status:'published', corrections:'', shanyApproved:false
   },
   {
     id:'p55', date:'2026-05-13', platform:'linkedin-shany', type:'Repost — Shany',
@@ -1525,6 +1545,403 @@ I use this number to open conversations. It closes them too.`,
 I read this study when we were building the product and it has stayed with me. Responding is a revenue strategy.`,
     visualConcept:'Warm personal card. Short and thoughtful on cream. Shany voice.',
     status:'scheduled', corrections:'', shanyApproved:false
+  },
+  {
+    id:'p86', date:'2026-04-30', platform:'linkedin-group', type:'Group Repost',
+    visual:'',
+    copy:`Three kinds of hotel rating problems — and most chains are managing the wrong one.
+
+The visible problem: a score stuck at 8.1 while the city average climbs. Easy to see, hard to ignore.
+
+The quiet problem: a trailing 90-day average lower than the displayed score. A drop signal most chains never catch until it's too late.
+
+The operational problem: recurring complaints with no clear owner. Everyone sees the reviews. Nobody maps them to a fix.
+
+All three are solvable. But only once you know which one you're actually dealing with.
+
+Which of these shows up most at your properties?`,
+    status:'scheduled', corrections:'', shanyApproved:true
+  },
+  {
+    id:'p87', date:'2026-05-06', platform:'linkedin-group', type:'Group Repost',
+    visual:'',
+    copy:`The guest who gives you a 7 is the most valuable feedback you'll ever get — and most hotels scroll right past them.
+
+A 10 tells you nothing to fix. A 3 puts you in damage control.
+
+But a 7? That guest almost had a great stay. They noticed something specific. They're not angry enough to walk away permanently.
+
+That is a roadmap to a repeat guest.
+
+Most hotel teams spend their energy on the 3s and celebrate the 10s. The 7s are where the real improvement happens.
+
+How does your team currently treat the mid-range reviews?`,
+    status:'scheduled', corrections:'', shanyApproved:true
+  },
+  {
+    id:'p88', date:'2026-05-13', platform:'linkedin-group', type:'Group Repost',
+    visual:'',
+    copy:`Two questions that sound identical but lead to completely different outcomes:
+
+"How do we manage our reviews?" → respond faster, template better, apologize more professionally.
+
+"What's the fastest path to a higher score?" → identify what's actually hurting the rating, fix it operationally, move the number.
+
+One is a PR exercise. One shows up on the P&L.
+
+Most hotel chains are optimizing for the first question. The second one is where the revenue is.
+
+Which question is your team actually asking?`,
+    status:'scheduled', corrections:'', shanyApproved:true
+  },
+  {
+    id:'p89', date:'2026-05-18', platform:'linkedin-group', type:'Group Repost',
+    visual:'',
+    copy:`A one-off complaint about a specific staff member probably isn't moving your Booking.com score.
+
+A recurring pattern — check-in wait times across 3 properties for 6 weeks straight? That's your score.
+
+The difference is volume, frequency, and cross-property pattern. Most hotel teams are sorting through this manually, one review at a time.
+
+What's your current process for separating signal from noise in your review data?`,
+    status:'scheduled', corrections:'', shanyApproved:true
+  },
+  {
+    id:'p90', date:'2026-05-25', platform:'linkedin-group', type:'Group Repost',
+    visual:'',
+    copy:`Hotel ratings on Booking.com aren't a popularity contest. They're a feedback loop with direct revenue consequences.
+
+A 0.1 point improvement can shift your search ranking enough to meaningfully move occupancy.
+
+So the conversation shouldn't be "how do we get more positive reviews?"
+
+It should be: "what's actually driving our negative ones — and how fast can we fix it?"
+
+Different question. Completely different result.
+
+How is your team framing this conversation internally?`,
+    status:'scheduled', corrections:'', shanyApproved:true
+  },
+  {
+    id:'p91', date:'2026-05-27', platform:'linkedin-group', type:'Group Repost',
+    visual:'',
+    copy:`Hotels that fix their top 3 complaint clusters within 30 days see an average 0.3–0.5 point rating improvement within 90 days.
+
+No capital expenditure. No renovation. Operational prioritization alone.
+
+The reason it works: most rating problems aren't physical — they're process gaps that show up consistently in review data but never get connected to the person who can fix them.
+
+Has anyone in the group tracked this kind of before/after? Would love to hear what you saw.`,
+    status:'scheduled', corrections:'', shanyApproved:true
+  },
+  {
+    id:'p92', date:'2026-06-03', platform:'linkedin-group', type:'Group Repost',
+    visual:'',
+    copy:`Cornell University ran the numbers on what a 1-point rating improvement actually means for hotel revenue.
+
+1% increase in your Booking.com rating = 1.42% more RevPAR + 0.54% more occupancy.
+
+Across a chain of 10 properties, that's not a rounding error. That's a budget line.
+
+The implication: your rating isn't a reputation metric. It's a revenue dial — and most chains aren't actively managing it as one.
+
+What's your current approach to improving ratings systematically across properties?`,
+    status:'scheduled', corrections:'', shanyApproved:true
+  },
+  {
+    id:'p93', date:'2026-06-10', platform:'linkedin-group', type:'Group Repost',
+    visual:'',
+    copy:`72% of guests say a hotel's rating matters more to them than the brand name.
+
+That's Expedia's data — and when you sit with it, it makes sense.
+
+The brand tells guests what to expect. The rating tells them what actually happened.
+
+A Marriott property at 7.8 loses bookings to an independent at 9.1. Consistently.
+
+For chain hotel executives, the implication is significant: your rating is now your most powerful brand signal — not your flag.
+
+How are you thinking about rating management at the chain level vs. property level?`,
+    status:'scheduled', corrections:'', shanyApproved:true
+  },
+  {
+    id:'p94', date:'2026-06-15', platform:'linkedin-group', type:'Group Repost',
+    visual:'',
+    copy:`Hotels that respond to 40–45% of their reviews see 2.2x more OTA revenue than those that don't respond at all.
+
+Cornell University and TripAdvisor independently reached the same conclusion.
+
+97% of guests who read reviews also read the responses. They're not evaluating the complaint — they're evaluating how you handle it.
+
+Most hotel teams think of review responses as customer service. The data says it's a revenue strategy.
+
+What percentage of reviews is your team currently responding to — and is there a system behind it?`,
+    status:'scheduled', corrections:'', shanyApproved:true
+  },
+  {
+    id:'p95', date:'2026-06-18', platform:'linkedin-omri', type:'Thought Leadership',
+    visual:'',
+    copy:`Your Booking.com rating is not a reputation score.
+
+It's a revenue dial.
+
+A 0.1 point improvement can shift your search rank enough to move occupancy. Cornell found that a 1% rating increase translates to 1.42% more RevPAR and 0.54% more occupancy.
+
+That's not a footnote. That's a P&L line.
+
+Most hotel chain CEOs I speak to treat their rating as a PR metric. Something to monitor. Something to manage when it drops.
+
+The ones moving fastest ask a different question:
+
+"What is our rating costing us right now?"
+
+Once you ask that, the next question follows: "What specifically is holding it down?"
+
+That's the conversation RatingIQ was built for.
+
+rating-iq.com`,
+    status:'draft', needsReview:true, corrections:'', shanyApproved:false
+  },
+  {
+    id:'p96', date:'2026-06-20', platform:'linkedin-omri', type:'Thought Leadership',
+    visual:'',
+    copy:`Most hotels don't have a review problem.
+
+They have a signal problem.
+
+You're collecting hundreds — maybe thousands — of reviews every quarter across Booking.com, TripAdvisor, Google, and your OTA channels.
+
+The problem isn't volume. It's that nobody's reading them systematically.
+
+A 3-star review about breakfast goes into the same pile as a 3-star review about the elevator. One of those is costing you rating points across 8 properties. The other is a one-off.
+
+You can't fix what you haven't ranked.
+
+And the ranking question isn't "what's getting the lowest scores?" It's: what recurring pattern, across which properties, is driving the most rating damage right now?
+
+That's the problem RatingIQ solves.
+
+rating-iq.com`,
+    status:'draft', needsReview:true, corrections:'', shanyApproved:false
+  },
+  {
+    id:'p97', date:'2026-06-22', platform:'linkedin-company', type:'Brand',
+    visual:'',
+    copy:`Guests are telling you exactly what to fix.
+
+The check-in line that took 25 minutes. The room that wasn't ready at 4pm. The breakfast that ran out of options by 8:30. The WiFi password nobody could find.
+
+These aren't random complaints. They're patterns.
+
+And patterns have a number attached — the fraction of a point they're costing your Booking.com score, the rank position you're losing to the property down the street, the ADR gap between you and a competitor with a 0.3 higher rating.
+
+RatingIQ maps every complaint cluster to its rating impact, then pushes a prioritized fix to the person who can act on it.
+
+Knowing isn't enough. Someone has to do something about it.
+
+rating-iq.com`,
+    status:'draft', needsReview:true, corrections:'', shanyApproved:false
+  },
+  {
+    id:'p98', date:'2026-06-24', platform:'linkedin-company', type:'Brand',
+    visual:'',
+    copy:`Reviews contain the signals.
+
+Every complaint cluster, every recurring issue, every pattern across your properties — it's all there, buried in the text.
+
+The problem is the distance between that signal and the person who can do something about it.
+
+A GM shouldn't need to read 400 reviews to understand that check-in delays are costing them 0.2 points on Booking.com this quarter. They should get that signal delivered, prioritized, and attached to an action.
+
+That's what RatingIQ does.
+
+Reviews → signal detection → operational priorities → rating improvement → revenue.
+
+The chain is simple. The execution is where most hotels get stuck.
+
+rating-iq.com`,
+    status:'draft', needsReview:true, corrections:'', shanyApproved:false
+  },
+  {
+    id:'p99', date:'2026-06-26', platform:'linkedin-omri', type:'Thought Leadership',
+    visual:'',
+    copy:`We talked to dozens of hotel GMs before building RatingIQ.
+
+The most common thing we heard wasn't "we need better data."
+
+It was: "I don't have time to log into another platform."
+
+They're already in PMS, channel manager, POS, revenue management systems. Adding a review analytics dashboard means one more tab nobody opens.
+
+That's why we built RatingIQ as a push system, not a pull one.
+
+The GM doesn't log in to find the problem. The problem — ranked by rating impact, mapped to the responsible team — gets pushed to them.
+
+The question was never "how do we give hotels better data?"
+
+It was: "how do we make sure the right person acts on the right information before it costs them another 0.1 points?"
+
+rating-iq.com`,
+    status:'draft', needsReview:true, corrections:'', shanyApproved:false
+  },
+  {
+    id:'p100', date:'2026-06-28', platform:'linkedin-omri', type:'Thought Leadership',
+    visual:'',
+    copy:`There's a number a lot of hotel chain CEOs don't look at closely enough.
+
+7.9.
+
+Not terrible. Not alarming. Easy to live with.
+
+But here's what 7.9 actually means:
+
+You're priced like an 8.2 property but converting like a 7.6. Guests see the rate, check the rating, and book the competitor with the cleaner score.
+
+You're invisible to OTA algorithms that surface 8.0+ properties first on peak nights.
+
+You're leaving rate on the table — not because your product isn't good enough, but because the signal you're sending doesn't match the experience you're delivering.
+
+A 0.3 point improvement from 7.9 to 8.2 isn't a marketing win. It's a pricing unlock.
+
+The question is: what's holding you at 7.9?
+
+That's always a shorter list than people expect.
+
+rating-iq.com`,
+    status:'draft', needsReview:true, corrections:'', shanyApproved:false
+  },
+  {
+    id:'p101', date:'2026-06-30', platform:'linkedin-company', type:'Brand',
+    visual:'',
+    copy:`The most valuable question in hotel rating management isn't "what are guests complaining about?"
+
+It's "what should we fix first?"
+
+Those two questions produce very different answers.
+
+The first gives you a list. The second gives you a roadmap.
+
+Most hotel teams end up with the list. They read reviews, notice patterns, have conversations — and the quarter ends with the same issues still open, because nobody agreed on what mattered most.
+
+Prioritization is the missing step.
+
+RatingIQ ranks every complaint cluster by its impact on your Booking.com score, then pushes the top priorities to the teams responsible for fixing them.
+
+Not "here are all your problems." Here's what to fix first.
+
+rating-iq.com`,
+    status:'draft', needsReview:true, corrections:'', shanyApproved:false
+  },
+  {
+    id:'p102', date:'2026-07-02', platform:'linkedin-omri', type:'Thought Leadership',
+    visual:'',
+    copy:`One of our clients came to us with a familiar problem.
+
+Reviews were coming in. The team was reading them. Nothing was changing.
+
+In less than two months with RatingIQ:
+
+11 rating improvements on Booking.com.
+12 rating improvements on Google.
+
+No renovation. No new staff. No capital expenditure.
+
+The same team, the same properties — with a clearer picture of what to fix and a system that made sure the fix actually happened.
+
+The improvements came from identifying the complaint clusters with the highest rating impact, building a prioritized action plan, and pushing it to the people who could execute.
+
+That's it.
+
+The information was always there. The gap was between the information and the action.`,
+    status:'draft', needsReview:true, corrections:'', shanyApproved:false
+  },
+  {
+    id:'p103', date:'2026-07-04', platform:'linkedin-omri', type:'Thought Leadership',
+    visual:'',
+    copy:`A hotel that doesn't respond to its reviews isn't just being quiet.
+
+It's sending a signal.
+
+To guests reading before booking: nobody's watching. To OTA algorithms: low engagement. To your own team: this doesn't matter enough to address.
+
+Cornell and TripAdvisor both found that properties responding to 40–45% of reviews see 2.2x more OTA revenue. Not because the responses are perfect — because the act of responding changes the signal your property sends.
+
+But there's a second layer most hotels miss.
+
+Generic responses to specific complaints signal that nobody read them. Late responses signal an overwhelmed team. No responses to recurring issues signal a team that isn't connected to the feedback loop.
+
+Review responses aren't a PR exercise.
+
+They're an operational health check.`,
+    status:'draft', needsReview:true, corrections:'', shanyApproved:false
+  },
+  {
+    id:'p104', date:'2026-07-06', platform:'linkedin-company', type:'Brand',
+    visual:'',
+    copy:`A property GM sees one hotel's reviews.
+
+A chain CEO needs to see something different.
+
+They need to know that check-in delays aren't a problem at one property — they're a pattern across seven. That the breakfast issue at the city center location is the same issue, manifested differently, at the resort. That the 0.2 point drop in Q1 is concentrated in three specific properties and driven by two specific complaint clusters.
+
+That's not a data request. That's operational intelligence at the portfolio level.
+
+Most hotel review tools were built for the property team. RatingIQ was built for the chain — with portfolio-level visibility, pattern detection across properties, and priorities pushed to the right team at every level.
+
+One CEO. Full picture. Zero guesswork.
+
+rating-iq.com`,
+    status:'draft', needsReview:true, corrections:'', shanyApproved:false
+  },
+  {
+    id:'p105', date:'2026-05-11', platform:'linkedin-omri', type:'Video',
+    visual:'',
+    copy:`Your rating doesn't just affect how guests feel.
+
+It affects how many show up.
+
+Trust. Conversion. Occupancy. Revenue.
+
+Every hotel chain CEO I speak to knows their rating is a business number. What's harder to see is exactly which part of the operation is pulling it down - and by how much.
+
+That's the gap RatingIQ closes.
+
+From reviews to revenue.`,
+    status:'draft', needsReview:true, corrections:'', shanyApproved:false
+  },
+  {
+    id:'p106', date:'2026-05-12', platform:'linkedin-omri', type:'Video',
+    visual:'',
+    copy:`Most hotels do read their reviews.
+
+The problem isn't awareness. It's what happens after.
+
+A GM reads 40 reviews on a Tuesday morning. She flags three operational issues in her head. Two get addressed. One doesn't. No one at the chain level sees any of it.
+
+This repeats. At every property. Every week.
+
+Meanwhile, the rating stays flat - or drifts down.
+
+Reading reviews is not the same as acting on them.
+
+The gap is a system problem.`,
+    status:'draft', needsReview:true, corrections:'', shanyApproved:false
+  },
+  {
+    id:'p107', date:'2026-05-14', platform:'linkedin-omri', type:'Video',
+    visual:'',
+    copy:`Reviews are not just feedback.
+
+They are operational signals.
+
+When guests keep mentioning check-in, cleanliness, breakfast, maintenance, service - that isn't noise. That is a pattern.
+
+The question isn't whether to read the reviews. The question is whether your team has a system that turns what guests say into what gets fixed.
+
+Most don't.
+
+That's what we fix at RatingIQ.`,
+    status:'draft', needsReview:true, corrections:'', shanyApproved:false
   }
 ];
 
@@ -1555,133 +1972,137 @@ const PARENT_MAP={
   p70:'p24',p82:'p24',
   p71:'p26',p83:'p26',
   p72:'p28',p84:'p28',
-  p73:'p30',p85:'p30'
+  p73:'p30',p85:'p30',
+  p86:'p9',p87:'p31',p88:'p13',p89:'p16',p90:'p19',p91:'p18',p92:'p24',p93:'p27',p94:'p29',
+  ai17772706120c:'ai17772706120o',ai17772706120s:'ai17772706120o',
+  ai17772706121c:'ai17772706121o',ai17772706121s:'ai17772706121o',
+  ai17772706122c:'ai17772706122o',ai17772706122s:'ai17772706122o'
 };
 
 <!-- AIPOSTS:START -->
 const AI_POSTS = [
   {
-    "id": "ai17772706120o",
+    "id": "ai17778732120o",
     "date": "2026-05-18",
     "platform": "linkedin-omri",
     "type": "Thought Leadership",
-    "copy": "Google just showed us the future of travel decisions. Hotels need to pay attention.\n\nAt Google Cloud Next, they used the cruise industry to demo what 'agentic AI' actually looks like — AI that collapses research, comparison, and booking into a single flow.\n\nOne prompt. One decision. One booking.\n\nHere's what that means for hotels:\n\nThe traveler's shortlist gets shorter. Fast.\n\nWhen AI is doing the filtering, it's not scrolling through 47 reviews. It's pattern-matching against sentiment signals, star ratings, and recency — and surfacing the properties that win on all three.\n\nYour review profile is about to become your first impression. Not your photos. Not your description.\n\nThe properties that win in an agentic AI world have:\n→ High overall ratings (4.3+)\n→ Consistent positive sentiment across recent reviews\n→ Specific mentions of what guests care about most\n\nThe data already confirms it: 1% rating increase = 1.42% RevPAR lift (Cornell).\n\nImagine what AI filtering does to your occupancy when it's shortlisting properties for every traveler on the planet.\n\nThe window to build your reputation before AI booking goes mainstream is closing.\n\nWhat does your review strategy look like right now?\n\n#HotelManagement #HospitalityTech #ReputationManagement",
+    "copy": "Spirit Airlines just shut down.\n\nThat's not just an aviation story. It's a hospitality story.\n\nFor years, the budget travel model trained guests to optimize for price. Spirit, Frontier, Ryanair — they built an entire customer psychology around 'cheap first, comfort later.'\n\nThat model is collapsing.\n\nPost-pandemic travelers are choosing differently. They're paying more for comfort, consistency, and experiences they'll actually remember.\n\nAnd here's what that means for your property:\n\nThe guests checking in this summer have higher expectations than ever. They're not comparing you to the 2-star down the street. They're comparing you to the best stay they've ever had.\n\nOne negative review about cleanliness or a cold check-in hits harder now than in 2019. These guests will write that review. And they'll read yours before they book.\n\nThe premium shift is your opportunity — but only if your reputation reflects the experience you're delivering.\n\nHotels that close the gap between experience and perception win. The ones that don't are invisible.\n\nWhat are you doing today to ensure the premium traveler chooses you?\n\n#HotelManagement #GuestExperience #HospitalityTrends",
     "visual": "Pending — AI Suggested",
-    "visualConcept": "Minimalist hotel lobby viewed from above in cream and deep navy palette. Floating AI decision-tree nodes connecting to star rating badges and sentiment progress bars. Clean geometric data visualization aesthetic, no faces, soft directional lines suggesting algorithmic filtering and information flow, Midjourney photorealistic with slight editorial illustration overlay, no text.",
+    "visualConcept": "Overhead flat-lay of a luxury hotel lobby floor plan on cream linen paper, overlaid with a minimalist data dashboard showing a rising star-rating trend line in navy blue with gold accent details, no people, clean editorial style, soft natural window lighting, data-forward hotel aesthetic",
     "aiSuggested": true,
-    "trend": "Google Cloud demos agentic AI collapsing travel booking into a single decision flow",
+    "trend": "Spirit Airlines shuts down — signals accelerating shift from budget to premium travel",
     "status": "draft",
     "corrections": "",
     "shanyApproved": false
   },
   {
-    "id": "ai17772706120c",
+    "id": "ai17778732120c",
     "date": "2026-05-19",
     "platform": "linkedin-company",
     "type": "Company Repost",
-    "copy": "1% rating increase = 1.42% RevPAR (Cornell). In an AI-filtered world, that gap is about to get much wider.\n\nAgentic AI is collapsing travel decisions into a single prompt. Hotels with stronger review profiles surface first — and get booked more.\n\nRatingIQ helps hotels build the review signal AI booking tools favor: high ratings, recent reviews, consistent sentiment.\n\nThe window is now.\nrating-iq.com",
+    "copy": "Post-pandemic travelers are choosing premium over price — and their review standards have risen with it.\n\nThe Spirit Airlines shutdown is the latest signal: budget travel is out. Guests now arrive with higher expectations and leave more detailed, demanding reviews.\n\nHotels that align their reputation with the experience they deliver capture this demand. Those that don't become invisible at booking.\n\nSee how RatingIQ helps you close the gap. rating-iq.com",
     "visual": "Pending — AI Suggested",
-    "visualConcept": "Minimalist hotel lobby viewed from above in cream and deep navy palette. Floating AI decision-tree nodes connecting to star rating badges and sentiment progress bars. Clean geometric data visualization aesthetic, no faces, soft directional lines suggesting algorithmic filtering and information flow, Midjourney photorealistic with slight editorial illustration overlay, no text.",
+    "visualConcept": "Overhead flat-lay of a luxury hotel lobby floor plan on cream linen paper, overlaid with a minimalist data dashboard showing a rising star-rating trend line in navy blue with gold accent details, no people, clean editorial style, soft natural window lighting, data-forward hotel aesthetic",
     "aiSuggested": true,
-    "trend": "Google Cloud demos agentic AI collapsing travel booking into a single decision flow",
+    "trend": "Spirit Airlines shuts down — signals accelerating shift from budget to premium travel",
     "status": "draft",
     "corrections": "",
     "shanyApproved": false
   },
   {
-    "id": "ai17772706120s",
+    "id": "ai17778732120s",
     "date": "2026-05-19",
     "platform": "linkedin-shany",
     "type": "Repost — Shany",
-    "copy": "Omri nails it — AI trip planning is compressing the hotel shortlist fast. If your review profile isn't strong, AI filters you out before a human even looks.\n\n1% rating increase = 1.42% RevPAR. That math gets brutal when AI does the sorting.\n\nFull breakdown in Omri's post — worth five minutes if you run a property.",
+    "copy": "This hits close to home. The premium traveler shift isn't just an airline story — it's reshaping hotel booking behavior right now. Your reputation needs to reflect your experience, or you lose the booking before check-in. Worth reading. [link]",
     "visual": "Pending — AI Suggested",
-    "visualConcept": "Minimalist hotel lobby viewed from above in cream and deep navy palette. Floating AI decision-tree nodes connecting to star rating badges and sentiment progress bars. Clean geometric data visualization aesthetic, no faces, soft directional lines suggesting algorithmic filtering and information flow, Midjourney photorealistic with slight editorial illustration overlay, no text.",
+    "visualConcept": "Overhead flat-lay of a luxury hotel lobby floor plan on cream linen paper, overlaid with a minimalist data dashboard showing a rising star-rating trend line in navy blue with gold accent details, no people, clean editorial style, soft natural window lighting, data-forward hotel aesthetic",
     "aiSuggested": true,
-    "trend": "Google Cloud demos agentic AI collapsing travel booking into a single decision flow",
+    "trend": "Spirit Airlines shuts down — signals accelerating shift from budget to premium travel",
     "status": "draft",
     "corrections": "",
     "shanyApproved": false
   },
   {
-    "id": "ai17772706121o",
-    "date": "2026-05-11",
+    "id": "ai17778732121o",
+    "date": "2026-05-20",
     "platform": "linkedin-omri",
     "type": "Timely Post",
-    "copy": "Memorial Day weekend is 12 days away. Your competitors are already locking in bookings.\n\nHere's what most GMs miss this time of year:\n\nLast-minute holiday travelers don't browse. They filter.\n\nThey open Google, TripAdvisor, or an AI trip planner — and they sort by rating. The 4.5-star property gets the click. The 4.1-star property gets overlooked.\n\nOne star up = 11.2% higher ADR (TripAdvisor data).\n\nThat's not a rounding error. That's a room rate strategy.\n\nIf your property is sitting below 4.3 on Google right now, you have days — not weeks — to move the needle before peak decisions get made.\n\nThe levers that actually work fast:\n→ Identify your top 3 complaint clusters from the last 60 days\n→ Brief operations, housekeeping, and front desk — today\n→ Launch a response campaign on your unanswered reviews\n\nWe've seen properties move 0.2–0.4 stars in 30 days with focused repair work. A week of deliberate effort can start that trend.\n\nThat's the difference between a sold-out Memorial Day weekend and a half-full one.\n\nWhat's your rating sitting at right now?\n\n#HotelManagement #MemorialDayWeekend #Hospitality",
+    "copy": "Memorial Day weekend is 19 days away.\n\nThat's your last window to influence the reviews that will define your summer.\n\nHere's a reality most GMs don't think about: the reviews guests leave over Memorial Day will show up in July 4th booking searches. By then, you can't respond your way out of a bad trend.\n\nThe hotels that outperform this summer started their reputation work in May.\n\nSo what moves the needle in 19 days?\n\n→ Audit your last 90 days of reviews. Find the 2–3 recurring complaints showing up again and again.\n→ Brief your team this week on the exact language guests are using to describe problems.\n→ Fix one operational gap before Friday, May 22.\n→ Build a recovery protocol for when something goes wrong during peak weekend.\n\nYou won't eliminate every negative review. But you can shrink the gap between experience and expectation before 10,000 guests show up.\n\nThe summer P&L starts now.\n\n#HotelManagement #HospitalityOperations #RevPAR",
     "visual": "Pending — AI Suggested",
-    "visualConcept": "Split-panel hotel comparison graphic in cream and deep navy. Left panel: muted 4.1-star rating badge with sparse availability indicators. Right panel: bold 4.5-star badge with a 'Sold Out' marker in gold. Subtle horizontal stripe texture evoking an American flag as a geometric background element, no faces, clean data card layout, warm directional editorial lighting, Midjourney photorealistic minimal.",
+    "visualConcept": "Minimalist wall calendar opened to late May on cream paper, with a navy blue upward-trending review score graph overlaid in the negative space, a single hotel room key as a subtle accent detail, no faces, clean editorial composition, cream and navy color palette, data-forward aesthetic",
     "aiSuggested": true,
-    "trend": "Memorial Day weekend 12 days out — holiday travelers filter by star rating when booking last-minute stays",
+    "trend": "Memorial Day weekend 19 days away — peak season reputation window closing fast",
     "status": "draft",
     "corrections": "",
     "shanyApproved": false
   },
   {
-    "id": "ai17772706121c",
-    "date": "2026-05-12",
+    "id": "ai17778732121c",
+    "date": "2026-05-21",
     "platform": "linkedin-company",
     "type": "Company Repost",
-    "copy": "One star up = 11.2% higher ADR (TripAdvisor). With Memorial Day weekend 12 days out, your rating is your booking engine.\n\nHoliday travelers filter by stars first. Below 4.3 on Google? You're invisible to the top of the shortlist.\n\nRatingIQ identifies your top complaint clusters and builds a rapid repair plan — before peak season decisions lock in.\n\nrating-iq.com",
+    "copy": "Memorial Day is 19 days away. The reviews guests leave this weekend will directly drive your July 4th bookings.\n\nHotels that audit recurring complaints and align their teams now will outperform this summer. Those that don't will spend August explaining the dip.\n\n1% rating increase = 1.42% RevPAR. The window to move that needle is open — barely.\n\nStart at rating-iq.com",
     "visual": "Pending — AI Suggested",
-    "visualConcept": "Split-panel hotel comparison graphic in cream and deep navy. Left panel: muted 4.1-star rating badge with sparse availability indicators. Right panel: bold 4.5-star badge with a 'Sold Out' marker in gold. Subtle horizontal stripe texture evoking an American flag as a geometric background element, no faces, clean data card layout, warm directional editorial lighting, Midjourney photorealistic minimal.",
+    "visualConcept": "Minimalist wall calendar opened to late May on cream paper, with a navy blue upward-trending review score graph overlaid in the negative space, a single hotel room key as a subtle accent detail, no faces, clean editorial composition, cream and navy color palette, data-forward aesthetic",
     "aiSuggested": true,
-    "trend": "Memorial Day weekend 12 days out — holiday travelers filter by star rating when booking last-minute stays",
+    "trend": "Memorial Day weekend 19 days away — peak season reputation window closing fast",
     "status": "draft",
     "corrections": "",
     "shanyApproved": false
   },
   {
-    "id": "ai17772706121s",
-    "date": "2026-05-12",
+    "id": "ai17778732121s",
+    "date": "2026-05-21",
     "platform": "linkedin-shany",
     "type": "Repost — Shany",
-    "copy": "12 days to Memorial Day weekend. Last-minute travelers sort by stars — not photos, not price.\n\nOne star up = 11.2% higher ADR. That gap is very real during holiday weekends.\n\nOmri breaks down exactly how to move the needle in time. If you're a GM right now, this one's for you.",
+    "copy": "Peak season prep isn't just about staffing — it's about reputation. What guests say over Memorial Day weekend shapes your entire summer revenue curve. This is the checklist I'd want every GM running right now. [link]",
     "visual": "Pending — AI Suggested",
-    "visualConcept": "Split-panel hotel comparison graphic in cream and deep navy. Left panel: muted 4.1-star rating badge with sparse availability indicators. Right panel: bold 4.5-star badge with a 'Sold Out' marker in gold. Subtle horizontal stripe texture evoking an American flag as a geometric background element, no faces, clean data card layout, warm directional editorial lighting, Midjourney photorealistic minimal.",
+    "visualConcept": "Minimalist wall calendar opened to late May on cream paper, with a navy blue upward-trending review score graph overlaid in the negative space, a single hotel room key as a subtle accent detail, no faces, clean editorial composition, cream and navy color palette, data-forward aesthetic",
     "aiSuggested": true,
-    "trend": "Memorial Day weekend 12 days out — holiday travelers filter by star rating when booking last-minute stays",
+    "trend": "Memorial Day weekend 19 days away — peak season reputation window closing fast",
     "status": "draft",
     "corrections": "",
     "shanyApproved": false
   },
   {
-    "id": "ai17772706122o",
-    "date": "2026-05-28",
+    "id": "ai17778732122o",
+    "date": "2026-05-22",
     "platform": "linkedin-omri",
     "type": "Data & Metrics",
-    "copy": "The reviews that move your rating aren't the 5-star ones. They're the specific ones.\n\nTrip.com just made this point on a macro scale — their global growth strategy is built on being hyperlocal in every market. The same principle applies to hotel reputation.\n\nGeneric 5-star review: 'Great stay!'\nHyper-specific 5-star review: 'Room 412 was incredibly quiet. Staff remembered our anniversary. Breakfast had real options for dietary restrictions.'\n\nOne signals to OTAs, AI platforms, and travelers that this hotel consistently delivers. The other is noise.\n\nHotels with higher review specificity score 12–18% better on sentiment analysis tools — which directly influence OTA algorithm ranking.\n\nThe strategy isn't to beg for more reviews.\n\nIt's to train your team to create the moments that generate specific ones:\n→ The front desk agent who remembers a name\n→ The housekeeping note left after a long stay\n→ The F&B team that nails a dietary request without being asked twice\n\nSpecificity in reviews comes from specificity in service.\n\nThat's what moves ratings from 4.1 to 4.4 — and from 4.4 to 4.7.\n\n1% up = 1.42% RevPAR (Cornell). Every decimal point counts.\n\nWhat moments is your team creating today?\n\n#HotelManagement #GuestExperience #ReputationManagement",
+    "copy": "Luxury brands spent 20 years optimizing for the human eye.\n\nThe next booking may be made by AI.\n\nThat's not a hypothetical. Travel AI agents — tools that research, compare, and book on behalf of guests — are already reading your reviews, rating scores, and response patterns.\n\nHere's what the algorithm actually evaluates:\n→ Your average star rating, weighted by recency\n→ Sentiment consistency across review categories\n→ Whether you respond to negative reviews\n→ How your score compares to your comp set\n\nThis is the new SEO for hotels.\n\nIn 2015, you optimized for Google. In 2020, you optimized for OTA search rankings. In 2026, you're optimizing for AI that makes booking decisions before a human ever enters the picture.\n\nHotels with fragmented review profiles — 4.2 here, 3.8 there, no response strategy — get filtered out before a guest ever sees the results.\n\nYour rating isn't a vanity metric anymore. It's a machine-readable sales signal.\n\nTreat it that way.\n\n#HotelTechnology #HospitalityAI #ReputationManagement",
     "visual": "Pending — AI Suggested",
-    "visualConcept": "Elegant hotel service vignette in cream and deep navy. Two floating review excerpt cards side by side — one short and dim, one detailed with specific phrases highlighted in warm gold. Sentiment analysis wave visualization overlaying a minimalist hotel room scene in the background. No faces, editorial data-forward aesthetic, soft upward directional lighting, Midjourney photorealistic with a subtle infographic illustration overlay, no text.",
+    "visualConcept": "Abstract visualization of clean data streams flowing into a five-star hotel rating icon, cream background with navy blue geometric circuit-line patterns, minimalist hotel building silhouette in the lower third, no faces, editorial photography style, subtle gold accent lines at data nodes, data-forward aesthetic",
     "aiSuggested": true,
-    "trend": "Trip.com's hyperlocal global strategy mirrors how specific — not generic — reviews are what actually move hotel ratings",
+    "trend": "AI agents are beginning to make luxury travel booking decisions — reading reviews and ratings algorithmically",
     "status": "draft",
     "corrections": "",
     "shanyApproved": false
   },
   {
-    "id": "ai17772706122c",
-    "date": "2026-05-29",
+    "id": "ai17778732122c",
+    "date": "2026-05-23",
     "platform": "linkedin-company",
     "type": "Company Repost",
-    "copy": "1% rating increase = 1.42% RevPAR (Cornell). But the reviews driving that number aren't generic — they're specific.\n\nDetail-rich reviews signal quality to OTA algorithms in ways that 'Great stay!' never will.\n\nRatingIQ's sentiment analysis identifies which service moments generate your highest-signal reviews — and which gaps are costing you rating points.\n\nFix the moments. Move the rating.\nrating-iq.com",
+    "copy": "AI booking agents are reading your reviews, rating trends, and response patterns — and filtering properties before a human ever searches.\n\nYour star rating is now a machine-readable sales signal. Fragmented review profiles get cut before the consideration set even forms.\n\n1 star up = 11.2% higher ADR. The stakes just got algorithmic.\n\nrating-iq.com",
     "visual": "Pending — AI Suggested",
-    "visualConcept": "Elegant hotel service vignette in cream and deep navy. Two floating review excerpt cards side by side — one short and dim, one detailed with specific phrases highlighted in warm gold. Sentiment analysis wave visualization overlaying a minimalist hotel room scene in the background. No faces, editorial data-forward aesthetic, soft upward directional lighting, Midjourney photorealistic with a subtle infographic illustration overlay, no text.",
+    "visualConcept": "Abstract visualization of clean data streams flowing into a five-star hotel rating icon, cream background with navy blue geometric circuit-line patterns, minimalist hotel building silhouette in the lower third, no faces, editorial photography style, subtle gold accent lines at data nodes, data-forward aesthetic",
     "aiSuggested": true,
-    "trend": "Trip.com's hyperlocal global strategy mirrors how specific — not generic — reviews are what actually move hotel ratings",
+    "trend": "AI agents are beginning to make luxury travel booking decisions — reading reviews and ratings algorithmically",
     "status": "draft",
     "corrections": "",
     "shanyApproved": false
   },
   {
-    "id": "ai17772706122s",
-    "date": "2026-05-29",
+    "id": "ai17778732122s",
+    "date": "2026-05-23",
     "platform": "linkedin-shany",
     "type": "Repost — Shany",
-    "copy": "Omri's take hits home — the best reviews aren't the shortest ones.\n\n'Great stay!' is noise. A review that names the room, the staff, and the breakfast? That's signal — and that's what moves OTA rankings.\n\nSpecific service creates specific reviews. 1% rating lift = 1.42% RevPAR (Cornell).",
+    "copy": "We've been optimizing for human eyes. But AI travel agents are already deciding which hotels get surfaced — and which get skipped entirely. Your reputation score is becoming a ranking signal. Read this one carefully. [link]",
     "visual": "Pending — AI Suggested",
-    "visualConcept": "Elegant hotel service vignette in cream and deep navy. Two floating review excerpt cards side by side — one short and dim, one detailed with specific phrases highlighted in warm gold. Sentiment analysis wave visualization overlaying a minimalist hotel room scene in the background. No faces, editorial data-forward aesthetic, soft upward directional lighting, Midjourney photorealistic with a subtle infographic illustration overlay, no text.",
+    "visualConcept": "Abstract visualization of clean data streams flowing into a five-star hotel rating icon, cream background with navy blue geometric circuit-line patterns, minimalist hotel building silhouette in the lower third, no faces, editorial photography style, subtle gold accent lines at data nodes, data-forward aesthetic",
     "aiSuggested": true,
-    "trend": "Trip.com's hyperlocal global strategy mirrors how specific — not generic — reviews are what actually move hotel ratings",
+    "trend": "AI agents are beginning to make luxury travel booking decisions — reading reviews and ratings algorithmically",
     "status": "draft",
     "corrections": "",
     "shanyApproved": false
@@ -1694,7 +2115,7 @@ const AI_POSTS = [
 // from defaults while keeping status, corrections, shanyApproved, and date.
 
 
-const DATA_VERSION = 18;
+const DATA_VERSION = 22;
 
 function loadPosts(){
   try{
@@ -1789,6 +2210,7 @@ function fmtDay(d){
 function platformLabel(p){
   if(p==='linkedin-omri')return' Omri';
   if(p==='linkedin-shany')return' Shany';
+  if(p==='linkedin-group')return' Groups';
   return'';
 }
 
@@ -1804,7 +2226,7 @@ const ICONS={
 };
 
 function platformIcon(p){
-  if(p==='linkedin-company'||p==='linkedin-omri'||p==='linkedin-shany')return ICONS.linkedin;
+  if(p==='linkedin-company'||p==='linkedin-omri'||p==='linkedin-shany'||p==='linkedin-group')return ICONS.linkedin;
   if(p==='facebook')return ICONS.facebook;
   return'';
 }
@@ -1875,19 +2297,21 @@ function renderTable(){
   filtered.filter(p=>PARENT_MAP[p.id]&&!filteredIds.has(PARENT_MAP[p.id])).forEach(p=>ordered.push({post:p,isChild:false}));
 
   tbody.innerHTML=ordered.map(({post:p,isChild})=>`
-    <tr class="${isChild?'sub-row':''}${p.aiSuggested?' ai-row':''}" onclick="openEdit('${p.id}')">
+    <tr class="${isChild?'sub-row':''}${p.aiSuggested?' ai-row':''}${p.needsReview?' review-row':''}" onclick="openEdit('${p.id}')">
       <td class="td-date" onclick="event.stopPropagation()" title="Click to change date">
         ${isChild?'':`<span class="date-label">${fmtDate(p.date)}</span><span class="td-day">${fmtDay(p.date)}</span>`}
         <input type="date" value="${p.date}" onchange="quickDate('${p.id}',this.value)">
       </td>
       <td><span class="badge badge-${p.platform}">${platformIcon(p.platform)}${platformLabel(p.platform)}</span></td>
-      <td><span class="type-tag">${p.type}</span>${p.aiSuggested?'<span class="ai-badge">AI</span>':''}${p.linkedInUrl?`<a href="${p.linkedInUrl}" target="_blank" title="View on LinkedIn" style="margin-left:5px;color:var(--slate);font-size:11px;text-decoration:none;vertical-align:middle">🔗</a>`:''}</td>
+      <td><span class="type-tag">${p.type}</span>${p.aiSuggested?'<span class="ai-badge">AI</span>':''}${p.needsReview?'<span class="review-badge">Review</span>':''}<span style="display:block;font-size:10px;color:#94a3b8;margin-top:2px">${p.id}</span>${p.linkedInUrl?`<a href="${p.linkedInUrl}" target="_blank" title="View on LinkedIn" style="margin-left:5px;color:var(--slate);font-size:11px;text-decoration:none;vertical-align:middle">🔗</a>`:''}</td>
       <td><div class="copy-preview">${p.copy.split('\n')[0]}</div>${p.aiSuggested&&p.trend?`<div style="font-size:10px;color:#7c3aed;margin-top:2px;opacity:.75">↳ ${p.trend.slice(0,55)}${p.trend.length>55?'…':''}</div>`:''}${p.aiSuggested&&p.visualConcept?`<div class="visual-prompt-tip">${p.visualConcept.slice(0,80)}…</div>`:''}
       </td>
       <td onclick="event.stopPropagation();openBuilderFor('${p.id}')">
-        ${getThumb(p.id)
-          ? `<img class="vis-thumb" src="${getThumb(p.id)}" title="Click to manage visual" alt="visual">`
-          : `<div class="vis-dot" title="Upload visual in builder">📤</div>`}
+        ${(t=>t==='__video__'
+          ? `<div class="vis-thumb" style="background:#e6f4f0;display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;border-radius:5px;border:1px solid rgba(0,0,0,.1)" title="Video attached">▶</div>`
+          : t
+          ? `<img class="vis-thumb" src="${t}" title="Click to manage visual" alt="visual">`
+          : `<div class="vis-dot" title="Upload visual in builder">📤</div>`)(getThumb(p.id))}
       </td>
       <td onclick="event.stopPropagation()">
         <select class="status-select status-${p.status}" onchange="quickStatus('${p.id}',this.value);this.className='status-select status-'+this.value">
@@ -2009,9 +2433,11 @@ function renderTimeline(){
                     </div>
                   </div>
                   <div class="tl-card-right" onclick="event.stopPropagation();openBuilderFor('${p.id}')">
-                    ${getThumb(p.id)
-                      ? `<img class="vis-thumb" src="${getThumb(p.id)}" title="Manage visual" alt="visual">`
-                      : `<div class="vis-dot" title="Upload visual">📤</div>`}
+                    ${(t=>t==='__video__'
+                      ? `<div class="vis-thumb" style="background:#e6f4f0;display:flex;align-items:center;justify-content:center;font-size:18px;border-radius:5px;border:1px solid rgba(0,0,0,.1)" title="Video attached">▶</div>`
+                      : t
+                      ? `<img class="vis-thumb" src="${t}" title="Manage visual" alt="visual">`
+                      : `<div class="vis-dot" title="Upload visual">📤</div>`)(getThumb(p.id))}
                   </div>
                 </div>
               `).join('')}
@@ -2038,9 +2464,10 @@ function openEdit(id){
   document.getElementById('edit-corrections').value=p.corrections||'';
   document.getElementById('edit-linkedin-url').value=p.linkedInUrl||'';
   document.getElementById('edit-copy').value=p.copy;
-  // load image if exists
   const img=uploadedImages[id]||null;
-  modalSetImage(img);
+  if(img) modalSetImage(img);
+  else if(localStorage.getItem('sc_vid_'+id)) modalSetVideoIndicator();
+  else modalSetImage(null);
   updateCharCount();
   updateModalBadge();
   document.getElementById('post-modal').classList.add('open');
@@ -2098,9 +2525,9 @@ function savePost(){
     savedId=newId;
     posts.push({id:newId,date,platform,type,status,visualConcept,corrections,linkedInUrl,copy});
   }
-  // Persist image from modal
-  if(savedId&&modalImageData) saveImage(savedId,modalImageData);
-  else if(savedId&&!modalImageData) removeImage(savedId);
+  if(savedId&&modalImageData){ saveImage(savedId,modalImageData); removeVideo(savedId); }
+  else if(savedId&&modalVideoFile){ saveVideo(savedId,modalVideoFile); removeImage(savedId); }
+  else if(savedId&&!modalImageData&&!modalVideoFile){ removeImage(savedId); removeVideo(savedId); }
   savePosts(posts);
   vbPopulateSelect();
   render();
@@ -3878,33 +4305,82 @@ const uploadedImages={}; // postId -> full dataUrl (in-memory)
 
 function saveImage(postId,dataUrl){
   uploadedImages[postId]=dataUrl;
-  // Persist compressed thumb (~150px) for table display
   resizeImage(dataUrl,150,0.7).then(t=>{
     try{localStorage.setItem('sc_thumb_'+postId,t);}catch(e){}
   });
-  // Try to persist full image
   try{localStorage.setItem('sc_img_'+postId,dataUrl);}catch(e){
     console.warn('Image too large for localStorage — keeping in memory only');
   }
+  // Persist to disk for scheduler
+  fetch('http://localhost:3002/image',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:postId,dataUrl})}).catch(()=>{});
 }
 
 function removeImage(postId){
   delete uploadedImages[postId];
   try{localStorage.removeItem('sc_img_'+postId);}catch(e){}
   try{localStorage.removeItem('sc_thumb_'+postId);}catch(e){}
+  fetch('http://localhost:3002/image/'+postId,{method:'DELETE'}).catch(()=>{});
+}
+
+function saveVideo(postId,file){
+  try{localStorage.setItem('sc_vid_'+postId,'1');}catch(e){}
+  // Remove any existing image
+  delete uploadedImages[postId];
+  try{localStorage.removeItem('sc_img_'+postId);}catch(e){}
+  try{localStorage.removeItem('sc_thumb_'+postId);}catch(e){}
+  fetch('http://localhost:3002/video/'+postId,{
+    method:'POST',
+    headers:{'Content-Type':file.type||'video/mp4'},
+    body:file
+  }).catch(()=>{});
+}
+
+function removeVideo(postId){
+  try{localStorage.removeItem('sc_vid_'+postId);}catch(e){}
+  fetch('http://localhost:3002/video/'+postId,{method:'DELETE'}).catch(()=>{});
 }
 
 function getThumb(postId){
-  return localStorage.getItem('sc_thumb_'+postId)||null;
+  const t=localStorage.getItem('sc_thumb_'+postId);
+  if(t)return t;
+  if(localStorage.getItem('sc_vid_'+postId))return '__video__';
+  return null;
 }
 
 function loadImages(){
   for(const key of Object.keys(localStorage)){
     if(key.startsWith('sc_img_')){
-      const id=key.replace('sc_img_','');
-      uploadedImages[id]=localStorage.getItem(key);
+      uploadedImages[key.replace('sc_img_','')]=localStorage.getItem(key);
     }
   }
+  // Restore anything on disk that localStorage lost
+  fetch('http://localhost:3002/visuals').then(r=>r.json()).then(data=>{
+    if(!data.files)return;
+    data.files.forEach(({id,type})=>{
+      if(type==='video'){
+        if(!localStorage.getItem('sc_vid_'+id)){
+          localStorage.setItem('sc_vid_'+id,'1');
+          renderTable();
+        }
+      } else if(!uploadedImages[id]){
+        fetch('http://localhost:3002/visual/'+id)
+          .then(r=>r.blob())
+          .then(blob=>{
+            const reader=new FileReader();
+            reader.onload=e=>{
+              const dataUrl=e.target.result;
+              uploadedImages[id]=dataUrl;
+              try{localStorage.setItem('sc_img_'+id,dataUrl);}catch(e){}
+              resizeImage(dataUrl,150,0.7).then(t=>{
+                try{localStorage.setItem('sc_thumb_'+id,t);}catch(e){}
+                renderTable();
+              });
+            };
+            reader.readAsDataURL(blob);
+          }).catch(()=>{});
+      }
+    });
+  }).catch(()=>{});
 }
 
 function resizeImage(dataUrl,maxW,quality){
@@ -3923,44 +4399,117 @@ function resizeImage(dataUrl,maxW,quality){
 }
 
 // ─────────────────────────────────────────
-// MODAL IMAGE HANDLING
+// MODAL IMAGE / VIDEO HANDLING
 // ─────────────────────────────────────────
-let modalImageData=null; // current image being edited in modal
+let modalImageData=null;
+let modalVideoFile=null;
+let modalVideoObjectUrl=null;
 
 function modalSetImage(dataUrl){
   modalImageData=dataUrl||null;
+  modalVideoFile=null;
+  if(modalVideoObjectUrl){URL.revokeObjectURL(modalVideoObjectUrl);modalVideoObjectUrl=null;}
   const zone=document.getElementById('modal-img-zone');
   const placeholder=document.getElementById('modal-img-placeholder');
-  const preview=document.getElementById('modal-img-preview');
+  const imgPreview=document.getElementById('modal-img-preview');
+  const vidPreview=document.getElementById('modal-video-preview');
   const actions=document.getElementById('modal-img-actions');
+  vidPreview.style.display='none'; vidPreview.src='';
   if(dataUrl){
     zone.classList.add('has-img');
     zone.onclick=null;
     placeholder.style.display='none';
-    preview.style.display='block';
-    preview.src=dataUrl;
+    imgPreview.style.display='block';
+    imgPreview.src=dataUrl;
     actions.style.display='flex';
   } else {
     zone.classList.remove('has-img');
     zone.onclick=()=>document.getElementById('modal-file-input').click();
     placeholder.style.display='';
-    preview.style.display='none';
-    preview.src='';
+    imgPreview.style.display='none';
+    imgPreview.src='';
     actions.style.display='none';
   }
 }
 
+function modalSetVideo(file){
+  modalImageData=null;
+  modalVideoFile=file;
+  if(modalVideoObjectUrl) URL.revokeObjectURL(modalVideoObjectUrl);
+  modalVideoObjectUrl=URL.createObjectURL(file);
+  const zone=document.getElementById('modal-img-zone');
+  const placeholder=document.getElementById('modal-img-placeholder');
+  const imgPreview=document.getElementById('modal-img-preview');
+  const vidPreview=document.getElementById('modal-video-preview');
+  const actions=document.getElementById('modal-img-actions');
+  zone.classList.add('has-img');
+  zone.onclick=null;
+  placeholder.style.display='none';
+  imgPreview.style.display='none';
+  vidPreview.src=modalVideoObjectUrl;
+  vidPreview.style.display='block';
+  actions.style.display='flex';
+}
+
+function modalSetVideoIndicator(){
+  const zone=document.getElementById('modal-img-zone');
+  const placeholder=document.getElementById('modal-img-placeholder');
+  const vidPreview=document.getElementById('modal-video-preview');
+  const imgPreview=document.getElementById('modal-img-preview');
+  const actions=document.getElementById('modal-img-actions');
+  zone.classList.add('has-img');
+  zone.onclick=null;
+  imgPreview.style.display='none';
+  placeholder.style.display='none';
+  vidPreview.src='http://localhost:3002/visual/'+editingId+'?t='+Date.now();
+  vidPreview.style.display='block';
+  actions.style.display='flex';
+}
+
 function modalHandleFile(file){
   if(!file)return;
-  const reader=new FileReader();
-  reader.onload=e=>modalSetImage(e.target.result);
-  reader.readAsDataURL(file);
+  const isVideo=file.type.startsWith('video/')||/\.(mp4|mov|m4v|webm|avi|mkv)$/i.test(file.name);
+  if(isVideo){
+    modalSetVideo(file);
+  } else {
+    const reader=new FileReader();
+    reader.onload=e=>modalSetImage(e.target.result);
+    reader.readAsDataURL(file);
+  }
+}
+
+async function loadFromPath(){
+  const path=document.getElementById('modal-path-input').value.trim();
+  if(!path||!editingId)return;
+  const btn=document.querySelector('[onclick="loadFromPath()"]');
+  btn.textContent='Loading…';btn.disabled=true;
+  try{
+    const res=await fetch('http://localhost:3002/load-file',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({id:editingId,path})
+    });
+    const data=await res.json();
+    if(!data.ok)throw new Error(data.error);
+    if(data.type==='video'){
+      modalVideoFile='__from_path__';
+      modalImageData=null;
+      localStorage.setItem('sc_vid_'+editingId,'1');
+      modalSetVideoIndicator();
+    } else {
+      modalSetImage(data.dataUrl);
+      saveImage(editingId,data.dataUrl);
+    }
+    document.getElementById('modal-path-input').value='';
+  }catch(e){alert('Could not load file: '+e.message);}
+  btn.textContent='Load';btn.disabled=false;
 }
 
 function modalRemoveImage(){
+  // reset placeholder HTML in case it was video indicator
+  document.getElementById('modal-img-placeholder').innerHTML=`<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><div style="margin-top:6px;font-size:12px;font-weight:600">Upload visual</div><div style="font-size:11px;margin-top:2px">Image or video</div>`;
   modalSetImage(null);
 }
-
 
 // ─────────────────────────────────────────
 // BUILDER UPLOAD FUNCTIONS
@@ -4046,14 +4595,65 @@ function vbRefreshThumb(){
   }
 }
 
+function vbIsVideo(file){
+  return file.type.startsWith('video/')||/\.(mp4|mov|m4v|webm|avi|mkv|qt)$/i.test(file.name);
+}
+
 function vbHandleDrop(e){
   e.preventDefault();
   const file=e.dataTransfer.files[0];
-  if(file&&file.type.startsWith('image/'))vbReadFile(file);
+  if(!file)return;
+  if(vbIsVideo(file)) vbSaveVideo(file);
+  else vbReadFile(file);
 }
 
 function vbHandleFile(file){
-  if(file&&file.type.startsWith('image/'))vbReadFile(file);
+  if(!file)return;
+  if(vbIsVideo(file)) vbSaveVideo(file);
+  else vbReadFile(file);
+}
+
+function vbSaveVideo(file){
+  const id=vbCurrentPostId;
+  if(!id)return;
+  saveVideo(id,file);
+  // Show video indicator in builder
+  document.getElementById('vb-current-thumb-wrap').style.display='';
+  const thumb=document.getElementById('vb-current-thumb');
+  thumb.style.display='none';
+  thumb.insertAdjacentHTML('afterend','<div id="vb-vid-indicator" style="background:#e6f4f0;border-radius:7px;padding:20px;text-align:center;font-size:28px">▶<div style="font-size:12px;color:#0f766e;margin-top:4px">Video attached</div></div>');
+  renderTable();
+}
+
+async function vbLoadFromPath(){
+  const path=document.getElementById('vb-path-input').value.trim();
+  const id=vbCurrentPostId;
+  if(!path||!id)return;
+  const btn=document.querySelector('[onclick="vbLoadFromPath()"]');
+  btn.textContent='Loading…';btn.disabled=true;
+  try{
+    const res=await fetch('http://localhost:3002/load-file',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({id,path})
+    });
+    const data=await res.json();
+    if(!data.ok)throw new Error(data.error);
+    if(data.type==='video'){
+      localStorage.setItem('sc_vid_'+id,'1');
+      document.getElementById('vb-current-thumb-wrap').style.display='';
+      const existing=document.getElementById('vb-vid-indicator');
+      if(existing)existing.remove();
+      document.getElementById('vb-current-thumb').insertAdjacentHTML('afterend','<div id="vb-vid-indicator" style="background:#e6f4f0;border-radius:7px;padding:20px;text-align:center;font-size:28px">▶<div style="font-size:12px;color:#0f766e;margin-top:4px">Video attached</div></div>');
+    } else {
+      saveImage(id,data.dataUrl);
+      vbSelectPost(id);
+      vbRefreshThumb();
+    }
+    document.getElementById('vb-path-input').value='';
+    renderTable();
+  }catch(e){alert('Could not load: '+e.message);}
+  btn.textContent='Load';btn.disabled=false;
 }
 
 function vbReadFile(file){

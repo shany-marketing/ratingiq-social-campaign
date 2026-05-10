@@ -1,46 +1,51 @@
-import { readFileSync, writeFileSync } from "fs";
+import { readFileSync, writeFileSync, existsSync } from "fs";
 import { config } from "dotenv";
 
 config();
 
 const SCHEDULE_FILE = new URL("./schedule.json", import.meta.url).pathname;
 const CAMPAIGN_FILE = new URL("../index.html", import.meta.url).pathname;
+const VISUALS_DIR   = new URL("./visuals/", import.meta.url).pathname;
 
 const today = new Date().toISOString().split("T")[0];
 
-function extractActivityId(url) {
-  const m = url.match(/urn:li:activity:(\d+)/);
-  return m ? m[1] : null;
+
+async function registerAndUpload(token, author, filePath, recipe, contentType) {
+  const reg = await fetch("https://api.linkedin.com/v2/assets?action=registerUpload", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+      "X-Restli-Protocol-Version": "2.0.0",
+    },
+    body: JSON.stringify({
+      registerUploadRequest: {
+        recipes: [recipe],
+        owner: author,
+        serviceRelationships: [{ relationshipType: "OWNER", identifier: "urn:li:userGeneratedContent" }],
+      },
+    }),
+  });
+  const regData = await reg.json();
+  if (!reg.ok) throw new Error(`Media register failed: ${JSON.stringify(regData)}`);
+
+  const uploadUrl = regData.value.uploadMechanism["com.linkedin.digitalmedia.uploading.MediaUploadHttpRequest"].uploadUrl;
+  const asset = regData.value.asset;
+
+  const put = await fetch(uploadUrl, {
+    method: "PUT",
+    headers: { Authorization: `Bearer ${token}`, "Content-Type": contentType },
+    body: readFileSync(filePath),
+  });
+  if (!put.ok) throw new Error(`Media PUT failed: ${put.status}`);
+
+  return asset;
 }
 
-async function resolveShareUrn(linkedInUrl) {
-  // Given a LinkedIn post URL (with activity URN), find the urn:li:share: URN
-  // needed for the Shares API reshare. Requires org token with r_organization_social.
-  const activityId = extractActivityId(linkedInUrl);
-  if (!activityId) return null;
-  const orgToken = process.env.LINKEDIN_ORG_TOKEN;
-  const orgUrn   = process.env.LINKEDIN_ORG_URN;
-  if (!orgToken || !orgUrn) return null;
-  try {
-    const r = await fetch(
-      `https://api.linkedin.com/v2/shares?q=owners&owners=${encodeURIComponent(orgUrn)}&count=20`,
-      { headers: { Authorization: `Bearer ${orgToken}`, "X-Restli-Protocol-Version": "2.0.0" } }
-    );
-    const data = await r.json();
-    const shares = data.elements || [];
-    // Match by activity id embedded in each share's activity field
-    for (const s of shares) {
-      if (s.activity && s.activity.includes(activityId)) return s.id;
-      if (s.id && s.id.includes(activityId)) return s.id;
-    }
-    // Fallback: return first share URN (most recent org post)
-    return shares[0]?.id || null;
-  } catch {
-    return null;
-  }
-}
+const uploadImage = (t, a, p) => registerAndUpload(t, a, p, "urn:li:digitalmediaRecipe:feedshare-image", "image/jpeg");
+const uploadVideo = (t, a, p) => registerAndUpload(t, a, p, "urn:li:digitalmediaRecipe:feedshare-video",  "video/mp4");
 
-async function postToLinkedIn(profile, text, reshareUrn = null) {
+async function postToLinkedIn(profile, text, reshareUrn = null, imagePath = null, videoPath = null) {
   const tokenKey = profile === "omri" ? "LINKEDIN_OMRI_TOKEN"
     : profile === "shany" ? "LINKEDIN_SHANY_TOKEN"
     : "LINKEDIN_ORG_TOKEN";
@@ -57,7 +62,7 @@ async function postToLinkedIn(profile, text, reshareUrn = null) {
   }
 
   if (reshareUrn) {
-    // Reshare via /v2/shares — requires urn:li:share:XXXX URN
+    // Reshare via /v2/shares — image not supported on reshares
     const body = {
       owner: author,
       resharedShare: reshareUrn,
@@ -78,15 +83,31 @@ async function postToLinkedIn(profile, text, reshareUrn = null) {
   }
 
   // Standalone post via /v2/ugcPosts
+  let mediaAsset = null;
+  let mediaCategory = "NONE";
+  if (imagePath && existsSync(imagePath)) {
+    mediaAsset = await uploadImage(token, author, imagePath);
+    mediaCategory = "IMAGE";
+  } else if (videoPath && existsSync(videoPath)) {
+    mediaAsset = await uploadVideo(token, author, videoPath);
+    mediaCategory = "VIDEO";
+  }
+
+  const shareContent = mediaAsset
+    ? {
+        shareCommentary: { text },
+        shareMediaCategory: mediaCategory,
+        media: [{ status: "READY", media: mediaAsset }],
+      }
+    : {
+        shareCommentary: { text },
+        shareMediaCategory: "NONE",
+      };
+
   const body = {
     author,
     lifecycleState: "PUBLISHED",
-    specificContent: {
-      "com.linkedin.ugc.ShareContent": {
-        shareCommentary: { text },
-        shareMediaCategory: "NONE",
-      },
-    },
+    specificContent: { "com.linkedin.ugc.ShareContent": shareContent },
     visibility: { "com.linkedin.ugc.MemberNetworkVisibility": "PUBLIC" },
   };
 
@@ -108,7 +129,6 @@ async function postToLinkedIn(profile, text, reshareUrn = null) {
 function updateCampaignStatus(postId, status) {
   try {
     let html = readFileSync(CAMPAIGN_FILE, "utf8");
-    // Update status in DEFAULT_POSTS for this post id
     const regex = new RegExp(`(id:'${postId}'[^}]*status:)'[^']*'`);
     html = html.replace(regex, `$1'${status}'`);
     writeFileSync(CAMPAIGN_FILE, html);
@@ -119,7 +139,13 @@ function updateCampaignStatus(postId, status) {
 
 async function run() {
   const schedule = JSON.parse(readFileSync(SCHEDULE_FILE, "utf8"));
-  const due = schedule.filter(p => p.date === today && p.status === "scheduled" && p.approved === true);
+  const now = Date.now();
+  const due = schedule.filter(p =>
+    p.date === today && p.approved === true && (
+      p.status === "scheduled" ||
+      (p.status === "failed" && p.retryAfter && p.retryAfter <= now)
+    )
+  );
   const notReady = schedule.filter(p => p.date === today && p.status === "scheduled" && !p.approved);
 
   if (notReady.length > 0) {
@@ -135,22 +161,34 @@ async function run() {
 
   for (const post of due) {
     try {
+      if (post.profile === "company" || post.profile === "group") {
+        console.log(`⏭ Skipped ${post.id} — posted manually`);
+        continue;
+      }
+
       let reshareUrn = null;
       if (post.reshareOf) {
         const parent = schedule.find(p => p.id === post.reshareOf);
-        if (!parent?.linkedInUrl) {
-          console.log(`⏳ Skipped ${post.id} — waiting for LinkedIn URL on ${post.reshareOf}`);
+        if (parent?.profile === "company") {
+          console.log(`⏭ Skipped ${post.id} — reshares of company posts are done manually`);
           continue;
         }
-        reshareUrn = await resolveShareUrn(parent.linkedInUrl);
-        if (!reshareUrn) {
-          console.error(`✗ Skipped ${post.id} — could not resolve share URN from: ${parent.linkedInUrl}`);
-          console.error(`  Make sure LINKEDIN_ORG_TOKEN is set and has r_organization_social scope.`);
+        if (!parent?.linkedInId) {
+          console.log(`⏳ Skipped ${post.id} — waiting for parent post ${post.reshareOf} to be published`);
           continue;
         }
+        reshareUrn = parent.linkedInId;
       }
-      console.log(`Posting ${post.id} as ${post.profile}${reshareUrn ? ' (reshare)' : ''}...`);
-      const linkedInId = await postToLinkedIn(post.profile, post.copy, reshareUrn);
+
+      const imagePath = !reshareUrn ? `${VISUALS_DIR}${post.id}.jpg` : null;
+      const videoPath = !reshareUrn ? `${VISUALS_DIR}${post.id}.mp4` : null;
+      const hasImage = imagePath && existsSync(imagePath);
+      const hasVideo = videoPath && existsSync(videoPath);
+      if (hasImage) console.log(`  ↳ Image found: ${post.id}.jpg`);
+      if (hasVideo) console.log(`  ↳ Video found: ${post.id}.mp4`);
+
+      console.log(`Posting ${post.id} as ${post.profile}${reshareUrn ? ' (reshare)' : ''}${hasImage ? ' + image' : ''}${hasVideo ? ' + video' : ''}...`);
+      const linkedInId = await postToLinkedIn(post.profile, post.copy, reshareUrn, hasImage ? imagePath : null, hasVideo ? videoPath : null);
       post.status = "published";
       post.linkedInId = linkedInId;
       post.publishedAt = new Date().toISOString();
@@ -159,6 +197,7 @@ async function run() {
     } catch (e) {
       post.status = "failed";
       post.error = e.message;
+      post.retryAfter = Date.now() + 3600000; // retry in 1 hour
       console.error(`✗ Failed: ${post.id} — ${e.message}`);
     }
   }
