@@ -138,11 +138,12 @@ function updateCampaignStatus(postId, status) {
 }
 
 async function run() {
+  const retryOnly = process.argv.includes("--retry-only");
   const schedule = JSON.parse(readFileSync(SCHEDULE_FILE, "utf8"));
   const now = Date.now();
   const due = schedule.filter(p =>
     p.date === today && p.approved === true && (
-      p.status === "scheduled" ||
+      (!retryOnly && p.status === "scheduled") ||
       (p.status === "failed" && p.retryAfter && p.retryAfter <= now)
     )
   );

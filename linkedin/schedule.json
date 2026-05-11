@@ -857,8 +857,10 @@
     "date": "2026-05-11",
     "profile": "omri",
     "copy": "Your rating doesn't just affect how guests feel.\n\nIt affects how many show up.\n\nTrust. Conversion. Occupancy. Revenue.\n\nEvery hotel chain CEO I speak to knows their rating is a business number. What's harder to see is exactly which part of the operation is pulling it down - and by how much.\n\nThat's the gap RatingIQ closes.\n\nFrom reviews to revenue.",
-    "status": "scheduled",
-    "approved": true
+    "status": "published",
+    "approved": true,
+    "linkedInId": "urn:li:ugcPost:7459510452721614849",
+    "publishedAt": "2026-05-11T07:51:23.031Z"
   },
   {
     "id": "p106",
