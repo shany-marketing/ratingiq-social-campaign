@@ -8,6 +8,22 @@
     "approved": false
   },
   {
+    "id": "p62",
+    "date": "2026-04-09",
+    "profile": "omri",
+    "copy": "We built what we always wanted to build.\n\nNot another review management tool. Something that actually moves the number.\n\nrating-iq.com",
+    "status": "published",
+    "approved": false
+  },
+  {
+    "id": "p74",
+    "date": "2026-04-09",
+    "profile": "shany",
+    "copy": "We changed the name. We didn't change what we believe.\n\nA hotel chain's rating is a revenue number. Everything we build starts from there.",
+    "status": "published",
+    "approved": false
+  },
+  {
     "id": "p3",
     "date": "2026-04-11",
     "profile": "omri",
@@ -24,6 +40,14 @@
     "approved": false
   },
   {
+    "id": "p39",
+    "date": "2026-04-11",
+    "profile": "shany",
+    "copy": "Omri puts the math behind something I explain in every demo.\n\n0.2 on Booking.com isn't a small dip. It's a number on the P&L.\n\nThis post is the short version of every conversation we have.",
+    "status": "published",
+    "approved": false
+  },
+  {
     "id": "p4",
     "date": "2026-04-13",
     "profile": "company",
@@ -32,10 +56,18 @@
     "approved": false
   },
   {
-    "id": "p39",
-    "date": "2026-04-11",
+    "id": "p63",
+    "date": "2026-04-13",
+    "profile": "omri",
+    "copy": "It's live. Everything we've been building — the product, the story, the case for why this matters.\n\nrating-iq.com",
+    "status": "published",
+    "approved": false
+  },
+  {
+    "id": "p75",
+    "date": "2026-04-13",
     "profile": "shany",
-    "copy": "Omri puts the math behind something I explain in every demo.\n\n0.2 on Booking.com isn't a small dip. It's a number on the P&L.\n\nThis post is the short version of every conversation we have.",
+    "copy": "I spent months working on this website. Not on how it looks — on what it says.\n\nFor the person who actually has to make the call. Take a look.\n\nrating-iq.com",
     "status": "published",
     "approved": false
   },
@@ -48,6 +80,48 @@
     "approved": false
   },
   {
+    "id": "p44",
+    "date": "2026-04-15",
+    "profile": "company",
+    "copy": "No renovation required. Just the right data, to the right person, at the right time.\n\nThat's the whole product.\n\nrating-iq.com",
+    "status": "published",
+    "approved": false
+  },
+  {
+    "id": "p52",
+    "date": "2026-04-15",
+    "profile": "shany",
+    "copy": "Every time Omri explains this, someone in the room exhales.\n\nNo renovation required. The problem is operational. That means the fix is too.",
+    "status": "published",
+    "approved": false
+  },
+  {
+    "id": "p8",
+    "date": "2026-04-23",
+    "profile": "omri",
+    "copy": "Every hotel bought a review management tool.\n\nA genuinely surprising number of them open it maybe twice a month.\n\nI'm not judging. I get it. The GM is running a hotel. 47 things on fire at any given moment. Opening a dashboard to \"explore patterns\" is not on that list.\n\nSo the data sits. Reviews pile up. The same complaints come in every weekend. Nothing changes.\n\nThe fix isn't a better dashboard. It's a push.\n\nNew complaint cluster? Tell the GM. Don't wait for them to find it.\nSame issue across 3 properties? Tell the CEO.\nScore trending down? Alert someone before it shows up on the display.\n\nThat's how review data actually gets used.\nYou make it come to people. Not the other way around.",
+    "status": "published",
+    "approved": false
+  },
+  {
+    "id": "p64",
+    "date": "2026-04-27",
+    "profile": "omri",
+    "copy": "This is the short version of what I explain in every first call.\n\nNobody logs in. We built around that truth.\n\nrating-iq.com",
+    "status": "published",
+    "approved": false,
+    "reshareOf": "p7"
+  },
+  {
+    "id": "p76",
+    "date": "2026-04-27",
+    "profile": "shany",
+    "copy": "We are not a dashboard. We are not a reporting tool.\n\nWe are the thing that makes review data actually get used.",
+    "status": "published",
+    "approved": false,
+    "reshareOf": "p7"
+  },
+  {
     "id": "p7",
     "date": "2026-04-28",
     "profile": "company",
@@ -57,12 +131,22 @@
     "linkedInUrl": "https://www.linkedin.com/feed/update/urn:li:activity:7454415065123971073/?actorCompanyId=91043663"
   },
   {
-    "id": "p8",
-    "date": "2026-04-23",
-    "profile": "omri",
-    "copy": "Every hotel bought a review management tool.\n\nA genuinely surprising number of them open it maybe twice a month.\n\nI'm not judging. I get it. The GM is running a hotel. 47 things on fire at any given moment. Opening a dashboard to \"explore patterns\" is not on that list.\n\nSo the data sits. Reviews pile up. The same complaints come in every weekend. Nothing changes.\n\nThe fix isn't a better dashboard. It's a push.\n\nNew complaint cluster? Tell the GM. Don't wait for them to find it.\nSame issue across 3 properties? Tell the CEO.\nScore trending down? Alert someone before it shows up on the display.\n\nThat's how review data actually gets used.\nYou make it come to people. Not the other way around.",
+    "id": "p45",
+    "date": "2026-04-28",
+    "profile": "company",
+    "copy": "Nobody logs in. That's not a criticism — it's an industry truth.\n\nWe built RatingIQ around it.\n\nrating-iq.com",
     "status": "published",
     "approved": false
+  },
+  {
+    "id": "p53",
+    "date": "2026-04-28",
+    "profile": "shany",
+    "copy": "Nobody opens the dashboard. I've been in enough hotel ops conversations to know this is true.\n\nOmri explains exactly why that matters.",
+    "status": "published",
+    "approved": true,
+    "linkedInId": "urn:li:share:7454771385261953024",
+    "publishedAt": "2026-04-28T06:00:01.353Z"
   },
   {
     "id": "p9",
@@ -75,12 +159,56 @@
     "publishedAt": "2026-04-30T06:43:07.912Z"
   },
   {
+    "id": "p46",
+    "date": "2026-04-30",
+    "profile": "company",
+    "copy": "Three rating problems. All solvable. None requiring guesswork.\n\nSee exactly what's hurting yours at rating-iq.com",
+    "status": "published",
+    "approved": false,
+    "reshareOf": "p9"
+  },
+  {
+    "id": "p54",
+    "date": "2026-04-30",
+    "profile": "shany",
+    "copy": "Three problems. All solvable.\n\nI've watched Omri explain this in rooms with hotel CEOs and seen the penny drop every time.",
+    "status": "published",
+    "approved": false,
+    "reshareOf": "p9"
+  },
+  {
+    "id": "p86",
+    "date": "2026-04-30",
+    "profile": "group",
+    "type": "Group Repost",
+    "status": "published",
+    "approved": false
+  },
+  {
     "id": "p10",
     "date": "2026-05-04",
     "profile": "company",
     "copy": "From reviews to revenue.\n\nThat's the only journey that matters.\n\nNot \"manage your reputation.\" Not \"monitor your feedback.\"\n\nMove the number that moves your P&L.\n\nrating-iq.com",
     "status": "published",
     "approved": false
+  },
+  {
+    "id": "p65",
+    "date": "2026-05-04",
+    "profile": "omri",
+    "copy": "From reviews to revenue. That's the journey.\n\nThat's the only one that matters.",
+    "status": "published",
+    "approved": false,
+    "reshareOf": "p10"
+  },
+  {
+    "id": "p77",
+    "date": "2026-05-04",
+    "profile": "shany",
+    "copy": "From reviews to revenue. I've been living this line for months.\n\nIt's the clearest thing we've ever said about what we do.",
+    "status": "published",
+    "approved": false,
+    "reshareOf": "p10"
   },
   {
     "id": "p31",
@@ -113,46 +241,12 @@
     "publishedAt": "2026-05-06T06:00:02.907Z"
   },
   {
-    "id": "p11",
-    "date": "2026-05-15",
-    "profile": "omri",
-    "copy": "True story.\n\nA chain CEO told me their rating had been stuck at 8.3 for two years.\n\nI pulled their review data before the call.\n\nTop complaint cluster across 4 properties: WiFi in meeting rooms.\n\nSame issue. 11 months in a row. 47 reviews. Never once escalated to someone with authority to fix it.\n\nTwo weeks after the call, they sorted the infrastructure.\n\nScore: 8.6 within 60 days.\n\nNo renovation. No new staff. No rebranding.\n\nJust: someone finally connected the complaint to the person who could act on it.\n\nThat's RatingIQ.",
-    "status": "scheduled",
-    "approved": true
-  },
-  {
-    "id": "p34",
-    "date": "2026-05-15",
-    "profile": "company",
-    "copy": "Score up 0.3 in 60 days. No renovation. One connected complaint.\n\nThis is exactly what RatingIQ is built for.",
-    "status": "scheduled",
-    "approved": false,
-    "reshareOf": "p11"
-  },
-  {
-    "id": "p12",
-    "date": "2026-05-11",
-    "profile": "company",
-    "copy": "The average hotel chain has:\n\n→ 4 recurring complaint clusters unresolved for 90+ days\n→ 1 property dragging down the portfolio average by 0.4 points\n→ A Booking.com score that hasn't moved in over a year\n\nWe didn't make these numbers up. We see them every time we look at a new portfolio.\n\nThe good news: all three are fixable without touching the building.\n\nrating-iq.com",
-    "status": "scheduled",
-    "approved": true
-  },
-  {
-    "id": "p41",
-    "date": "2026-05-15",
-    "profile": "shany",
-    "copy": "The WiFi story. Every time I share this, someone says \"we have the exact same problem.\"\n\nThat's the point. These aren't unusual problems. They're just unconnected ones.",
-    "status": "scheduled",
-    "approved": true,
-    "reshareOf": "p11"
-  },
-  {
-    "id": "p13",
-    "date": "2026-05-13",
-    "profile": "omri",
-    "copy": "The question hotel chains ask: \"How do we manage our reviews?\"\n\nThe question they should be asking: \"What's the fastest path to a higher score?\"\n\nThose sound similar. They're completely different.\n\n\"Manage reviews\" = respond faster, template better, apologize more professionally.\n\n\"Faster path to a higher score\" = find what's actually hurting the rating, fix it operationally, move the number.\n\nOne of these is a PR exercise.\nOne shows up on the P&L.\n\nYou already know which one matters.",
-    "status": "scheduled",
-    "approved": true
+    "id": "p87",
+    "date": "2026-05-06",
+    "profile": "group",
+    "type": "Group Repost",
+    "status": "published",
+    "approved": false
   },
   {
     "id": "p15",
@@ -163,120 +257,583 @@
     "approved": false
   },
   {
+    "id": "p48",
+    "date": "2026-05-08",
+    "profile": "company",
+    "copy": "Happy Mother's Day from the whole RatingIQ team.\n\nTo every hotel running full houses this weekend.",
+    "status": "published",
+    "approved": false,
+    "reshareOf": "p15"
+  },
+  {
+    "id": "p56",
+    "date": "2026-05-08",
+    "profile": "shany",
+    "copy": "Mother's Day in hospitality is no joke.\n\nThis post says it better than anything I've written. Happy Mother's Day to every hotel team running full houses.",
+    "status": "published",
+    "approved": false,
+    "reshareOf": "p15"
+  },
+  {
+    "id": "p12",
+    "date": "2026-05-11",
+    "profile": "company",
+    "copy": "The average hotel chain has:\n\n→ 4 recurring complaint clusters unresolved for 90+ days\n→ 1 property dragging down the portfolio average by 0.4 points\n→ A Booking.com score that hasn't moved in over a year\n\nWe didn't make these numbers up. We see them every time we look at a new portfolio.\n\nThe good news: all three are fixable without touching the building.\n\nrating-iq.com",
+    "status": "published",
+    "approved": false
+  },
+  {
+    "id": "p66",
+    "date": "2026-05-11",
+    "profile": "omri",
+    "copy": "4 clusters. 0.4 point drag. 14 months flat.\n\nWe see these numbers every time we look at a new portfolio. None of them are permanent.\n\nrating-iq.com",
+    "status": "published",
+    "approved": false,
+    "reshareOf": "p12"
+  },
+  {
+    "id": "p78",
+    "date": "2026-05-11",
+    "profile": "shany",
+    "copy": "We see these numbers every time we look at a new portfolio.\n\n4 clusters. One dragging property. A score that hasn't moved in a year. All fixable. That's what keeps me going.",
+    "status": "published",
+    "approved": false,
+    "reshareOf": "p12"
+  },
+  {
+    "id": "p105",
+    "date": "2026-05-11",
+    "profile": "omri",
+    "copy": "Your rating doesn't just affect how guests feel.\n\nIt affects how many show up.\n\nTrust. Conversion. Occupancy. Revenue.\n\nEvery hotel chain CEO I speak to knows their rating is a business number. What's harder to see is exactly which part of the operation is pulling it down - and by how much.\n\nThat's the gap RatingIQ closes.\n\nFrom reviews to revenue.",
+    "status": "published",
+    "approved": false,
+    "linkedInId": "urn:li:ugcPost:7459510452721614849",
+    "publishedAt": "2026-05-11T07:51:23.031Z",
+    "type": "video"
+  },
+  {
+    "id": "p106",
+    "date": "2026-05-12",
+    "profile": "omri",
+    "copy": "Most hotels do read their reviews.\n\nThe problem isn't awareness. It's what happens after.\n\nA GM reads 40 reviews on a Tuesday morning. She flags three operational issues in her head. Two get addressed. One doesn't. No one at the chain level sees any of it.\n\nThis repeats. At every property. Every week.\n\nMeanwhile, the rating stays flat - or drifts down.\n\nReading reviews is not the same as acting on them.\n\nThe gap is a system problem.",
+    "status": "published",
+    "approved": true,
+    "linkedInId": "urn:li:ugcPost:7459845241114615808",
+    "publishedAt": "2026-05-12T06:01:42.979Z",
+    "type": "video"
+  },
+  {
+    "id": "p13",
+    "date": "2026-05-13",
+    "profile": "omri",
+    "copy": "The question hotel chains ask: \"How do we manage our reviews?\"\n\nThe question they should be asking: \"What's the fastest path to a higher score?\"\n\nThose sound similar. They're completely different.\n\n\"Manage reviews\" = respond faster, template better, apologize more professionally.\n\n\"Faster path to a higher score\" = find what's actually hurting the rating, fix it operationally, move the number.\n\nOne of these is a PR exercise.\nOne shows up on the P&L.\n\nYou already know which one matters.",
+    "status": "published",
+    "approved": false,
+    "linkedInId": "urn:li:share:7460207205020196864",
+    "publishedAt": "2026-05-13T06:00:01.843Z"
+  },
+  {
+    "id": "p47",
+    "date": "2026-05-13",
+    "profile": "company",
+    "copy": "Different question. Different answer.\n\nThe right one shows up on your P&L.\n\nrating-iq.com",
+    "status": "published",
+    "approved": false,
+    "reshareOf": "p13"
+  },
+  {
+    "id": "p55",
+    "date": "2026-05-13",
+    "profile": "shany",
+    "copy": "The wrong question gets you response templates.\n\nThe right one gets you a number on your P&L. This is the distinction we built a company around.",
+    "status": "published",
+    "approved": false,
+    "reshareOf": "p13",
+    "linkedInId": "7460207209298264065",
+    "publishedAt": "2026-05-13T06:00:02.840Z"
+  },
+  {
+    "id": "p88",
+    "date": "2026-05-13",
+    "profile": "group",
+    "type": "Group Repost",
+    "status": "published",
+    "approved": false
+  },
+  {
+    "id": "p107",
+    "date": "2026-05-14",
+    "profile": "omri",
+    "copy": "Reviews are not just feedback.\n\nThey are operational signals.\n\nWhen guests keep mentioning check-in, cleanliness, breakfast, maintenance, service - that isn't noise. That is a pattern.\n\nThe question isn't whether to read the reviews. The question is whether your team has a system that turns what guests say into what gets fixed.\n\nMost don't.\n\nThat's what we fix at RatingIQ.",
+    "status": "published",
+    "approved": false,
+    "type": "video"
+  },
+  {
+    "id": "p11",
+    "date": "2026-05-15",
+    "profile": "omri",
+    "copy": "True story.\n\nA chain CEO told me their rating had been stuck at 8.3 for two years.\n\nI pulled their review data before the call.\n\nTop complaint cluster across 4 properties: WiFi in meeting rooms.\n\nSame issue. 11 months in a row. 47 reviews. Never once escalated to someone with authority to fix it.\n\nTwo weeks after the call, they sorted the infrastructure.\n\nScore: 8.6 within 60 days.\n\nNo renovation. No new staff. No rebranding.\n\nJust: someone finally connected the complaint to the person who could act on it.\n\nThat's RatingIQ.",
+    "status": "published",
+    "approved": true,
+    "linkedInId": "urn:li:share:7460932073445462016",
+    "publishedAt": "2026-05-15T06:00:23.992Z"
+  },
+  {
+    "id": "p34",
+    "date": "2026-05-15",
+    "profile": "company",
+    "copy": "Score up 0.3 in 60 days. No renovation. One connected complaint.\n\nThis is exactly what RatingIQ is built for.",
+    "status": "published",
+    "approved": false,
+    "reshareOf": "p11"
+  },
+  {
+    "id": "p41",
+    "date": "2026-05-15",
+    "profile": "shany",
+    "copy": "The WiFi story. Every time I share this, someone says \"we have the exact same problem.\"\n\nThat's the point. These aren't unusual problems. They're just unconnected ones.",
+    "status": "published",
+    "approved": true,
+    "reshareOf": "p11",
+    "linkedInId": "7460932077186760704",
+    "publishedAt": "2026-05-15T06:00:24.836Z"
+  },
+  {
     "id": "p16",
     "date": "2026-05-18",
     "profile": "company",
     "copy": "Not all complaints are equal.\n\nA one-off guest complaint about a specific staff member? Probably not moving your score.\n\nA recurring cluster about check-in wait times across 3 properties for 6 weeks? That's your score.\n\nRatingIQ shows you the difference. And pushes the fix to the people who can act on it.\n\nBecause knowing isn't enough. Someone has to do something about it.\n\nrating-iq.com",
-    "status": "scheduled",
-    "approved": true
-  },
-  {
-    "id": "p17",
-    "date": "2026-05-20",
-    "profile": "omri",
-    "copy": "True story.\n\nHotel chain. 6 properties. Booking.com scores from 7.9 to 8.7.\n\nThe CEO assumed the 7.9 property needed a renovation.\n\nWe pulled the data before he signed anything.\n\nTop complaint cluster at the 7.9 property: a single check-in desk handling peak arrival times solo.\n\nThat's it. One operational gap. No structural issue. No design problem.\n\nThey added a second desk for peak hours.\n\nScore: 8.4 within 90 days.\n\nThe CEO's words at our next call: \"I was about to spend $400K on the wrong thing.\"\n\nThe most expensive mistake in this industry is solving the visible problem instead of the actual one.",
-    "status": "scheduled",
-    "approved": true
-  },
-  {
-    "id": "p35",
-    "date": "2026-05-20",
-    "profile": "company",
-    "copy": "The most expensive mistake in hospitality: solving the visible problem instead of the actual one.\n\nOur founder. Our mission.",
-    "status": "scheduled",
-    "approved": false,
-    "reshareOf": "p17"
-  },
-  {
-    "id": "p42",
-    "date": "2026-05-20",
-    "profile": "shany",
-    "copy": "The $400K story is real. I was in that call.\n\nThe CEO was ready to sign a renovation. The data said something completely different.\n\nThis is why we pull the data before you make a decision.",
-    "status": "scheduled",
-    "approved": true,
-    "reshareOf": "p17"
-  },
-  {
-    "id": "p18",
-    "date": "2026-05-27",
-    "profile": "company",
-    "copy": "Hotels that address their top 3 complaint clusters within 30 days:\n\n→ See an average rating improvement of 0.3-0.5 points within 90 days\n→ Without capital expenditure\n→ Through operational prioritization alone\n\nThese aren't projections from a marketing deck.\nThese are outcomes from chains using RatingIQ.\n\nThe math is straightforward once you know where to look.\n\nrating-iq.com",
-    "status": "scheduled",
-    "approved": true
-  },
-  {
-    "id": "p19",
-    "date": "2026-05-25",
-    "profile": "omri",
-    "copy": "Hotel ratings on Booking.com are not a popularity contest.\n\nThey're a feedback loop with financial consequences.\n\nA 0.1 point improvement in your score can shift your search rank enough to meaningfully move occupancy.\n\nWhich means the conversation isn't: \"How do we get more positive reviews?\"\n\nIt's: \"What's actually driving our negative reviews. How fast can we fix it?\"\n\nDifferent question. Different answer. Different result.\n\nThe first question leads to response templates.\nThe second one leads to RatingIQ.",
-    "status": "scheduled",
-    "approved": true
-  },
-  {
-    "id": "p21",
-    "date": "2026-05-22",
-    "profile": "omri",
-    "copy": "Memorial Day weekend.\n\nOne of the highest-demand weekends in US hospitality.\n\nAlso: one of the highest-complaint weekends.\n\nThe gap between a sold-out property and a well-reviewed sold-out property isn't square footage or thread count.\n\nIt's operational execution under pressure.\n\nThe chains that come out of this weekend with better reviews than they went in. They had the fixes mapped before Friday.\n\nGood luck to everyone running a full house this weekend. You've earned the demand.\n\n(The rating, you still have to work for.)",
-    "status": "scheduled",
+    "status": "published",
     "approved": false
   },
   {
-    "id": "p22",
-    "date": "2026-05-29",
+    "id": "p67",
+    "date": "2026-05-18",
+    "profile": "omri",
+    "copy": "A recurring cluster across 3 properties for 6 weeks is not a complaint.\n\nThat's your score.\n\nrating-iq.com",
+    "status": "published",
+    "approved": false,
+    "reshareOf": "p16"
+  },
+  {
+    "id": "p79",
+    "date": "2026-05-18",
+    "profile": "shany",
+    "copy": "A one-off complaint is noise. A recurring cluster is your score.\n\nThis one took us a while to explain clearly. We finally got it right.",
+    "status": "published",
+    "approved": false,
+    "reshareOf": "p16"
+  },
+  {
+    "id": "p89",
+    "date": "2026-05-18",
+    "profile": "group",
+    "type": "Group Repost",
+    "status": "published",
+    "approved": false
+  },
+  {
+    "id": "ai17778732120o",
+    "date": "2026-05-19",
+    "profile": "omri",
+    "copy": "Spirit Airlines just shut down.\n\nThat's not just an aviation story. It's a hospitality story.\n\nFor years, the budget travel model trained guests to optimize for price. Spirit, Frontier, Ryanair — they built an entire customer psychology around 'cheap first, comfort later.'\n\nThat model is collapsing.\n\nPost-pandemic travelers are choosing differently. They're paying more for comfort, consistency, and experiences they'll actually remember.\n\nAnd here's what that means for your property:\n\nThe guests checking in this summer have higher expectations than ever. They're not comparing you to the 2-star down the street. They're comparing you to the best stay they've ever had.\n\nOne negative review about cleanliness or a cold check-in hits harder now than in 2019. These guests will write that review. And they'll read yours before they book.\n\nThe premium shift is your opportunity — but only if your reputation reflects the experience you're delivering.\n\nHotels that close the gap between experience and perception win. The ones that don't are invisible.\n\nWhat are you doing today to ensure the premium traveler chooses you?\n\n#HotelManagement #GuestExperience #HospitalityTrends",
+    "status": "published",
+    "approved": false,
+    "linkedInId": "urn:li:share:7462381536542330880",
+    "publishedAt": "2026-05-19T06:00:03.423Z"
+  },
+  {
+    "id": "ai17778732120c",
+    "date": "2026-05-19",
     "profile": "company",
-    "copy": "We built the website around one question:\n\n\"What would this look like if it wasn't designed for investors?\"\n\nNo feature list. No dashboard screenshots. No testimonial carousels.\n\nJust the problem, the approach, and the outcome. For the person who actually has to make a decision.\n\nIf you haven't seen it yet:\n\nrating-iq.com",
+    "copy": "Post-pandemic travelers are choosing premium over price — and their review standards have risen with it.\n\nThe Spirit Airlines shutdown is the latest signal: budget travel is out. Guests now arrive with higher expectations and leave more detailed, demanding reviews.\n\nHotels that align their reputation with the experience they deliver capture this demand. Those that don't become invisible at booking.\n\nSee how RatingIQ helps you close the gap. rating-iq.com",
+    "status": "published",
+    "approved": false
+  },
+  {
+    "id": "ai17778732120s",
+    "date": "2026-05-19",
+    "profile": "shany",
+    "copy": "This hits close to home. The premium traveler shift isn't just an airline story — it's reshaping hotel booking behavior right now. Your reputation needs to reflect your experience, or you lose the booking before check-in. Worth reading.",
+    "reshareOf": "ai17778732120o",
+    "status": "published",
+    "approved": false,
+    "error": "{\"message\":\"Cannot reshare nonexistent share urn:li:share:7462381536542330880\",\"status\":400}",
+    "retryAfter": 1779174004138,
+    "linkedInId": "7462397678363238401",
+    "publishedAt": "2026-05-19T07:04:11.199Z"
+  },
+  {
+    "id": "p109",
+    "date": "2026-05-20",
+    "profile": "omri",
+    "copy": "When I ask hotel managers about their rating, the first answer is almost always the same:\n\n\"I know what guests are complaining about.\"\n\nBut that's the wrong ANSWER.\n\nKnowing what guests complain about is not the same as knowing which specific issue, across which properties, is driving the most rating damage right now.\n\nThat rating is different. And it changes how you deploy your team.\n\nThat's the question RatingIQ is built to answer.",
+    "status": "published",
+    "approved": false,
+    "visual": "video5_done.mp4",
+    "type": "video",
+    "linkedInId": "urn:li:ugcPost:7462744100279287810",
+    "publishedAt": "2026-05-20T06:00:44.871Z"
+  },
+  {
+    "id": "p115",
+    "date": "2026-05-22",
+    "profile": "shany",
+    "copy": "I reframe this in every conversation I have.\n\nNot \"what are guests complaining about\" - but \"what is it costing us right now?\"\n\nOmri explains it better than I do.",
+    "status": "published",
+    "approved": false,
+    "visual": ""
+  },
+  {
+    "id": "p116",
+    "date": "2026-05-22",
+    "profile": "company",
+    "copy": "The right question changes everything.\n\nNot \"what are guests unhappy about?\" - but \"which pattern, across which properties, is hurting our score the most right now?\"\n\nThat's what RatingIQ answers.\n\nrating-iq.com",
+    "status": "published",
+    "approved": false,
+    "visual": ""
+  },
+  {
+    "id": "ai17778732122o",
+    "date": "2026-05-25",
+    "profile": "omri",
+    "copy": "Luxury brands spent 20 years optimizing for the human eye.\n\nThe next booking may be made by AI.\n\nThat's not a hypothetical. Travel AI agents — tools that research, compare, and book on behalf of guests — are already reading your reviews, rating scores, and response patterns.\n\nHere's what the algorithm actually evaluates:\n→ Your average star rating, weighted by recency\n→ Sentiment consistency across review categories\n→ Whether you respond to negative reviews\n→ How your score compares to your comp set\n\nThis is the new SEO for hotels.\n\nIn 2015, you optimized for Google. In 2020, you optimized for OTA search rankings. In 2026, you're optimizing for AI that makes booking decisions before a human ever enters the picture.\n\nHotels with fragmented review profiles — 4.2 here, 3.8 there, no response strategy — get filtered out before a guest ever sees the results.\n\nYour rating isn't a vanity metric anymore. It's a machine-readable sales signal.\n\nTreat it that way.\n\n#HotelTechnology #HospitalityAI #ReputationManagement",
+    "status": "published",
+    "approved": false,
+    "linkedInId": "urn:li:share:7464563676289626112",
+    "publishedAt": "2026-05-25T06:31:05.615Z"
+  },
+  {
+    "id": "ai17778732122c",
+    "date": "2026-05-25",
+    "profile": "company",
+    "copy": "AI booking agents are reading your reviews, rating trends, and response patterns, and filtering properties before a human ever searches.\n\nYour star rating is now a machine-readable sales signal. Fragmented review profiles get cut before the consideration set even forms.\n\n1 star up = 11.2% higher ADR. The stakes just got algorithmic.\n\nrating-iq.com",
     "status": "scheduled",
     "approved": true
+  },
+  {
+    "id": "ai17778732122s",
+    "date": "2026-05-25",
+    "profile": "shany",
+    "copy": "We've been optimizing for human eyes. But AI travel agents are already deciding which hotels get surfaced — and which get skipped entirely. Your reputation score is becoming a ranking signal. Read this one carefully.",
+    "reshareOf": "ai17778732122o",
+    "status": "published",
+    "approved": false,
+    "linkedInId": "7464565480142483456",
+    "publishedAt": "2026-05-25T06:38:15.498Z"
+  },
+  {
+    "id": "p19",
+    "date": "2026-05-26",
+    "profile": "omri",
+    "copy": "Hotel ratings on Booking.com are not a popularity contest.\n\nThey're a feedback loop with financial consequences.\n\nA 0.1 point improvement in your score can shift your search rank enough to meaningfully move occupancy.\n\nWhich means the conversation isn't: \"How do we get more positive reviews?\"\n\nIt's: \"What's actually driving our negative reviews. How fast can we fix it?\"\n\nDifferent question. Different answer. Different result.\n\nThe first question leads to response templates.\nThe second one leads to RatingIQ.",
+    "status": "published",
+    "approved": true,
+    "linkedInId": "urn:li:share:7464918247625273346",
+    "publishedAt": "2026-05-26T06:00:01.815Z"
+  },
+  {
+    "id": "p49",
+    "date": "2026-05-26",
+    "profile": "company",
+    "copy": "A 0.1 point improvement can shift your search rank enough to move occupancy.\n\nThe conversation starts at rating-iq.com",
+    "status": "published",
+    "approved": false,
+    "reshareOf": "p19"
+  },
+  {
+    "id": "p57",
+    "date": "2026-05-26",
+    "profile": "shany",
+    "copy": "Not a popularity contest. A feedback loop with financial consequences.\n\nOmri puts in one sentence what takes me a slide deck to explain.",
+    "status": "published",
+    "approved": false,
+    "reshareOf": "p19",
+    "linkedInId": "7464918250594828288",
+    "publishedAt": "2026-05-26T06:00:02.485Z"
+  },
+  {
+    "id": "p90",
+    "date": "2026-05-26",
+    "profile": "group",
+    "type": "Group Repost",
+    "status": "published",
+    "approved": false,
+    "copy": "Hotel ratings on Booking.com aren't a popularity contest. They're a feedback loop with direct revenue consequences.\n\nA 0.1 point improvement can shift your search ranking enough to meaningfully move occupancy.\n\nSo the conversation shouldn't be \"how do we get more positive reviews?\"\n\nIt should be: \"what's actually driving our negative ones — and how fast can we fix it?\"\n\nDifferent question. Completely different result.\n\nHow is your team framing this conversation internally?"
+  },
+  {
+    "id": "p123",
+    "date": "2026-05-27",
+    "profile": "omri",
+    "copy": "I visited a hotel in Miami last month.\n\nRating flat for 18 months. They had tried everything. New mattresses. Staff retraining. Breakfast upgrade.\n\nI pulled up their top 5 complaints.\n\n1. Noise from the lobby bar past midnight.\n2. Inconsistent check-in times.\n\nNobody had ranked them before.\n\nThey fixed both within three weeks.\n\nRating moved from 7.6 to 8.1.\n\nThe problem was never effort. It was priority.",
+    "status": "published",
+    "approved": false,
+    "visual": "Omri photo — hotel lobby or property visit",
+    "error": "fetch failed",
+    "linkedInId": "urn:li:share:7465310041752141824",
+    "publishedAt": "2026-05-27T07:56:52.865Z"
+  },
+  {
+    "id": "p18",
+    "date": "2026-05-28",
+    "profile": "company",
+    "copy": "Hotels that address their top 3 complaint clusters within 30 days:\n\n→ See an average rating improvement of 0.3-0.5 points within 90 days\n→ Without capital expenditure\n→ Through operational prioritization alone\n\nThese aren't projections from a marketing deck.\nThese are outcomes from chains using RatingIQ.\n\nThe math is straightforward once you know where to look.\n\nrating-iq.com",
+    "status": "published",
+    "approved": false
+  },
+  {
+    "id": "p68",
+    "date": "2026-05-28",
+    "profile": "omri",
+    "copy": "0.3 to 0.5 points. 90 days. Zero CapEx.\n\nThese are outcomes from chains using RatingIQ. Not projections.",
+    "status": "published",
+    "approved": false,
+    "reshareOf": "p18"
+  },
+  {
+    "id": "p80",
+    "date": "2026-05-28",
+    "profile": "shany",
+    "copy": "0.3 to 0.5 points in 90 days. Zero CapEx.\n\nI share this every time someone asks me for proof it works.",
+    "status": "published",
+    "approved": false,
+    "reshareOf": "p18"
+  },
+  {
+    "id": "p91",
+    "date": "2026-05-28",
+    "profile": "group",
+    "type": "Group Repost",
+    "status": "published",
+    "approved": false,
+    "copy": "Hotels that fix their top 3 complaint clusters within 30 days see an average 0.3–0.5 point rating improvement within 90 days.\n\nNo capital expenditure. No renovation. Operational prioritization alone.\n\nThe reason it works: most rating problems aren't physical - they're process gaps that show up consistently in review data but never get connected to the person who can fix them.\n\nHas anyone in the group tracked this kind of before/after? Would love to hear what you saw."
+  },
+  {
+    "id": "p17",
+    "date": "2026-05-31",
+    "profile": "omri",
+    "copy": "True story.\n\nHotel chain. 6 properties. Booking.com scores from 7.9 to 8.7.\n\nThe CEO assumed the 7.9 property needed a renovation.\n\nWe pulled the data before he signed anything.\n\nTop complaint cluster at the 7.9 property: a single check-in desk handling peak arrival times solo.\n\nThat's it. One operational gap. No structural issue. No design problem.\n\nThey added a second desk for peak hours.\n\nScore: 8.4 within 90 days.\n\nThe CEO's words at our next call: \"I was about to spend $400K on the wrong thing.\"\n\nThe most expensive mistake in this industry is solving the visible problem instead of the actual one.",
+    "status": "published",
+    "approved": false,
+    "linkedInId": "urn:li:share:7466730188417163264",
+    "publishedAt": "2026-05-31T06:00:02.169Z"
+  },
+  {
+    "id": "p35",
+    "date": "2026-05-31",
+    "profile": "company",
+    "copy": "The most expensive mistake in hospitality: solving the visible problem instead of the actual one.\n\nOur founder. Our mission.",
+    "status": "published",
+    "approved": false,
+    "reshareOf": "p17",
+    "error": "Browser script exited with code 1"
+  },
+  {
+    "id": "p42",
+    "date": "2026-06-01",
+    "profile": "shany",
+    "copy": "The $400K story is real. I was in that call.\n\nThe CEO was ready to sign a renovation. The data said something completely different.\n\nThis is why we pull the data before you make a decision.",
+    "status": "published",
+    "approved": false,
+    "reshareOf": "p17",
+    "linkedInId": "7466730474032472064",
+    "publishedAt": "2026-05-31T06:01:10.226Z",
+    "error": "{\"errorDetailType\":\"com.linkedin.common.error.BadRequest\",\"message\":\"com.linkedin.content.common.exception.BadRequestResponseException: Content is a duplicate of urn:li:share:7466730475957694464\",\"errorDetails\":{\"inputErrors\":[{\"description\":\"Duplicate post is detected\",\"input\":{},\"code\":\"DUPLICATE_POST\"}]},\"status\":422}"
   },
   {
     "id": "p23",
     "date": "2026-06-01",
     "profile": "omri",
-    "copy": "The best thing I hear after a RatingIQ walkthrough:\n\n\"I've been asking for this for three years.\"\n\nNot \"impressive tech.\"\nNot \"great UI.\"\nNot \"nice to have.\"\n\n\"Someone finally connected what guests are saying to what I actually need to fix.\"\n\nThat's the product. That's always been the product.\n\nIf you run a hotel chain and that line sounds familiar, we should talk.",
-    "status": "scheduled",
-    "approved": true
+    "copy": "The best thing I hear after a RatingIQ walkthrough:\n\n\"I've been asking for this for three years.\"\n\nNot \"impressive tech.\"\nNot \"great UI.\"\nNot \"nice to have.\"\n\n\"Someone finally connected what guests are saying to what I actually need to fix.\"\n\nThat's the product. That's always been the product.\n\nIf you run a hotel chain and that line sounds familiar — we should talk.",
+    "status": "published",
+    "approved": false,
+    "linkedInId": "urn:li:share:7467092578350366720",
+    "publishedAt": "2026-06-01T06:00:02.553Z"
   },
   {
     "id": "p36",
     "date": "2026-06-01",
     "profile": "company",
     "copy": "Someone finally connected what guests are saying to what you actually need to fix.\n\nThat's the whole product. That's always been the product.\n\nrating-iq.com",
-    "status": "scheduled",
+    "status": "published",
     "approved": false,
-    "reshareOf": "p23"
+    "reshareOf": "p23",
+    "error": "Browser script exited with code 1"
+  },
+  {
+    "id": "p43",
+    "date": "2026-06-02",
+    "profile": "shany",
+    "copy": "\"I've been asking for this for three years.\"\n\nI hear this a lot. Omri hears it more. This post is why we built what we built.\n\nrating-iq.com",
+    "status": "published",
+    "approved": false,
+    "reshareOf": "p23",
+    "linkedInId": "7467456396939116545",
+    "publishedAt": "2026-06-02T06:05:43.416Z",
+    "error": "{\"errorDetailType\":\"com.linkedin.common.error.BadRequest\",\"message\":\"com.linkedin.content.common.exception.BadRequestResponseException: Content is a duplicate of urn:li:share:7467092602329202688\",\"errorDetails\":{\"inputErrors\":[{\"description\":\"Duplicate post is detected\",\"input\":{},\"code\":\"DUPLICATE_POST\"}]},\"status\":422}"
+  },
+  {
+    "id": "p22",
+    "date": "2026-06-02",
+    "profile": "company",
+    "copy": "Most hotel tech websites open with a product tour.\n\nrating-iq.com opens with the problem.\n\nThe rating pressure. The revenue consequence. The operational fix - without renovation, without capital expenditure.\n\nIf you're running a hotel chain and your Booking.com score hasn't moved in 12 months, that page was written for you.\n\nrating-iq.com",
+    "status": "published",
+    "approved": false
+  },
+  {
+    "id": "p69",
+    "date": "2026-06-02",
+    "profile": "omri",
+    "copy": "We built the website for one person.\n\nThe one who has to make the decision.\n\nrating-iq.com",
+    "status": "published",
+    "approved": false,
+    "reshareOf": "p22"
+  },
+  {
+    "id": "p81",
+    "date": "2026-06-02",
+    "profile": "shany",
+    "copy": "I built this website for one person. The CEO who signs the P&L and doesn't have time for a product tour.\n\nIf that's you, rating-iq.com",
+    "status": "published",
+    "approved": false,
+    "reshareOf": "p22"
   },
   {
     "id": "p24",
     "date": "2026-06-03",
     "profile": "company",
-    "copy": "A 1% increase in your rating.\n\nThat doesn't sound like much.\n\nCornell University ran the numbers. It translates to 1.42% more RevPAR and 0.54% more occupancy.\n\nAcross a chain of 10 properties, that's not a rounding error. That's a line item on the P&L.\n\nYour rating isn't a reputation score. It's a revenue dial.\n\nRatingIQ shows you exactly which direction it's moving. And why.\n\nrating-iq.com",
+    "copy": "A 1% increase in your rating. That doesn't sound like much.\n\nCornell University ran the numbers. It translates to 1.42% more RevPAR and 0.54% more occupancy.\n\nAcross a chain of 10 properties, that's not a rounding error. That's a line item on the P&L.\n\nYour rating isn't a reputation score. It's a revenue dial.\n\nRatingIQ shows you exactly which direction it's moving - and why.\n\nrating-iq.com",
+    "status": "published",
+    "approved": false
+  },
+  {
+    "id": "p70",
+    "date": "2026-06-03",
+    "profile": "omri",
+    "copy": "1% rating increase. 1.42% more RevPAR. Cornell ran the numbers.\n\nThe dial is real.\n\nrating-iq.com",
+    "status": "published",
+    "approved": false,
+    "reshareOf": "p24"
+  },
+  {
+    "id": "p82",
+    "date": "2026-06-03",
+    "profile": "shany",
+    "copy": "Cornell says 1% rating increase = 1.42% RevPAR.\n\nI've been using this number in every conversation since we found it. The math is the pitch.",
+    "status": "published",
+    "approved": false,
+    "reshareOf": "p24"
+  },
+  {
+    "id": "p92",
+    "date": "2026-06-03",
+    "profile": "group",
+    "type": "Group Repost",
+    "status": "published",
+    "approved": false,
+    "copy": "Cornell University ran the numbers on what a 1-point rating improvement actually means for hotel revenue.\n\n1% increase in your Booking.com rating = 1.42% more RevPAR + 0.54% more occupancy.\n\nAcross a chain of 10 properties, that's not a rounding error. That's a budget line.\n\nThe implication: your rating isn't a reputation metric. It's a revenue dial, and most chains aren't actively managing it as one.\n\nWhat's your current approach to improving ratings systematically across properties?"
+  },
+  {
+    "id": "p128",
+    "date": "2026-06-04",
+    "profile": "omri",
+    "type": "Thought Leadership",
+    "copy": "48 teams. 104 matches. 16 cities across 3 countries. 39 days.\n\nThe 2026 FIFA World Cup starts in 7 days.\n\nI've watched a lot of major events come and go. But this one is different for hospitality.\n\nIt's not just the scale. It's the geography.\n\nMillions of guests spreading across Dallas, Miami, New York, Vancouver, Mexico City - all of them arriving with elevated expectations and a smartphone in their pocket.\n\nThe reviews they leave will be read long after July 19.\n\nFor hotel chains with properties in host cities, this isn't a revenue event. It's a reputation event.\n\nAre your teams ready?\n\n#WorldCup2026 #HospitalityLeadership #HotelManagement",
+    "status": "published",
+    "approved": false,
+    "visual": "World Cup 2026 host city map across USA, Canada, Mexico",
+    "linkedInId": "urn:li:share:7468204067853455362",
+    "publishedAt": "2026-06-04T07:36:42.434Z"
+  },
+  {
+    "id": "p143",
+    "date": "2026-06-05",
+    "profile": "group",
+    "type": "Group Repost",
+    "status": "scheduled",
+    "approved": true
+  },
+  {
+    "id": "p129",
+    "date": "2026-06-07",
+    "profile": "company",
+    "type": "Brand",
+    "copy": "80% of World Cup host-city hotels are running below booking projections.\n\nThe tournament starts in 4 days.\n\nVisa headwinds. Geopolitical concerns. Aggressive pricing that outpaced demand.\n\nBut here's the thing about the guests who did commit - they're the serious ones.\n\nThey secured visas. Bought premium tickets. Paid elevated room rates. Flew across the world for this.\n\nThat guest has high expectations and very little tolerance for friction.\n\nWhen volume disappoints, experience becomes the only metric that matters.\n\nWhat are your ratings telling you heading into next week?\n\n#WorldCup2026 #HotelIndustry #GuestExperience #HospitalityData",
+    "status": "published",
+    "approved": false,
+    "visual": "Data graphic: booking demand vs projection gap for World Cup host cities"
+  },
+  {
+    "id": "p139",
+    "date": "2026-06-07",
+    "profile": "omri",
+    "reshareOf": "p129",
+    "copy": "The 80% stat is real. I've heard it directly from GMs in host cities.\n\nThe guests still coming expect a lot. What's your property showing right now?",
+    "status": "published",
+    "approved": false
+  },
+  {
+    "id": "p25",
+    "date": "2026-06-07",
+    "profile": "omri",
+    "copy": "1% increase in your rating.\n\nTOBB University found that's worth 2.68% more in online revenue per room.\n\nOTAs don't just show you to more guests when your rating goes up. They show you to guests who are ready to book.\n\nThe algorithm knows.\n\nrating-iq.com",
     "status": "scheduled",
     "approved": false
   },
   {
-    "id": "p43",
-    "date": "2026-06-01",
-    "profile": "shany",
-    "copy": "\"I've been asking for this for three years.\"\n\nI hear this a lot. Omri hears it more. This post is why we built what we built.",
+    "id": "p51",
+    "date": "2026-06-07",
+    "profile": "company",
+    "copy": "2.68% more in online revenue per rating point.\n\nThe math works for a reason.\n\nrating-iq.com",
     "status": "scheduled",
-    "approved": true,
-    "reshareOf": "p23"
+    "approved": false,
+    "reshareOf": "p25"
   },
   {
-    "id": "p25",
-    "date": "2026-06-05",
-    "profile": "omri",
-    "copy": "1% increase in your rating.\n\nTOBB University found that's worth 2.68% more in online revenue per room.\n\nOTAs don't just show you to more guests when your rating goes up. They show you to guests who are ready to book.\n\nThe algorithm knows.\n\nrating-iq.com",
+    "id": "p59",
+    "date": "2026-06-07",
+    "profile": "shany",
+    "copy": "2.68% more in online revenue per rating point. I use this number in almost every conversation.\n\nOmri explains the why.",
     "status": "scheduled",
-    "approved": true
+    "approved": true,
+    "reshareOf": "p25"
   },
   {
     "id": "p26",
     "date": "2026-06-08",
     "profile": "company",
-    "copy": "Raise your Booking.com rating by one star.\n\nAccording to TripAdvisor research, you can now charge 11.2% more per room. And still get booked.\n\nMost hotels spend years and significant budget trying to justify a rate increase. The ones with the highest ratings don't have to justify anything.\n\nYour rating is your pricing power.\n\nrating-iq.com",
-    "status": "scheduled",
+    "copy": "Raise your Booking.com rating by one point.\n\nAccording to TripAdvisor research, you can now charge 11.2% more per room - and still get booked.\n\nMost hotels spend years and significant budget trying to justify a rate increase. The ones with the highest ratings don't have to justify anything.\n\nYour rating is your pricing power.\n\nrating-iq.com",
+    "status": "published",
     "approved": false
+  },
+  {
+    "id": "p71",
+    "date": "2026-06-08",
+    "profile": "omri",
+    "copy": "One star on Booking.com. 11.2% more on your rate. Still booked.\n\nThe highest-rated properties don't justify their prices. They just charge them.\n\nrating-iq.com",
+    "status": "published",
+    "approved": false,
+    "reshareOf": "p26"
+  },
+  {
+    "id": "p83",
+    "date": "2026-06-08",
+    "profile": "shany",
+    "copy": "Raise your rating by one star. Charge 11.2% more. Still get booked.\n\nTripAdvisor's number, not ours. The case writes itself.",
+    "status": "published",
+    "approved": false,
+    "reshareOf": "p26"
+  },
+  {
+    "id": "p130",
+    "date": "2026-06-09",
+    "profile": "company",
+    "type": "Brand",
+    "copy": "The 2026 World Cup spans 16 host cities across the US, Canada, and Mexico. Not all of them are set up to win.\n\nMiami and Atlanta are leading - strong leisure infrastructure, confirmed team base camps, established international traffic.\n\nDallas and New Jersey carry the biggest matches: both semifinals and the final.\n\nKansas City is the cautionary tale - 90% of hoteliers there report bookings well below forecast.\n\nThe interesting question isn't which city fills the most rooms.\n\nIt's which city converts a smaller, more demanding crowd into the strongest ratings on the other side of this.\n\nThat's the result that matters in October.\n\n#WorldCup2026 #HotelIndustry #HospitalityInsights",
+    "status": "scheduled",
+    "approved": false,
+    "visual": "US map highlighting 16 host cities with match count labels"
   },
   {
     "id": "p27",
@@ -291,17 +848,79 @@
     "date": "2026-06-10",
     "profile": "company",
     "copy": "72% of guests choose rating over brand name.\n\nYour rating is your brand now. RatingIQ is how you protect it.\n\nrating-iq.com",
-    "status": "scheduled",
+    "status": "draft",
     "approved": false,
     "reshareOf": "p27"
   },
   {
+    "id": "p60",
+    "date": "2026-06-10",
+    "profile": "shany",
+    "copy": "72% choose rating over brand name. I've seen this stat stop people mid-sentence in demos.\n\nThe logo is just the introduction. Omri nails it here.",
+    "status": "draft",
+    "approved": false,
+    "reshareOf": "p27"
+  },
+  {
+    "id": "p93",
+    "date": "2026-06-10",
+    "profile": "group",
+    "type": "Group Repost",
+    "status": "draft",
+    "approved": false
+  },
+  {
+    "id": "p131",
+    "date": "2026-06-11",
+    "profile": "omri",
+    "type": "Thought Leadership",
+    "copy": "It starts today.\n\nThe whistle blows at Estadio Azteca this afternoon - Mexico City hosting the World Cup for a third time.\n\n39 days. 104 matches. Millions of guests moving through 16 cities, sleeping in thousands of hotels, and forming opinions they'll share for years.\n\nThe revenue window everyone planned around is now open.\n\nBut the reviews window is open too.\n\nFor every chain with properties in Dallas, Atlanta, Miami, New York, Vancouver, Mexico City - the guest experience clock just started.\n\nGood luck to every hospitality team on the ground.\n\nThis is your tournament too.\n\n#WorldCup2026 #FIFA2026 #HospitalityLeadership",
+    "status": "scheduled",
+    "approved": false,
+    "visual": "Estadio Azteca Mexico City - opening match atmosphere"
+  },
+  {
+    "id": "p140",
+    "date": "2026-06-11",
+    "profile": "company",
+    "reshareOf": "p131",
+    "copy": "The tournament is live. The guest experience clock is running.\n\nSee what your ratings are saying at rating-iq.com",
+    "status": "scheduled",
+    "approved": true
+  },
+  {
+    "id": "p144",
+    "date": "2026-06-11",
+    "profile": "group",
+    "type": "Group Repost",
+    "status": "scheduled",
+    "approved": true
+  },
+  {
     "id": "p28",
-    "date": "2026-06-12",
+    "date": "2026-06-14",
     "profile": "company",
     "copy": "One rating point.\n\nContemporary Hospitality Management found that a single point increase in your hotel's rating is linked to a 7.5% increase in occupancy.\n\nOne point. Across your whole chain. Every property.\n\nThe question isn't whether it's worth fixing. The question is what's holding it back.\n\nrating-iq.com",
     "status": "scheduled",
     "approved": false
+  },
+  {
+    "id": "p72",
+    "date": "2026-06-14",
+    "profile": "omri",
+    "copy": "One rating point. 7.5% more occupancy. Across your whole chain.\n\nThe question is what's holding it back.\n\nrating-iq.com",
+    "status": "draft",
+    "approved": false,
+    "reshareOf": "p28"
+  },
+  {
+    "id": "p84",
+    "date": "2026-06-14",
+    "profile": "shany",
+    "copy": "One rating point. 7.5% more occupancy.\n\nI use this number to open conversations. It closes them too.",
+    "status": "draft",
+    "approved": false,
+    "reshareOf": "p28"
   },
   {
     "id": "p29",
@@ -316,9 +935,36 @@
     "date": "2026-06-15",
     "profile": "company",
     "copy": "Review responses aren't customer service. They're a revenue strategy.\n\nEvery unanswered review is a missed signal. And a missed booking.\n\nrating-iq.com",
-    "status": "scheduled",
+    "status": "draft",
     "approved": false,
     "reshareOf": "p29"
+  },
+  {
+    "id": "p61",
+    "date": "2026-06-15",
+    "profile": "shany",
+    "copy": "Review responses as a revenue strategy. Not customer service.\n\nThat reframe changes everything. Worth reading.",
+    "status": "draft",
+    "approved": false,
+    "reshareOf": "p29"
+  },
+  {
+    "id": "p94",
+    "date": "2026-06-15",
+    "profile": "group",
+    "type": "Group Repost",
+    "status": "draft",
+    "approved": false
+  },
+  {
+    "id": "p132",
+    "date": "2026-06-16",
+    "profile": "omri",
+    "type": "Thought Leadership",
+    "copy": "5 days into the World Cup. The first patterns are already forming.\n\nIn every host city, guests arrived with high expectations and very little patience for friction - long check-in queues, transport chaos, language barriers, understaffed lobbies.\n\nThe hotels that understood their guest profile before they walked through the door had a smooth first week.\n\nThe ones that treated this like a normal peak season are finding out now what they missed.\n\nGuest experience at a global event isn't reactive. It can't be.\n\nThe data to prepare was always available. The question was whether anyone looked at it.\n\n#WorldCup2026 #GuestExperience #HotelManagement",
+    "status": "scheduled",
+    "approved": true,
+    "visual": "Hotel lobby - busy check-in scene, international guests"
   },
   {
     "id": "p30",
@@ -327,263 +973,6 @@
     "copy": "Hotels that start responding to negative reviews receive fewer of them.\n\nThat's from a peer-reviewed study by Proserpio and Zervas.\n\nMost people assume unhappy guests are just looking to vent. Some are. But a lot of them are looking to be heard.\n\nWhen you respond. Publicly, consistently, in the right language. You change the signal you send to every guest who comes after.\n\nSilence is what keeps the bad reviews coming.\n\nrating-iq.com",
     "status": "scheduled",
     "approved": false
-  },
-  {
-    "id": "p44",
-    "date": "2026-04-15",
-    "profile": "company",
-    "copy": "No renovation required. Just the right data, to the right person, at the right time.\n\nThat's the whole product.\n\nrating-iq.com",
-    "status": "published",
-    "approved": false
-  },
-  {
-    "id": "p45",
-    "date": "2026-04-28",
-    "profile": "company",
-    "copy": "Nobody logs in. That's not a criticism — it's an industry truth.\n\nWe built RatingIQ around it.\n\nrating-iq.com",
-    "status": "published",
-    "approved": false
-  },
-  {
-    "id": "p46",
-    "date": "2026-04-30",
-    "profile": "company",
-    "copy": "Three rating problems. All solvable. None requiring guesswork.\n\nSee exactly what's hurting yours at rating-iq.com",
-    "status": "published",
-    "approved": false,
-    "reshareOf": "p9"
-  },
-  {
-    "id": "p47",
-    "date": "2026-05-13",
-    "profile": "company",
-    "copy": "Different question. Different answer.\n\nThe right one shows up on your P&L.\n\nrating-iq.com",
-    "status": "scheduled",
-    "approved": false,
-    "reshareOf": "p13"
-  },
-  {
-    "id": "p48",
-    "date": "2026-05-08",
-    "profile": "company",
-    "copy": "Happy Mother's Day from the whole RatingIQ team.\n\nTo every hotel running full houses this weekend.",
-    "status": "published",
-    "approved": false,
-    "reshareOf": "p15"
-  },
-  {
-    "id": "p49",
-    "date": "2026-05-25",
-    "profile": "company",
-    "copy": "A 0.1 point improvement can shift your search rank enough to move occupancy.\n\nThe conversation starts at rating-iq.com",
-    "status": "scheduled",
-    "approved": false,
-    "reshareOf": "p19"
-  },
-  {
-    "id": "p50",
-    "date": "2026-05-22",
-    "profile": "company",
-    "copy": "Happy Memorial Day from the RatingIQ team.\n\nTo every hotel running full capacity this weekend.",
-    "status": "scheduled",
-    "approved": false,
-    "reshareOf": "p21"
-  },
-  {
-    "id": "p51",
-    "date": "2026-06-05",
-    "profile": "company",
-    "copy": "2.68% more in online revenue per rating point.\n\nThe math works for a reason.\n\nrating-iq.com",
-    "status": "scheduled",
-    "approved": false,
-    "reshareOf": "p25"
-  },
-  {
-    "id": "p52",
-    "date": "2026-04-15",
-    "profile": "shany",
-    "copy": "Every time Omri explains this, someone in the room exhales.\n\nNo renovation required. The problem is operational. That means the fix is too.",
-    "status": "published",
-    "approved": false
-  },
-  {
-    "id": "p53",
-    "date": "2026-04-28",
-    "profile": "shany",
-    "copy": "Nobody opens the dashboard. I've been in enough hotel ops conversations to know this is true.\n\nOmri explains exactly why that matters.",
-    "status": "published",
-    "approved": true,
-    "linkedInId": "urn:li:share:7454771385261953024",
-    "publishedAt": "2026-04-28T06:00:01.353Z"
-  },
-  {
-    "id": "p54",
-    "date": "2026-04-30",
-    "profile": "shany",
-    "copy": "Three problems. All solvable.\n\nI've watched Omri explain this in rooms with hotel CEOs and seen the penny drop every time.",
-    "status": "published",
-    "approved": false,
-    "reshareOf": "p9"
-  },
-  {
-    "id": "p55",
-    "date": "2026-05-13",
-    "profile": "shany",
-    "copy": "The wrong question gets you response templates.\n\nThe right one gets you a number on your P&L. This is the distinction we built a company around.",
-    "status": "scheduled",
-    "approved": true,
-    "reshareOf": "p13"
-  },
-  {
-    "id": "p56",
-    "date": "2026-05-08",
-    "profile": "shany",
-    "copy": "Mother's Day in hospitality is no joke.\n\nThis post says it better than anything I've written. Happy Mother's Day to every hotel team running full houses.",
-    "status": "published",
-    "approved": false,
-    "reshareOf": "p15"
-  },
-  {
-    "id": "p57",
-    "date": "2026-05-25",
-    "profile": "shany",
-    "copy": "Not a popularity contest. A feedback loop with financial consequences.\n\nOmri puts in one sentence what takes me a slide deck to explain.",
-    "status": "scheduled",
-    "approved": true,
-    "reshareOf": "p19"
-  },
-  {
-    "id": "p58",
-    "date": "2026-05-22",
-    "profile": "shany",
-    "copy": "Sold out doesn't mean well-reviewed.\n\nI've been in this industry long enough to know that gap is always operational. This one is worth reading.",
-    "status": "scheduled",
-    "approved": true,
-    "reshareOf": "p21"
-  },
-  {
-    "id": "p59",
-    "date": "2026-06-05",
-    "profile": "shany",
-    "copy": "2.68% more in online revenue per rating point. I use this number in almost every conversation.\n\nOmri explains the why.",
-    "status": "scheduled",
-    "approved": true,
-    "reshareOf": "p25"
-  },
-  {
-    "id": "p60",
-    "date": "2026-06-10",
-    "profile": "shany",
-    "copy": "72% choose rating over brand name. I've seen this stat stop people mid-sentence in demos.\n\nThe logo is just the introduction. Omri nails it here.",
-    "status": "scheduled",
-    "approved": true,
-    "reshareOf": "p27"
-  },
-  {
-    "id": "p61",
-    "date": "2026-06-15",
-    "profile": "shany",
-    "copy": "Review responses as a revenue strategy. Not customer service.\n\nThat reframe changes everything. Worth reading.",
-    "status": "scheduled",
-    "approved": true,
-    "reshareOf": "p29"
-  },
-  {
-    "id": "p62",
-    "date": "2026-04-09",
-    "profile": "omri",
-    "copy": "We built what we always wanted to build.\n\nNot another review management tool. Something that actually moves the number.\n\nrating-iq.com",
-    "status": "published",
-    "approved": false
-  },
-  {
-    "id": "p63",
-    "date": "2026-04-13",
-    "profile": "omri",
-    "copy": "It's live. Everything we've been building — the product, the story, the case for why this matters.\n\nrating-iq.com",
-    "status": "published",
-    "approved": false
-  },
-  {
-    "id": "p64",
-    "date": "2026-04-27",
-    "profile": "omri",
-    "copy": "This is the short version of what I explain in every first call.\n\nNobody logs in. We built around that truth.\n\nrating-iq.com",
-    "status": "published",
-    "approved": false,
-    "reshareOf": "p7"
-  },
-  {
-    "id": "p65",
-    "date": "2026-05-04",
-    "profile": "omri",
-    "copy": "From reviews to revenue. That's the journey.\n\nThat's the only one that matters.",
-    "status": "published",
-    "approved": false,
-    "reshareOf": "p10"
-  },
-  {
-    "id": "p66",
-    "date": "2026-05-11",
-    "profile": "omri",
-    "copy": "4 clusters. 0.4 point drag. 14 months flat.\n\nWe see these numbers every time we look at a new portfolio. None of them are permanent.\n\nrating-iq.com",
-    "status": "scheduled",
-    "approved": true,
-    "reshareOf": "p12"
-  },
-  {
-    "id": "p67",
-    "date": "2026-05-18",
-    "profile": "omri",
-    "copy": "A recurring cluster across 3 properties for 6 weeks is not a complaint.\n\nThat's your score.\n\nrating-iq.com",
-    "status": "scheduled",
-    "approved": true,
-    "reshareOf": "p16"
-  },
-  {
-    "id": "p68",
-    "date": "2026-05-27",
-    "profile": "omri",
-    "copy": "0.3 to 0.5 points. 90 days. Zero CapEx.\n\nThese are outcomes from chains using RatingIQ. Not projections.",
-    "status": "scheduled",
-    "approved": true,
-    "reshareOf": "p18"
-  },
-  {
-    "id": "p69",
-    "date": "2026-05-29",
-    "profile": "omri",
-    "copy": "We built the website for one person.\n\nThe one who has to make the decision.\n\nrating-iq.com",
-    "status": "scheduled",
-    "approved": true,
-    "reshareOf": "p22"
-  },
-  {
-    "id": "p70",
-    "date": "2026-06-03",
-    "profile": "omri",
-    "copy": "1% rating increase. 1.42% more RevPAR. Cornell ran the numbers.\n\nThe dial is real.\n\nrating-iq.com",
-    "status": "scheduled",
-    "approved": true,
-    "reshareOf": "p24"
-  },
-  {
-    "id": "p71",
-    "date": "2026-06-08",
-    "profile": "omri",
-    "copy": "One star on Booking.com. 11.2% more on your rate. Still booked.\n\nThe highest-rated properties don't justify their prices. They just charge them.\n\nrating-iq.com",
-    "status": "scheduled",
-    "approved": true,
-    "reshareOf": "p26"
-  },
-  {
-    "id": "p72",
-    "date": "2026-06-12",
-    "profile": "omri",
-    "copy": "One rating point. 7.5% more occupancy. Across your whole chain.\n\nThe question is what's holding it back.\n\nrating-iq.com",
-    "status": "scheduled",
-    "approved": true,
-    "reshareOf": "p28"
   },
   {
     "id": "p73",
@@ -595,103 +984,6 @@
     "reshareOf": "p30"
   },
   {
-    "id": "p74",
-    "date": "2026-04-09",
-    "profile": "shany",
-    "copy": "We changed the name. We didn't change what we believe.\n\nA hotel chain's rating is a revenue number. Everything we build starts from there.",
-    "status": "published",
-    "approved": false
-  },
-  {
-    "id": "p75",
-    "date": "2026-04-13",
-    "profile": "shany",
-    "copy": "I spent months working on this website. Not on how it looks — on what it says.\n\nFor the person who actually has to make the call. Take a look.\n\nrating-iq.com",
-    "status": "published",
-    "approved": false
-  },
-  {
-    "id": "p76",
-    "date": "2026-04-27",
-    "profile": "shany",
-    "copy": "We are not a dashboard. We are not a reporting tool.\n\nWe are the thing that makes review data actually get used.",
-    "status": "published",
-    "approved": false,
-    "reshareOf": "p7"
-  },
-  {
-    "id": "p77",
-    "date": "2026-05-04",
-    "profile": "shany",
-    "copy": "From reviews to revenue. I've been living this line for months.\n\nIt's the clearest thing we've ever said about what we do.",
-    "status": "published",
-    "approved": false,
-    "reshareOf": "p10"
-  },
-  {
-    "id": "p78",
-    "date": "2026-05-11",
-    "profile": "shany",
-    "copy": "We see these numbers every time we look at a new portfolio.\n\n4 clusters. One dragging property. A score that hasn't moved in a year. All fixable. That's what keeps me going.",
-    "status": "scheduled",
-    "approved": true,
-    "reshareOf": "p12"
-  },
-  {
-    "id": "p79",
-    "date": "2026-05-18",
-    "profile": "shany",
-    "copy": "A one-off complaint is noise. A recurring cluster is your score.\n\nThis one took us a while to explain clearly. We finally got it right.",
-    "status": "scheduled",
-    "approved": true,
-    "reshareOf": "p16"
-  },
-  {
-    "id": "p80",
-    "date": "2026-05-27",
-    "profile": "shany",
-    "copy": "0.3 to 0.5 points in 90 days. Zero CapEx.\n\nI share this every time someone asks me for proof it works.",
-    "status": "scheduled",
-    "approved": true,
-    "reshareOf": "p18"
-  },
-  {
-    "id": "p81",
-    "date": "2026-05-29",
-    "profile": "shany",
-    "copy": "I built this website for one person. The CEO who signs the P&L and doesn't have time for a product tour.\n\nIf that's you — rating-iq.com",
-    "status": "scheduled",
-    "approved": true,
-    "reshareOf": "p22"
-  },
-  {
-    "id": "p82",
-    "date": "2026-06-03",
-    "profile": "shany",
-    "copy": "Cornell says 1% rating increase = 1.42% RevPAR.\n\nI've been using this number in every conversation since we found it. The math is the pitch.",
-    "status": "scheduled",
-    "approved": true,
-    "reshareOf": "p24"
-  },
-  {
-    "id": "p83",
-    "date": "2026-06-08",
-    "profile": "shany",
-    "copy": "Raise your rating by one star. Charge 11.2% more. Still get booked.\n\nTripAdvisor's number, not ours. The case writes itself.",
-    "status": "scheduled",
-    "approved": true,
-    "reshareOf": "p26"
-  },
-  {
-    "id": "p84",
-    "date": "2026-06-12",
-    "profile": "shany",
-    "copy": "One rating point. 7.5% more occupancy.\n\nI use this number to open conversations. It closes them too.",
-    "status": "scheduled",
-    "approved": true,
-    "reshareOf": "p28"
-  },
-  {
     "id": "p85",
     "date": "2026-06-17",
     "profile": "shany",
@@ -699,78 +991,6 @@
     "status": "scheduled",
     "approved": true,
     "reshareOf": "p30"
-  },
-  {
-    "id": "p86",
-    "date": "2026-04-30",
-    "profile": "group",
-    "type": "Group Repost",
-    "status": "published",
-    "approved": false
-  },
-  {
-    "id": "p87",
-    "date": "2026-05-06",
-    "profile": "group",
-    "type": "Group Repost",
-    "status": "published",
-    "approved": false
-  },
-  {
-    "id": "p88",
-    "date": "2026-05-13",
-    "profile": "group",
-    "type": "Group Repost",
-    "status": "scheduled",
-    "approved": true
-  },
-  {
-    "id": "p89",
-    "date": "2026-05-18",
-    "profile": "group",
-    "type": "Group Repost",
-    "status": "scheduled",
-    "approved": true
-  },
-  {
-    "id": "p90",
-    "date": "2026-05-25",
-    "profile": "group",
-    "type": "Group Repost",
-    "status": "scheduled",
-    "approved": true
-  },
-  {
-    "id": "p91",
-    "date": "2026-05-27",
-    "profile": "group",
-    "type": "Group Repost",
-    "status": "scheduled",
-    "approved": true
-  },
-  {
-    "id": "p92",
-    "date": "2026-06-03",
-    "profile": "group",
-    "type": "Group Repost",
-    "status": "scheduled",
-    "approved": false
-  },
-  {
-    "id": "p93",
-    "date": "2026-06-10",
-    "profile": "group",
-    "type": "Group Repost",
-    "status": "scheduled",
-    "approved": true
-  },
-  {
-    "id": "p94",
-    "date": "2026-06-15",
-    "profile": "group",
-    "type": "Group Repost",
-    "status": "scheduled",
-    "approved": true
   },
   {
     "id": "p95",
@@ -782,7 +1002,7 @@
   },
   {
     "id": "p96",
-    "date": "2026-06-20",
+    "date": "2026-06-21",
     "profile": "omri",
     "type": "Thought Leadership",
     "status": "draft",
@@ -797,24 +1017,43 @@
     "approved": false
   },
   {
+    "id": "p133",
+    "date": "2026-06-23",
+    "profile": "company",
+    "type": "Brand",
+    "copy": "Mexico City. Guadalajara. Monterrey.\n\nThree cities that have hosted the World Cup before - in 1970 and 1986. They've been here.\n\nToronto and Vancouver bring Canada's service reputation to the biggest global stage.\n\nWhat makes these 5 cities particularly interesting from a data perspective is the guest mix.\n\nThey're hosting the most internationally diverse crowds in the tournament - supporters from dozens of countries, each with different baseline expectations, different service standards they're benchmarking you against, and different platforms they use to leave reviews.\n\nOne thing they all have in common: they check ratings before they book, and they write them after they check out.\n\nIn a global event, guest experience is a global question.\n\n#WorldCup2026 #HospitalityData #GuestExperience #HotelIndustry",
+    "status": "scheduled",
+    "approved": true,
+    "visual": "Mexico City, Guadalajara, Toronto, Vancouver - split city visual"
+  },
+  {
+    "id": "p124",
+    "date": "2026-06-25",
+    "profile": "omri",
+    "copy": "Best 60 seconds of my week.\n\nA chain CEO seeing our dashboard for the first time.\n\nHe manages 11 hotels. Three were underperforming.\n\nWe showed him the top 3 complaints per property, ranked by impact.\n\nHe was quiet for a moment. Then said:\n\n\"This is the first time I've seen my whole portfolio in one place.\"\n\nWe hear this in almost every demo.\n\nNot because CEOs don't care about their data.\n\nBecause nobody had organized it for them.",
+    "status": "scheduled",
+    "approved": false,
+    "visual": "Omri photo — meeting or demo setting"
+  },
+  {
     "id": "p98",
-    "date": "2026-06-24",
+    "date": "2026-06-26",
     "profile": "company",
     "type": "Brand",
     "status": "draft",
     "approved": false
   },
   {
-    "id": "p99",
-    "date": "2026-06-26",
+    "id": "p100",
+    "date": "2026-06-28",
     "profile": "omri",
     "type": "Thought Leadership",
     "status": "draft",
     "approved": false
   },
   {
-    "id": "p100",
-    "date": "2026-06-28",
+    "id": "p99",
+    "date": "2026-06-29",
     "profile": "omri",
     "type": "Thought Leadership",
     "status": "draft",
@@ -829,8 +1068,18 @@
     "approved": false
   },
   {
+    "id": "p134",
+    "date": "2026-07-01",
+    "profile": "omri",
+    "type": "Thought Leadership",
+    "copy": "The group stage is over.\n\nThe knockout rounds start today - and the crowd just changed.\n\nRound of 32 fans are different. More emotionally invested. Traveling further on shorter notice. Paying premium prices at peak demand. Carrying the intensity of a fanbase that still believes it can win.\n\nThat energy creates the best hotel reviews and the worst hotel reviews - sometimes in the same property, the same night.\n\nThe teams that managed the group stage well are about to face a harder test.\n\nHigher expectations. Less predictability. More pressure on every interaction.\n\nHow a hotel handles this week shows up in its ratings for the next two years.\n\n#WorldCup2026 #HotelManagement #GuestExperience",
+    "status": "scheduled",
+    "approved": true,
+    "visual": "World Cup knockout bracket graphic"
+  },
+  {
     "id": "p102",
-    "date": "2026-07-02",
+    "date": "2026-07-03",
     "profile": "omri",
     "type": "Thought Leadership",
     "status": "draft",
@@ -838,7 +1087,7 @@
   },
   {
     "id": "p103",
-    "date": "2026-07-04",
+    "date": "2026-07-05",
     "profile": "omri",
     "type": "Thought Leadership",
     "status": "draft",
@@ -853,29 +1102,104 @@
     "approved": false
   },
   {
-    "id": "p105",
-    "date": "2026-05-11",
+    "id": "p125",
+    "date": "2026-07-07",
     "profile": "omri",
-    "copy": "Your rating doesn't just affect how guests feel.\n\nIt affects how many show up.\n\nTrust. Conversion. Occupancy. Revenue.\n\nEvery hotel chain CEO I speak to knows their rating is a business number. What's harder to see is exactly which part of the operation is pulling it down - and by how much.\n\nThat's the gap RatingIQ closes.\n\nFrom reviews to revenue.",
-    "status": "published",
+    "copy": "I have spoken to over 200 hotel operators in the past two years.\n\nOne thing comes up in almost every conversation.\n\n\"We have the reviews. We just don't know what to do with them.\"\n\nThe data is never the problem.\nThe gap between data and action is the problem.\n\nA hotel with 3,000 reviews has one useful signal: the top 3 issues hurting their score.\n\nEverything else is noise.\n\nWe cut through it.",
+    "status": "scheduled",
     "approved": true,
-    "linkedInId": "urn:li:ugcPost:7459510452721614849",
-    "publishedAt": "2026-05-11T07:51:23.031Z"
+    "visual": "Omri photo — office or candid working shot"
   },
   {
-    "id": "p106",
-    "date": "2026-05-12",
+    "id": "p135",
+    "date": "2026-07-08",
+    "profile": "company",
+    "type": "Brand",
+    "copy": "The World Cup quarterfinals are set.\n\nAnd across Atlanta, Dallas, Los Angeles, and Miami, hotel GMs are looking at 4 weeks of review data and seeing exactly how their properties showed up.\n\nThe tournament isn't over yet. But the ratings picture is already forming.\n\nHigh-demand periods don't just test your operations. They set your reputation for the next season.\n\nThe properties that used this tournament to understand their guests - to spot friction points, close service gaps, and narrow the distance between expectation and delivery - are building a competitive asset that outlasts July 19.\n\nThe data is there. The question is always whether you're reading it in real time, or waiting for the damage report.\n\n#WorldCup2026 #HospitalityData #HotelIndustry #RatingIQ",
+    "status": "scheduled",
+    "approved": true,
+    "visual": "Review data visualization - 4 weeks of tournament review trends"
+  },
+  {
+    "id": "p136",
+    "date": "2026-07-13",
     "profile": "omri",
-    "copy": "Most hotels do read their reviews.\n\nThe problem isn't awareness. It's what happens after.\n\nA GM reads 40 reviews on a Tuesday morning. She flags three operational issues in her head. Two get addressed. One doesn't. No one at the chain level sees any of it.\n\nThis repeats. At every property. Every week.\n\nMeanwhile, the rating stays flat - or drifts down.\n\nReading reviews is not the same as acting on them.\n\nThe gap is a system problem.",
+    "type": "Thought Leadership",
+    "copy": "Two cities. One night apart.\n\nDallas hosts the World Cup semifinal on Tuesday. Atlanta on Wednesday.\n\nThe guests checking in this week are among the most passionate sports travelers on earth. They've followed their national team for weeks, spent thousands to be here, and arrived carrying the weight of a tournament that's still alive for them.\n\nThey're going to be emotional. Exhausted. Demanding. Generous when things go right.\n\nAnd then they're going back to their rooms after the final whistle.\n\nWhat happens there - the service, the small details, the moments that don't show up in any operations manual - will end up in a review that 10,000 future guests will read.\n\nDallas. Atlanta. This is your moment.\n\n#WorldCup2026 #HospitalityLeadership #GuestExperience",
+    "status": "scheduled",
+    "approved": true,
+    "visual": "AT&T Stadium Dallas + Mercedes-Benz Stadium Atlanta split visual"
+  },
+  {
+    "id": "p141",
+    "date": "2026-07-13",
+    "profile": "company",
+    "reshareOf": "p136",
+    "copy": "Dallas and Atlanta. The biggest hospitality test of the tournament.\n\nKnow your guest. rating-iq.com",
     "status": "scheduled",
     "approved": true
   },
   {
-    "id": "p107",
-    "date": "2026-05-14",
-    "profile": "omri",
-    "copy": "Reviews are not just feedback.\n\nThey are operational signals.\n\nWhen guests keep mentioning check-in, cleanliness, breakfast, maintenance, service - that isn't noise. That is a pattern.\n\nThe question isn't whether to read the reviews. The question is whether your team has a system that turns what guests say into what gets fixed.\n\nMost don't.\n\nThat's what we fix at RatingIQ.",
+    "id": "p145",
+    "date": "2026-07-13",
+    "profile": "group",
+    "type": "Group Repost",
     "status": "scheduled",
     "approved": true
+  },
+  {
+    "id": "p126",
+    "date": "2026-07-15",
+    "profile": "omri",
+    "copy": "A chain hotel stuck at 7.8 for two years.\n\nThey tried everything. New cleaning protocols. Staff retraining. Full menu overhaul.\n\nNone of it moved the score.\n\nWe looked at their review data.\n\nThree complaint categories covered 68% of negative mentions.\n\nTwo of them had nothing to do with what they had been fixing.\n\nEight weeks later: 8.2.\n\nThe answer was in the reviews the whole time.\n\nThey just needed someone to show them where to look.",
+    "status": "scheduled",
+    "approved": true,
+    "visual": "Omri photo — professional headshot or candid"
+  },
+  {
+    "id": "p137",
+    "date": "2026-07-17",
+    "profile": "omri",
+    "type": "Thought Leadership",
+    "copy": "This Sunday, MetLife Stadium hosts the World Cup Final.\n\nThe most-watched sporting event on the planet. 92,000 seats. One match.\n\nAround it, the hotels of New York and New Jersey are hosting what may be the most internationally diverse single-night crowd in US hospitality history.\n\nEvery guest in that market this weekend is writing a review in their head.\n\nThe best hotel teams in the world are in those lobbies right now - not because they were told to be, but because they understand what this moment is.\n\n39 days of hospitality. One final weekend to get it right.\n\nTo every team still on the floor: you've earned this stage.\n\n#WorldCup2026Final #HospitalityLeadership #FIFA2026",
+    "status": "scheduled",
+    "approved": true,
+    "visual": "MetLife Stadium exterior + NYC skyline at dusk"
+  },
+  {
+    "id": "p138",
+    "date": "2026-07-21",
+    "profile": "company",
+    "type": "Brand",
+    "copy": "The final whistle blew on Sunday.\n\nThe 2026 World Cup is over.\n\n39 days. 104 matches. 16 cities. 3 countries. Millions of guests.\n\nThe tournament is done. The ratings are permanent.\n\nTripAdvisor, Google, Booking.com - the record of how the hospitality industry performed across every host city in June and July 2026 is now written and searchable. It will influence guest decisions for years.\n\nThe chains that used this window to understand their guests - to read the data, close service gaps, and show up for the moment - built something that compounds beyond the tournament.\n\nThe ones that waited to see how it went are now seeing how it went.\n\nWhich side of that line are you on?\n\n#WorldCup2026 #HospitalityIndustry #HotelManagement #GuestExperience #RatingIQ",
+    "status": "scheduled",
+    "approved": true,
+    "visual": "World Cup trophy alongside hotel review rating graphic"
+  },
+  {
+    "id": "p142",
+    "date": "2026-07-22",
+    "profile": "omri",
+    "reshareOf": "p138",
+    "copy": "39 days. The ratings record is permanent now.\n\nWorth asking your team which side of that line they're on.",
+    "status": "scheduled",
+    "approved": true
+  },
+  {
+    "id": "p146",
+    "date": "2026-07-22",
+    "profile": "group",
+    "type": "Group Repost",
+    "status": "scheduled",
+    "approved": true
+  },
+  {
+    "id": "p127",
+    "date": "2026-07-24",
+    "profile": "omri",
+    "copy": "People ask why I started RatingIQ.\n\nHonest answer: I kept watching good hotels lose business to hotels that simply understood their reviews better.\n\nNot better rooms. Not better staff.\nBetter signal.\n\nThe gap between a 7.9 and an 8.2 is almost always three specific operational problems.\n\nMost hotels do not know what those three problems are.\n\nWe tell them. Their team fixes them.\n\nThat is the whole company.",
+    "status": "scheduled",
+    "approved": false,
+    "visual": "Omri photo — founder/personal shot"
   }
 ]

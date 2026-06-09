@@ -213,13 +213,28 @@ canvas#vb-canvas{border-radius:8px;box-shadow:0 4px 24px rgba(0,0,0,.18);max-wid
 .modal-img-wrap{border:2px dashed rgba(0,0,0,.13);border-radius:8px;padding:16px;text-align:center;cursor:pointer;transition:all .2s;background:#faf9f7}
 .modal-img-wrap:hover{border-color:var(--gold);background:#fdfbf7}
 .modal-img-wrap.has-img{border-style:solid;border-color:rgba(0,0,0,.1);cursor:default;padding:0;overflow:hidden}
+#sync-toast{position:fixed;bottom:24px;right:24px;padding:10px 18px;border-radius:8px;font-size:13px;font-weight:600;color:#fff;z-index:9999;opacity:0;transition:opacity .3s;pointer-events:none}
+#sync-toast.show{opacity:1}
+#sync-toast.ok{background:#16a34a}
+#sync-toast.err{background:#dc2626}
+#sync-pending{display:none;align-items:center;gap:6px;background:#dc2626;color:#fff;font-size:12px;font-weight:700;padding:4px 10px;border-radius:20px;cursor:pointer;margin-left:14px}
+#sync-pending.visible{display:flex}
+#sync-pending:hover{background:#b91c1c}
+.month-header-row td{background:#f0fdf4;padding:8px 14px;cursor:pointer;user-select:none;border-top:2px solid #bbf7d0;border-bottom:1px solid #d1fae5;border-left:3px solid #bbf7d0;border-right:3px solid #bbf7d0}
+.month-header-row:hover td{background:#dcfce7}
+.published-section-end td{height:6px;background:linear-gradient(to bottom,#dcfce7,transparent);border-bottom:2px solid #bbf7d0;border-left:3px solid #bbf7d0;border-right:3px solid #bbf7d0;padding:0}
+.published-item td:first-child{border-left:3px solid #bbf7d0}
+.published-item td:last-child{border-right:3px solid #bbf7d0}
+.month-toggle{display:inline-block;width:16px;color:#16a34a;font-size:13px}
 </style>
 </head>
 <body>
+<div id="sync-toast"></div>
 
 <header>
   <div class="logo">Rating<span>IQ</span></div>
   <div class="header-sub">Social Campaign</div>
+  <div id="sync-pending" title="Click to retry pending syncs" onclick="flushSyncQueue()"></div>
   <nav>
     <button class="active" onclick="switchTab('roadmap',this)">Roadmap</button>
     <button onclick="switchTab('timeline',this)">Timeline</button>
@@ -665,7 +680,7 @@ Just: someone finally connected the complaint to the person who could act on it.
 
 That's RatingIQ.`,
     visualConcept:'Quote card. Large: "Score up 0.3 in 60 days." Smaller: "No renovation." Navy background, gold accent. Minimal and punchy.',
-    status:'draft', corrections:'', shanyApproved:false
+    status:'published', corrections:'', shanyApproved:false
   },
   {
     id:'p12', date:'2026-05-11', platform:'linkedin-company', type:'Data & Metrics',
@@ -702,7 +717,7 @@ One shows up on the P&L.
 
 You already know which one matters.`,
     visualConcept:'Two-question split. Left: wrong question crossed out. Right: right question in gold. Sharp, provocative.',
-    status:'draft', corrections:'', shanyApproved:false
+    status:'published', corrections:'', shanyApproved:false
   },
   {
     id:'p15', date:'2026-05-08', platform:'linkedin-omri', type:'Timely Post',
@@ -742,7 +757,7 @@ rating-iq.com`,
     status:'draft', corrections:'', shanyApproved:false
   },
   {
-    id:'p17', date:'2026-05-20', platform:'linkedin-omri', type:'True Story',
+    id:'p17', date:'2026-05-31', platform:'linkedin-omri', type:'True Story',
     visual:'"I was about to spend $400K\non the wrong thing."',
     copy:`True story.
 
@@ -764,10 +779,10 @@ The CEO's words at our next call: "I was about to spend $400K on the wrong thing
 
 The most expensive mistake in this industry is solving the visible problem instead of the actual one.`,
     visualConcept:'Pull quote card. Large: "$400K on the wrong thing." Navy background. Gold text. Powerful and memorable.',
-    status:'draft', corrections:'', shanyApproved:false
+    status:'published', corrections:'', shanyApproved:false
   },
   {
-    id:'p18', date:'2026-05-27', platform:'linkedin-company', type:'Data & Metrics',
+    id:'p18', date:'2026-05-28', platform:'linkedin-company', type:'Data & Metrics',
     visual:'0.3–0.5 points.\n90 days. Zero CapEx.',
     copy:`Hotels that address their top 3 complaint clusters within 30 days:
 
@@ -785,7 +800,7 @@ rating-iq.com`,
     status:'draft', corrections:'', shanyApproved:false
   },
   {
-    id:'p19', date:'2026-05-25', platform:'linkedin-omri', type:'Thought Leadership',
+    id:'p19', date:'2026-05-26', platform:'linkedin-omri', type:'Thought Leadership',
     visual:'Different question.\nDifferent result.',
     copy:`Hotel ratings on Booking.com are not a popularity contest.
 
@@ -802,31 +817,10 @@ Different question. Different answer. Different result.
 The first question leads to response templates.
 The second one leads to RatingIQ.`,
     visualConcept:'Clean quote split. Left question faded. Right question bold in gold. Minimal and sharp.',
-    status:'draft', corrections:'', shanyApproved:false
+    status:'published', corrections:'', shanyApproved:false
   },
   {
-    id:'p21', date:'2026-05-22', platform:'linkedin-omri', type:'Timely Post',
-    visual:'Sold out doesn\'t mean\nwell-reviewed.',
-    copy:`Memorial Day weekend.
-
-One of the highest-demand weekends in US hospitality.
-
-Also: one of the highest-complaint weekends.
-
-The gap between a sold-out property and a well-reviewed sold-out property isn't square footage or thread count.
-
-It's operational execution under pressure.
-
-The chains that come out of this weekend with better reviews than they went in — they had the fixes mapped before Friday.
-
-Good luck to everyone running a full house this weekend. You've earned the demand.
-
-(The rating, you still have to work for.)`,
-    visualConcept:'Minimal dark card. "Sold out ≠ well-reviewed." Gold divider. Understated and smart.',
-    status:'draft', corrections:'', shanyApproved:false
-  },
-  {
-    id:'p22', date:'2026-05-29', platform:'linkedin-company', type:'Website Feature',
+    id:'p22', date:'2026-06-02', platform:'linkedin-company', type:'Website Feature',
     visual:'Built for one person.\nThe CEO who signs the P&L.',
     copy:`Most hotel tech websites open with a product tour.
 
@@ -857,7 +851,7 @@ That's the product. That's always been the product.
 
 If you run a hotel chain and that line sounds familiar — we should talk.`,
     visualConcept:'Pull quote card. Large quote in Manrope italic. Minimal navy background. Very human, very direct.',
-    status:'draft', corrections:'', shanyApproved:false
+    status:'published', corrections:'', shanyApproved:false
   },
   {
     id:'p24', date:'2026-06-03', platform:'linkedin-company', type:'Data & Metrics',
@@ -879,7 +873,7 @@ rating-iq.com`,
     status:'draft', corrections:'', shanyApproved:false
   },
   {
-    id:'p25', date:'2026-06-05', platform:'linkedin-omri', type:'Data & Metrics',
+    id:'p25', date:'2026-06-07', platform:'linkedin-omri', type:'Data & Metrics',
     visual:'+2.68% online revenue\nper room.\nOne rating point.',
     copy:`1% increase in your rating.
 
@@ -926,7 +920,7 @@ rating-iq.com`,
     status:'draft', corrections:'', shanyApproved:false
   },
   {
-    id:'p28', date:'2026-06-12', platform:'linkedin-company', type:'Data & Metrics',
+    id:'p28', date:'2026-06-14', platform:'linkedin-company', type:'Data & Metrics',
     visual:'One rating point.\n+7.5% occupancy.',
     copy:`One rating point.
 
@@ -1030,7 +1024,7 @@ This is exactly what RatingIQ is built for.`,
     status:'scheduled', corrections:'', shanyApproved:false
   },
   {
-    id:'p35', date:'2026-05-20', platform:'linkedin-company', type:'Company Repost',
+    id:'p35', date:'2026-05-31', platform:'linkedin-company', type:'Company Repost', reshareOf:'p17',
     visual:'Pending — Claude Design',
     copy:`The most expensive mistake in hospitality: solving the visible problem instead of the actual one.
 
@@ -1100,10 +1094,10 @@ Omri explains why most hotels are focused on the wrong end of the scale. I've be
 
 That's the point. These aren't unusual problems. They're just unconnected ones.`,
     visualConcept:'Clean warm card. Short quote in navy on cream. Personal and grounded.',
-    status:'scheduled', corrections:'', shanyApproved:false
+    status:'published', corrections:'', shanyApproved:false
   },
   {
-    id:'p42', date:'2026-05-20', platform:'linkedin-shany', type:'Repost — Shany',
+    id:'p42', date:'2026-05-31', platform:'linkedin-shany', type:'Repost — Shany', reshareOf:'p17',
     visual:'Pending — Claude Design',
     copy:`The $400K story is real. I was in that call.
 
@@ -1111,7 +1105,7 @@ The CEO was ready to sign a renovation. The data said something completely diffe
 
 This is why we pull the data before you make a decision.`,
     visualConcept:'Personal card. Pull quote: "$400K on the wrong thing." Warm, not corporate. RatingIQ logo.',
-    status:'scheduled', corrections:'', shanyApproved:false
+    status:'published', corrections:'', shanyApproved:false
   },
   {
     id:'p43', date:'2026-06-01', platform:'linkedin-shany', type:'Repost — Shany',
@@ -1120,7 +1114,7 @@ This is why we pull the data before you make a decision.`,
 
 I hear this a lot. Omri hears it more. This post is why we built what we built.`,
     visualConcept:'Warm cream card. Short quote in navy italic. Minimal and human. RatingIQ logo bottom.',
-    status:'scheduled', corrections:'', shanyApproved:false
+    status:'published', corrections:'', shanyApproved:false
   },
 
   // ─── MISSING: COMPANY REPOSTS OF OMRI POSTS ───
@@ -1176,7 +1170,7 @@ To every hotel running full houses this weekend.`,
     status:'scheduled', corrections:'', shanyApproved:false
   },
   {
-    id:'p49', date:'2026-05-25', platform:'linkedin-company', type:'Company Repost',
+    id:'p49', date:'2026-05-26', platform:'linkedin-company', type:'Company Repost',
     visual:'Pending — Claude Design',
     copy:`A 0.1 point improvement can shift your search rank enough to move occupancy.
 
@@ -1185,20 +1179,7 @@ The conversation starts at rating-iq.com`,
     status:'scheduled', corrections:'', shanyApproved:false
   },
   {
-    id:'p50', date:'2026-05-22', platform:'linkedin-company', type:'Company Repost',
-    visual:'Pending — Claude Design',
-    copy:`This weekend, every hotel in the US is full.
-
-The reviews that land Monday morning will follow you for months.
-
-To every team running at capacity — you've got this.
-
-rating-iq.com`,
-    visualConcept:'Minimal navy card. Warm holiday line in white Manrope. Gold RatingIQ logo.',
-    status:'scheduled', corrections:'', shanyApproved:false
-  },
-  {
-    id:'p51', date:'2026-06-05', platform:'linkedin-company', type:'Company Repost',
+    id:'p51', date:'2026-06-07', platform:'linkedin-company', type:'Company Repost',
     visual:'Pending — Claude Design',
     copy:`2.68% more in online revenue per rating point.
 
@@ -1244,7 +1225,7 @@ I've watched Omri explain this in rooms with hotel CEOs and seen the penny drop 
 
 The right one gets you a number on your P&L. This is the distinction we built a company around.`,
     visualConcept:'Personal card. Short sharp copy on cream. Marketing director voice.',
-    status:'scheduled', corrections:'', shanyApproved:false
+    status:'published', corrections:'', shanyApproved:false
   },
   {
     id:'p56', date:'2026-05-08', platform:'linkedin-shany', type:'Repost — Shany',
@@ -1256,25 +1237,16 @@ This post says it better than anything I've written. Happy Mother's Day to every
     status:'scheduled', corrections:'', shanyApproved:false
   },
   {
-    id:'p57', date:'2026-05-25', platform:'linkedin-shany', type:'Repost — Shany',
+    id:'p57', date:'2026-05-26', platform:'linkedin-shany', type:'Repost — Shany',
     visual:'Pending — Claude Design',
     copy:`Not a popularity contest. A feedback loop with financial consequences.
 
 Omri puts in one sentence what takes me a slide deck to explain.`,
     visualConcept:'Short personal card on cream. Warm and direct.',
-    status:'scheduled', corrections:'', shanyApproved:false
+    status:'published', corrections:'', shanyApproved:false
   },
   {
-    id:'p58', date:'2026-05-22', platform:'linkedin-shany', type:'Repost — Shany',
-    visual:'Pending — Claude Design',
-    copy:`Sold out doesn't mean well-reviewed.
-
-I've been in this industry long enough to know that gap is always operational. This one is worth reading.`,
-    visualConcept:'Warm personal card. Short, grounded copy on cream.',
-    status:'scheduled', corrections:'', shanyApproved:false
-  },
-  {
-    id:'p59', date:'2026-06-05', platform:'linkedin-shany', type:'Repost — Shany',
+    id:'p59', date:'2026-06-07', platform:'linkedin-shany', type:'Repost — Shany',
     visual:'Pending — Claude Design',
     copy:`2.68% more in online revenue per rating point. I use this number in almost every conversation.
 
@@ -1362,10 +1334,10 @@ That's your score.
 
 rating-iq.com`,
     visualConcept:'Bold card. Sharp single line in gold. Clean and direct.',
-    status:'scheduled', corrections:'', shanyApproved:false
+    status:'published', corrections:'', shanyApproved:false
   },
   {
-    id:'p68', date:'2026-05-27', platform:'linkedin-omri', type:'Repost — Omri',
+    id:'p68', date:'2026-05-28', platform:'linkedin-omri', type:'Repost — Omri',
     visual:'Pending — Claude Design',
     copy:`0.3 to 0.5 points. 90 days. Zero CapEx.
 
@@ -1374,7 +1346,7 @@ These are outcomes from chains using RatingIQ. Not projections.`,
     status:'scheduled', corrections:'', shanyApproved:false
   },
   {
-    id:'p69', date:'2026-05-29', platform:'linkedin-omri', type:'Repost — Omri',
+    id:'p69', date:'2026-06-02', platform:'linkedin-omri', type:'Repost — Omri',
     visual:'Pending — Claude Design',
     copy:`We built the website for one person.
 
@@ -1407,7 +1379,7 @@ rating-iq.com`,
     status:'scheduled', corrections:'', shanyApproved:false
   },
   {
-    id:'p72', date:'2026-06-12', platform:'linkedin-omri', type:'Repost — Omri',
+    id:'p72', date:'2026-06-14', platform:'linkedin-omri', type:'Repost — Omri',
     visual:'Pending — Claude Design',
     copy:`One rating point. 7.5% more occupancy. Across your whole chain.
 
@@ -1490,10 +1462,10 @@ It's the clearest thing we've ever said about what we do.`,
 
 This one took us a while to explain clearly. We finally got it right.`,
     visualConcept:'Short personal card. Direct and grounded. Cream background.',
-    status:'scheduled', corrections:'', shanyApproved:false
+    status:'published', corrections:'', shanyApproved:false
   },
   {
-    id:'p80', date:'2026-05-27', platform:'linkedin-shany', type:'Repost — Shany',
+    id:'p80', date:'2026-05-28', platform:'linkedin-shany', type:'Repost — Shany',
     visual:'Pending — Claude Design',
     copy:`0.3 to 0.5 points in 90 days. Zero CapEx.
 
@@ -1502,7 +1474,7 @@ I share this every time someone asks me for proof it works.`,
     status:'scheduled', corrections:'', shanyApproved:false
   },
   {
-    id:'p81', date:'2026-05-29', platform:'linkedin-shany', type:'Repost — Shany',
+    id:'p81', date:'2026-06-02', platform:'linkedin-shany', type:'Repost — Shany',
     visual:'Pending — Claude Design',
     copy:`I built this website for one person. The CEO who signs the P&L and doesn't have time for a product tour.
 
@@ -1529,7 +1501,7 @@ TripAdvisor's number, not ours. The case writes itself.`,
     status:'scheduled', corrections:'', shanyApproved:false
   },
   {
-    id:'p84', date:'2026-06-12', platform:'linkedin-shany', type:'Repost — Shany',
+    id:'p84', date:'2026-06-14', platform:'linkedin-shany', type:'Repost — Shany',
     visual:'Pending — Claude Design',
     copy:`One rating point. 7.5% more occupancy.
 
@@ -1607,7 +1579,7 @@ What's your current process for separating signal from noise in your review data
     status:'scheduled', corrections:'', shanyApproved:true
   },
   {
-    id:'p90', date:'2026-05-25', platform:'linkedin-group', type:'Group Repost',
+    id:'p90', date:'2026-05-26', platform:'linkedin-group', type:'Group Repost',
     visual:'',
     copy:`Hotel ratings on Booking.com aren't a popularity contest. They're a feedback loop with direct revenue consequences.
 
@@ -1623,7 +1595,7 @@ How is your team framing this conversation internally?`,
     status:'scheduled', corrections:'', shanyApproved:true
   },
   {
-    id:'p91', date:'2026-05-27', platform:'linkedin-group', type:'Group Repost',
+    id:'p91', date:'2026-05-28', platform:'linkedin-group', type:'Group Repost',
     visual:'',
     copy:`Hotels that fix their top 3 complaint clusters within 30 days see an average 0.3–0.5 point rating improvement within 90 days.
 
@@ -1703,7 +1675,7 @@ rating-iq.com`,
     status:'draft', needsReview:true, corrections:'', shanyApproved:false
   },
   {
-    id:'p96', date:'2026-06-20', platform:'linkedin-omri', type:'Thought Leadership',
+    id:'p96', date:'2026-06-21', platform:'linkedin-omri', type:'Thought Leadership',
     visual:'',
     copy:`Most hotels don't have a review problem.
 
@@ -1763,7 +1735,7 @@ rating-iq.com`,
     status:'draft', needsReview:true, corrections:'', shanyApproved:false
   },
   {
-    id:'p99', date:'2026-06-26', platform:'linkedin-omri', type:'Thought Leadership',
+    id:'p99', date:'2026-06-29', platform:'linkedin-omri', type:'Thought Leadership',
     visual:'',
     copy:`We talked to dozens of hotel GMs before building RatingIQ.
 
@@ -1856,7 +1828,7 @@ The information was always there. The gap was between the information and the ac
     status:'draft', needsReview:true, corrections:'', shanyApproved:false
   },
   {
-    id:'p103', date:'2026-07-04', platform:'linkedin-omri', type:'Thought Leadership',
+    id:'p103', date:'2026-07-05', platform:'linkedin-omri', type:'Thought Leadership',
     visual:'',
     copy:`A hotel that doesn't respond to its reviews isn't just being quiet.
 
@@ -1941,10 +1913,10 @@ The question isn't whether to read the reviews. The question is whether your tea
 Most don't.
 
 That's what we fix at RatingIQ.`,
-    status:'draft', needsReview:true, corrections:'', shanyApproved:false
+    status:'published', needsReview:true, corrections:'', shanyApproved:false
   },
   {
-    id:'p108', date:'2026-05-16', platform:'linkedin-omri', type:'Video',
+    id:'p108', date:'2026-07-02', platform:'linkedin-omri', type:'Video',
     visual:'',
     copy:`Most hotel chain CEOs don't know what their Booking.com rating is costing them in real money.
 
@@ -1960,23 +1932,23 @@ It requires knowing exactly what to fix first.`,
     status:'draft', needsReview:true, corrections:'', shanyApproved:false
   },
   {
-    id:'p109', date:'2026-05-18', platform:'linkedin-omri', type:'Video',
-    visual:'',
-    copy:`When I ask hotel chain CEOs about their rating, the first answer is almost always the same:
+    id:'p109', date:'2026-05-20', platform:'linkedin-omri', type:'Video',
+    visual:'video5_done.mp4',
+    copy:`When I ask hotel managers about their rating, the first answer is almost always the same:
 
 "I know what guests are complaining about."
 
-But that's the wrong question.
+But that's the wrong ANSWER.
 
 Knowing what guests complain about is not the same as knowing which specific issue, across which properties, is driving the most rating damage right now.
 
-That ranking is different. And it changes how you deploy your team.
+That rating is different. And it changes how you deploy your team.
 
 That's the question RatingIQ is built to answer.`,
-    status:'draft', needsReview:true, corrections:'', shanyApproved:false
+    status:'published', needsReview:false, corrections:'', shanyApproved:true
   },
   {
-    id:'p110', date:'2026-05-20', platform:'linkedin-omri', type:'Video',
+    id:'p110', date:'2026-07-16', platform:'linkedin-omri', type:'Video',
     visual:'',
     copy:`"My GMs know the problems. They just don't fix them consistently."
 
@@ -1992,7 +1964,7 @@ That's the gap RatingIQ closes.`,
     status:'draft', needsReview:true, corrections:'', shanyApproved:false
   },
   {
-    id:'p111', date:'2026-05-22', platform:'linkedin-omri', type:'Video',
+    id:'p111', date:'2026-07-23', platform:'linkedin-omri', type:'Video',
     visual:'',
     copy:`When a hotel CEO tells me their rating has been stuck for 18 months, the first assumption is usually: it needs a renovation.
 
@@ -2006,7 +1978,7 @@ You need to know which ones are doing the most damage right now - and a system t
     status:'draft', needsReview:true, corrections:'', shanyApproved:false
   },
   {
-    id:'p112', date:'2026-05-24', platform:'linkedin-omri', type:'Video',
+    id:'p112', date:'2026-07-30', platform:'linkedin-omri', type:'Video',
     visual:'',
     copy:`Here's something most hotel tech companies won't say:
 
@@ -2024,7 +1996,7 @@ RatingIQ is the system.`,
 
   // ─── RESHARES: p108–p112 ───
   {
-    id:'p113', date:'2026-05-17', platform:'linkedin-shany', type:'Repost — Shany',
+    id:'p113', date:'2026-07-05', platform:'linkedin-shany', type:'Repost — Shany',
     visual:'',
     copy:`The math behind the gap nobody talks about.
 
@@ -2034,7 +2006,7 @@ Omri breaks down what it's actually costing.`,
     status:'draft', needsReview:true, corrections:'', shanyApproved:false
   },
   {
-    id:'p114', date:'2026-05-17', platform:'linkedin-company', type:'Company Repost',
+    id:'p114', date:'2026-07-05', platform:'linkedin-company', type:'Company Repost',
     visual:'',
     copy:`0.1 point. That's the gap between where you rank today and where you could rank tomorrow.
 
@@ -2044,7 +2016,7 @@ rating-iq.com`,
     status:'draft', needsReview:true, corrections:'', shanyApproved:false
   },
   {
-    id:'p115', date:'2026-05-19', platform:'linkedin-shany', type:'Repost — Shany',
+    id:'p115', date:'2026-05-22', platform:'linkedin-shany', type:'Repost — Shany',
     visual:'',
     copy:`I reframe this in every conversation I have.
 
@@ -2054,7 +2026,7 @@ Omri explains it better than I do.`,
     status:'draft', needsReview:true, corrections:'', shanyApproved:false
   },
   {
-    id:'p116', date:'2026-05-19', platform:'linkedin-company', type:'Company Repost',
+    id:'p116', date:'2026-05-22', platform:'linkedin-company', type:'Company Repost',
     visual:'',
     copy:`The right question changes everything.
 
@@ -2066,7 +2038,7 @@ rating-iq.com`,
     status:'draft', needsReview:true, corrections:'', shanyApproved:false
   },
   {
-    id:'p117', date:'2026-05-21', platform:'linkedin-shany', type:'Repost — Shany',
+    id:'p117', date:'2026-07-19', platform:'linkedin-shany', type:'Repost — Shany',
     visual:'',
     copy:`This is the operational reality I see in every chain we work with.
 
@@ -2076,7 +2048,7 @@ Omri nails it.`,
     status:'draft', needsReview:true, corrections:'', shanyApproved:false
   },
   {
-    id:'p118', date:'2026-05-21', platform:'linkedin-company', type:'Company Repost',
+    id:'p118', date:'2026-07-19', platform:'linkedin-company', type:'Company Repost',
     visual:'',
     copy:`Your GMs aren't ignoring the reviews. They're overwhelmed by them.
 
@@ -2086,7 +2058,7 @@ rating-iq.com`,
     status:'draft', needsReview:true, corrections:'', shanyApproved:false
   },
   {
-    id:'p119', date:'2026-05-23', platform:'linkedin-shany', type:'Repost — Shany',
+    id:'p119', date:'2026-07-26', platform:'linkedin-shany', type:'Repost — Shany',
     visual:'',
     copy:`The number of times I've sat in a meeting where the answer was "we need to renovate" - and it wasn't.
 
@@ -2094,7 +2066,7 @@ This is one of the most important things Omri says. And it's true every time.`,
     status:'draft', needsReview:true, corrections:'', shanyApproved:false
   },
   {
-    id:'p120', date:'2026-05-23', platform:'linkedin-company', type:'Company Repost',
+    id:'p120', date:'2026-07-26', platform:'linkedin-company', type:'Company Repost',
     visual:'',
     copy:`Most rating gains don't require a renovation.
 
@@ -2104,7 +2076,110 @@ rating-iq.com`,
     status:'draft', needsReview:true, corrections:'', shanyApproved:false
   },
   {
-    id:'p121', date:'2026-05-25', platform:'linkedin-shany', type:'Repost — Shany',
+    id:'p123', date:'2026-05-27', platform:'linkedin-omri', type:'Thought Leadership + Photo',
+    visual:'Omri photo — hotel lobby or property visit',
+    copy:`I visited a hotel in Miami last month.
+
+Rating flat for 18 months. They had tried everything. New mattresses. Staff retraining. Breakfast upgrade.
+
+I pulled up their top 5 complaints.
+
+1. Noise from the lobby bar past midnight.
+2. Inconsistent check-in times.
+
+Nobody had ranked them before.
+
+They fixed both within three weeks.
+
+Rating moved from 7.6 to 8.1.
+
+The problem was never effort. It was priority.`,
+    status:'published', needsReview:false, corrections:'', shanyApproved:true
+  },
+  {
+    id:'p124', date:'2026-06-25', platform:'linkedin-omri', type:'Thought Leadership + Photo',
+    visual:'Omri photo — meeting or demo setting',
+    copy:`Best 60 seconds of my week.
+
+A chain CEO seeing our dashboard for the first time.
+
+He manages 11 hotels. Three were underperforming.
+
+We showed him the top 3 complaints per property, ranked by impact.
+
+He was quiet for a moment. Then said:
+
+"This is the first time I've seen my whole portfolio in one place."
+
+We hear this in almost every demo.
+
+Not because CEOs don't care about their data.
+
+Because nobody had organized it for them.`,
+    status:'scheduled', needsReview:false, corrections:'', shanyApproved:true
+  },
+  {
+    id:'p125', date:'2026-07-07', platform:'linkedin-omri', type:'Thought Leadership + Photo',
+    visual:'Omri photo — office or candid working shot',
+    copy:`I have spoken to over 200 hotel operators in the past two years.
+
+One thing comes up in almost every conversation.
+
+"We have the reviews. We just don't know what to do with them."
+
+The data is never the problem.
+The gap between data and action is the problem.
+
+A hotel with 3,000 reviews has one useful signal: the top 3 issues hurting their score.
+
+Everything else is noise.
+
+We cut through it.`,
+    status:'scheduled', needsReview:false, corrections:'', shanyApproved:true
+  },
+  {
+    id:'p126', date:'2026-07-15', platform:'linkedin-omri', type:'Thought Leadership + Photo',
+    visual:'Omri photo — professional headshot or candid',
+    copy:`A chain hotel stuck at 7.8 for two years.
+
+They tried everything. New cleaning protocols. Staff retraining. Full menu overhaul.
+
+None of it moved the score.
+
+We looked at their review data.
+
+Three complaint categories covered 68% of negative mentions.
+
+Two of them had nothing to do with what they had been fixing.
+
+Eight weeks later: 8.2.
+
+The answer was in the reviews the whole time.
+
+They just needed someone to show them where to look.`,
+    status:'scheduled', needsReview:false, corrections:'', shanyApproved:true
+  },
+  {
+    id:'p127', date:'2026-07-24', platform:'linkedin-omri', type:'Thought Leadership + Photo',
+    visual:'Omri photo — founder/personal shot',
+    copy:`People ask why I started RatingIQ.
+
+Honest answer: I kept watching good hotels lose business to hotels that simply understood their reviews better.
+
+Not better rooms. Not better staff.
+Better signal.
+
+The gap between a 7.9 and an 8.2 is almost always three specific operational problems.
+
+Most hotels do not know what those three problems are.
+
+We tell them. Their team fixes them.
+
+That is the whole company.`,
+    status:'scheduled', needsReview:false, corrections:'', shanyApproved:true
+  },
+  {
+    id:'p121', date:'2026-08-02', platform:'linkedin-shany', type:'Repost — Shany',
     visual:'',
     copy:`The question I ask in every demo: do you want a tool you log into, or a system that works while you don't?
 
@@ -2112,7 +2187,7 @@ The answer is always the same.`,
     status:'draft', needsReview:true, corrections:'', shanyApproved:false
   },
   {
-    id:'p122', date:'2026-05-25', platform:'linkedin-company', type:'Company Repost',
+    id:'p122', date:'2026-08-02', platform:'linkedin-company', type:'Company Repost',
     visual:'',
     copy:`The priority shouldn't wait for someone to log in.
 
@@ -2122,6 +2197,264 @@ That's the RatingIQ difference.
 
 rating-iq.com`,
     status:'draft', needsReview:true, corrections:'', shanyApproved:false
+  },
+
+  // ─── WORLD CUP 2026 ───
+  {
+    id:'p128', date:'2026-06-04', platform:'linkedin-omri', type:'World Cup',
+    visual:'World Cup 2026 host city map across USA, Canada, Mexico',
+    copy:`48 teams. 104 matches. 16 cities across 3 countries. 39 days.
+
+The 2026 FIFA World Cup starts in 7 days.
+
+I've watched a lot of major events come and go. But this one is different for hospitality.
+
+It's not just the scale. It's the geography.
+
+Millions of guests spreading across Dallas, Miami, New York, Vancouver, Mexico City - all of them arriving with elevated expectations and a smartphone in their pocket.
+
+The reviews they leave will be read long after July 19.
+
+For hotel chains with properties in host cities, this isn't a revenue event. It's a reputation event.
+
+Are your teams ready?
+
+#WorldCup2026 #HospitalityLeadership #HotelManagement`,
+    status:'published', needsReview:false, corrections:'', shanyApproved:true
+  },
+  {
+    id:'p129', date:'2026-06-05', platform:'linkedin-company', type:'World Cup',
+    visual:'Data graphic: booking demand vs projection gap for World Cup host cities',
+    copy:`80% of World Cup host-city hotels are running below booking projections.
+
+The tournament starts in 6 days.
+
+Visa headwinds. Geopolitical concerns. Aggressive pricing that outpaced demand.
+
+But here's the thing about the guests who did commit - they're the serious ones.
+
+They secured visas. Bought premium tickets. Paid elevated room rates. Flew across the world for this.
+
+That guest has high expectations and very little tolerance for friction.
+
+When volume disappoints, experience becomes the only metric that matters.
+
+What are your ratings telling you heading into next week?
+
+#WorldCup2026 #HotelIndustry #GuestExperience #HospitalityData`,
+    status:'scheduled', needsReview:false, corrections:'', shanyApproved:true
+  },
+  {
+    id:'p139', date:'2026-06-05', platform:'linkedin-omri', type:'World Cup Repost', reshareOf:'p129',
+    visual:'',
+    copy:`The 80% stat is real. I've heard it directly from GMs in host cities.
+
+The guests still coming expect a lot. What's your property showing right now?`,
+    status:'scheduled', needsReview:false, corrections:'', shanyApproved:true
+  },
+  {
+    id:'p130', date:'2026-06-09', platform:'linkedin-company', type:'World Cup',
+    visual:'US map highlighting 16 host cities with match count labels',
+    copy:`The 2026 World Cup spans 16 host cities across the US, Canada, and Mexico. Not all of them are set up to win.
+
+Miami and Atlanta are leading - strong leisure infrastructure, confirmed team base camps, established international traffic.
+
+Dallas and New Jersey carry the biggest matches: both semifinals and the final.
+
+Kansas City is the cautionary tale - 90% of hoteliers there report bookings well below forecast.
+
+The interesting question isn't which city fills the most rooms.
+
+It's which city converts a smaller, more demanding crowd into the strongest ratings on the other side of this.
+
+That's the result that matters in October.
+
+#WorldCup2026 #HotelIndustry #HospitalityInsights`,
+    status:'scheduled', needsReview:false, corrections:'', shanyApproved:true
+  },
+  {
+    id:'p131', date:'2026-06-11', platform:'linkedin-omri', type:'World Cup',
+    visual:'Estadio Azteca Mexico City - opening match atmosphere',
+    copy:`It starts today.
+
+The whistle blows at Estadio Azteca this afternoon - Mexico City hosting the World Cup for a third time.
+
+39 days. 104 matches. Millions of guests moving through 16 cities, sleeping in thousands of hotels, and forming opinions they'll share for years.
+
+The revenue window everyone planned around is now open.
+
+But the reviews window is open too.
+
+For every chain with properties in Dallas, Atlanta, Miami, New York, Vancouver, Mexico City - the guest experience clock just started.
+
+Good luck to every hospitality team on the ground.
+
+This is your tournament too.
+
+#WorldCup2026 #FIFA2026 #HospitalityLeadership`,
+    status:'scheduled', needsReview:false, corrections:'', shanyApproved:true
+  },
+  {
+    id:'p140', date:'2026-06-11', platform:'linkedin-company', type:'World Cup Repost', reshareOf:'p131',
+    visual:'',
+    copy:`The tournament is live. The guest experience clock is running.
+
+See what your ratings are saying at rating-iq.com`,
+    status:'scheduled', needsReview:false, corrections:'', shanyApproved:true
+  },
+  {
+    id:'p132', date:'2026-06-16', platform:'linkedin-omri', type:'World Cup',
+    visual:'Hotel lobby - busy check-in scene, international guests',
+    copy:`5 days into the World Cup. The first patterns are already forming.
+
+In every host city, guests arrived with high expectations and very little patience for friction - long check-in queues, transport chaos, language barriers, understaffed lobbies.
+
+The hotels that understood their guest profile before they walked through the door had a smooth first week.
+
+The ones that treated this like a normal peak season are finding out now what they missed.
+
+Guest experience at a global event isn't reactive. It can't be.
+
+The data to prepare was always available. The question was whether anyone looked at it.
+
+#WorldCup2026 #GuestExperience #HotelManagement`,
+    status:'scheduled', needsReview:false, corrections:'', shanyApproved:true
+  },
+  {
+    id:'p133', date:'2026-06-23', platform:'linkedin-company', type:'World Cup',
+    visual:'Mexico City, Guadalajara, Toronto, Vancouver - split city visual',
+    copy:`Mexico City. Guadalajara. Monterrey.
+
+Three cities that have hosted the World Cup before - in 1970 and 1986. They've been here.
+
+Toronto and Vancouver bring Canada's service reputation to the biggest global stage.
+
+What makes these 5 cities particularly interesting from a data perspective is the guest mix.
+
+They're hosting the most internationally diverse crowds in the tournament - supporters from dozens of countries, each with different baseline expectations, different service standards they're benchmarking you against, and different platforms they use to leave reviews.
+
+One thing they all have in common: they check ratings before they book, and they write them after they check out.
+
+In a global event, guest experience is a global question.
+
+#WorldCup2026 #HospitalityData #GuestExperience #HotelIndustry`,
+    status:'scheduled', needsReview:false, corrections:'', shanyApproved:true
+  },
+  {
+    id:'p134', date:'2026-07-01', platform:'linkedin-omri', type:'World Cup',
+    visual:'World Cup knockout bracket graphic',
+    copy:`The group stage is over.
+
+The knockout rounds start today - and the crowd just changed.
+
+Round of 32 fans are different. More emotionally invested. Traveling further on shorter notice. Paying premium prices at peak demand. Carrying the intensity of a fanbase that still believes it can win.
+
+That energy creates the best hotel reviews and the worst hotel reviews - sometimes in the same property, the same night.
+
+The teams that managed the group stage well are about to face a harder test.
+
+Higher expectations. Less predictability. More pressure on every interaction.
+
+How a hotel handles this week shows up in its ratings for the next two years.
+
+#WorldCup2026 #HotelManagement #GuestExperience`,
+    status:'scheduled', needsReview:false, corrections:'', shanyApproved:true
+  },
+  {
+    id:'p135', date:'2026-07-08', platform:'linkedin-company', type:'World Cup',
+    visual:'Review data visualization - 4 weeks of tournament review trends',
+    copy:`The World Cup quarterfinals are set.
+
+And across Atlanta, Dallas, Los Angeles, and Miami, hotel GMs are looking at 4 weeks of review data and seeing exactly how their properties showed up.
+
+The tournament isn't over yet. But the ratings picture is already forming.
+
+High-demand periods don't just test your operations. They set your reputation for the next season.
+
+The properties that used this tournament to understand their guests - to spot friction points, close service gaps, and narrow the distance between expectation and delivery - are building a competitive asset that outlasts July 19.
+
+The data is there. The question is always whether you're reading it in real time, or waiting for the damage report.
+
+#WorldCup2026 #HospitalityData #HotelIndustry #RatingIQ`,
+    status:'scheduled', needsReview:false, corrections:'', shanyApproved:true
+  },
+  {
+    id:'p136', date:'2026-07-13', platform:'linkedin-omri', type:'World Cup',
+    visual:'AT&T Stadium Dallas + Mercedes-Benz Stadium Atlanta split visual',
+    copy:`Two cities. One night apart.
+
+Dallas hosts the World Cup semifinal on Tuesday. Atlanta on Wednesday.
+
+The guests checking in this week are among the most passionate sports travelers on earth. They've followed their national team for weeks, spent thousands to be here, and arrived carrying the weight of a tournament that's still alive for them.
+
+They're going to be emotional. Exhausted. Demanding. Generous when things go right.
+
+And then they're going back to their rooms after the final whistle.
+
+What happens there - the service, the small details, the moments that don't show up in any operations manual - will end up in a review that 10,000 future guests will read.
+
+Dallas. Atlanta. This is your moment.
+
+#WorldCup2026 #HospitalityLeadership #GuestExperience`,
+    status:'scheduled', needsReview:false, corrections:'', shanyApproved:true
+  },
+  {
+    id:'p141', date:'2026-07-13', platform:'linkedin-company', type:'World Cup Repost', reshareOf:'p136',
+    visual:'',
+    copy:`Dallas and Atlanta. The biggest hospitality test of the tournament.
+
+Know your guest. rating-iq.com`,
+    status:'scheduled', needsReview:false, corrections:'', shanyApproved:true
+  },
+  {
+    id:'p137', date:'2026-07-17', platform:'linkedin-omri', type:'World Cup',
+    visual:'MetLife Stadium exterior + NYC skyline at dusk',
+    copy:`This Sunday, MetLife Stadium hosts the World Cup Final.
+
+The most-watched sporting event on the planet. 92,000 seats. One match.
+
+Around it, the hotels of New York and New Jersey are hosting what may be the most internationally diverse single-night crowd in US hospitality history.
+
+Every guest in that market this weekend is writing a review in their head.
+
+The best hotel teams in the world are in those lobbies right now - not because they were told to be, but because they understand what this moment is.
+
+39 days of hospitality. One final weekend to get it right.
+
+To every team still on the floor: you've earned this stage.
+
+#WorldCup2026Final #HospitalityLeadership #FIFA2026`,
+    status:'scheduled', needsReview:false, corrections:'', shanyApproved:true
+  },
+  {
+    id:'p138', date:'2026-07-21', platform:'linkedin-company', type:'World Cup',
+    visual:'World Cup trophy alongside hotel review rating graphic',
+    copy:`The final whistle blew on Sunday.
+
+The 2026 World Cup is over.
+
+39 days. 104 matches. 16 cities. 3 countries. Millions of guests.
+
+The tournament is done. The ratings are permanent.
+
+TripAdvisor, Google, Booking.com - the record of how the hospitality industry performed across every host city in June and July 2026 is now written and searchable. It will influence guest decisions for years.
+
+The chains that used this window to understand their guests - to read the data, close service gaps, and show up for the moment - built something that compounds beyond the tournament.
+
+The ones that waited to see how it went are now seeing how it went.
+
+Which side of that line are you on?
+
+#WorldCup2026 #HospitalityIndustry #HotelManagement #GuestExperience #RatingIQ`,
+    status:'scheduled', needsReview:false, corrections:'', shanyApproved:true
+  },
+  {
+    id:'p142', date:'2026-07-22', platform:'linkedin-omri', type:'World Cup Repost', reshareOf:'p138',
+    visual:'',
+    copy:`39 days. The ratings record is permanent now.
+
+Worth asking your team which side of that line they're on.`,
+    status:'scheduled', needsReview:false, corrections:'', shanyApproved:true
   }
 ];
 
@@ -2135,7 +2468,6 @@ const PARENT_MAP={
   p48:'p15',p56:'p15',
   p35:'p17',p42:'p17',
   p49:'p19',p57:'p19',
-  p50:'p21',p58:'p21',
   p36:'p23',p43:'p23',
   p51:'p25',p59:'p25',
   p37:'p27',p60:'p27',
@@ -2161,14 +2493,15 @@ const PARENT_MAP={
   p115:'p109',p116:'p109',
   p117:'p110',p118:'p110',
   p119:'p111',p120:'p111',
-  p121:'p112',p122:'p112'
+  p121:'p112',p122:'p112',
+  p139:'p129',p140:'p131',p141:'p136',p142:'p138'
 };
 
 <!-- AIPOSTS:START -->
 const AI_POSTS = [
   {
     "id": "ai17778732120o",
-    "date": "2026-05-18",
+    "date": "2026-05-19",
     "platform": "linkedin-omri",
     "type": "Thought Leadership",
     "copy": "Spirit Airlines just shut down.\n\nThat's not just an aviation story. It's a hospitality story.\n\nFor years, the budget travel model trained guests to optimize for price. Spirit, Frontier, Ryanair — they built an entire customer psychology around 'cheap first, comfort later.'\n\nThat model is collapsing.\n\nPost-pandemic travelers are choosing differently. They're paying more for comfort, consistency, and experiences they'll actually remember.\n\nAnd here's what that means for your property:\n\nThe guests checking in this summer have higher expectations than ever. They're not comparing you to the 2-star down the street. They're comparing you to the best stay they've ever had.\n\nOne negative review about cleanliness or a cold check-in hits harder now than in 2019. These guests will write that review. And they'll read yours before they book.\n\nThe premium shift is your opportunity — but only if your reputation reflects the experience you're delivering.\n\nHotels that close the gap between experience and perception win. The ones that don't are invisible.\n\nWhat are you doing today to ensure the premium traveler chooses you?\n\n#HotelManagement #GuestExperience #HospitalityTrends",
@@ -2176,9 +2509,9 @@ const AI_POSTS = [
     "visualConcept": "Overhead flat-lay of a luxury hotel lobby floor plan on cream linen paper, overlaid with a minimalist data dashboard showing a rising star-rating trend line in navy blue with gold accent details, no people, clean editorial style, soft natural window lighting, data-forward hotel aesthetic",
     "aiSuggested": true,
     "trend": "Spirit Airlines shuts down — signals accelerating shift from budget to premium travel",
-    "status": "draft",
+    "status": "published",
     "corrections": "",
-    "shanyApproved": false
+    "shanyApproved": true
   },
   {
     "id": "ai17778732120c",
@@ -2190,69 +2523,28 @@ const AI_POSTS = [
     "visualConcept": "Overhead flat-lay of a luxury hotel lobby floor plan on cream linen paper, overlaid with a minimalist data dashboard showing a rising star-rating trend line in navy blue with gold accent details, no people, clean editorial style, soft natural window lighting, data-forward hotel aesthetic",
     "aiSuggested": true,
     "trend": "Spirit Airlines shuts down — signals accelerating shift from budget to premium travel",
-    "status": "draft",
+    "status": "published",
     "corrections": "",
-    "shanyApproved": false
+    "shanyApproved": true
   },
   {
     "id": "ai17778732120s",
     "date": "2026-05-19",
     "platform": "linkedin-shany",
     "type": "Repost — Shany",
-    "copy": "This hits close to home. The premium traveler shift isn't just an airline story — it's reshaping hotel booking behavior right now. Your reputation needs to reflect your experience, or you lose the booking before check-in. Worth reading. [link]",
+    "copy": "This hits close to home. The premium traveler shift isn't just an airline story — it's reshaping hotel booking behavior right now. Your reputation needs to reflect your experience, or you lose the booking before check-in. Worth reading.",
     "visual": "Pending — AI Suggested",
     "visualConcept": "Overhead flat-lay of a luxury hotel lobby floor plan on cream linen paper, overlaid with a minimalist data dashboard showing a rising star-rating trend line in navy blue with gold accent details, no people, clean editorial style, soft natural window lighting, data-forward hotel aesthetic",
     "aiSuggested": true,
+    "reshareOf": "ai17778732120o",
     "trend": "Spirit Airlines shuts down — signals accelerating shift from budget to premium travel",
-    "status": "draft",
+    "status": "published",
     "corrections": "",
-    "shanyApproved": false
-  },
-  {
-    "id": "ai17778732121o",
-    "date": "2026-05-20",
-    "platform": "linkedin-omri",
-    "type": "Timely Post",
-    "copy": "Memorial Day weekend is 19 days away.\n\nThat's your last window to influence the reviews that will define your summer.\n\nHere's a reality most GMs don't think about: the reviews guests leave over Memorial Day will show up in July 4th booking searches. By then, you can't respond your way out of a bad trend.\n\nThe hotels that outperform this summer started their reputation work in May.\n\nSo what moves the needle in 19 days?\n\n→ Audit your last 90 days of reviews. Find the 2–3 recurring complaints showing up again and again.\n→ Brief your team this week on the exact language guests are using to describe problems.\n→ Fix one operational gap before Friday, May 22.\n→ Build a recovery protocol for when something goes wrong during peak weekend.\n\nYou won't eliminate every negative review. But you can shrink the gap between experience and expectation before 10,000 guests show up.\n\nThe summer P&L starts now.\n\n#HotelManagement #HospitalityOperations #RevPAR",
-    "visual": "Pending — AI Suggested",
-    "visualConcept": "Minimalist wall calendar opened to late May on cream paper, with a navy blue upward-trending review score graph overlaid in the negative space, a single hotel room key as a subtle accent detail, no faces, clean editorial composition, cream and navy color palette, data-forward aesthetic",
-    "aiSuggested": true,
-    "trend": "Memorial Day weekend 19 days away — peak season reputation window closing fast",
-    "status": "draft",
-    "corrections": "",
-    "shanyApproved": false
-  },
-  {
-    "id": "ai17778732121c",
-    "date": "2026-05-21",
-    "platform": "linkedin-company",
-    "type": "Company Repost",
-    "copy": "Memorial Day is 19 days away. The reviews guests leave this weekend will directly drive your July 4th bookings.\n\nHotels that audit recurring complaints and align their teams now will outperform this summer. Those that don't will spend August explaining the dip.\n\n1% rating increase = 1.42% RevPAR. The window to move that needle is open — barely.\n\nStart at rating-iq.com",
-    "visual": "Pending — AI Suggested",
-    "visualConcept": "Minimalist wall calendar opened to late May on cream paper, with a navy blue upward-trending review score graph overlaid in the negative space, a single hotel room key as a subtle accent detail, no faces, clean editorial composition, cream and navy color palette, data-forward aesthetic",
-    "aiSuggested": true,
-    "trend": "Memorial Day weekend 19 days away — peak season reputation window closing fast",
-    "status": "draft",
-    "corrections": "",
-    "shanyApproved": false
-  },
-  {
-    "id": "ai17778732121s",
-    "date": "2026-05-21",
-    "platform": "linkedin-shany",
-    "type": "Repost — Shany",
-    "copy": "Peak season prep isn't just about staffing — it's about reputation. What guests say over Memorial Day weekend shapes your entire summer revenue curve. This is the checklist I'd want every GM running right now. [link]",
-    "visual": "Pending — AI Suggested",
-    "visualConcept": "Minimalist wall calendar opened to late May on cream paper, with a navy blue upward-trending review score graph overlaid in the negative space, a single hotel room key as a subtle accent detail, no faces, clean editorial composition, cream and navy color palette, data-forward aesthetic",
-    "aiSuggested": true,
-    "trend": "Memorial Day weekend 19 days away — peak season reputation window closing fast",
-    "status": "draft",
-    "corrections": "",
-    "shanyApproved": false
+    "shanyApproved": true
   },
   {
     "id": "ai17778732122o",
-    "date": "2026-05-22",
+    "date": "2026-05-25",
     "platform": "linkedin-omri",
     "type": "Data & Metrics",
     "copy": "Luxury brands spent 20 years optimizing for the human eye.\n\nThe next booking may be made by AI.\n\nThat's not a hypothetical. Travel AI agents — tools that research, compare, and book on behalf of guests — are already reading your reviews, rating scores, and response patterns.\n\nHere's what the algorithm actually evaluates:\n→ Your average star rating, weighted by recency\n→ Sentiment consistency across review categories\n→ Whether you respond to negative reviews\n→ How your score compares to your comp set\n\nThis is the new SEO for hotels.\n\nIn 2015, you optimized for Google. In 2020, you optimized for OTA search rankings. In 2026, you're optimizing for AI that makes booking decisions before a human ever enters the picture.\n\nHotels with fragmented review profiles — 4.2 here, 3.8 there, no response strategy — get filtered out before a guest ever sees the results.\n\nYour rating isn't a vanity metric anymore. It's a machine-readable sales signal.\n\nTreat it that way.\n\n#HotelTechnology #HospitalityAI #ReputationManagement",
@@ -2260,13 +2552,13 @@ const AI_POSTS = [
     "visualConcept": "Abstract visualization of clean data streams flowing into a five-star hotel rating icon, cream background with navy blue geometric circuit-line patterns, minimalist hotel building silhouette in the lower third, no faces, editorial photography style, subtle gold accent lines at data nodes, data-forward aesthetic",
     "aiSuggested": true,
     "trend": "AI agents are beginning to make luxury travel booking decisions — reading reviews and ratings algorithmically",
-    "status": "draft",
+    "status": "published",
     "corrections": "",
     "shanyApproved": false
   },
   {
     "id": "ai17778732122c",
-    "date": "2026-05-23",
+    "date": "2026-05-25",
     "platform": "linkedin-company",
     "type": "Company Repost",
     "copy": "AI booking agents are reading your reviews, rating trends, and response patterns — and filtering properties before a human ever searches.\n\nYour star rating is now a machine-readable sales signal. Fragmented review profiles get cut before the consideration set even forms.\n\n1 star up = 11.2% higher ADR. The stakes just got algorithmic.\n\nrating-iq.com",
@@ -2274,13 +2566,13 @@ const AI_POSTS = [
     "visualConcept": "Abstract visualization of clean data streams flowing into a five-star hotel rating icon, cream background with navy blue geometric circuit-line patterns, minimalist hotel building silhouette in the lower third, no faces, editorial photography style, subtle gold accent lines at data nodes, data-forward aesthetic",
     "aiSuggested": true,
     "trend": "AI agents are beginning to make luxury travel booking decisions — reading reviews and ratings algorithmically",
-    "status": "draft",
+    "status": "published",
     "corrections": "",
     "shanyApproved": false
   },
   {
     "id": "ai17778732122s",
-    "date": "2026-05-23",
+    "date": "2026-05-25",
     "platform": "linkedin-shany",
     "type": "Repost — Shany",
     "copy": "We've been optimizing for human eyes. But AI travel agents are already deciding which hotels get surfaced — and which get skipped entirely. Your reputation score is becoming a ranking signal. Read this one carefully. [link]",
@@ -2288,7 +2580,7 @@ const AI_POSTS = [
     "visualConcept": "Abstract visualization of clean data streams flowing into a five-star hotel rating icon, cream background with navy blue geometric circuit-line patterns, minimalist hotel building silhouette in the lower third, no faces, editorial photography style, subtle gold accent lines at data nodes, data-forward aesthetic",
     "aiSuggested": true,
     "trend": "AI agents are beginning to make luxury travel booking decisions — reading reviews and ratings algorithmically",
-    "status": "draft",
+    "status": "published",
     "corrections": "",
     "shanyApproved": false
   }
@@ -2300,7 +2592,7 @@ const AI_POSTS = [
 // from defaults while keeping status, corrections, shanyApproved, and date.
 
 
-const DATA_VERSION = 24;
+const DATA_VERSION = 33;
 
 function loadPosts(){
   try{
@@ -2456,33 +2748,16 @@ function getFiltered(){
   }).sort((a,b)=>a.date.localeCompare(b.date));
 }
 
-function renderTable(){
-  const tbody=document.getElementById('posts-table');
-  const filtered=getFiltered();
-  if(!filtered.length){
-    tbody.innerHTML='<tr><td colspan="9" style="text-align:center;padding:32px;color:var(--slate)">No posts found</td></tr>';
-    return;
-  }
-  // Group reposts under their parent original
-  const filteredIds=new Set(filtered.map(p=>p.id));
-  const children={};
-  filtered.forEach(p=>{
-    const par=PARENT_MAP[p.id];
-    if(par&&filteredIds.has(par)){
-      if(!children[par]) children[par]=[];
-      children[par].push(p);
-    }
-  });
-  const ordered=[];
-  filtered.filter(p=>!PARENT_MAP[p.id]).forEach(p=>{
-    ordered.push({post:p,isChild:false});
-    (children[p.id]||[]).forEach(c=>ordered.push({post:c,isChild:true}));
-  });
-  // orphan reposts (parent filtered out) shown as normal rows
-  filtered.filter(p=>PARENT_MAP[p.id]&&!filteredIds.has(PARENT_MAP[p.id])).forEach(p=>ordered.push({post:p,isChild:false}));
+const publishedOpen={};
 
-  tbody.innerHTML=ordered.map(({post:p,isChild})=>`
-    <tr class="${isChild?'sub-row':''}${p.aiSuggested?' ai-row':''}${p.needsReview?' review-row':''}" onclick="openEdit('${p.id}')">
+function togglePublishedMonth(key){
+  publishedOpen[key]=!publishedOpen[key];
+  renderTable();
+}
+
+function postRow(p,isChild,inPublished=false){
+  return `
+    <tr class="${inPublished?'published-item ':''}${isChild?'sub-row':''}${p.aiSuggested?' ai-row':''}${p.needsReview?' review-row':''}" onclick="openEdit('${p.id}')">
       <td class="td-date" onclick="event.stopPropagation()" title="Click to change date">
         ${isChild?'':`<span class="date-label">${fmtDate(p.date)}</span><span class="td-day">${fmtDay(p.date)}</span>`}
         <input type="date" value="${p.date}" onchange="quickDate('${p.id}',this.value)">
@@ -2513,13 +2788,67 @@ function renderTable(){
         <input type="text" value="${p.corrections||''}" placeholder="Add note..." onchange="quickCorrection('${p.id}',this.value)">
       </td>
       <td><span style="font-size:16px;color:var(--slate);padding:0 6px">›</span></td>
-    </tr>
-  `).join('');
+    </tr>`;
+}
+
+function renderTable(){
+  const tbody=document.getElementById('posts-table');
+  const filtered=getFiltered();
+  if(!filtered.length){
+    tbody.innerHTML='<tr><td colspan="9" style="text-align:center;padding:32px;color:var(--slate)">No posts found</td></tr>';
+    return;
+  }
+  // Group reposts under their parent original
+  const filteredIds=new Set(filtered.map(p=>p.id));
+  const children={};
+  filtered.forEach(p=>{
+    const par=PARENT_MAP[p.id];
+    if(par&&filteredIds.has(par)){
+      if(!children[par]) children[par]=[];
+      children[par].push(p);
+    }
+  });
+  const ordered=[];
+  filtered.filter(p=>!PARENT_MAP[p.id]).forEach(p=>{
+    ordered.push({post:p,isChild:false});
+    (children[p.id]||[]).forEach(c=>ordered.push({post:c,isChild:true}));
+  });
+  filtered.filter(p=>PARENT_MAP[p.id]&&!filteredIds.has(PARENT_MAP[p.id])).forEach(p=>ordered.push({post:p,isChild:false}));
+
+  // Split published from active
+  const publishedItems=ordered.filter(({post})=>post.status==='published');
+  const activeItems=ordered.filter(({post})=>post.status!=='published');
+
+  // Group published by month
+  const monthOrder=[];
+  const byMonth={};
+  publishedItems.forEach(item=>{
+    const [y,m]=item.post.date.split('-');
+    const key=new Date(+y,+m-1,1).toLocaleString('en-US',{month:'long',year:'numeric'});
+    if(!byMonth[key]){byMonth[key]=[];monthOrder.push(key);}
+    byMonth[key].push(item);
+  });
+
+  let html='';
+  monthOrder.forEach(key=>{
+    const items=byMonth[key];
+    const open=!!publishedOpen[key];
+    const safeKey=key.replace(/'/g,"\\'");
+    html+=`<tr class="month-header-row" onclick="togglePublishedMonth('${safeKey}')"><td colspan="9"><span class="month-toggle">${open?'▾':'▸'}</span><strong>${key}</strong><span style="color:#86efac;font-size:12px;font-weight:400;margin-left:8px">${items.length} published</span></td></tr>`;
+    if(open){
+      items.forEach(({post,isChild})=>{html+=postRow(post,isChild,true);});
+      html+=`<tr class="published-section-end"><td colspan="9"></td></tr>`;
+    }
+  });
+
+  activeItems.forEach(({post,isChild})=>{html+=postRow(post,isChild);});
+
+  tbody.innerHTML=html;
 
   // color status selects
   tbody.querySelectorAll('.status-select').forEach(s=>{
-    s.style.background = {draft:'#f1f5f9',ready:'#eff6ff',scheduled:'#fffbeb',published:'#f0fdf4'}[s.value]||'';
-    s.style.color = {draft:'#64748b',ready:'#3b82f6',scheduled:'#d97706',published:'#16a34a'}[s.value]||'';
+    s.style.background={draft:'#f1f5f9',ready:'#eff6ff',scheduled:'#fffbeb',published:'#f0fdf4'}[s.value]||'';
+    s.style.color={draft:'#64748b',ready:'#3b82f6',scheduled:'#d97706',published:'#16a34a'}[s.value]||'';
     s.style.fontWeight='700';
     s.style.borderRadius='20px';
     s.style.padding='3px 8px';
@@ -2531,27 +2860,95 @@ function quickDate(id,val){
   const p=posts.find(x=>x.id===id);
   if(p){
     p.date=val;
+    // Cascade date to reshare children in local state
+    posts.forEach(c=>{if(c.reshareOf===id) c.date=val;});
     savePosts(posts);
-    fetch('http://localhost:3004/sync',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'dateChange',id,date:val,platform:p.platform})}).catch(()=>{});
+    syncToScheduler({id,date:val});
     posts.sort((a,b)=>a.date.localeCompare(b.date)||(parseInt(a.id.slice(1))-parseInt(b.id.slice(1))));
     renderTable();
     renderTimeline();
     renderStats();
   }
 }
-function syncToScheduler(payload){
-  fetch('http://localhost:3002/sync',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}).catch(()=>{});
+let _toastTimer=null;
+const SYNC_QUEUE_KEY='sc_sync_queue';
+function showSyncToast(msg,isErr){
+  const t=document.getElementById('sync-toast');
+  t.textContent=msg;t.className='show '+(isErr?'err':'ok');
+  clearTimeout(_toastTimer);
+  _toastTimer=setTimeout(()=>{t.className='';},3500);
+}
+function getSyncQueue(){try{return JSON.parse(localStorage.getItem(SYNC_QUEUE_KEY)||'[]');}catch{return[];}}
+function saveSyncQueue(q){localStorage.setItem(SYNC_QUEUE_KEY,JSON.stringify(q));}
+function updateSyncBadge(){
+  const q=getSyncQueue();
+  const el=document.getElementById('sync-pending');
+  if(!el)return;
+  if(q.length>0){el.textContent=q.length+' sync'+(q.length>1?'s':'')+' pending — click to retry';el.classList.add('visible');}
+  else{el.classList.remove('visible');}
+}
+async function flushSyncQueue(){
+  const q=getSyncQueue();
+  if(!q.length)return;
+  const remaining=[];
+  for(const payload of q){
+    const ok=await attemptSync(payload);
+    if(!ok)remaining.push(payload);
+  }
+  saveSyncQueue(remaining);
+  updateSyncBadge();
+  if(remaining.length===0)showSyncToast('All pending syncs complete',false);
+  else showSyncToast(remaining.length+' sync(s) still failing — server offline?',true);
+}
+async function attemptSync(payload){
+  try{
+    const res=await fetch('http://localhost:3002/sync',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    const data=await res.json();
+    return data.ok;
+  }catch{return false;}
+}
+function platformToProfile(platform){
+  return {
+    'linkedin-omri':'omri',
+    'linkedin-shany':'shany',
+    'linkedin-company':'company',
+    'linkedin-group':'group'
+  }[platform]||platform||'omri';
+}
+function buildUpsertEntry(p,overrides={}){
+  const profile=p.profile||platformToProfile(p.platform);
+  const entry={id:p.id,date:p.date,profile,copy:p.copy,status:p.status,approved:p.approved||false};
+  if(p.reshareOf) entry.reshareOf=p.reshareOf;
+  if(p.type==='video') entry.type='video';
+  return Object.assign(entry,overrides);
+}
+async function syncToScheduler(payload){
+  const ok=await attemptSync(payload);
+  if(ok){
+    showSyncToast('Synced',false);
+    // remove from queue if it was there from a previous failure
+    const q=getSyncQueue().filter(p=>p.id!==payload.id);
+    saveSyncQueue(q);
+    updateSyncBadge();
+  }else{
+    const q=getSyncQueue().filter(p=>p.id!==payload.id);
+    q.push(payload);
+    saveSyncQueue(q);
+    updateSyncBadge();
+    showSyncToast('Sync server offline — queued for retry',true);
+  }
 }
 function quickStatus(id,val){
   const p=posts.find(x=>x.id===id);
   if(p){
-    const isPersonal = p.profile==='omri' || p.profile==='shany';
-    // Personal profiles: "Ready" auto-promotes to "Scheduled"
-    if(val==='ready' && isPersonal) val='scheduled';
+    const profile=p.profile||platformToProfile(p.platform);
+    const isPersonal=profile==='omri'||profile==='shany';
+    if(val==='ready'&&isPersonal) val='scheduled';
     p.status=val;savePosts(posts);renderStats();renderTable();
-    const payload={id, status: val};
-    if(val==='scheduled' && (p.shanyApproved || isPersonal)) payload.approved=true;
-    if(val!=='ready' && val!=='scheduled') payload.approved=false;
+    const payload={id,status:val};
+    if(val==='scheduled'&&(p.shanyApproved||isPersonal)) payload.approved=true;
+    if(val!=='ready'&&val!=='scheduled') payload.approved=false;
+    if(!p.id.match(/^p\d+$/)) payload._upsert=buildUpsertEntry(p,{status:val,approved:payload.approved||false});
     syncToScheduler(payload);
   }
 }
@@ -2563,8 +2960,9 @@ function quickShanyApprove(id,val){
   const p=posts.find(x=>x.id===id);
   if(p){
     p.shanyApproved=val;savePosts(posts);renderStats();renderTable();
-    if(val && p.status==='ready') syncToScheduler({id, approved: true});
-    if(!val) syncToScheduler({id, approved: false});
+    const payload={id,approved:val};
+    if(!p.id.match(/^p\d+$/)) payload._upsert=buildUpsertEntry(p,{approved:val});
+    syncToScheduler(payload);
   }
 }
 
@@ -2714,6 +3112,18 @@ function savePost(){
   else if(savedId&&modalVideoFile){ saveVideo(savedId,modalVideoFile); removeImage(savedId); }
   else if(savedId&&!modalImageData&&!modalVideoFile){ removeImage(savedId); removeVideo(savedId); }
   savePosts(posts);
+  // Sync all editable fields to schedule.json
+  if(savedId){
+    const profile={
+      'linkedin-omri':'omri','linkedin-shany':'shany',
+      'linkedin-company':'company','linkedin-group':'group'
+    }[platform]||'omri';
+    const isNew=!editingId;
+    const sp=posts.find(x=>x.id===savedId);
+    const payload={id:savedId,date,status,copy,approved:sp?.approved||false};
+    if(isNew) payload._upsert={id:savedId,date,profile,copy,status,approved:false};
+    syncToScheduler(payload);
+  }
   vbPopulateSelect();
   render();
   closeModal('post-modal');
@@ -4886,6 +5296,9 @@ function init(){
   loadImages();
   render();
   vbPopulateSelect();
+  updateSyncBadge();
+  flushSyncQueue();
+  setInterval(flushSyncQueue,30000);
 }
 
 window.addEventListener('load',()=>{

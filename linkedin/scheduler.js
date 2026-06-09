@@ -1,11 +1,33 @@
-import { readFileSync, writeFileSync, existsSync } from "fs";
+import { readFileSync, writeFileSync, existsSync, unlinkSync } from "fs";
+import { execSync, spawnSync } from "child_process";
+import { fileURLToPath } from "url";
+import { dirname, join } from "path";
 import { config } from "dotenv";
+import { createRequire } from "module";
 
 config();
 
-const SCHEDULE_FILE = new URL("./schedule.json", import.meta.url).pathname;
-const CAMPAIGN_FILE = new URL("../index.html", import.meta.url).pathname;
-const VISUALS_DIR   = new URL("./visuals/", import.meta.url).pathname;
+const require = createRequire(import.meta.url);
+const FFMPEG  = require("@ffmpeg-installer/ffmpeg").path;
+
+function transcodeForLinkedIn(inputPath) {
+  const outputPath = inputPath.replace(/\.mp4$/i, "_transcoded.mp4");
+  execSync(
+    `"${FFMPEG}" -y -i "${inputPath}" ` +
+    `-vcodec libx264 -acodec aac -r 30 ` +
+    `-vf "scale=trunc(iw/2)*2:trunc(ih/2)*2,colorspace=bt709:iall=bt470bg:all=bt709:fast=1,format=yuv420p" ` +
+    `-color_primaries bt709 -color_trc bt709 -colorspace bt709 -color_range tv ` +
+    `-b:v 4M -maxrate 5M -bufsize 10M -preset fast -g 60 ` +
+    `-movflags +faststart "${outputPath}"`,
+    { stdio: "pipe" }
+  );
+  return outputPath;
+}
+
+const DIR           = dirname(fileURLToPath(import.meta.url));
+const SCHEDULE_FILE = join(DIR, "schedule.json");
+const CAMPAIGN_FILE = join(DIR, "../index.html");
+const VISUALS_DIR   = join(DIR, "visuals") + "/";
 
 const today = new Date().toISOString().split("T")[0];
 
@@ -126,6 +148,42 @@ async function postToLinkedIn(profile, text, reshareUrn = null, imagePath = null
   return data.id;
 }
 
+function runCompanyPost(schedule, omriPost) {
+  // Find a company post on the same date that pairs with this Omri post
+  const companion = schedule.find(p =>
+    p.date === omriPost.date &&
+    p.profile === "company" &&
+    p.status === "scheduled" &&
+    p.approved === true
+  );
+  if (!companion) return;
+
+  const isReshare = companion.reshareOf === omriPost.id;
+  const scriptName = isReshare ? "reshare_company.js" : "post_company.js";
+  const imagePath = `${VISUALS_DIR}${omriPost.id}.jpg`;
+
+  let scriptArgs = ["--id", companion.id, "--copy", companion.copy];
+  if (isReshare) {
+    scriptArgs.push("--parent-urn", omriPost.linkedInId);
+  } else if (existsSync(imagePath)) {
+    scriptArgs.push("--image", imagePath);
+  }
+
+  console.log(`\nRunning company ${isReshare ? "reshare" : "post"}: ${companion.id}...`);
+  const result = spawnSync("node", [join(DIR, scriptName), ...scriptArgs], { stdio: "inherit" });
+
+  if (result.status === 0) {
+    companion.status = "published";
+    companion.publishedAt = new Date().toISOString();
+    updateCampaignStatus(companion.id, "published");
+    console.log(`✓ Company ${isReshare ? "reshare" : "post"} done: ${companion.id}`);
+  } else {
+    companion.status = "failed";
+    companion.error = `Browser script exited with code ${result.status}`;
+    console.error(`✗ Company post failed: ${companion.id}`);
+  }
+}
+
 function updateCampaignStatus(postId, status) {
   try {
     let html = readFileSync(CAMPAIGN_FILE, "utf8");
@@ -134,6 +192,19 @@ function updateCampaignStatus(postId, status) {
     writeFileSync(CAMPAIGN_FILE, html);
   } catch (e) {
     console.log(`Note: Could not update campaign file status for ${postId}: ${e.message}`);
+  }
+}
+
+async function withRetry(fn, label, maxAttempts = 4, baseDelayMs = 15000) {
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    try {
+      return await fn();
+    } catch (e) {
+      if (attempt === maxAttempts) throw e;
+      const delay = baseDelayMs * attempt;
+      console.log(`  ↳ Attempt ${attempt}/${maxAttempts} failed: ${e.message}. Retrying in ${delay / 1000}s...`);
+      await new Promise(r => setTimeout(r, delay));
+    }
   }
 }
 
@@ -162,8 +233,8 @@ async function run() {
 
   for (const post of due) {
     try {
-      if (post.profile === "company" || post.profile === "group") {
-        console.log(`⏭ Skipped ${post.id} — posted manually`);
+      if (post.profile === "group" || post.profile === "company") {
+        // group = manual; company = handled by runCompanyPost after Omri publishes
         continue;
       }
 
@@ -181,25 +252,71 @@ async function run() {
         reshareUrn = parent.linkedInId;
       }
 
-      const imagePath = !reshareUrn ? `${VISUALS_DIR}${post.id}.jpg` : null;
-      const videoPath = !reshareUrn ? `${VISUALS_DIR}${post.id}.mp4` : null;
+      const imagePath = (!reshareUrn && post.type !== 'video') ? `${VISUALS_DIR}${post.id}.jpg` : null;
+      const videoPath = (!reshareUrn && post.type === 'video') ? `${VISUALS_DIR}${post.id}.mp4` : null;
       const hasImage = imagePath && existsSync(imagePath);
       const hasVideo = videoPath && existsSync(videoPath);
       if (hasImage) console.log(`  ↳ Image found: ${post.id}.jpg`);
       if (hasVideo) console.log(`  ↳ Video found: ${post.id}.mp4`);
 
+      let finalVideoPath = hasVideo ? videoPath : null;
+      if (hasVideo) {
+        console.log(`  ↳ Transcoding video for LinkedIn...`);
+        finalVideoPath = transcodeForLinkedIn(videoPath);
+        console.log(`  ↳ Transcoded: ${finalVideoPath}`);
+      }
+
       console.log(`Posting ${post.id} as ${post.profile}${reshareUrn ? ' (reshare)' : ''}${hasImage ? ' + image' : ''}${hasVideo ? ' + video' : ''}...`);
-      const linkedInId = await postToLinkedIn(post.profile, post.copy, reshareUrn, hasImage ? imagePath : null, hasVideo ? videoPath : null);
+      const linkedInId = await withRetry(() => postToLinkedIn(post.profile, post.copy, reshareUrn, hasImage ? imagePath : null, finalVideoPath), post.id);
       post.status = "published";
       post.linkedInId = linkedInId;
       post.publishedAt = new Date().toISOString();
       updateCampaignStatus(post.id, "published");
       console.log(`✓ Published: ${post.id} — LinkedIn ID: ${linkedInId}`);
+
+      // After Omri posts: auto-approve and process all same-day reshare children
+      if (post.profile === "omri") {
+        const children = schedule.filter(p =>
+          p.reshareOf === post.id && p.date === today && p.status === "scheduled"
+        );
+        children.forEach(c => { c.approved = true; });
+        writeFileSync(SCHEDULE_FILE, JSON.stringify(schedule, null, 2));
+
+        // Company reshare (handled by browser script)
+        runCompanyPost(schedule, post);
+
+        // Shany reshare (post directly via API)
+        const shanyChild = children.find(p => p.profile === "shany");
+        if (shanyChild) {
+          try {
+            console.log(`\nPosting Shany reshare: ${shanyChild.id}...`);
+            const shanyId = await withRetry(() => postToLinkedIn("shany", shanyChild.copy, post.linkedInId, null, null), shanyChild.id);
+            shanyChild.status = "published";
+            shanyChild.linkedInId = shanyId;
+            shanyChild.publishedAt = new Date().toISOString();
+            updateCampaignStatus(shanyChild.id, "published");
+            console.log(`✓ Shany reshare published: ${shanyChild.id}`);
+          } catch (e) {
+            shanyChild.status = "failed";
+            shanyChild.error = e.message;
+            console.error(`✗ Shany reshare failed: ${shanyChild.id} — ${e.message}`);
+          }
+        }
+      }
+      if (finalVideoPath && finalVideoPath !== videoPath) {
+        try { unlinkSync(finalVideoPath); } catch {}
+      }
     } catch (e) {
-      post.status = "failed";
+      // Auto-reschedule to next day so it shows correctly in the UI and retries tomorrow
+      const nextDay = new Date();
+      nextDay.setDate(nextDay.getDate() + 1);
+      const nextDate = nextDay.toISOString().split('T')[0];
+      post.date = nextDate;
+      post.status = "scheduled";
       post.error = e.message;
-      post.retryAfter = Date.now() + 3600000; // retry in 1 hour
-      console.error(`✗ Failed: ${post.id} — ${e.message}`);
+      // Cascade next-day date to reshare children
+      schedule.forEach(p => { if (p.reshareOf === post.id) p.date = nextDate; });
+      console.error(`✗ Failed: ${post.id} — ${e.message} — rescheduled to ${nextDate}`);
     }
   }
 
