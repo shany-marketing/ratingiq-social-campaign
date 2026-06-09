@@ -4943,10 +4943,21 @@ function getThumb(postId){
 }
 
 function loadImages(){
+  const missingThumbs=[];
   for(const key of Object.keys(localStorage)){
     if(key.startsWith('sc_img_')){
-      uploadedImages[key.replace('sc_img_','')]=localStorage.getItem(key);
+      const id=key.replace('sc_img_','');
+      uploadedImages[id]=localStorage.getItem(key);
+      if(!localStorage.getItem('sc_thumb_'+id)) missingThumbs.push(id);
     }
+  }
+  // Generate missing thumbnails from cached full images
+  if(missingThumbs.length){
+    Promise.all(missingThumbs.map(id=>
+      resizeImage(uploadedImages[id],150,0.7).then(t=>{
+        try{localStorage.setItem('sc_thumb_'+id,t);}catch(e){}
+      })
+    )).then(()=>renderTable());
   }
   // Restore anything on disk that localStorage lost
   fetch('http://localhost:3002/visuals').then(r=>r.json()).then(data=>{
