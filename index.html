@@ -2656,14 +2656,14 @@ function loadPosts(){
           if(!loadedIds.has(ap.id)) loaded.push({...ap});
         });
       }
-      loaded.sort((a,b)=>a.date.localeCompare(b.date));
+      loaded.sort((a,b)=>b.date.localeCompare(a.date));
       localStorage.setItem('sc_posts',JSON.stringify(loaded));
       return loaded;
     }
     localStorage.setItem('sc_data_version',String(DATA_VERSION));
     const base=[...DEFAULT_POSTS.map(p=>({...p}))];
     if(typeof AI_POSTS!=='undefined') AI_POSTS.forEach(ap=>base.push({...ap}));
-    base.sort((a,b)=>a.date.localeCompare(b.date));
+    base.sort((a,b)=>b.date.localeCompare(a.date));
     return base;
   }catch{return [...DEFAULT_POSTS.map(p=>({...p}))]}
 }
@@ -2864,7 +2864,7 @@ function quickDate(id,val){
     posts.forEach(c=>{if(c.reshareOf===id) c.date=val;});
     savePosts(posts);
     syncToScheduler({id,date:val});
-    posts.sort((a,b)=>a.date.localeCompare(b.date)||(parseInt(a.id.slice(1))-parseInt(b.id.slice(1))));
+    posts.sort((a,b)=>b.date.localeCompare(a.date)||(parseInt(b.id.slice(1))-parseInt(a.id.slice(1))));
     renderTable();
     renderTimeline();
     renderStats();
@@ -2971,7 +2971,7 @@ function quickShanyApprove(id,val){
 // ─────────────────────────────────────────
 function renderTimeline(){
   const cont=document.getElementById('timeline-view');
-  const sorted=[...posts].sort((a,b)=>a.date.localeCompare(b.date));
+  const sorted=[...posts].sort((a,b)=>b.date.localeCompare(a.date));
 
   // group by week
   const weeks={};
@@ -2985,7 +2985,7 @@ function renderTimeline(){
   });
 
   // group by date within week
-  cont.innerHTML=Object.keys(weeks).sort().map(wk=>{
+  cont.innerHTML=Object.keys(weeks).sort().reverse().map(wk=>{
     const wkPosts=weeks[wk];
     const dates={};
     wkPosts.forEach(p=>{
@@ -2997,7 +2997,7 @@ function renderTimeline(){
     return `
       <div class="tl-week">
         <div class="tl-week-label">${label}</div>
-        ${Object.keys(dates).sort().map(d=>`
+        ${Object.keys(dates).sort().reverse().map(d=>`
           <div class="tl-row">
             <div class="tl-date-col">
               <div class="day">${new Date(d+'T12:00:00').getDate()}</div>
@@ -5125,7 +5125,7 @@ function openBuilderFor(id){
 
 function vbPopulateSelect(){
   const sel=document.getElementById('vb-post-select');
-  const sorted=[...posts].sort((a,b)=>a.date.localeCompare(b.date));
+  const sorted=[...posts].sort((a,b)=>b.date.localeCompare(a.date));
   sel.innerHTML='<option value="">— Select a post —</option>'+
     sorted.map(p=>`<option value="${p.id}">${fmtDate(p.date)} · ${p.type.slice(0,32)}${p.type.length>32?'…':''}</option>`).join('');
 }
