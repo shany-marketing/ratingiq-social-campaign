@@ -2815,9 +2815,11 @@ function renderTable(){
   });
   filtered.filter(p=>PARENT_MAP[p.id]&&!filteredIds.has(PARENT_MAP[p.id])).forEach(p=>ordered.push({post:p,isChild:false}));
 
-  // Split published from active
+  // Split into published, upcoming active, and past non-published
+  const todayStr=new Date().toISOString().split('T')[0];
   const publishedItems=ordered.filter(({post})=>post.status==='published');
-  const activeItems=ordered.filter(({post})=>post.status!=='published');
+  const upcomingItems=ordered.filter(({post})=>post.status!=='published'&&post.date>=todayStr);
+  const pastItems=ordered.filter(({post})=>post.status!=='published'&&post.date<todayStr);
 
   // Group published by month
   const monthOrder=[];
@@ -2830,8 +2832,7 @@ function renderTable(){
   });
 
   let html='';
-  activeItems.forEach(({post,isChild})=>{html+=postRow(post,isChild);});
-
+  // Published months at top (collapsed)
   monthOrder.forEach(key=>{
     const items=byMonth[key];
     const open=!!publishedOpen[key];
@@ -2842,6 +2843,18 @@ function renderTable(){
       html+=`<tr class="published-section-end"><td colspan="9"></td></tr>`;
     }
   });
+
+  // Upcoming active posts
+  upcomingItems.forEach(({post,isChild})=>{html+=postRow(post,isChild);});
+
+  // Past non-published posts collapsed at bottom
+  if(pastItems.length){
+    const pastOpen=!!publishedOpen['__past__'];
+    html+=`<tr class="month-header-row" onclick="togglePublishedMonth('__past__')"><td colspan="9"><span class="month-toggle">${pastOpen?'▾':'▸'}</span><strong>Past — not published</strong><span style="color:#94a3b8;font-size:12px;font-weight:400;margin-left:8px">${pastItems.length} posts</span></td></tr>`;
+    if(pastOpen){
+      pastItems.forEach(({post,isChild})=>{html+=postRow(post,isChild);});
+    }
+  }
 
   tbody.innerHTML=html;
 
