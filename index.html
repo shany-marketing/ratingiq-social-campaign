@@ -4939,6 +4939,7 @@ function getThumb(postId){
   const t=localStorage.getItem('sc_thumb_'+postId);
   if(t)return t;
   if(localStorage.getItem('sc_vid_'+postId))return '__video__';
+  if(uploadedImages[postId])return uploadedImages[postId];
   return null;
 }
 
