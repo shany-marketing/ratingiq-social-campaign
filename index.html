@@ -2745,7 +2745,7 @@ function getFiltered(){
     if(omri==='pending'&&p.shanyApproved)return false;
     if(q&&!p.copy.toLowerCase().includes(q)&&!p.type.toLowerCase().includes(q))return false;
     return true;
-  }).sort((a,b)=>a.date.localeCompare(b.date));
+  }).sort((a,b)=>b.date.localeCompare(a.date));
 }
 
 const publishedOpen={};
@@ -2830,6 +2830,8 @@ function renderTable(){
   });
 
   let html='';
+  activeItems.forEach(({post,isChild})=>{html+=postRow(post,isChild);});
+
   monthOrder.forEach(key=>{
     const items=byMonth[key];
     const open=!!publishedOpen[key];
@@ -2840,8 +2842,6 @@ function renderTable(){
       html+=`<tr class="published-section-end"><td colspan="9"></td></tr>`;
     }
   });
-
-  activeItems.forEach(({post,isChild})=>{html+=postRow(post,isChild);});
 
   tbody.innerHTML=html;
 
