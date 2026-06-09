@@ -2745,7 +2745,7 @@ function getFiltered(){
     if(omri==='pending'&&p.shanyApproved)return false;
     if(q&&!p.copy.toLowerCase().includes(q)&&!p.type.toLowerCase().includes(q))return false;
     return true;
-  }).sort((a,b)=>b.date.localeCompare(a.date));
+  }).sort((a,b)=>a.date.localeCompare(b.date));
 }
 
 const publishedOpen={};
