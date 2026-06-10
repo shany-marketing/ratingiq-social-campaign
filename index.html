@@ -2667,7 +2667,18 @@ function loadPosts(){
     return base;
   }catch{return [...DEFAULT_POSTS.map(p=>({...p}))]}
 }
-function savePosts(p){localStorage.setItem('sc_posts',JSON.stringify(p))}
+function savePosts(p){
+  const data=JSON.stringify(p);
+  try{
+    localStorage.setItem('sc_posts',data);
+  }catch(e){
+    // localStorage full — prune full images (keep thumbs) and retry
+    Object.keys(localStorage).filter(k=>k.startsWith('sc_img_')).forEach(k=>localStorage.removeItem(k));
+    try{localStorage.setItem('sc_posts',data);}catch(e2){
+      console.error('savePosts failed even after pruning:',e2);
+    }
+  }
+}
 
 let posts=loadPosts();
 let editingId=null;
