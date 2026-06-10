@@ -917,7 +917,7 @@ Your rating is your brand now. The logo is just the introduction.
 
 rating-iq.com`,
     visualConcept:'Bold stat display. "72%" in large gold. Subtext: "choose rating over brand name" in white. Navy background. Expedia source small.',
-    status:'draft', corrections:'', shanyApproved:false
+    status:'published', corrections:'', shanyApproved:false
   },
   {
     id:'p28', date:'2026-06-14', platform:'linkedin-company', type:'Data & Metrics',
@@ -2832,8 +2832,8 @@ function renderTable(){
   });
 
   let html='';
-  // Published months at top (collapsed)
-  monthOrder.forEach(key=>{
+  // Published months at top (collapsed), most recent first
+  monthOrder.slice().reverse().forEach(key=>{
     const items=byMonth[key];
     const open=!!publishedOpen[key];
     const safeKey=key.replace(/'/g,"\\'");
