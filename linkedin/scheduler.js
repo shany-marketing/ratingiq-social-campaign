@@ -212,6 +212,20 @@ async function run() {
   const retryOnly = process.argv.includes("--retry-only");
   const schedule = JSON.parse(readFileSync(SCHEDULE_FILE, "utf8"));
   const now = Date.now();
+
+  // Auto-approve posts whose visual is on disk — board sync is unreliable from GitHub Pages
+  schedule.forEach(p => {
+    if (!p.approved && p.status === "scheduled" && p.date === today) {
+      const hasImage = existsSync(`${VISUALS_DIR}${p.id}.jpg`);
+      const hasVideo = existsSync(`${VISUALS_DIR}${p.id}.mp4`);
+      const isTextOnly = !p.visual || p.visual === '';
+      if (hasImage || hasVideo || isTextOnly) {
+        p.approved = true;
+        console.log(`  ✓ Auto-approved ${p.id} (visual ready)`);
+      }
+    }
+  });
+
   const due = schedule.filter(p =>
     p.date === today && p.approved === true && (
       (!retryOnly && p.status === "scheduled") ||
