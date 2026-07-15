@@ -1185,14 +1185,39 @@
     "error": "Media register failed: {\"status\":401,\"serviceErrorCode\":65602,\"code\":\"EXPIRED_ACCESS_TOKEN\",\"message\":\"The token used in the request has expired\"}"
   },
   {
+    "id": "p151",
+    "date": "2026-07-16",
+    "profile": "omri",
+    "type": "Thought Leadership",
+    "status": "draft",
+    "approved": false
+  },
+  {
     "id": "p137",
     "date": "2026-07-17",
     "profile": "omri",
     "type": "Thought Leadership",
-    "copy": "This Sunday, MetLife Stadium hosts the World Cup Final.\n\nThe most-watched sporting event on the planet. 92,000 seats. One match.\nAround it, the hotels of New York and New Jersey are hosting what may be the most internationally diverse single-night crowd in US hospitality history.\n\nEvery guest in that market this weekend is writing a review in their head.\nThe best hotel teams in the world are in those lobbies right now - not because they were told to be, but because they understand what this moment is.\n\n39 days of hospitality. One final weekend to get it right.\nTo every team still on the floor: you've earned this stage.\n\n#WorldCup2026Final #HospitalityLeadership #FIFA2026",
+    "copy": "This Sunday, MetLife Stadium hosts the World Cup Final.\n\nThe most-watched sporting event on the planet. 92,000 seats. One match.\n\nAround it, the hotels of New York and New Jersey are hosting what may be the most internationally diverse single-night crowd in US hospitality history.\n\nEvery guest in that market this weekend is writing a review in their head.\n\nThe best hotel teams in the world are in those lobbies right now - not because they were told to be, but because they understand what this moment is.\n\n39 days of hospitality. One final weekend to get it right.\n\nTo every team still on the floor: you've earned this stage.\n\n#WorldCup2026Final #HospitalityLeadership #FIFA2026",
     "status": "scheduled",
     "approved": false,
     "visual": "MetLife Stadium exterior + NYC skyline at dusk"
+  },
+  {
+    "id": "p148",
+    "date": "2026-07-18",
+    "profile": "company",
+    "type": "Brand",
+    "status": "scheduled",
+    "approved": true,
+    "copy": "We onboarded a new hotel last week, the great Oasis Spa Club Dead Sea. Not just any property, the largest in its chain - @Prima Hotels Israel .\n\nTheir CEO, Oren, sat through the team's full walkthrough himself. No delegating to a GM, no summary handed to him later.\n\nBy the end of the session, his question wasn't about the software. It was \"why didn't we do this sooner?\"\n\nThat's the moment we build for. Not a dashboard, but a clear picture of exactly what's hurting the rating, and what to fix first.\n\nOnboarding day is always our favorite day."
+  },
+  {
+    "id": "p149",
+    "date": "2026-07-20",
+    "profile": "omri",
+    "type": "Thought Leadership + Photo",
+    "status": "draft",
+    "approved": false
   },
   {
     "id": "p138",
@@ -1229,22 +1254,6 @@
     "status": "scheduled",
     "approved": false,
     "visual": "Omri photo — founder/personal shot"
-  },
-  {
-    "id": "p148",
-    "date": "2026-07-18",
-    "profile": "company",
-    "type": "Brand",
-    "status": "draft",
-    "approved": false
-  },
-  {
-    "id": "p149",
-    "date": "2026-07-20",
-    "profile": "omri",
-    "type": "Thought Leadership + Photo",
-    "status": "draft",
-    "approved": false
   },
   {
     "id": "p150",
