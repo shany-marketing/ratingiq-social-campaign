@@ -947,7 +947,7 @@ Review responses aren't customer service. They're a revenue strategy.
 
 rating-iq.com`,
     visualConcept:'Split stat card. "2.2x" in large gold. "more OTA revenue" below. Supporting stat "97% read responses" in smaller white text. Navy background.',
-    status:'draft', corrections:'', shanyApproved:false
+    status:'published', corrections:'', shanyApproved:false
   },
   {
     id:'p30', date:'2026-06-17', platform:'linkedin-company', type:'Thought Leadership',
@@ -1270,7 +1270,7 @@ The logo is just the introduction. Omri nails it here.`,
 
 That reframe changes everything. Worth reading.`,
     visualConcept:'Short personal card. Warm and direct on cream background.',
-    status:'scheduled', corrections:'', shanyApproved:false
+    status:'published', corrections:'', shanyApproved:false
   },
 
   // ─── OMRI REPOSTS OF COMPANY POSTS ───
@@ -2116,7 +2116,7 @@ We hear this in almost every demo.
 Not because CEOs don't care about their data.
 
 Because nobody had organized it for them.`,
-    status:'scheduled', needsReview:false, corrections:'', shanyApproved:true
+    status:'published', needsReview:false, corrections:'', shanyApproved:true
   },
   {
     id:'p125', date:'2026-07-07', platform:'linkedin-omri', type:'Thought Leadership + Photo',
@@ -2332,7 +2332,7 @@ Guest experience at a global event isn't reactive. It can't be.
 The data to prepare was always available. The question was whether anyone looked at it.
 
 #WorldCup2026 #GuestExperience #HotelManagement`,
-    status:'scheduled', needsReview:false, corrections:'', shanyApproved:true
+    status:'published', needsReview:false, corrections:'', shanyApproved:true
   },
   {
     id:'p133', date:'2026-06-23', platform:'linkedin-company', type:'World Cup',
@@ -2469,6 +2469,56 @@ Which side of that line are you on?
 
 Worth asking your team which side of that line they're on.`,
     status:'scheduled', needsReview:false, corrections:'', shanyApproved:true
+  },
+  {
+    id:'p148', date:'2026-07-18', platform:'linkedin-company', type:'Brand',
+    visual:'Omri + team with the hotel CEO, onboarding demo walkthrough',
+    copy:`We onboarded a new hotel this week. Not just any property, the largest in its chain.
+
+Their CEO sat through the full walkthrough himself. No delegating to a GM, no summary handed to him later.
+
+By the end of the session, his question wasn't about the software. It was "why didn't we do this sooner?"
+
+That's the moment we build for. Not a login. Not a dashboard. A clear picture of exactly what's hurting the rating, and what to fix first.
+
+Onboarding day is always our favorite day.`,
+    status:'draft', needsReview:true, corrections:'', shanyApproved:false
+  },
+  {
+    id:'p149', date:'2026-07-20', platform:'linkedin-omri', type:'Thought Leadership + Photo',
+    visual:'Omri solo, hotel property visit',
+    copy:`I spent a day this week walking a hotel CEO through his own numbers, live, on site.
+
+Not a slide deck. Not a summary someone else prepared for him.
+
+His own reviews, his own gaps, in front of him.
+
+Halfway through, he stopped asking questions about the software and started asking questions about his GMs.
+
+That shift is the real signal. The moment a CEO stops evaluating the tool and starts evaluating his own operation.
+
+It happens almost every time we sit across from the person who actually signs.
+
+Data doesn't change decisions. Ownership does.`,
+    status:'draft', needsReview:true, corrections:'', shanyApproved:false
+  },
+  {
+    id:'p150', date:'2026-07-28', platform:'linkedin-omri', type:'Thought Leadership',
+    visual:'Oren candid, poolside guest interaction',
+    copy:`We spent a full day at a hotel this week, watching the manager work.
+
+Not talking to him. Watching him.
+
+By the pool, a guest walked past carrying two coffees, one for herself and one for a stranger nearby whose order had been delayed. Oren saw it from thirty feet away. He walked straight over and thanked her, by name, for something she didn't know he'd noticed.
+
+He does this constantly. A staff member remembers a returning guest's allergy without being told. He catches it, and tells them so, in front of the whole team.
+
+Nothing happens in that hotel that he misses. Not because he's checking up on people. Because he genuinely loves the place and the people running it.
+
+You can build every system in the world to catch what's going wrong in a hotel.
+
+The best managers catch what's going right, and make sure the right people know it.`,
+    status:'draft', needsReview:true, corrections:'', shanyApproved:false
   }
 ];
 
@@ -2606,7 +2656,7 @@ const AI_POSTS = [
 // from defaults while keeping status, corrections, shanyApproved, and date.
 
 
-const DATA_VERSION = 33;
+const DATA_VERSION = 34;
 
 function loadPosts(){
   try{
