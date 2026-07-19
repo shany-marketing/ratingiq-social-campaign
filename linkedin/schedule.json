@@ -1155,15 +1155,26 @@
     "approved": true
   },
   {
+    "id": "p151",
+    "date": "2026-07-15",
+    "profile": "omri",
+    "type": "Thought Leadership",
+    "status": "published",
+    "approved": false,
+    "copy": "Today, I was at the Travel Innovation IL Summit Israel, the Israel Ministry of Tourism's launch event for the country's new tourism innovation community.\n\nHotel executives, entrepreneurs, tech companies, investors and government, all in one room, speaking the same language for once.\n\nItai Green 🎤 opened with the keynote, \"AI: From Buzzword to Business Value,\" pulled from his book Innovation or Elimination. Nine startups followed, showing exactly what that looks like in practice.\nTwo panels stuck with me.\nAmit Cotler moderated the first: Rafi Shauli, Bathen Yeshua and Uri Sirkis on how you actually launch innovation inside a conservative industry. Nobody sugarcoated it.\nOshrat Ben Moshe moderated the second, and it turned into a proper founder show-and-tell.\nShoutout to my fellow startup founders on that stage: Amit Shamni (Bridgify), Amir Balaish (Wenrix), Michal Hubschmann (ALWAYS CONNECT AI), Itai Marcipar (Pruvo (Acquired by Web Travel Group - WebBeds)), and Efrat Kaul Granot(Cancelon). Good company to be building alongside :) \n\nThe line that stayed with me: this isn't staying local. The model behind this community is already lined up to launch in other countries. Israel is the pilot, not the ceiling!\n\nSpent the rest of the day in conversations that are already turning into something real. Four hotel chains, local and global. Three strategic collaborations with companies that serve hotels, each with real upside.\n\nThanks to the Travel Innovation IL team and everyone building this community! This was the opening shot, not the whole story. \nLooking forward to where it goes next."
+  },
+  {
     "id": "p136",
     "date": "2026-07-16",
     "profile": "omri",
     "type": "Thought Leadership",
     "copy": "Two cities. One night apart.\n\nDallas hosts the World Cup semifinal on Tuesday. Atlanta on Wednesday.\n\nThe guests checking in this week are among the most passionate sports travelers on earth. They've followed their national team for weeks, spent thousands to be here, and arrived carrying the weight of a tournament that's still alive for them.\n\nThey're going to be emotional. Exhausted. Demanding. Generous when things go right.\n\nAnd then they're going back to their rooms after the final whistle.\n\nWhat happens there - the service, the small details, the moments that don't show up in any operations manual - will end up in a review that 10,000 future guests will read.\n\nDallas. Atlanta. This is your moment.\n\n#WorldCup2026 #HospitalityLeadership #GuestExperience",
-    "status": "scheduled",
+    "status": "published",
     "approved": true,
     "visual": "AT&T Stadium Dallas + Mercedes-Benz Stadium Atlanta split visual",
-    "error": "{\"status\":401,\"serviceErrorCode\":65602,\"code\":\"EXPIRED_ACCESS_TOKEN\",\"message\":\"The token used in the request has expired\"}"
+    "error": "{\"status\":401,\"serviceErrorCode\":65602,\"code\":\"EXPIRED_ACCESS_TOKEN\",\"message\":\"The token used in the request has expired\"}",
+    "linkedInId": "urn:li:share:7483412879304753153",
+    "publishedAt": "2026-07-16T06:51:05.083Z"
   },
   {
     "id": "p141",
@@ -1171,8 +1182,9 @@
     "profile": "company",
     "reshareOf": "p136",
     "copy": "Dallas and Atlanta. The biggest hospitality test of the tournament.\n\nKnow your guest. rating-iq.com",
-    "status": "scheduled",
-    "approved": true
+    "status": "failed",
+    "approved": true,
+    "error": "Browser script exited with code 1"
   },
   {
     "id": "p126",
@@ -1185,10 +1197,21 @@
     "error": "Media register failed: {\"status\":401,\"serviceErrorCode\":65602,\"code\":\"EXPIRED_ACCESS_TOKEN\",\"message\":\"The token used in the request has expired\"}"
   },
   {
-    "id": "p151",
+    "id": "p1784192492524",
     "date": "2026-07-16",
     "profile": "omri",
-    "type": "Thought Leadership",
+    "copy": "I almost skipped the @Travel Innovation IL Summit yesterday.\n\nI assumed it would be another conference with plenty of talk and not much coming out of it.\n\nGood thing my partners convinced me otherwise.\nI left with conversations with four hotel chains, two independent hotels, and three potential strategic partnerships, each with the potential to create more value for hotels together than separately.\n\nBut the best part was meeting hoteliers who were genuinely open to new ideas and ready to put innovation to work.\n\nSometimes, it pays to listen to your partners.\n\nHere’s my honest recap.\n",
+    "status": "published",
+    "approved": false,
+    "type": "video"
+  },
+  {
+    "id": "p152",
+    "date": "2026-07-16",
+    "profile": "company",
+    "reshareOf": "p1784192492524",
+    "type": "Company Repost",
+    "copy": "Our founder, in the room where hoteliers are already building what's next.\n\nFour hotel chains. Two independent properties. Three new partnerships.\n\nProof that listening to the right people pays off.",
     "status": "draft",
     "approved": false
   },
@@ -1198,7 +1221,7 @@
     "profile": "omri",
     "type": "Thought Leadership",
     "copy": "This Sunday, MetLife Stadium hosts the World Cup Final.\n\nThe most-watched sporting event on the planet. 92,000 seats. One match.\n\nAround it, the hotels of New York and New Jersey are hosting what may be the most internationally diverse single-night crowd in US hospitality history.\n\nEvery guest in that market this weekend is writing a review in their head.\n\nThe best hotel teams in the world are in those lobbies right now - not because they were told to be, but because they understand what this moment is.\n\n39 days of hospitality. One final weekend to get it right.\n\nTo every team still on the floor: you've earned this stage.\n\n#WorldCup2026Final #HospitalityLeadership #FIFA2026",
-    "status": "scheduled",
+    "status": "published",
     "approved": false,
     "visual": "MetLife Stadium exterior + NYC skyline at dusk"
   },
@@ -1212,21 +1235,42 @@
     "copy": "We onboarded a new hotel last week, the great Oasis Spa Club Dead Sea. Not just any property, the largest in its chain - @Prima Hotels Israel .\n\nTheir CEO, Oren, sat through the team's full walkthrough himself. No delegating to a GM, no summary handed to him later.\n\nBy the end of the session, his question wasn't about the software. It was \"why didn't we do this sooner?\"\n\nThat's the moment we build for. Not a dashboard, but a clear picture of exactly what's hurting the rating, and what to fix first.\n\nOnboarding day is always our favorite day."
   },
   {
+    "id": "p117",
+    "date": "2026-07-19",
+    "profile": "shany",
+    "type": "Repost",
+    "reshareOf": "p1784192492524",
+    "copy": "This is the operational reality I see in every chain we work with.\n\nIt's not a people problem. It's a system problem.\n\nOmri nails it.",
+    "status": "published",
+    "approved": false
+  },
+  {
+    "id": "p118",
+    "date": "2026-07-19",
+    "profile": "company",
+    "type": "Company Repost",
+    "reshareOf": "p1784192492524",
+    "copy": "Our founder, in the room where hoteliers are already building what's next.\n\nFour hotel chains. Two independent properties. Three new partnerships.\n\nThis is what happens when you actually listen.",
+    "status": "published",
+    "approved": false
+  },
+  {
     "id": "p149",
     "date": "2026-07-20",
     "profile": "omri",
     "type": "Thought Leadership + Photo",
-    "status": "draft",
-    "approved": false
+    "status": "scheduled",
+    "approved": false,
+    "copy": "I spent a day this week walking a hotel CEO through his own numbers, live, on site.\n\nNot a slide deck. Not a summary someone else prepared for him.\n\nHis own reviews, his own gaps, right in front of him.\n\nHalfway through, he stopped asking questions about the software and started asking questions about his department managers.\n\nThat shift is the real signal. The moment a CEO stops evaluating the tool and starts evaluating his own operation and team.\n\nIt happens almost every time we sit across from the person who actually signs.\n\nData doesn't change decisions. Ownership does.\n\n@RatingIQ\nwww.raiting-iq.com "
   },
   {
     "id": "p138",
     "date": "2026-07-21",
     "profile": "company",
     "type": "Brand",
-    "copy": "The final whistle blew on Sunday.\n\nThe 2026 World Cup is over.\n\n39 days. 104 matches. 16 cities. 3 countries. Millions of guests.\n\nThe tournament is done. The ratings are permanent.\n\nTripAdvisor, Google, Booking.com - the record of how the hospitality industry performed across every host city in June and July 2026 is now written and searchable. It will influence guest decisions for years.\n\nThe chains that used this window to understand their guests - to read the data, close service gaps, and show up for the moment - built something that compounds beyond the tournament.\n\nThe ones that waited to see how it went are now seeing how it went.\n\nWhich side of that line are you on?\n\n#WorldCup2026 #HospitalityIndustry #HotelManagement #GuestExperience #RatingIQ",
+    "copy": "The final whistle blew.\nThe 2026 World Cup is over.\n\n39 days. 104 matches. 16 cities. 3 countries. Millions of guests.\n\nThe tournament is done. The ratings are permanent.\n\nTripAdvisor, Expedia, Google, Booking.com - the record of how the hospitality industry performed across every host city in June and July 2026 is now written and searchable. It will influence guest decisions for years to come.\n\nThe chains that used this window to understand their guests - to read the data, close service gaps, and show up for the moment - built something that compounds beyond the tournament.\n\nThe ones that waited to see how it went are now seeing how it went.\n\nWhich side of that line are you on?\n\n#WorldCup2026 #HospitalityIndustry #HotelManagement #GuestExperience #RatingIQ",
     "status": "scheduled",
-    "approved": true,
+    "approved": false,
     "visual": "World Cup trophy alongside hotel review rating graphic"
   },
   {
@@ -1234,9 +1278,9 @@
     "date": "2026-07-22",
     "profile": "omri",
     "reshareOf": "p138",
-    "copy": "39 days. The ratings record is permanent now.\n\nWorth asking your team which side of that line they're on.",
+    "copy": "39 days. The ratings record is permanent now.\n\nWorth asking your team which side of that line they're on.\n\n@RatingIQ\nwww.rating-iq.com",
     "status": "scheduled",
-    "approved": true
+    "approved": false
   },
   {
     "id": "p146",
