@@ -125,6 +125,11 @@ app.get('/visual/:id', (req, res) => {
   else res.status(404).json({ ok: false });
 });
 
+app.get('/mention-cache', (_, res) => {
+  const p = join(DIR, 'mention_cache.json');
+  res.json(existsSync(p) ? JSON.parse(readFileSync(p, 'utf8')) : {});
+});
+
 app.get('/health', (_, res) => res.json({ ok: true }));
 
 // Serve the board locally so syncs work (avoids HTTPS→HTTP mixed-content block from GitHub Pages)

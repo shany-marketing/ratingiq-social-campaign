@@ -22,6 +22,14 @@
 .ai-badge::before{content:'✦';font-size:9px}
 .review-badge{display:inline-flex;align-items:center;gap:3px;background:#fef3c7;color:#92400e;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;letter-spacing:.3px;margin-left:5px;vertical-align:middle}
 .review-badge::before{content:'◎';font-size:9px}
+.mention-tag{color:#0a66c2;font-weight:600}
+.mention-tag.unresolved{color:#f59e0b}
+.mention-bar{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px;min-height:18px}
+.mention-pill{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:2px 8px;border-radius:20px;font-weight:600}
+.mention-pill.resolved{background:#dbeafe;color:#1d4ed8}
+.mention-pill.unresolved{background:#fef3c7;color:#92400e}
+.mention-pill.resolved::before{content:'✓ '}
+.mention-pill.unresolved::before{content:'? '}
 .visual-prompt-tip{max-width:320px;font-size:11.5px;color:var(--slate);font-style:italic;padding:6px 0 0}
 tr.ai-row{background:#faf7ff}
 tr.ai-row:hover{background:#f3eeff}
@@ -464,7 +472,10 @@ canvas#vb-canvas{border-radius:8px;box-shadow:0 4px 24px rgba(0,0,0,.18);max-wid
         <div class="field" style="flex:1;display:flex;flex-direction:column">
           <label>Post Copy</label>
           <textarea id="edit-copy" class="copy-area" style="flex:1;min-height:320px" oninput="updateCharCount()"></textarea>
-          <div class="char-count" id="char-count">0 chars</div>
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-top:4px">
+            <div id="mention-bar-live" class="mention-bar" style="flex:1"></div>
+            <div class="char-count" id="char-count" style="white-space:nowrap">0 chars</div>
+          </div>
         </div>
       </div>
     </div>
@@ -2771,6 +2782,31 @@ function savePosts(p){
 
 let posts=loadPosts();
 let editingId=null;
+let mentionCache={};
+fetch('http://localhost:3002/mention-cache').then(r=>r.ok?r.json():null).then(d=>{if(d)mentionCache=d;renderTable();}).catch(()=>{});
+
+function highlightMentions(text){
+  return text.replace(/@([\w-]+)/g,(_,h)=>{
+    const key=h.toLowerCase();
+    const known=mentionCache[key]!==undefined;
+    const resolved=known&&mentionCache[key]!==null;
+    const cls=!known||resolved?'mention-tag':'mention-tag unresolved';
+    return `<span class="${cls}">@${h}</span>`;
+  });
+}
+
+function renderMentionBar(text){
+  const found=[...new Set((text.match(/@[\w-]+/g)||[]).map(m=>m.slice(1)))];
+  if(!found.length)return '';
+  return '<div class="mention-bar">'+found.map(h=>{
+    const key=h.toLowerCase();
+    const known=mentionCache[key]!==undefined;
+    const resolved=known&&mentionCache[key]!==null;
+    const cls=!known||resolved?'resolved':'unresolved';
+    const label=cls==='unresolved'?'not yet tagged':mentionCache[key]?.urn?'tagged':'tagged';
+    return `<span class="mention-pill ${cls}">@${h}</span><span style="font-size:10px;color:var(--slate)">${label}</span>`;
+  }).join('')+'</div>';
+}
 
 // ─────────────────────────────────────────
 // HELPERS
@@ -2864,7 +2900,7 @@ function postRow(p,isChild,inPublished=false){
       </td>
       <td><span class="badge badge-${p.platform}">${platformIcon(p.platform)}${platformLabel(p.platform)}</span></td>
       <td><span class="type-tag">${p.type}</span>${p.aiSuggested?'<span class="ai-badge">AI</span>':''}${p.needsReview?'<span class="review-badge">Review</span>':''}<span style="display:block;font-size:10px;color:#94a3b8;margin-top:2px">${p.id}</span>${p.linkedInUrl?`<a href="${p.linkedInUrl}" target="_blank" title="View on LinkedIn" style="margin-left:5px;color:var(--slate);font-size:11px;text-decoration:none;vertical-align:middle">🔗</a>`:''}</td>
-      <td><div class="copy-preview">${p.copy.split('\n')[0]}</div>${p.aiSuggested&&p.trend?`<div style="font-size:10px;color:#7c3aed;margin-top:2px;opacity:.75">↳ ${p.trend.slice(0,55)}${p.trend.length>55?'…':''}</div>`:''}${p.aiSuggested&&p.visualConcept?`<div class="visual-prompt-tip">${p.visualConcept.slice(0,80)}…</div>`:''}
+      <td><div class="copy-preview">${highlightMentions(p.copy.split('\n')[0])}</div>${p.aiSuggested&&p.trend?`<div style="font-size:10px;color:#7c3aed;margin-top:2px;opacity:.75">↳ ${p.trend.slice(0,55)}${p.trend.length>55?'…':''}</div>`:''}${p.aiSuggested&&p.visualConcept?`<div class="visual-prompt-tip">${p.visualConcept.slice(0,80)}…</div>`:''}
       </td>
       <td onclick="event.stopPropagation();openBuilderFor('${p.id}')">
         ${(t=>t==='__video__'
@@ -3195,6 +3231,8 @@ function updateModalBadge(){
 function updateCharCount(){
   const v=document.getElementById('edit-copy').value;
   document.getElementById('char-count').textContent=`${v.length} chars`;
+  const bar=document.getElementById('mention-bar-live');
+  if(bar)bar.innerHTML=renderMentionBar(v);
 }
 
 function savePost(){

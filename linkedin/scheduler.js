@@ -67,31 +67,84 @@ async function registerAndUpload(token, author, filePath, recipe, contentType) {
 const uploadImage = (t, a, p) => registerAndUpload(t, a, p, "urn:li:digitalmediaRecipe:feedshare-image", "image/jpeg");
 const uploadVideo = (t, a, p) => registerAndUpload(t, a, p, "urn:li:digitalmediaRecipe:feedshare-video",  "video/mp4");
 
-// Known @mentions → LinkedIn URNs. Add more handles here as needed.
+// Hardcoded URNs for our own accounts — always resolved even without API lookup.
 const MENTION_MAP = {
-  "rating-iq":  () => ({ urn: process.env.LINKEDIN_ORG_URN,   type: "company" }),
-  "ratingiq":   () => ({ urn: process.env.LINKEDIN_ORG_URN,   type: "company" }),
+  "ratingiq":  () => ({ urn: process.env.LINKEDIN_ORG_URN, type: "company" }),
+  "rating-iq": () => ({ urn: process.env.LINKEDIN_ORG_URN, type: "company" }),
 };
 
-const POST_FOOTER = "\n\n@rating-iq\nwww.rating-iq.com";
+const POST_FOOTER = "\n\n@RatingIQ\nwww.rating-iq.com";
 
-// Appends footer and resolves @mentions into LinkedIn attribute objects.
-function buildCopy(raw) {
+const MENTION_CACHE_FILE = join(DIR, "mention_cache.json");
+
+function loadMentionCache() {
+  if (existsSync(MENTION_CACHE_FILE)) {
+    try { return JSON.parse(readFileSync(MENTION_CACHE_FILE, "utf8")); } catch {}
+  }
+  return {};
+}
+
+function saveMentionCache(cache) {
+  writeFileSync(MENTION_CACHE_FILE, JSON.stringify(cache, null, 2));
+}
+
+// Tries to resolve an @handle to a LinkedIn org URN via vanity-name lookup.
+async function tryResolveOrg(handle, token) {
+  const vanity = handle.replace(/[^a-zA-Z0-9-]/g, "").toLowerCase();
+  try {
+    const r = await fetch(
+      `https://api.linkedin.com/v2/organizations?q=vanityName&vanityName=${encodeURIComponent(vanity)}`,
+      { headers: { Authorization: `Bearer ${token}`, "X-Restli-Protocol-Version": "2.0.0" } }
+    );
+    const data = await r.json();
+    if (r.ok && data.elements?.[0]?.id) {
+      return { urn: `urn:li:organization:${data.elements[0].id}`, type: "company" };
+    }
+  } catch {}
+  return null;
+}
+
+// Scans text for unknown @mentions and attempts LinkedIn org lookup; updates cache in place.
+async function resolveUnknownMentions(text, token) {
+  const cache = loadMentionCache();
+  const re = /@([\w-]+)/g;
+  let m;
+  let changed = false;
+  while ((m = re.exec(text)) !== null) {
+    const key = m[1].toLowerCase();
+    if (MENTION_MAP[key] || cache[key]) continue;
+    console.log(`  ↳ Resolving @${m[1]} via LinkedIn API...`);
+    const entity = await tryResolveOrg(m[1], token);
+    if (entity) {
+      cache[key] = entity;
+      changed = true;
+      console.log(`  ✓ @${m[1]} → ${entity.urn}`);
+    } else {
+      cache[key] = null; // mark as unresolvable so we don't retry every post
+      changed = true;
+      console.log(`  ✗ @${m[1]} unresolved — will post as plain text`);
+    }
+  }
+  if (changed) saveMentionCache(cache);
+  return cache;
+}
+
+// Appends footer and builds LinkedIn attribute objects for all resolved @mentions.
+function buildCopy(raw, cache = {}) {
   const text = raw.trimEnd() + POST_FOOTER;
   const attributes = [];
   const re = /@([\w-]+)/g;
   let m;
   while ((m = re.exec(text)) !== null) {
-    const fn = MENTION_MAP[m[1].toLowerCase()];
-    if (!fn) continue;
-    const { urn, type } = fn();
-    if (!urn) continue;
+    const key = m[1].toLowerCase();
+    const entity = MENTION_MAP[key] ? MENTION_MAP[key]() : cache[key];
+    if (!entity?.urn) continue;
     attributes.push({
       start: m.index,
       length: m[0].length,
-      value: type === "company"
-        ? { "com.linkedin.common.CompanyAttributedEntity": { company: urn } }
-        : { "com.linkedin.common.MemberAttributedEntity":  { member:  urn } },
+      value: entity.type === "company"
+        ? { "com.linkedin.common.CompanyAttributedEntity": { company: entity.urn } }
+        : { "com.linkedin.common.MemberAttributedEntity":  { member:  entity.urn } },
     });
   }
   return { text, attributes };
@@ -113,9 +166,12 @@ async function postToLinkedIn(profile, text, reshareUrn = null, imagePath = null
     throw new Error(`Missing token or URN for profile: ${profile}`);
   }
 
+  // Auto-resolve any @mentions not yet in cache before building the copy.
+  const cache = await resolveUnknownMentions(text + POST_FOOTER, token);
+
   if (reshareUrn) {
     // Reshare via /v2/shares — image not supported on reshares
-    const { text: resolvedText, attributes } = buildCopy(text);
+    const { text: resolvedText, attributes } = buildCopy(text, cache);
     const textObj = attributes.length
       ? { text: resolvedText, attributes }
       : { text: resolvedText };
@@ -149,7 +205,7 @@ async function postToLinkedIn(profile, text, reshareUrn = null, imagePath = null
     mediaCategory = "VIDEO";
   }
 
-  const { text: resolvedText, attributes } = buildCopy(text);
+  const { text: resolvedText, attributes } = buildCopy(text, cache);
   const commentary = attributes.length
     ? { text: resolvedText, attributes }
     : { text: resolvedText };
