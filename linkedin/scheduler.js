@@ -67,6 +67,36 @@ async function registerAndUpload(token, author, filePath, recipe, contentType) {
 const uploadImage = (t, a, p) => registerAndUpload(t, a, p, "urn:li:digitalmediaRecipe:feedshare-image", "image/jpeg");
 const uploadVideo = (t, a, p) => registerAndUpload(t, a, p, "urn:li:digitalmediaRecipe:feedshare-video",  "video/mp4");
 
+// Known @mentions → LinkedIn URNs. Add more handles here as needed.
+const MENTION_MAP = {
+  "rating-iq":  () => ({ urn: process.env.LINKEDIN_ORG_URN,   type: "company" }),
+  "ratingiq":   () => ({ urn: process.env.LINKEDIN_ORG_URN,   type: "company" }),
+};
+
+const POST_FOOTER = "\n\n@rating-iq\nwww.rating-iq.com";
+
+// Appends footer and resolves @mentions into LinkedIn attribute objects.
+function buildCopy(raw) {
+  const text = raw.trimEnd() + POST_FOOTER;
+  const attributes = [];
+  const re = /@([\w-]+)/g;
+  let m;
+  while ((m = re.exec(text)) !== null) {
+    const fn = MENTION_MAP[m[1].toLowerCase()];
+    if (!fn) continue;
+    const { urn, type } = fn();
+    if (!urn) continue;
+    attributes.push({
+      start: m.index,
+      length: m[0].length,
+      value: type === "company"
+        ? { "com.linkedin.common.CompanyAttributedEntity": { company: urn } }
+        : { "com.linkedin.common.MemberAttributedEntity":  { member:  urn } },
+    });
+  }
+  return { text, attributes };
+}
+
 async function postToLinkedIn(profile, text, reshareUrn = null, imagePath = null, videoPath = null) {
   const tokenKey = profile === "omri" ? "LINKEDIN_OMRI_TOKEN"
     : profile === "shany" ? "LINKEDIN_SHANY_TOKEN"
@@ -85,10 +115,14 @@ async function postToLinkedIn(profile, text, reshareUrn = null, imagePath = null
 
   if (reshareUrn) {
     // Reshare via /v2/shares — image not supported on reshares
+    const { text: resolvedText, attributes } = buildCopy(text);
+    const textObj = attributes.length
+      ? { text: resolvedText, attributes }
+      : { text: resolvedText };
     const body = {
       owner: author,
       resharedShare: reshareUrn,
-      text: { text },
+      text: textObj,
     };
     const res = await fetch("https://api.linkedin.com/v2/shares", {
       method: "POST",
@@ -115,14 +149,19 @@ async function postToLinkedIn(profile, text, reshareUrn = null, imagePath = null
     mediaCategory = "VIDEO";
   }
 
+  const { text: resolvedText, attributes } = buildCopy(text);
+  const commentary = attributes.length
+    ? { text: resolvedText, attributes }
+    : { text: resolvedText };
+
   const shareContent = mediaAsset
     ? {
-        shareCommentary: { text },
+        shareCommentary: commentary,
         shareMediaCategory: mediaCategory,
         media: [{ status: "READY", media: mediaAsset }],
       }
     : {
-        shareCommentary: { text },
+        shareCommentary: commentary,
         shareMediaCategory: "NONE",
       };
 
