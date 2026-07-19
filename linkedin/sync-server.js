@@ -13,13 +13,33 @@ const SCHEDULE = join(DIR, 'schedule.json');
 const VISUALS  = join(DIR, 'visuals');
 
 app.post('/sync', (req, res) => {
-  const { id, approved, status } = req.body;
+  const { id, approved, status, date, copy, _upsert } = req.body;
   try {
     const schedule = JSON.parse(readFileSync(SCHEDULE, 'utf8'));
-    const entry = schedule.find(e => e.id === id);
-    if (!entry) return res.json({ ok: false, error: 'not found' });
+    let entry = schedule.find(e => e.id === id);
+    if (!entry) {
+      if (_upsert) {
+        entry = { ..._upsert };
+        schedule.push(entry);
+      } else {
+        return res.json({ ok: false, error: 'not found' });
+      }
+    }
     if (approved !== undefined) entry.approved = approved;
     if (status !== undefined) entry.status = status;
+    if (copy !== undefined) entry.copy = copy;
+    if (date !== undefined && date !== entry.date) {
+      entry.date = date;
+      // Reset failed posts when rescheduled
+      if (entry.status === 'failed') {
+        entry.status = 'scheduled';
+        delete entry.error;
+        delete entry.retryAfter;
+      }
+      // Cascade date to reshare children
+      schedule.forEach(p => { if (p.reshareOf === id) p.date = date; });
+    }
+    schedule.sort((a, b) => a.date.localeCompare(b.date));
     writeFileSync(SCHEDULE, JSON.stringify(schedule, null, 2));
     res.json({ ok: true });
   } catch (e) {
@@ -28,9 +48,13 @@ app.post('/sync', (req, res) => {
 });
 
 app.post('/video/:id', express.raw({type: '*/*', limit: '500mb'}), (req, res) => {
-  if (!req.params.id) return res.status(400).json({ ok: false, error: 'missing id' });
+  const id = req.params.id;
+  if (!id) return res.status(400).json({ ok: false, error: 'missing id' });
   try {
-    writeFileSync(join(VISUALS, `${req.params.id}.mp4`), req.body);
+    writeFileSync(join(VISUALS, `${id}.mp4`), req.body);
+    const schedule = JSON.parse(readFileSync(SCHEDULE, 'utf8'));
+    const entry = schedule.find(e => e.id === id);
+    if (entry) { entry.type = 'video'; writeFileSync(SCHEDULE, JSON.stringify(schedule, null, 2)); }
     res.json({ ok: true });
   } catch (e) {
     res.status(500).json({ ok: false, error: e.message });
@@ -69,6 +93,9 @@ app.post('/load-file', (req, res) => {
     const isVideo = /\.(mp4|mov|m4v|webm|avi|mkv|qt)$/i.test(path);
     if (isVideo) {
       copyFileSync(path, join(VISUALS, `${id}.mp4`));
+      const schedule = JSON.parse(readFileSync(SCHEDULE, 'utf8'));
+      const entry = schedule.find(e => e.id === id);
+      if (entry) { entry.type = 'video'; writeFileSync(SCHEDULE, JSON.stringify(schedule, null, 2)); }
       res.json({ ok: true, type: 'video' });
     } else {
       const data = readFileSync(path);
@@ -100,4 +127,10 @@ app.get('/visual/:id', (req, res) => {
 
 app.get('/health', (_, res) => res.json({ ok: true }));
 
-app.listen(3002, () => console.log('[sync-server] running on :3002'));
+// Serve the board locally so syncs work (avoids HTTPS→HTTP mixed-content block from GitHub Pages)
+app.get('/', (_, res) => res.sendFile(join(DIR, '..', 'index.html')));
+
+app.listen(3002, () => {
+  console.log('[sync-server] running on :3002');
+  console.log('[sync-server] board available at http://localhost:3002');
+});
