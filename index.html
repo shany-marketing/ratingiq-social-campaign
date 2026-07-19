@@ -2733,7 +2733,7 @@ function loadPosts(){
         loaded.forEach(lp=>{
           const dp=DEFAULT_POSTS.find(d=>d.id===lp.id);
           if(dp){
-            lp.copy=dp.copy;
+            if(!lp.userEditedCopy) lp.copy=dp.copy; // never overwrite user-edited copy
             lp.visual=dp.visual;
             lp.visualConcept=dp.visualConcept;
             lp.type=dp.type;
@@ -2810,14 +2810,14 @@ function highlightMentions(text){
 function renderMentionBar(text){
   const found=[...new Set((text.match(/@[\w-]+/g)||[]).map(m=>m.slice(1)))];
   if(!found.length)return '';
-  return '<div class="mention-bar">'+found.map(h=>{
+  return found.map(h=>{
     const key=h.toLowerCase();
     const known=mentionCache[key]!==undefined;
     const resolved=known&&mentionCache[key]!==null;
     const cls=!known||resolved?'resolved':'unresolved';
-    const label=cls==='unresolved'?'not yet tagged':mentionCache[key]?.urn?'tagged':'tagged';
+    const label=cls==='unresolved'?'— not yet tagged':'— will be tagged';
     return `<span class="mention-pill ${cls}">@${h}</span><span style="font-size:10px;color:var(--slate)">${label}</span>`;
-  }).join('')+'</div>';
+  }).join('');
 }
 
 // ─────────────────────────────────────────
@@ -2912,7 +2912,7 @@ function postRow(p,isChild,inPublished=false){
       </td>
       <td><span class="badge badge-${p.platform}">${platformIcon(p.platform)}${platformLabel(p.platform)}</span></td>
       <td><span class="type-tag">${p.type}</span>${p.aiSuggested?'<span class="ai-badge">AI</span>':''}${p.needsReview?'<span class="review-badge">Review</span>':''}<span style="display:block;font-size:10px;color:#94a3b8;margin-top:2px">${p.id}</span>${p.linkedInUrl?`<a href="${p.linkedInUrl}" target="_blank" title="View on LinkedIn" style="margin-left:5px;color:var(--slate);font-size:11px;text-decoration:none;vertical-align:middle">🔗</a>`:''}</td>
-      <td><div class="copy-preview">${highlightMentions(p.copy.split('\n')[0])}</div>${p.aiSuggested&&p.trend?`<div style="font-size:10px;color:#7c3aed;margin-top:2px;opacity:.75">↳ ${p.trend.slice(0,55)}${p.trend.length>55?'…':''}</div>`:''}${p.aiSuggested&&p.visualConcept?`<div class="visual-prompt-tip">${p.visualConcept.slice(0,80)}…</div>`:''}
+      <td><div class="copy-preview">${highlightMentions(p.copy.split('\n')[0])}</div>${(()=>{const ms=[...new Set((p.copy.match(/@[\w-]+/g)||[]))];return ms.length?`<div style="margin-top:2px">${ms.map(m=>`<span class="mention-tag" style="font-size:10px">${m}</span>`).join(' ')}</div>`:'';})()} ${p.aiSuggested&&p.trend?`<div style="font-size:10px;color:#7c3aed;margin-top:2px;opacity:.75">↳ ${p.trend.slice(0,55)}${p.trend.length>55?'…':''}</div>`:''}${p.aiSuggested&&p.visualConcept?`<div class="visual-prompt-tip">${p.visualConcept.slice(0,80)}…</div>`:''}
       </td>
       <td onclick="event.stopPropagation();openBuilderFor('${p.id}')">
         ${(t=>t==='__video__'
@@ -3261,7 +3261,7 @@ function savePost(){
   if(editingId){
     const p=posts.find(x=>x.id===editingId);
     const hadUrl=p.linkedInUrl||'';
-    Object.assign(p,{date,platform,type,status,visualConcept,corrections,linkedInUrl,copy});
+    Object.assign(p,{date,platform,type,status,visualConcept,corrections,linkedInUrl,copy,userEditedCopy:true});
     if(linkedInUrl&&linkedInUrl!==hadUrl){
       fetch('http://localhost:3004/sync',{method:'POST',headers:{'Content-Type':'application/json'},
         body:JSON.stringify({type:'linkedInUrl',id:savedId,url:linkedInUrl})}).catch(()=>{});
