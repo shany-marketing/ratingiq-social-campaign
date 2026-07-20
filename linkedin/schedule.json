@@ -1259,9 +1259,10 @@
     "date": "2026-07-20",
     "profile": "omri",
     "type": "Thought Leadership + Photo",
-    "status": "draft",
-    "approved": false,
-    "copy": "I spent a day this last week walking a hotel CEO through his own numbers, live, on site.\n\nNot a slide deck. Not a summary someone else prepared for him.\n\nHis own reviews, his own gaps, in front of him.\n\nHalfway through, he stopped asking questions about the software and started asking questions about his GMs.\n\nThat shift is the real signal. The moment a CEO stops evaluating the tool and starts evaluating his own operation.\n\nIt happens almost every time we sit across from the person who actually signs.\n\nData doesn't change decisions. Ownership does."
+    "status": "published",
+    "approved": true,
+    "copy": "I spent a day this week walking a hotel CEO through his own numbers, live, on site.\n\nNot a slide deck. Not a summary someone else prepared for him.\n\nHis own reviews, his own gaps, in front of him.\n\nHalfway through, he stopped asking questions about the software and started asking questions about his GMs.\n\nThat shift is the real signal. The moment a CEO stops evaluating the tool and starts evaluating his own operation.\n\nIt happens almost every time we sit across from the person who actually signs.\n\nData doesn't change decisions. Ownership does.\n",
+    "publishedAt": "2026-07-20T06:32:31.457Z"
   },
   {
     "id": "p138",
