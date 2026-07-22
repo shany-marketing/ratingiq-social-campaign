@@ -1260,27 +1260,35 @@
     "profile": "omri",
     "type": "Thought Leadership + Photo",
     "status": "published",
-    "approved": true,
+    "approved": false,
     "copy": "I spent a day this week walking a hotel CEO through his own numbers, live, on site.\n\nNot a slide deck. Not a summary someone else prepared for him.\n\nHis own reviews, his own gaps, in front of him.\n\nHalfway through, he stopped asking questions about the software and started asking questions about his GMs.\n\nThat shift is the real signal. The moment a CEO stops evaluating the tool and starts evaluating his own operation.\n\nIt happens almost every time we sit across from the person who actually signs.\n\nData doesn't change decisions. Ownership does.\n",
     "publishedAt": "2026-07-20T06:32:31.457Z"
   },
   {
     "id": "p138",
-    "date": "2026-07-21",
+    "date": "2026-07-20",
     "profile": "company",
     "type": "Brand",
-    "copy": "The final whistle blew.\nThe 2026 World Cup is over.\n\n39 days. 104 matches. 16 cities. 3 countries. Millions of guests.\n\nThe tournament is done. The ratings are permanent.\n\nTripAdvisor, Expedia, Google, Booking.com - the record of how the hospitality industry performed across every host city in June and July 2026 is now written and searchable. It will influence guest decisions for years to come.\n\nThe chains that used this window to understand their guests - to read the data, close service gaps, and show up for the moment - built something that compounds beyond the tournament.\n\nThe ones that waited to see how it went are now seeing how it went.\n\nWhich side of that line are you on?\n\n#WorldCup2026 #HospitalityIndustry #HotelManagement #GuestExperience #RatingIQ",
-    "status": "scheduled",
+    "copy": "The final whistle blew yesterday.\n\nThe 2026 World Cup is over.\n39 days. 104 matches. 16 cities. 3 countries. Millions of guests.\n\nThe tournament is done. The ratings are permanent.\n\nTripAdvisor, Expedia, Google, Booking.com - the record of how the hospitality industry performed across every host city in June and July 2026 is now written and searchable. It will influence guest decisions for years.\n\nThe chains that used this window to understand their guests - to read the data, close service gaps, and show up for the moment - built something that compounds beyond the tournament.\n\nThe ones that waited to see how it went are now seeing how it went.\n\nWhich side of that line are you on?\n\n#WorldCup2026 #HospitalityIndustry #HotelManagement #GuestExperience #RatingIQ",
+    "status": "published",
     "approved": false,
     "visual": "World Cup trophy alongside hotel review rating graphic"
   },
   {
     "id": "p142",
-    "date": "2026-07-22",
+    "date": "2026-07-20",
     "profile": "omri",
     "reshareOf": "p138",
     "copy": "39 days. The ratings record is permanent now.\n\nWorth asking your team which side of that line they're on.",
-    "status": "scheduled",
+    "status": "published",
+    "approved": false
+  },
+  {
+    "id": "p1784648008547",
+    "date": "2026-07-21",
+    "profile": "omri",
+    "copy": "When a hotel CEO tells me their rating has been stuck for 18 months, the first assumption is usually: it needs a renovation.\n\nAlmost always, it doesn't.\n\nThe issues holding your Booking.com score down tend to be operational. Check-in speed. Room readiness. Breakfast consistency. Service responsiveness.\n\nYou don't need capital to fix those.\n\nYou need to know which ones are doing the most damage right now - and a system that pushes your team to act.",
+    "status": "draft",
     "approved": false
   },
   {
@@ -1308,5 +1316,25 @@
     "status": "scheduled",
     "approved": true,
     "copy": "We spent a full day at a hotel recently, walking alongside the CEO.\n\nBy the pool, a guest stopped him.\nHe looked straight at Oren and asked: \"Are you the CEO?\"\nWhen Oren confirmed it, the man shook his hand.\n\nHe explained he visits the Dead Sea a few times a year for skin treatments. Always dreaded the stays. The nearby hotels were functional. Never worth looking forward to.\n\nThis one was different.\n\"You made me actually enjoy being here. First time that's ever happened. I'll be back.\"\n\nWe were still standing by the pool. By the time we got back inside, Oren had already sent a gift to the man's room.\n\nNo discussion. No process. A moment, a decision, done.\n\nThis is what we notice with the best operators. Nothing passes them. Not the guest who stops them poolside. Not the staff member who quietly handles something right. They see both, and they respond to both the same way.\nNo hierarchy in what deserves their attention.\n\nThat guest is going home and writing a review. Not about the room or the pool. About a 2-minute conversation that changed what the Dead Sea means to him. How a health necessity became leisure to him.  \n\nThe best ratings don't come from the property. They come from the person running it."
+  },
+  {
+    "id": "p121",
+    "date": "2026-08-02",
+    "profile": "shany",
+    "type": "Repost",
+    "reshareOf": "p112",
+    "copy": "One property pulling down a whole chain's score.\n  \nYou'd think it's the hardest one to fix. Usually it's just the most ignored one.\n\n@Omri Azulay walks through exactly how this gets solved. Stay tuned. ",
+    "status": "scheduled",
+    "approved": false
+  },
+  {
+    "id": "p122",
+    "date": "2026-08-02",
+    "profile": "company",
+    "type": "Company Repost",
+    "reshareOf": "p112",
+    "copy": "A new engagement, already underway.\n\nOne property dragging the group's rating. A GM meeting. Department heads. Specific priorities.\n\nThis is what it looks like when a chain decides to actually move the number.\n\nrating-iq.com",
+    "status": "published",
+    "approved": false
   }
 ]
