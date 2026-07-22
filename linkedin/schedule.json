@@ -1300,6 +1300,17 @@
     "approved": true
   },
   {
+    "id": "p111",
+    "date": "2026-07-22",
+    "profile": "omri",
+    "type": "Video",
+    "copy": "When a hotel CEO tells me their rating has been stuck for 18 months, the first assumption is usually: it needs a renovation.\n\nAlmost always, it doesn't.\n\nThe issues holding your Booking.com score down tend to be operational. Check-in speed. Room readiness. Breakfast consistency. Service responsiveness.\n\nYou don't need capital to fix those.\n\nYou need to know which ones are doing the most damage right now - and a system that pushes your team to act.",
+    "status": "published",
+    "approved": true,
+    "linkedInId": "urn:li:share:7485575657985458177",
+    "publishedAt": "2026-07-22T06:05:12.253Z"
+  },
+  {
     "id": "p127",
     "date": "2026-07-24",
     "profile": "omri",
